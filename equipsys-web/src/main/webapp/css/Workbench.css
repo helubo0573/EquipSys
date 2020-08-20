@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.body-sdiv{	width: 60%;text-align: center;padding:30px;}
+.body-bdiv{ width: 80%;text-align: center;padding:30px;}
+.body-sdiv,.body-bdiv{	background: rgb(248,248,248,0.4)}
+.title-div{	font-weight:bold;font-size:18px;text-align: center;border-bottom: 2px solid;width: 50%;margin-left: 25%;margin-bottom: 20px;}
+.layui-nav,.point{cursor: pointer;}
+.btn-div{	margin-top: 20px;	text-align: center;}
+.btn-Rdiv{text-align: right;}
+.btn{	margin-right: 10px;}
+.boxshow:hover{	cursor: pointer;box-shadow: 0 0 10px #FFFFFF;}
+.box-div{	border: 1px solid;	padding:10px;}
+.list-div{border: 1px solid;	padding:10px;margin-top: 10px;}
+.smart-delete{position: relative;display: inline-block;width: 18px;height: 18px;line-height: 20px;margin-left: 8px;top: 1px;text-align: center;font-size: 14px;color: #c2c2c2;transition: all .2s;-webkit-transition: all .2s;cursor: pointer;}
+.smart-delete:hover{border-radius: 2px;background-color: #FF5722;color: #fff;}
+.search-div{border:1px solid #fff;padding: 20px;text-align: left;height: 100%;margin-top: 10px;}
+.left{float:left;}
+.right{float:right;}
+.layeropen{color: #555;}
+.needing{border-right: solid 5px red}

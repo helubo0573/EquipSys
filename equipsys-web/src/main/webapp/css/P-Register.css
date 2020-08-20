@@ -1,0 +1,36 @@
+@charset "UTF-8";
+html{
+	height:100%;
+	width:100%;
+}
+body{
+	height:100%;
+	background-color: black;
+}
+.body-div{
+	-moz-border-radius:1em; 
+	-webkit-border-radius:1em; 
+	border-radius:1em;
+	text-align:center;
+	padding:20px 60px;
+	width:520px;
+	height:650px;
+	position:absolute; 
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+}
+.title-div{
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #FFF;
+	margin-bottom: 15px;
+}
+.info-div{
+	margin-top: 15px;
+}
+.info-div>a{
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+}

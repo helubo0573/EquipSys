@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org_post表:设备基础信息表模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.OrgPostMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.OrgPost">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+        <result column="post_name" property="postName" jdbcType="VARCHAR" />
+        <result column="post_remarks" property="postRemarks" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,dept_id,post_name,post_remarks 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="deptId != null and deptId != '' ">
+                and dept_id = #{deptId,jdbcType=INTEGER}
+            </if>
+            <if test="postName != null and postName != '' ">
+                and post_name = #{postName,jdbcType=VARCHAR}
+            </if>
+            <if test="postRemarks != null and postRemarks != '' ">
+                and post_remarks = #{postRemarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.OrgPost">
+        insert into org_post(dept_id,post_name,post_remarks)values(#{deptId,jdbcType=INTEGER},#{postName,jdbcType=VARCHAR},#{postRemarks,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.OrgPost">
+        update org_post set 
+            dept_id = #{deptId,jdbcType=INTEGER},
+            post_name = #{postName,jdbcType=VARCHAR},
+            post_remarks = #{postRemarks,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update org_post
+          <set>
+            <if test="deptId != null and deptId != '' ">        
+                dept_id = #{deptId,jdbcType=INTEGER},                
+            </if>
+            <if test="postName != null and postName != '' ">        
+                post_name = #{postName,jdbcType=VARCHAR},                
+            </if>
+            <if test="postRemarks != null and postRemarks != '' ">        
+                post_remarks = #{postRemarks,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from org_post
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_post
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_post
+        <include refid="searchBy"/>
+    </select>
+    
+</mapper>

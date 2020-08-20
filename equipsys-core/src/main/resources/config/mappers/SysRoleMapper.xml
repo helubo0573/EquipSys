@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sys_role表:系统用户表模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.SysRoleMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.SysRole">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,dept_id,role_name,remarks 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="deptId != null and deptId != '' ">
+                and dept_id = #{deptId,jdbcType=INTEGER}
+            </if>
+            <if test="roleName != null and roleName != '' ">
+                and role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.SysRole">
+        insert into sys_role(dept_id,role_name,remarks)values(#{deptId,jdbcType=INTEGER},#{roleName,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.SysRole">
+        update sys_role set 
+            dept_id = #{deptId,jdbcType=INTEGER},
+            role_name = #{roleName,jdbcType=VARCHAR},
+            remarks = #{remarks,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update sys_role
+          <set>
+            <if test="deptId != null and deptId != '' ">        
+                dept_id = #{deptId,jdbcType=INTEGER},                
+            </if>
+            <if test="roleName != null and roleName != '' ">        
+                role_name = #{roleName,jdbcType=VARCHAR},                
+            </if>
+            <if test="remarks != null and remarks != '' ">        
+                remarks = #{remarks,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        <include refid="searchBy"/>
+    </select>
+    
+    <delete id="deleteRoleById" parameterType="java.lang.Long">
+    	DELETE FROM
+    		sys_role
+    	WHERE id = #{id,jdbcType=INTEGER}       
+    </delete>
+</mapper>

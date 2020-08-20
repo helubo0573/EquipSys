@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sys_menu表:系统菜单资源表模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.SysMenuMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.SysMenu">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="perms" property="perms" jdbcType="VARCHAR" />
+        <result column="menu_type" property="menuType" jdbcType="INTEGER" />
+        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
+        <result column="menu_order" property="menuOrder" jdbcType="INTEGER" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,parent_id,menu_name,url,perms,menu_type,menu_icon,menu_order,remarks 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="parentId != null and parentId != '' ">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="menuName != null and menuName != '' ">
+                and menu_name = #{menuName,jdbcType=VARCHAR}
+            </if>
+            <if test="url != null and url != '' ">
+                and url = #{url,jdbcType=VARCHAR}
+            </if>
+            <if test="perms != null and perms != '' ">
+                and perms = #{perms,jdbcType=VARCHAR}
+            </if>
+            <if test="menuType != null and menuType != '' ">
+                and menu_type = #{menuType,jdbcType=INTEGER}
+            </if>
+            <if test="menuIcon != null and menuIcon != '' ">
+                and menu_icon = #{menuIcon,jdbcType=VARCHAR}
+            </if>
+            <if test="menuOrder != null and menuOrder != '' ">
+                and menu_order = #{menuOrder,jdbcType=INTEGER}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.SysMenu">
+        insert into sys_menu(parent_id,menu_name,url,perms,menu_type,menu_icon,menu_order,remarks)values(#{parentId,jdbcType=INTEGER},#{menuName,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{perms,jdbcType=VARCHAR},#{menuType,jdbcType=INTEGER},#{menuIcon,jdbcType=VARCHAR},#{menuOrder,jdbcType=INTEGER},#{remarks,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.SysMenu">
+        update sys_menu set 
+            parent_id = #{parentId,jdbcType=INTEGER},
+            menu_name = #{menuName,jdbcType=VARCHAR},
+            url = #{url,jdbcType=VARCHAR},
+            perms = #{perms,jdbcType=VARCHAR},
+            menu_type = #{menuType,jdbcType=INTEGER},
+            menu_icon = #{menuIcon,jdbcType=VARCHAR},
+            menu_order = #{menuOrder,jdbcType=INTEGER},
+            remarks = #{remarks,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update sys_menu
+          <set>
+            <if test="parentId != null and parentId != '' ">        
+                parent_id = #{parentId,jdbcType=INTEGER},                
+            </if>
+            <if test="menuName != null and menuName != '' ">        
+                menu_name = #{menuName,jdbcType=VARCHAR},                
+            </if>
+            <if test="url != null and url != '' ">        
+                url = #{url,jdbcType=VARCHAR},                
+            </if>
+            <if test="perms != null and perms != '' ">        
+                perms = #{perms,jdbcType=VARCHAR},                
+            </if>
+            <if test="menuType != null and menuType != '' ">        
+                menu_type = #{menuType,jdbcType=INTEGER},                
+            </if>
+            <if test="menuIcon != null and menuIcon != '' ">        
+                menu_icon = #{menuIcon,jdbcType=VARCHAR},                
+            </if>
+            <if test="menuOrder != null and menuOrder != '' ">        
+                menu_order = #{menuOrder,jdbcType=INTEGER},                
+            </if>
+            <if test="remarks != null and remarks != '' ">        
+                remarks = #{remarks,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        <include refid="searchBy"/>
+    </select>
+    
+    <select id="getMenu" resultMap="BaseResultMap">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from sys_menu
+    	order by menu_type,menu_order
+    </select>
+    
+    <select id="getMenuAll"  resultMap="BaseResultMap">
+    	SELECT DISTINCT
+			menu.parent_id AS parent_id,
+			menu.menu_name AS menu_name,
+			menu.url AS url,
+			menu.perms AS perms,
+			menu.menu_type AS menu_type,
+			menu.menu_icon AS menu_icon,
+			menu.menu_order AS menu_order,
+			menu.remarks AS remarks,
+			menu.id AS id
+		FROM
+			sys_menu AS menu
+		ORDER BY
+			menu_type,menu_order
+    </select>
+    
+    <select id="getParentMenu" resultMap="BaseResultMap">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from sys_menu
+    	where menu_type != 2
+    	order by menu_type,menu_order
+    </select>
+    
+    <select id="getMenuByUserName" resultMap="BaseResultMap" parameterType="String">
+    	SELECT DISTINCT
+			menu.parent_id AS parent_id,
+			menu.menu_name AS menu_name,
+			menu.url AS url,
+			menu.perms AS perms,
+			menu.menu_type AS menu_type,
+			menu.menu_icon AS menu_icon,
+			menu.menu_order AS menu_order,
+			menu.remarks AS remarks,
+			menu.id AS id
+		FROM
+			(((sys_menu AS menu
+			Inner Join sys_role_menu AS role_menu ON ((role_menu.menu_id = menu.id)))
+			Inner Join sys_role AS role ON ((role.id = role_menu.role_id)))
+			Inner Join sys_user_role AS user_role ON ((user_role.role_id = role.id)))
+			Inner Join sys_user AS `user` ON ((`user`.id = user_role.user_id))
+		WHERE
+			user.username =#{user} and menu.menu_type != 2
+		ORDER BY
+			menu_type,menu_order
+    </select>
+    
+    <select id="getPermsByUser"  resultMap="BaseResultMap" parameterType="String">
+    	SELECT DISTINCT
+			menu.parent_id AS parent_id,
+			menu.menu_name AS menu_name,
+			menu.url AS url,
+			menu.perms AS perms,
+			menu.menu_type AS menu_type,
+			menu.menu_icon AS menu_icon,
+			menu.menu_order AS menu_order,
+			menu.remarks AS remarks,
+			menu.id AS id
+		FROM
+			(((sys_menu AS menu
+			left Join sys_role_menu AS role_menu ON ((role_menu.menu_id = menu.id)))
+			left Join sys_role AS role ON ((role.id = role_menu.role_id)))
+			left Join sys_user_role AS user_role ON ((user_role.role_id = role.id)))
+			left Join sys_user AS `user` ON ((`user`.id = user_role.user_id))
+		WHERE
+			user.username =#{user} and menu.menu_type =  2
+    </select>
+    
+    <select id="getAdminPerms"  resultMap="BaseResultMap" parameterType="String">
+    	SELECT DISTINCT
+			menu.parent_id AS parent_id,
+			menu.menu_name AS menu_name,
+			menu.url AS url,
+			menu.perms AS perms,
+			menu.menu_type AS menu_type,
+			menu.menu_icon AS menu_icon,
+			menu.menu_order AS menu_order,
+			menu.remarks AS remarks,
+			menu.id AS id
+		FROM
+			sys_menu AS menu
+		WHERE
+			menu.menu_type =  2
+    </select>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+    	DELETE FROM sys_menu WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+</mapper>

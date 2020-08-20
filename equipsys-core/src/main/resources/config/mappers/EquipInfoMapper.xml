@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- equip_info表:设备基础信息表模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.EquipInfoMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.EquipInfo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="equip_name" property="equipName" jdbcType="VARCHAR" />
+        <result column="equip_code" property="equipCode" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+        <result column="equip_level" property="equipLevel" jdbcType="INTEGER" />
+        <result column="enable_date" property="enableDate" jdbcType="TIMESTAMP" />
+        <result column="attr_dept" property="attrDept" jdbcType="INTEGER" />
+        <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+        <result column="location" property="location" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="BaseExtResultMap" type="com.stone.equipsys.core.model.EquipInfoModel">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+        <result column="equip_name" property="equipName" jdbcType="VARCHAR" />
+        <result column="equip_code" property="equipCode" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+        <result column="equip_level" property="equipLevel" jdbcType="INTEGER" />
+        <result column="enable_date" property="enableDate" jdbcType="TIMESTAMP" />
+        <result column="attr_dept" property="attrDept" jdbcType="INTEGER" />
+        <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+        <result column="location" property="location" jdbcType="VARCHAR" />
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+        <result column="parentequip_name" property="parentequipName" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location 
+    </sql>
+    <sql id="Base_Ext_Column_List">
+    	equip.id as id,equip.equip_name as equip_name,equip.equip_code as equip_code,equip.parent_id as parent_id,equip.equip_level as equip_level,
+		equip.enable_date as enable_date,equip.attr_dept as attr_dept,equip.supplier as supplier,equip.location as location,
+		dept.dept_name as dept_name,pequip.equip_name as parentequip_name
+    </sql>
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="equipName != null and equipName != '' ">
+                and equip_name = #{equipName,jdbcType=VARCHAR}
+            </if>
+            <if test="equipCode != null and equipCode != '' ">
+                and equip_code = #{equipCode,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null and parentId != '' ">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="equipLevel != null and equipLevel != '' ">
+                and equip_level = #{equipLevel,jdbcType=INTEGER}
+            </if>
+            <if test="enableDate != null">
+                and enable_date = #{enableDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="attrDept != null and attrDept != '' ">
+                and attr_dept = #{attrDept,jdbcType=INTEGER}
+            </if>
+            <if test="supplier != null and supplier != '' ">
+                and supplier = #{supplier,jdbcType=VARCHAR}
+            </if>
+            <if test="location != null and location != '' ">
+                and location = #{location,jdbcType=VARCHAR}
+            </if>
+            <if test="maxlevel != null and location != ''">
+            	and equip_level &lt; #{maxlevel,jdbcType=INTEGER}
+            </if>
+            <if test="debarid !=null and debarid !=''">
+            	and id &lt;&gt; #{debarid,jdbcType=INTEGER} and parent_id &lt;&gt; #{debarid,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipInfo">
+        insert into equip_info(equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location)values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR})
+    </insert>
+
+	<insert id="insertReturnId" parameterType="com.stone.equipsys.core.domain.EquipInfo" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into equip_info(equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location)values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR})
+    </insert>
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.EquipInfo">
+        update equip_info set 
+            equip_name = #{equipName,jdbcType=VARCHAR},
+            equip_code = #{equipCode,jdbcType=VARCHAR},
+            parent_id = #{parentId,jdbcType=INTEGER},
+            equip_level = #{equipLevel,jdbcType=INTEGER},
+            enable_date = #{enableDate,jdbcType=TIMESTAMP},
+            attr_dept = #{attrDept,jdbcType=INTEGER},
+            supplier = #{supplier,jdbcType=VARCHAR},
+            location = #{location,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update equip_info
+          <set>
+            <if test="equipName != null and equipName != '' ">        
+                equip_name = #{equipName,jdbcType=VARCHAR},                
+            </if>
+            <if test="equipCode != null and equipCode != '' ">        
+                equip_code = #{equipCode,jdbcType=VARCHAR},                
+            </if>
+            <if test="parentId != null and parentId != '' ">        
+                parent_id = #{parentId,jdbcType=INTEGER},                
+            </if>
+            <if test="equipLevel != null and equipLevel != '' ">        
+                equip_level = #{equipLevel,jdbcType=INTEGER},                
+            </if>
+            <if test="enableDate != null">
+                enable_date = #{enableDate,jdbcType=TIMESTAMP},                
+            </if>
+            <if test="attrDept != null and attrDept != '' ">        
+                attr_dept = #{attrDept,jdbcType=INTEGER},                
+            </if>
+            <if test="supplier != null and supplier != '' ">        
+                supplier = #{supplier,jdbcType=VARCHAR},                
+            </if>
+            <if test="location != null and location != '' ">        
+                location = #{location,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from equip_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from equip_info
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from equip_info
+        <include refid="searchBy"/>
+    </select>
+    
+    <select id="getEquipExtInfoById" resultMap="BaseExtResultMap" parameterType="java.lang.Long">
+    	SELECT 
+		<include refid="Base_Ext_Column_List" />
+		FROM
+			equip_info AS equip
+			Left Join equip_info AS pequip ON equip.parent_id = pequip.id
+			Left Join org_dept AS dept ON equip.attr_dept = dept.id
+		WHERE
+			equip.id=#{id}
+    </select>
+</mapper>

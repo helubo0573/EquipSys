@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- employee_info表:设备基础信息表模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.EmployeeInfoMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.EmployeeInfo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+        <result column="emp_sex" property="empSex" jdbcType="INTEGER" />
+        <result column="emp_dept" property="empDept" jdbcType="INTEGER" />
+        <result column="emp_post" property="empPost" jdbcType="INTEGER" />
+        <result column="emp_mobil" property="empMobil" jdbcType="VARCHAR" />
+        <result column="emp_date" property="empDate" jdbcType="TIMESTAMP" />
+        <result column="emp_status" property="empStatus" jdbcType="INTEGER" />
+        <result column="emp_remarks" property="empRemarks" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="BaseInfoModelMap" type="com.stone.equipsys.core.model.EmployeeInfoModel" extends="BaseResultMap">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+        <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+        <result column="dept_id" property="deptid" jdbcType="INTEGER" />
+        <result column="dept_name" property="deptname" jdbcType="VARCHAR" />
+        <result column="post_id" property="postid" jdbcType="INTEGER" />
+        <result column="post_name" property="postname" jdbcType="VARCHAR" />
+        <result column="emp_sex" property="empSex" jdbcType="INTEGER" />
+        <result column="emp_dept" property="empDept" jdbcType="INTEGER" />
+        <result column="emp_post" property="empPost" jdbcType="INTEGER" />
+        <result column="emp_mobil" property="empMobil" jdbcType="VARCHAR" />
+        <result column="emp_date" property="empDate" jdbcType="TIMESTAMP" />
+        <result column="emp_status" property="empStatus" jdbcType="INTEGER" />
+        <result column="emp_remarks" property="empRemarks" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,emp_name,emp_sex,emp_dept,emp_post,emp_mobil,emp_date,emp_status,emp_remarks 
+    </sql>
+    
+    <sql id="BaseExtColumList">
+    	emp.id as id,
+    	emp.emp_name as emp_name,
+    	dept.id as dep_tid,
+    	dept.dept_name as dept_name,
+    	post.id as post_id,
+    	post.dept_name as post_name,
+    	emp.emp_sex as emp_sex,
+    	emp.emp_dept as emp_dept,
+    	emp.emp_post as emp_post,
+    	emp.emp_mobil as emp_mobil,
+    	emp.emp_date as emp_date,
+    	emp.emp_status as emp_status,
+    	emp.emp_remarks as emp_remarks
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+        	emp_status &lt;&gt; -1
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="empName != null and empName != '' ">
+                and emp_name = #{empName,jdbcType=VARCHAR}
+            </if>
+            <if test="empSex != null and empSex != '' ">
+                and emp_sex = #{empSex,jdbcType=INTEGER}
+            </if>
+            <if test="empDept != null and empDept != '' ">
+                and emp_dept = #{empDept,jdbcType=INTEGER}
+            </if>
+            <if test="empPost != null and empPost != '' ">
+                and emp_post = #{empPost,jdbcType=INTEGER}
+            </if>
+            <if test="empMobil != null and empMobil != '' ">
+                and emp_mobil = #{empMobil,jdbcType=VARCHAR}
+            </if>
+            <if test="empDate != null">
+                and emp_date = #{empDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="empStatus != null and empStatus != '' ">
+                and emp_status = #{empStatus,jdbcType=INTEGER}
+            </if>
+            <if test="empRemarks != null and empRemarks != '' ">
+                and emp_remarks = #{empRemarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    <sql id="BaseExtSearch">
+    	<trim prefix="where" prefixOverrides="and|or">
+    		emp_status &lt;&gt; -1
+	    	<if test="empname != null and empname != '' ">
+	    		and emp.emp_name like CONCAT("%",#{empname,jdbcType=VARCHAR},"%")
+	    	</if>
+	    	<if test="deptname != null and deptname !=''">
+	    		and dept.dept_name like CONCAT("%",#{deptname,jdbcType=VARCHAR},"%")
+	    	</if>
+	    	<if test="postname != null and postname !=''">
+	    		and post.dept_name like CONCAT("%",#{postname,jdbcType=VARCHAR},"%")
+	    	</if>
+    	</trim>
+    </sql>
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.EmployeeInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into employee_info(emp_name,emp_sex,emp_dept,emp_post,emp_mobil,emp_date,emp_status,emp_remarks)values(#{empName,jdbcType=VARCHAR},#{empSex,jdbcType=INTEGER},#{empDept,jdbcType=INTEGER},#{empPost,jdbcType=INTEGER},#{empMobil,jdbcType=VARCHAR},#{empDate,jdbcType=TIMESTAMP},#{empStatus,jdbcType=INTEGER},#{empRemarks,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.EmployeeInfo">
+        update employee_info set 
+            emp_name = #{empName,jdbcType=VARCHAR},
+            emp_sex = #{empSex,jdbcType=INTEGER},
+            emp_dept = #{empDept,jdbcType=INTEGER},
+            emp_post = #{empPost,jdbcType=INTEGER},
+            emp_mobil = #{empMobil,jdbcType=VARCHAR},
+            emp_date = #{empDate,jdbcType=TIMESTAMP},
+            emp_status = #{empStatus,jdbcType=INTEGER},
+            emp_remarks = #{empRemarks,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update employee_info
+          <set>
+            <if test="empName != null and empName != '' ">        
+                emp_name = #{empName,jdbcType=VARCHAR},                
+            </if>
+            <if test="empSex != null and empSex != '' ">        
+                emp_sex = #{empSex,jdbcType=INTEGER},                
+            </if>
+            <if test="empDept != null and empDept != '' ">        
+                emp_dept = #{empDept,jdbcType=INTEGER},                
+            </if>
+            <if test="empPost != null and empPost != '' ">        
+                emp_post = #{empPost,jdbcType=INTEGER},                
+            </if>
+            <if test="empMobil != null and empMobil != '' ">        
+                emp_mobil = #{empMobil,jdbcType=VARCHAR},                
+            </if>
+            <if test="empDate != null">
+                emp_date = #{empDate,jdbcType=TIMESTAMP},                
+            </if>
+            <if test="empStatus != null and empStatus != '' ">        
+                emp_status = #{empStatus,jdbcType=INTEGER},                
+            </if>
+            <if test="empRemarks != null and empRemarks != '' ">        
+                emp_remarks = #{empRemarks,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from employee_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from employee_info
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from employee_info
+        <include refid="searchBy"/>
+    </select>
+    
+    <select id="getEmployeeTree" resultMap="BaseInfoModelMap">
+    	SELECT
+			<include refid="BaseExtColumList" />
+		FROM
+			employee_info AS emp
+			Inner Join org_dept AS post ON post.Id = emp.emp_post
+			Inner Join org_dept AS dept ON post.dept_id = dept.id 
+    </select>
+    
+    <select id="searchExtEmployee" resultMap="BaseInfoModelMap" parameterType="java.util.HashMap">
+    	SELECT
+			<include refid="BaseExtColumList" />
+		FROM
+			employee_info AS emp
+			Inner Join org_dept AS post ON post.Id = emp.emp_post
+			Inner Join org_dept AS dept ON post.parent_id = dept.id 
+		<include refid="BaseExtSearch" />
+    </select>
+    
+    <select id="findEmployeeExtInfoById" resultMap="BaseInfoModelMap" parameterType="java.lang.Long">
+    	select
+        	<include refid="BaseExtColumList" />
+        FROM
+	        employee_info AS emp
+			Inner Join org_dept AS post ON post.Id = emp.emp_post
+			Inner Join org_dept AS dept ON post.parent_id = dept.id 
+        where emp.id = #{id,jdbcType=INTEGER} and emp_status &lt;&gt; -1
+    </select>
+    
+    <update id="dimissionEmployee" parameterType="java.lang.Long">
+    	update employee_info set emp_status = -1 where id = #{id ,jdbcType=INTEGER}
+    </update>
+</mapper>
