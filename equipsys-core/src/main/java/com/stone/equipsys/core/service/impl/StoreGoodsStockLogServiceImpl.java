@@ -46,8 +46,9 @@ public class StoreGoodsStockLogServiceImpl extends BaseServiceImpl<StoreGoodsSto
 	public String createOrderCode(int stocktype) {
 		HashMap<String, Object> param=new HashMap<String,Object>();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat paramsdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date indate=new Date();
-		param.put("changeTime", indate);
+		param.put("changeTime", paramsdf.format(indate));
 		param.put("changeType", 0);
 		int count=storeGoodsStockLogMapper.listSelective(param).size();
 		String typestr=stocktype<=20?"I":"O";
