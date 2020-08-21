@@ -81,7 +81,18 @@ public class StoreChangeStorageController {
 			@RequestParam(value="quantity")int quantity,
 			@RequestParam(value="deptid")Long deptid,
 			@RequestParam(value="use")String use,
-			@RequestParam(value="remarks")String remarks) {
-		
+			@RequestParam(value="remarks")String remarks,
+			@RequestParam(value="changetype")int changetype) {
+		SysUserModel user=(SysUserModel) request.getSession().getAttribute("SysUser");
+		boolean flag=InventoryRecordsService.outcomeRecord(modelid, quantity, changetype, user,remarks);
+		Map<String, Object> res = new HashMap<String, Object>();
+		if(flag) {
+			res.put(Constant.RESPONSE_CODE,Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "提交成功");
+		}else {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "提交失败");
+		}
+		ServletUtils.writeToResponse(response, res);
 	}
 }

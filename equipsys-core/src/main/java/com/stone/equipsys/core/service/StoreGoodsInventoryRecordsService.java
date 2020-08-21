@@ -20,4 +20,6 @@ public interface StoreGoodsInventoryRecordsService extends BaseService<StoreGood
 	 * @return
 	 */
 	boolean incomeRecord(StoreGoodsInventoryRecords record,SysUserModel user,int changetype);
+	
+	boolean outcomeRecord(Long modelid,int quantity,int changetype,SysUserModel user,String remarks);
 }

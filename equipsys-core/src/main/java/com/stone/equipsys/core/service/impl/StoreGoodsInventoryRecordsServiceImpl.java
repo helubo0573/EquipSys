@@ -1,5 +1,8 @@
 package com.stone.equipsys.core.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -52,6 +55,35 @@ public class StoreGoodsInventoryRecordsServiceImpl extends BaseServiceImpl<Store
 				ModelNumberInfoService.updateQuantity(record.getModelId(), sum);
 				StockLogService.insertLog(record.getModelId(), changetype, record.getQuantity(), sum, user.getEmpname(), record.getRemarks());
 			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	@Transactional
+	public boolean outcomeRecord(Long modelid, int quantity, int changetype, SysUserModel user,String remarks) {
+		int t=quantity;
+		try {
+			HashMap<String, Object> param=new HashMap<>();
+			param.put("modelId", modelid);
+			List<StoreGoodsInventoryRecords> recordslist=storeGoodsInventoryRecordsMapper.listSelective(param);
+			for(StoreGoodsInventoryRecords records:recordslist) {
+				if(records.getQuantity()>quantity) {
+					records.setQuantity(records.getQuantity()-quantity);
+					storeGoodsInventoryRecordsMapper.update(records);
+					break;
+				}else {
+					quantity-=records.getQuantity();
+					records.setQuantity(0);
+					storeGoodsInventoryRecordsMapper.update(records);
+				}
+			}
+			int sum=storeGoodsInventoryRecordsMapper.countquantity(modelid);
+			ModelNumberInfoService.updateQuantity(modelid, sum);
+			StockLogService.insertLog(modelid, changetype, t, sum, user.getEmpname(), remarks);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
