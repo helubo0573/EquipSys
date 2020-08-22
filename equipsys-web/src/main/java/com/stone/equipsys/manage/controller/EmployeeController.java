@@ -122,4 +122,20 @@ public class EmployeeController{
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
+	
+	@RequestMapping(value="employee/getUnPostEmployeeTree")
+	public void getUnPostEmployeeTree(HttpServletResponse response, HttpServletRequest request) {
+		HashMap<String,	Object> param=new HashMap<String,Object>();
+		param.put("parentId", 0);
+		String emptreejson=SysUserAction.createUnPostEmployeeTree(deptmapper.listSelective(param), employeeservice.getEmployeeTree(null));
+		Map<String, Object> res = new HashMap<String, Object>();
+		if(emptreejson!=null) {
+			res.put("emptree", emptreejson);
+			res.put(Constant.RESPONSE_CODE_MSG, "查询成功");
+		}else {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
 }

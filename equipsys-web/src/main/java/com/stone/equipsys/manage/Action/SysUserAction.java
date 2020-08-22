@@ -68,4 +68,8 @@ public class SysUserAction {
 	public static String createEmployeeTree(List<OrgDept> deptlist,List<EmployeeInfo> emplist) {
 		return JSONObject.toJSONString(EmployeeUtil.EmployeeTreeList(emplist, deptlist));
 	}
+	
+	public static String createUnPostEmployeeTree(List<OrgDept> deptlist,List<EmployeeInfo> emplist) {
+		return JSONObject.toJSONString(EmployeeUtil.UnPostEmployeeTreeList(emplist, deptlist));
+	}
 }

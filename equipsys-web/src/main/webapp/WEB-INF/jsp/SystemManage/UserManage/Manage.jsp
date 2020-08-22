@@ -35,11 +35,11 @@
 			<table class="table table-bordered layeropen">
 				<tbody>
 					<tr>
-						<th><label class="control-label">用户名</label></th>
+						<th width="100px"><label class="control-label">用户名</label></th>
 						<td>
 							<input class="form-control needing" name="userinfoname" id="userinfo-name">
 						</td>
-						<th><label class="control-label">所属员工</label></th>
+						<th width="100px"><label class="control-label">所属员工</label></th>
 						<td>
 							<input class="form-control needing point" name="userinfo-empname" id="userinfo-empname" data-post="" readonly onclick="showEmpTree()" placeholder="点此选择用户所属员工">
 						</td>

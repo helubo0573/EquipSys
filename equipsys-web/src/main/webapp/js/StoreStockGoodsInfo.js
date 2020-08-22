@@ -345,6 +345,45 @@ function getChangeType(type){
 		}
 	})
 }
+
+function showUnPostEmpTree(){
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		url:"../employee/getUnPostEmployeeTree.do",
+		success:function(data){
+			layer.open({
+				type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                anim: 2,
+                area : [ '400px', '500px' ],
+                shadeClose: true, //开启遮罩关闭
+                content: '<ul id="emptree" class="ztree"></ul>',
+                btn:['确定','取消'],
+                success: function (layero, index) {
+                	var setting = {
+            			callback:{
+    			        	onClick:setEmployee
+    			        }
+                	};
+                	var ztree=$.fn.zTree.init($("#emptree"), setting, JSON.parse(data.emptree));
+                }
+			})
+			
+		}
+	})
+}
+function setEmployee(event, treeId, treeNode){
+	if(treeNode.isemp){
+		$("#ChangeStorage-form #employeeid").val(treeNode.id)
+		$("#ChangeStorage-form #employeename").val(treeNode.name)
+		var parentnode=treeNode.getParentNode();
+		$("#ChangeStorage-form #deptid").val(parentnode.id)
+		$("#ChangeStorage-form #deptname").val(parentnode.name)
+		layer.close(layer.index)
+	}
+}
 /**
  * 查看库存变更记录
  * @returns

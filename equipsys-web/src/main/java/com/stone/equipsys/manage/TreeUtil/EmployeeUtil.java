@@ -23,6 +23,15 @@ public class EmployeeUtil {
 		public List<TreeObject> children = null;
 	}
 	
+	static class UnPostTree{
+		public Object id;
+		public Object pId;
+		public String name;
+		public boolean check=false;
+		public boolean nocheck=false;
+		public boolean isemp=false;
+		public List<TreeObject> children = null;
+	}
 	/**
 	 * 输入部门岗位人员表生成人员树
 	 * @param emplist
@@ -66,10 +75,48 @@ public class EmployeeUtil {
 			if (parentObject == null)	treeList.add(treeObject);
 			
 		}
-		for(TreeObject tree:treeList) {
-			String jsonStr = JSONObject.toJSONString(tree);
-		}
 		return treeList;
 	}
 	
+	/**
+	 * 	无岗位级的部门员工树
+	 * @param emplist
+	 * @param deptlist
+	 * @return
+	 */
+	public static List<TreeObject> UnPostEmployeeTreeList(List<EmployeeInfo> emplist,List<OrgDept> deptlist){
+		Map<String, TreeObject> empmapping = new TreeMap<String, TreeObject>();
+		Map<String, TreeObject> deptmapping = new TreeMap<String, TreeObject>();
+		for(EmployeeInfo emp:emplist ) {
+			TreeObject treeObject = new TreeObject();
+			treeObject.id=emp.getId();
+			treeObject.pId=emp.getEmpDept();
+			treeObject.name=emp.getEmpName();
+			treeObject.check=false;
+			treeObject.isemp=true;
+			empmapping.put(treeObject.id.toString(), treeObject);
+		}
+		for(OrgDept dept:deptlist) {
+			if(dept.getDeptType()==0) {
+				TreeObject treeObject = new TreeObject();
+				treeObject.id=dept.getId();
+				treeObject.name=dept.getDeptName();
+				treeObject.pId=0;
+				treeObject.nocheck=true;
+				treeObject.children=new ArrayList<TreeObject>();
+				deptmapping.put(treeObject.id.toString(), treeObject);
+			}
+		}
+		
+		for(TreeObject treeObject:empmapping.values()) {
+			TreeObject Object = deptmapping.get(treeObject.pId+"");
+			Object.children.add(treeObject);
+		}
+		List<TreeObject> treeList = new ArrayList<TreeObject>();
+		for (TreeObject treeObject : deptmapping.values()){
+			TreeObject parentObject = deptmapping.get(treeObject.pId + "");
+			if (parentObject == null)	treeList.add(treeObject);
+		}
+		return treeList;
+	}
 }

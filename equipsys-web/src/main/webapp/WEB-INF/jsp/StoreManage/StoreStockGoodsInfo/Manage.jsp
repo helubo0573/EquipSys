@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202008184"></script>
+<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202008185"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202006028"></script>
 <body>
 	<div class="body-bdiv">
@@ -77,12 +77,13 @@
 	</form>
 	<form id="ChangeStorage-form" class="form-horizontal box-div" style="display: none;">
 		<input type="hidden" id="modelid" name="modelid">
-		<input type="hidden" id="deptid" name="deptid"> 
+		<input type="hidden" id="employeeid" name="employeeid">
+		<input type="hidden" id="deptid" name="deptid">
 		<table class="order-table table table-bordered layeropen">
 			<tbody>
 				<tr>
 					<th width="88px"><label class="control-label">物料名称</label></th>
-					<td width="140px">
+					<td width="150px">
 						<label class="control-label" id="goodsname"></label>
 					</td>
 					<th width="88px"><label class="control-label">物料类型</label></th>
@@ -124,12 +125,20 @@
 					<td><input class="form-control point" id="total" readonly value="0.00"></td>
 				</tr>
 				<tr id="outcome-tr">
+					<th>
+						<label class="control-label">领料人</label>
+					</th>
+					<td>
+						<input id="employeename" class="form-control point" onclick="showUnPostEmpTree()" readonly placeholder="点击选择领料人">
+					</td>
 					<th><label class="control-label">领料部门</label></th>
 					<td>
-						<input id="dept" class="form-control" value="0.00">
+						<input id="deptname" class="form-control" readonly>
 					</td>
+				</tr>
+				<tr>
 					<th><label class="control-label">用途</label></th>
-					<td><input class="form-control" name="use"></td>
+					<td colspan="3"><input class="form-control" name="use"></td>
 				</tr>
 				<tr id="supplier-tr">
 					<th><label class="control-label">供应商</label></th>
