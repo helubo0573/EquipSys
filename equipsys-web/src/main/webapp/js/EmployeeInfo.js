@@ -57,6 +57,7 @@ function saveEmployee(index){
 			url:"../employee/save.do",
 			success:function(data){
 				if(data.code==200){
+					getEmployeePage(1)
 					layer.msg(data.msg)
 					layer.close(index)
 				}

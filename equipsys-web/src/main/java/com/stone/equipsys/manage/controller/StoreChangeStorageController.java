@@ -50,7 +50,7 @@ public class StoreChangeStorageController {
 			@RequestParam(value="remarks")String remarks,
 			@RequestParam(value="changetype")int changetype) {
 		SysUserModel user=(SysUserModel) request.getSession().getAttribute("SysUser");
-		StoreGoodsInventoryRecords records=new 	StoreGoodsInventoryRecords(modelid,changedate,quantity,price,supplier,remarks);
+		StoreGoodsInventoryRecords records=new StoreGoodsInventoryRecords(modelid,changedate,quantity,price,supplier,remarks);
 		boolean flag=InventoryRecordsService.incomeRecord(records, user,changetype);
 		Map<String, Object> res = new HashMap<String, Object>();
 		if(flag) {
@@ -79,12 +79,13 @@ public class StoreChangeStorageController {
 			@RequestParam(value = "modelid")Long modelid,
 			@RequestParam(value="changedate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date changedate,
 			@RequestParam(value="quantity")int quantity,
+			@RequestParam(value="employeeid")Long employeeid,
 			@RequestParam(value="deptid")Long deptid,
 			@RequestParam(value="use")String use,
 			@RequestParam(value="remarks")String remarks,
 			@RequestParam(value="changetype")int changetype) {
 		SysUserModel user=(SysUserModel) request.getSession().getAttribute("SysUser");
-		boolean flag=InventoryRecordsService.outcomeRecord(modelid, quantity, changetype, user,remarks);
+		boolean flag=InventoryRecordsService.outcomeRecord(modelid, quantity, changetype, employeeid,deptid,use,user,remarks);
 		Map<String, Object> res = new HashMap<String, Object>();
 		if(flag) {
 			res.put(Constant.RESPONSE_CODE,Constant.SUCCEED_CODE_VALUE);

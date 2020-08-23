@@ -1,5 +1,7 @@
 package com.stone.equipsys.core.mapper;
 
+import java.util.HashMap;
+
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.StoreGoodsStockLog;
@@ -14,6 +16,6 @@ import com.stone.equipsys.core.domain.StoreGoodsStockLog;
 @RDBatisDao
 public interface StoreGoodsStockLogMapper extends BaseMapper<StoreGoodsStockLog, Long> {
 
-    
+    int getcount(HashMap<String, Object> param);
 
 }

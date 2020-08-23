@@ -49,16 +49,25 @@ public class StoreGoodsStockLogServiceImpl extends BaseServiceImpl<StoreGoodsSto
 		SimpleDateFormat paramsdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date indate=new Date();
 		param.put("changeTime", paramsdf.format(indate));
-		param.put("changeType", 0);
-		int count=storeGoodsStockLogMapper.listSelective(param).size();
+		//int count=storeGoodsStockLogMapper.listSelective(param).size();
+		int count=storeGoodsStockLogMapper.getcount(param);
 		String typestr=stocktype<=20?"I":"O";
 		return typestr+sdf.format(indate)+String.format("%03d", count);
 	}
 
 	@Override
-	public boolean insertLog(Long modelnumberid, int type, int quantity,  int overplus,String op,String remarks) {
+	public boolean insertIncomeLog(Long modelnumberid,int type,int quantity,float price,String supplier,int overplus,String op,String remarks) {
 		Date indate=new Date();
-		StoreGoodsStockLog log=new StoreGoodsStockLog(createOrderCode(type),modelnumberid,type,indate,quantity,overplus,op,remarks);
+		StoreGoodsStockLog log=new StoreGoodsStockLog(createOrderCode(type),modelnumberid,type,indate,quantity,price,supplier,overplus,op,remarks);
+		int flag=storeGoodsStockLogMapper.save(log);
+		return flag==1?true:false;
+	}
+
+	@Override
+	public boolean insertOutcomeLog(Long modelnumberid, int type, int quantity, Long employeeid, Long deptid,
+			String use, int overplus, String op, String remarks) {
+		Date indate=new Date();
+		StoreGoodsStockLog log=new StoreGoodsStockLog(createOrderCode(type),modelnumberid,type,indate,quantity,employeeid,deptid,use,overplus,op,remarks);
 		int flag=storeGoodsStockLogMapper.save(log);
 		return flag==1?true:false;
 	}

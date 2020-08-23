@@ -15,7 +15,7 @@ public class Create
 	final static String mapperpath = "config/mappers/";				// Mapper文件存储地址 默认在resources中
 	//以下是需要配置的参数
 	//表名
-	final static String table = "sys_data_dictionary";
+	final static String table = "store_goods_stock_log";
 	//类说明
 	final static String functionName = "数据字典";
 	//包路径
@@ -23,7 +23,7 @@ public class Create
 	//module名称
 	final static String moduleName = "core";
 	// 类名前缀
-	final static String classNamePrefix = "SysDataDictionary";
+	final static String classNamePrefix = "StoreGoodsStockLog";
 	public static final Logger logger = LoggerFactory.getLogger(Create.class);
 
 	public static void main(String[] args){

@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202008185"></script>
+<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202008231"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202006028"></script>
 <body>
 	<div class="body-bdiv">
@@ -116,7 +116,7 @@
 				        </div>
 					</td>
 				</tr>
-				<tr id="income-tr">
+				<tr class="income">
 					<th><label class="control-label">单价（￥）</label></th>
 					<td>
 						<input id="price" name="price" class="form-control" value="0.00">
@@ -124,7 +124,7 @@
 					<th><label class="control-label">总价（￥）</label></th>
 					<td><input class="form-control point" id="total" readonly value="0.00"></td>
 				</tr>
-				<tr id="outcome-tr">
+				<tr class="outcome">
 					<th>
 						<label class="control-label">领料人</label>
 					</th>
@@ -136,11 +136,11 @@
 						<input id="deptname" class="form-control" readonly>
 					</td>
 				</tr>
-				<tr>
+				<tr class="outcome">
 					<th><label class="control-label">用途</label></th>
 					<td colspan="3"><input class="form-control" name="use"></td>
 				</tr>
-				<tr id="supplier-tr">
+				<tr class="income">
 					<th><label class="control-label">供应商</label></th>
 					<td colspan="3"><input class="form-control" name="supplier"></td>
 				</tr>

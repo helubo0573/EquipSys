@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 物料明细存储纪录实体
+ * 数据字典实体
  * 
  * @author stone
  * @version 1.0.0
- * @date 2020-08-07 23:00:22
+ * @date 2020-08-23 23:17:44
  */
  public class StoreGoodsStockLog implements Serializable {
 
@@ -32,43 +32,83 @@ import java.util.Date;
     /*** 变更数量*/
     private Integer changeQuantity;
 
-    /*** 仓位*/
-    private Long storeId;
+    /*** 入库参数 入库单价*/
+    private float price;
+
+    /*** 入库参数 供应商*/
+    private String supplier;
+
+    /*** 出库参数 领料人*/
+    private Long employeeId;
+
+    /*** 出库参数 领料部门*/
+    private Long deptId;
+
+    /*** 出库参数 用途*/
+    private String useFor;
 
     /*** 剩余数量*/
     private Integer overplus;
 
-    /*** */
+    /*** 操作人*/
     private String op;
 
     /*** */
     private String remarks;
 
-    public StoreGoodsStockLog() {}
-    
     /**
-     * 
-     * @param ordercode		库存变更编号
-     * @param modelid		规格id
-     * @param changetype	变更类型
-     * @param changetime	变更时间
-     * @param quantity		变更数量
-     * @param storeid		仓库id
-     * @param overplus		结存数量
-     * @param op			操作人
-     * @param remarks		备注 
+     * 	入库
+     * @param ordercode
+     * @param modelid
+     * @param changetype
+     * @param changetime
+     * @param quantity
+     * @param price
+     * @param supplier
+     * @param overplus
+     * @param op
+     * @param remarks
      */
-    public StoreGoodsStockLog(String ordercode,Long modelid,int changetype,Date changetime,int quantity,int overplus,String op,String remarks) {
-    	this.setOrderCode(ordercode);
-    	this.setModelId(modelid);
-    	this.setChangeType(changetype);
-    	this.setChangeTime(changetime);
-    	this.setChangeQuantity(quantity);
-    	this.setOverplus(overplus);
-    	this.setOp(op);
-    	this.setRemarks(remarks);
+    public StoreGoodsStockLog(String ordercode,Long modelid,int changetype,Date changetime,int quantity,float price,String supplier,int overplus,String op,String remarks) {
+        this.setOrderCode(ordercode);
+        this.setModelId(modelid);
+        this.setChangeType(changetype);
+        this.setChangeTime(changetime);
+        this.setChangeQuantity(quantity);
+        this.setPrice(price);
+        this.setSupplier(supplier);
+        this.setOverplus(overplus);
+        this.setOp(op);
+        this.setRemarks(remarks);
     }
-
+    /**
+     * 	 出库
+     * @param ordercode
+     * @param modelid
+     * @param changetype
+     * @param changetime
+     * @param quantity
+     * @param employeeid
+     * @param deptid
+     * @param use
+     * @param overplus
+     * @param op
+     * @param remarks
+     */
+    public StoreGoodsStockLog(String ordercode,Long modelid,int changetype,Date changetime,int quantity,Long employeeid,Long deptid,String use,int overplus,String op,String remarks) {
+        this.setOrderCode(ordercode);
+        this.setModelId(modelid);
+        this.setChangeType(changetype);
+        this.setChangeTime(changetime);
+        this.setChangeQuantity(quantity);
+        this.setEmployeeId(employeeid);
+        this.setDeptId(deptid);
+        this.setUseFor(use);
+        this.setOverplus(overplus);
+        this.setOp(op);
+        this.setRemarks(remarks);
+    }
+    
     /*** 获取主键Id
     *
     * @return id
@@ -127,7 +167,7 @@ import java.util.Date;
 
     /*** 设置库存变更类型
     * 
-    * @param changeType 要设置的库存变更类型  0:入库  1:出库
+    * @param changeType 要设置的库存变更类型
     */
     public void setChangeType(Integer changeType){
         this.changeType = changeType;
@@ -165,20 +205,84 @@ import java.util.Date;
         this.changeQuantity = changeQuantity;
     }
 
-    /*** 获取仓位
+    /*** 获取入库参数 入库单价
     *
-    * @return 仓位
+    * @return 入库参数 入库单价
     */
-    public Long getStoreId(){
-        return storeId;
+    public float getPrice(){
+        return price;
     }
 
-    /*** 设置仓位
+    /*** 设置入库参数 入库单价
     * 
-    * @param storeId 要设置的仓位
+    * @param price 要设置的入库参数 入库单价
     */
-    public void setStoreId(Long storeId){
-        this.storeId = storeId;
+    public void setPrice(float price){
+        this.price = price;
+    }
+
+    /*** 获取入库参数 供应商
+    *
+    * @return 入库参数 供应商
+    */
+    public String getSupplier(){
+        return supplier;
+    }
+
+    /*** 设置入库参数 供应商
+    * 
+    * @param supplier 要设置的入库参数 供应商
+    */
+    public void setSupplier(String supplier){
+        this.supplier = supplier;
+    }
+
+    /*** 获取出库参数 领料人
+    *
+    * @return 出库参数 领料人
+    */
+    public Long getEmployeeId(){
+        return employeeId;
+    }
+
+    /*** 设置出库参数 领料人
+    * 
+    * @param employeeId 要设置的出库参数 领料人
+    */
+    public void setEmployeeId(Long employeeId){
+        this.employeeId = employeeId;
+    }
+
+    /*** 获取出库参数 领料部门
+    *
+    * @return 出库参数 领料部门
+    */
+    public Long getDeptId(){
+        return deptId;
+    }
+
+    /*** 设置出库参数 领料部门
+    * 
+    * @param deptId 要设置的出库参数 领料部门
+    */
+    public void setDeptId(Long deptId){
+        this.deptId = deptId;
+    }
+
+    /*** 获取出库参数 用途
+    *
+    * @return 出库参数 用途
+    */
+    public String getUseFor(){
+        return useFor;
+    }
+
+    /*** 设置出库参数 用途
+    * 
+    * @param useFor 要设置的出库参数 用途
+    */
+    public void setUseFor(String useFor){
+        this.useFor = useFor;
     }
 
     /*** 获取剩余数量
@@ -197,17 +301,17 @@ import java.util.Date;
         this.overplus = overplus;
     }
 
-    /*** 获取
+    /*** 获取操作人
     *
-    * @return 
+    * @return 操作人
     */
     public String getOp(){
         return op;
     }
 
-    /*** 设置
+    /*** 设置操作人
     * 
-    * @param op 要设置的
+    * @param op 要设置的操作人
     */
     public void setOp(String op){
         this.op = op;

@@ -53,7 +53,7 @@ public class StoreGoodsInventoryRecordsServiceImpl extends BaseServiceImpl<Store
 			if(flag>0) {
 				int sum=storeGoodsInventoryRecordsMapper.countquantity(record.getModelId());
 				ModelNumberInfoService.updateQuantity(record.getModelId(), sum);
-				StockLogService.insertLog(record.getModelId(), changetype, record.getQuantity(), sum, user.getEmpname(), record.getRemarks());
+				StockLogService.insertIncomeLog(record.getModelId(), changetype, record.getQuantity(),record.getPrice(),record.getSupplier(), sum, user.getEmpname(), record.getRemarks());
 			}
 			return true;
 		} catch (Exception e) {
@@ -64,7 +64,7 @@ public class StoreGoodsInventoryRecordsServiceImpl extends BaseServiceImpl<Store
 
 	@Override
 	@Transactional
-	public boolean outcomeRecord(Long modelid, int quantity, int changetype, SysUserModel user,String remarks) {
+	public boolean outcomeRecord(Long modelid, int quantity, int changetype, Long employeeid,Long deptid,String use,SysUserModel user,String remarks) {
 		int t=quantity;
 		try {
 			HashMap<String, Object> param=new HashMap<>();
@@ -83,7 +83,7 @@ public class StoreGoodsInventoryRecordsServiceImpl extends BaseServiceImpl<Store
 			}
 			int sum=storeGoodsInventoryRecordsMapper.countquantity(modelid);
 			ModelNumberInfoService.updateQuantity(modelid, sum);
-			StockLogService.insertLog(modelid, changetype, t, sum, user.getEmpname(), remarks);
+			StockLogService.insertOutcomeLog(modelid, changetype, t,employeeid,deptid,use ,sum ,user.getEmpname(), remarks);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -272,13 +272,11 @@ function showChangeStorage(type,id,name,unit){
 			$("#ChangeStorage-form #unit").html(unit)
 			getChangeType(type)
         	if(type==0){
-				$("#ChangeStorage-form #outcome-tr").hide()
-				$("#ChangeStorage-form #income-tr").show()
-				$("#ChangeStorage-form #supplier-tr").show()
+				$("#ChangeStorage-form .outcome").hide()
+				$("#ChangeStorage-form .income").show()
 			}else{
-				$("#ChangeStorage-form #outcome-tr").show()
-				$("#ChangeStorage-form #income-tr").hide()
-				$("#ChangeStorage-form #supplier-tr").hide()
+				$("#ChangeStorage-form .outcome").show()
+				$("#ChangeStorage-form .income").hide()
 			}
         },
         yes:function(index){

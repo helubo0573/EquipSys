@@ -19,5 +19,7 @@ public interface StoreGoodsStockLogService extends BaseService<StoreGoodsStockLo
 	 */
 	String createOrderCode(int stocktype);
 	
-	boolean insertLog(Long modelnumberid,int type,int quantity,int overplus,String op,String remarks);
+	boolean insertIncomeLog(Long modelnumberid,int type,int quantity,float price,String supplier,int overplus,String op,String remarks);
+	
+	boolean insertOutcomeLog(Long modelnumberid,int type,int quantity,Long employeeid,Long deptid,String use,int overplus,String op,String remarks);
 }

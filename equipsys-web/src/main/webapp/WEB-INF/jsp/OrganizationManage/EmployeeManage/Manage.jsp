@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EmployeeInfo.js?d=2020060209"></script>
+<script type="text/javascript" src="../js/EmployeeInfo.js?d=202008231"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
