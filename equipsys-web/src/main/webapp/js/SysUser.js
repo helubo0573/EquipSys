@@ -165,7 +165,7 @@ function setUserRole(id){
 	            	var nodes = zTree.getCheckedNodes(true);
 	            	var nstr="";
 	            	for (var i=0, l=nodes.length; i<l; i++) {
-	            		nstr+=nodes[i].id + ","
+	            		if(!nodes[i].isParent)	nstr+=nodes[i].id + ","
 	    			}
 	            	$.ajax({
 	            		contenType:'application/json',
