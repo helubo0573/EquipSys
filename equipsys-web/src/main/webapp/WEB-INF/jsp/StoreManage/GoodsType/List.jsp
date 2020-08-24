@@ -9,7 +9,7 @@
 <title></title>
 </head>
 <body>
-	<select size="28" style="width: 100%;color: black;">
+	<select multiple="multiple" style="width: 100%;color: black;height: 100%">
 		<c:forEach items="${typelist }" var="type">
 			<option value="${type.id }" data-order="${type.typeOrder }" data-quickcode="${type.quickCode }" data-remarks="${type.remarks }" onclick="getGoodsTypeInfo(this)">${type.typeName }</option>
 		</c:forEach>

@@ -14,7 +14,7 @@
 			物料类型维护
 		</div>
 		<div class="box-div" style="height: 580px;">
-			<div id="GoodsTypeList-div" style="float:left;display: inline-block; width: 200px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
+			<div id="GoodsTypeList-div" style="float:left;display: inline-block; width: 200px; height: 100%; padding: 10px; border: 1px solid #ddd;">
 				<%@include file="List.jsp" %>
 			</div>
 			<div style="margin-left: 210px;border: 1px solid;height: 100%;">
