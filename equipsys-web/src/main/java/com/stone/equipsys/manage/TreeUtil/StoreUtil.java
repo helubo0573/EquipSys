@@ -48,17 +48,14 @@ public class StoreUtil {
 			storemap.put(store.getId().toString(), storeob);
 		}
 		List<Map.Entry<String, StoreObject>> Sortmap=new ArrayList<Map.Entry<String, StoreObject>>(storemap.entrySet());
-		Collections.sort(Sortmap, new Comparator<Map.Entry<String, StoreObject>>(){
-
-			@Override
-			public int compare(Entry<String, StoreObject> o1, Entry<String, StoreObject> o2) {
-				if(o1.getValue().order!=o2.getValue().order) {
-					return o1.getValue().order-o2.getValue().order;
-				}else {
-					return o1.getKey().compareTo(o2.getKey());
-				}
-			}
-		});
+		/*
+		 * Collections.sort(Sortmap, new Comparator<Map.Entry<String, StoreObject>>(){
+		 * 
+		 * @Override public int compare(Entry<String, StoreObject> o1, Entry<String,
+		 * StoreObject> o2) { if(o1.getValue().order!=o2.getValue().order) { return
+		 * o1.getValue().order-o2.getValue().order; }else { return
+		 * o1.getKey().compareTo(o2.getKey()); } } });
+		 */
 		if(type) {
 			for(StoreObject store:storemap.values()) {
 				if(store.pId!=0) {
@@ -70,7 +67,7 @@ public class StoreUtil {
 				}
 			}
 			for(StoreObject store:storemap.values()) {
-				if(store.children!=null) {
+				if(store.pId==0) {
 					relist.add(store);
 				}
 			}
