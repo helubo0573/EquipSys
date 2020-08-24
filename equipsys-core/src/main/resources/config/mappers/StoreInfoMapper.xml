@@ -95,4 +95,9 @@
         order by store_order
     </select>
     
+    <delete id="delete" parameterType="java.lang.Long">
+    	delete 
+    	from store_info
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

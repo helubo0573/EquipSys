@@ -80,6 +80,6 @@ public class StoreInfoController {
 	
 	@RequestMapping(value="storeinfo/delete")
 	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long id) {
-		
+		//由于删除数据存在逻辑关系，延后开发
 	}
 }

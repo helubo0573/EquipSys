@@ -124,14 +124,21 @@ function saveStoreGoods(index){
 }
 
 function deleteStockGoodsInfo(){
-	
+	layer.msg("因删除功能存在逻辑关系，故延后开发此功能")
 }
 function createStoreGoodsData(){
 	return $("#storegoods-form").attr("data-type")=="1"?$("#storegoods-form").serialize():"goodsname="+$("#storegoods-form #goodsname").val()+"&typeid="+$("#storegoods-form #goodstype-id").val()+"&remarks="+$("#storegoods-form #remarks").val();
 }
 
 function checkStoreGoodsData(){
-	
+	if($("#storegoods-form #goodsname").val()==""){
+		layer.msg("请填写物料名称");
+		return false;
+	}
+	if($("#storegoods-form #goodstypename").val()==""){
+		layer.msg("请选择物料类型")
+		return false;		
+	}
 	return true;
 }
 
@@ -197,7 +204,18 @@ function getModelNumberList(pagenum){
 	$("#modelnumber-list").load("../modelnumber/search.do",param)
 }
 function checkStockGoodsModelNumberInfo(){
-	
+	if($("#goodsmodelnumberinfo-form #modelname").val()==""){
+		layer.msg("请填写物料规格名称");
+		return false;
+	}
+	if($("#goodsmodelnumberinfo-form #storename").val()==""){
+		layer.msg("请选择库存仓位");
+		return false;
+	}
+	if($("#goodsmodelnumberinfo-form #unit").val()==""){
+		layer.msg("请填写库存单位");
+		return false;
+	}
 	return true;
 }
 
@@ -293,7 +311,7 @@ function showChangeStorage(type,id,name,unit){
 }
 
 function sumitChangeStorageInfo(index,type){
-	if(checkChangeStorageInfo()){
+	if(checkChangeStorageInfo(type)){
 		$.ajax({
 			contenType:'application/json',
 			Type:'POST',
@@ -312,17 +330,47 @@ function sumitChangeStorageInfo(index,type){
 	}
 }
 
+function totalprice(){
+	var price=$("#ChangeStorage-form #price").val()
+	var quantity=$("#ChangeStorage-form #quantity").val()
+	console.log(price+"---"+quantity)
+	$("#ChangeStorage-form #total").val(price*quantity)
+}
+
 function createChangeStorageInfo(){
 	return $("#ChangeStorage-form").serialize()
 }
 
 function clearChangeStorageInfo(){
-	$("#ChangeStorage-form input,textarea").val("");
+	$("#ChangeStorage-form input[id!=changedate-input],textarea").val("");
 	$("#ChangeStorage-form #changetype-select").empty();
 }
 
-function checkChangeStorageInfo(){
-	
+function checkChangeStorageInfo(type){
+	$("#ChangeStorage-form ")
+	if($("#ChangeStorage-form changedate-input").val()==""){
+		layer.msg(type==0?"请选择入库日期":"请选择出库日期");
+		return false;
+	}
+	if($("#ChangeStorage-form #changetype-select").val()=="-1"){
+		layer.msg(type==0?"请选择入库类型":"请选择出库类型");
+		return false;
+	}
+	if($("#ChangeStorage-form #quantity").val()==""){
+		layer.msg(type==0?"请填写入库数量":"请填写出库数量");
+		return false;
+	}
+	if(type==0){
+		if($("#ChangeStorage-form #price").val()==""){
+			layer.msg("请填写入库单价");
+			return false;
+		}
+	}else{
+		if($("#ChangeStorage-form #employeename").val()==""){
+			layer.msg("请选择领料人");
+			return false;
+		}
+	}
 	return true;
 }
 /**获取变更类型*/

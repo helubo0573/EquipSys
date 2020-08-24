@@ -86,4 +86,11 @@
         from store_goods_type
         <include refid="searchBy"/>
     </select>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+    	delete 
+    	from store_goods_type
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
+    
 </mapper>

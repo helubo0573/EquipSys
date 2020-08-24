@@ -86,11 +86,12 @@ function deleteStoreInfo(){
 				url:"../storeinfo/delete.do",
 				data:"id="+$("#storeid-info").val(),
 				success:function(data){
-					layer.msg(data.msg)
 					if(data.code==200){
 						getRoleTree("#role-tree");
 						clearRoleInfo();
 						changeStoreInfoBtnState(true)
+						layer.msg(data.msg)
+						layer.close(layer.index)
 					}
 				}
 			})

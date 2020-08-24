@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/StoreInfo.js?d=202007134"></script>
+<script type="text/javascript" src="../js/StoreInfo.js?d=202008241"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202006028"></script>
 <body>
 	<div class="body-sdiv">
