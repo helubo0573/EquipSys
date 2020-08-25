@@ -21,6 +21,7 @@ import com.stone.equipsys.core.common.constant.PathConstant;
 import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.domain.StoreGoodsInfo;
 import com.stone.equipsys.core.mapper.StoreGoodsInfoMapper;
+import com.stone.equipsys.core.mapper.StoreGoodsModelNumberInfoMapper;
 import com.stone.equipsys.core.mapper.StoreGoodsTypeMapper;
 import com.stone.equipsys.core.service.StoreGoodsInfoService;
 import com.stone.equipsys.manage.TreeUtil.StoreStockGoodsUtil;
@@ -34,7 +35,8 @@ public class StoreStockGoodsInfoController {
 	private StoreGoodsInfoMapper StoreGoodsInfoMapper;
 	@Resource
 	private StoreGoodsTypeMapper StoreGoodsTypeMapper; 
-	
+	@Resource
+	private StoreGoodsModelNumberInfoMapper ModelNumberInfoMapper;
 	@RequestMapping(value="storestockgoodsinfo/manage")
 	public String toManagePage(HttpServletResponse response, HttpServletRequest request) {
 		
@@ -69,5 +71,14 @@ public class StoreStockGoodsInfoController {
 			res.put(Constant.RESPONSE_CODE_MSG, "保存成功");
 		}
 		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("storestockgoodsinfo/goodsdetailjson")
+	public void getGoodsModelDetailInfoTree(HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+		String treejson=JSONObject.toJSONString(StoreStockGoodsUtil.CreateStockGoodsModelObjectList(
+				StoreGoodsTypeMapper.listSelective(null), 
+				StoreGoodsInfoMapper.listSelective(null), 
+				ModelNumberInfoMapper.listSelective(null)));
+		ServletUtils.writeToResponse(response, treejson);
 	}
 }

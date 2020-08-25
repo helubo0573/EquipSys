@@ -395,7 +395,7 @@ function showEquipParts(){
         anim:2,
         shade: 0.3,
         title:'配件维护',
-        area:[ '580px', '650px' ],
+        area:[ '780px', '650px' ],
         btn:['保存','关闭'],
         content: $("#setparts-form"),
         success: function (layero, index){
@@ -404,14 +404,14 @@ function showEquipParts(){
 				Type:'POST',
 				dataType:'json',
 				data:"type=4",
-				url:"../store/getgoodsmodelinfo.do",
+				url:"../storestockgoodsinfo/goodsdetailjson.do",
 				success:function(data){
 					var setting={
 				        callback:{
-				        	onClick:clickEquipNode
+				        	onClick:clickGoodsModelNumber
 		        		}
 					};
-					$.fn.zTree.init($(e), setting, JSON.parse(data.equiptree));
+					$.fn.zTree.init($("#setparts-form #equipsparts-tree"), setting, JSON.parse(data));
 				}
 			})
 		},
@@ -427,6 +427,14 @@ function showEquipParts(){
         }
 	})
 }
+function clickGoodsModelNumber(event, treeId, treeNode){
+	
+}
+
+function insertParts(){
+	
+}
+
 function savePartsInfo(index){
 	
 }

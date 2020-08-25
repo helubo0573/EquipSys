@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.stone.equipsys.core.domain.StoreGoodsInfo;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 import com.stone.equipsys.core.domain.StoreGoodsType;
+import com.stone.equipsys.manage.TreeUtil.StoreUtil.StoreObject;
 
 
 public class StoreStockGoodsUtil {
@@ -32,12 +33,13 @@ public class StoreStockGoodsUtil {
 		public Long pId;
 		public String name;
 		public int order;
-		public boolean check=false;
 		public String icon="";
-		public String remarks="";
-		public List<StockGoodsObject> children = null;
+		public List<StockGoodsModelObject> children = null;
 		public int getOrder() {
 			return this.order;
+		}
+		public String getModelName() {
+			return this.name;
 		}
 	}
 	
@@ -74,8 +76,47 @@ public class StoreStockGoodsUtil {
 		
 	}
 	
-	public List<StockGoodsModelObject> CreateStockGoodsModelObjectList(List<StoreGoodsType> goodstypelist,List<StoreGoodsInfo> goodsinfolist,List<StoreGoodsModelNumberInfo> modelnumberlist){
-	
-		return null;
+	public static List<StockGoodsModelObject> CreateStockGoodsModelObjectList(List<StoreGoodsType> goodstypelist,List<StoreGoodsInfo> goodsinfolist,List<StoreGoodsModelNumberInfo> modelnumberlist){
+		Map<String,StockGoodsModelObject> goodstypemap=new TreeMap<String,StockGoodsModelObject>();
+		Map<String,StockGoodsModelObject> goodsinfomap=new TreeMap<String,StockGoodsModelObject>();
+		Map<String,StockGoodsModelObject> goodsmodelmap=new TreeMap<String,StockGoodsModelObject>();
+		List<StockGoodsModelObject> relist=new ArrayList<StockGoodsModelObject>();
+		for(StoreGoodsModelNumberInfo model:modelnumberlist) {
+			StockGoodsModelObject mob=new StockGoodsModelObject();
+			mob.id=model.getId();
+			mob.pId=model.getGoodsId();
+			mob.name=model.getModelNumberName();
+			goodsmodelmap.put(model.getId()+"", mob);
+		}
+		for(StoreGoodsType goodstype:goodstypelist) {
+			StockGoodsModelObject mob=new StockGoodsModelObject();
+			mob.id=goodstype.getId();
+			mob.name=goodstype.getTypeName();
+			mob.order=goodstype.getTypeOrder();
+			mob.children=new ArrayList<StockGoodsModelObject>();
+			goodstypemap.put(goodstype.getId()+"", mob);
+		}
+		for(StoreGoodsInfo goodsinfo:goodsinfolist) {
+			StockGoodsModelObject mob=new StockGoodsModelObject();
+			mob.id=goodsinfo.getId();
+			mob.name=goodsinfo.getGoodsName();
+			mob.pId=goodsinfo.getGoodsType();
+			mob.children=new ArrayList<StockGoodsModelObject>();
+			goodsinfomap.put(goodsinfo.getId()+"", mob);
+		}
+		for(StockGoodsModelObject model:goodsmodelmap.values()) {
+			goodsinfomap.get(model.pId+"").children.add(model);
+		}
+		for(StockGoodsModelObject goods:goodsinfomap.values()) {
+			List<StockGoodsModelObject> tlist=goods.children;
+			if(tlist!=null) goods.children=tlist.stream().sorted(Comparator.comparing(StockGoodsModelObject::getModelName)).collect(Collectors.toList());
+			goodstypemap.get(goods.pId+"").children.add(goods);
+		}
+		for(StockGoodsModelObject goodstype:goodstypemap.values()) {
+			List<StockGoodsModelObject> tlist=goodstype.children;
+			if(tlist!=null) goodstype.children=tlist.stream().sorted(Comparator.comparing(StockGoodsModelObject::getOrder)).collect(Collectors.toList());
+			relist.add(goodstype);
+		}
+		return relist;
 	}
 }
