@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.stone.equipsys.core.domain.StoreGoodsInfo;
+import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 import com.stone.equipsys.core.domain.StoreGoodsType;
 
 
@@ -21,11 +22,25 @@ public class StoreStockGoodsUtil {
 		public String icon="";
 		public String remarks="";
 		public List<StockGoodsObject> children = null;
-		
 		public int getOrder() {
 			return this.order;
 		}
 	}
+	
+	public static class StockGoodsModelObject{
+		public Long id;
+		public Long pId;
+		public String name;
+		public int order;
+		public boolean check=false;
+		public String icon="";
+		public String remarks="";
+		public List<StockGoodsObject> children = null;
+		public int getOrder() {
+			return this.order;
+		}
+	}
+	
 	
 	public static List<StockGoodsObject> CreateStockGoodsList(List<StoreGoodsType> goodstypelist,List<StoreGoodsInfo> goodsinfolist){
 		Map<String,StockGoodsObject> goodstypemap=new TreeMap<String,StockGoodsObject>();
@@ -57,5 +72,10 @@ public class StoreStockGoodsUtil {
 		relist=relist.stream().sorted(Comparator.comparing(StockGoodsObject::getOrder)).collect(Collectors.toList());
 		return relist;
 		
+	}
+	
+	public List<StockGoodsModelObject> CreateStockGoodsModelObjectList(List<StoreGoodsType> goodstypelist,List<StoreGoodsInfo> goodsinfolist,List<StoreGoodsModelNumberInfo> modelnumberlist){
+	
+		return null;
 	}
 }

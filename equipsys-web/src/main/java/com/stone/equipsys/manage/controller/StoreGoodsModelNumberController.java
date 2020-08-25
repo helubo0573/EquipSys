@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,9 @@ public class StoreGoodsModelNumberController {
 	private StoreGoodsModelNumberInfoMapper StoreGoodsModelNumberMapper;
 	@Resource
 	private StoreGoodsModelNumberInfoService StoreGoodsModelNumberInfoService;
+	
 	@RequestMapping("modelnumber/save")
+	@RequiresPermissions(value = "store:goodsmodelnumber:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="id",defaultValue="0")Long id,
 			@RequestParam(value="goodsid")Long goodsid,

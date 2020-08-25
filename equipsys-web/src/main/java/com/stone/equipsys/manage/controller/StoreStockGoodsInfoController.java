@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,7 @@ public class StoreStockGoodsInfoController {
 	}
 	
 	@RequestMapping(value="storestockgoodsinfo/save")
+	@RequiresPermissions(value = "store:goodsinfo:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="goodsid",defaultValue="0")Long id,
 			@RequestParam(value="typeid")Long typeid,
@@ -67,9 +69,5 @@ public class StoreStockGoodsInfoController {
 			res.put(Constant.RESPONSE_CODE_MSG, "保存成功");
 		}
 		ServletUtils.writeToResponse(response, res);
-	}
-	@RequestMapping("storestockgoodsinfo/saveModelNumber")
-	public void saveModelNumber(HttpServletResponse response, HttpServletRequest request) {
-		
 	}
 }

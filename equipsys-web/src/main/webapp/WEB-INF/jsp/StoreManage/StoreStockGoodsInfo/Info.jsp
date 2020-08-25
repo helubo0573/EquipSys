@@ -25,9 +25,13 @@
 			<tr>
 				<td colspan="4">
 					<div class="right">
-						<button class="btn btn-info btn-xs" onclick="showStockGoodsInfo('0')">新增</button>
-						<button class="btn btn-warning btn-xs" onclick="showStockGoodsInfo('1')">修改</button>
-						<button class="btn btn-danger btn-xs" onclick="deleteStockGoodsInfo()">删除</button>
+						<shiro:hasPermission name="store:goodsinfo:save">
+							<button class="btn btn-info btn-xs" onclick="showStockGoodsInfo('0')">新增</button>
+							<button class="btn btn-warning btn-xs" onclick="showStockGoodsInfo('1')">修改</button>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="store:goodsinfo:delete">
+							<button class="btn btn-danger btn-xs" onclick="deleteStockGoodsInfo()">删除</button>
+						</shiro:hasPermission>
 					</div>
 				</td>
 			</tr>
@@ -40,7 +44,9 @@
 		</div>
 		<div style="border: white 1px solid;height: 395px;width: 100%;text-align: center;">
 			<div class="btn-Rdiv" style="margin: 8px 0px">
-				<button class="btn btn-info btn-xs" id="addmodelnumber" onclick="showGoodsModelNumberInfo(0)" disabled>新增物料规格</button>
+				<shiro:hasPermission name="store:goodsmodelnumber:save">
+					<button class="btn btn-info btn-xs" id="addmodelnumber" onclick="showGoodsModelNumberInfo(0)" disabled>新增物料规格</button>
+				</shiro:hasPermission>
 			</div>
 			<div id="modelnumber-list" style="width: 98%;text-align: center;margin-left: 1%">
 				<%@include file="subList.jsp" %>

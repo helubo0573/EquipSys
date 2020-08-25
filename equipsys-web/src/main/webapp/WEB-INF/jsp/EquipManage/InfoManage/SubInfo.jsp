@@ -11,7 +11,7 @@
 <body>
 	<div class="btn-Rdiv">
 		<shiro:hasPermission name="equip:info:setparts">
-		 	<button class="btn btn-info btn-xs left" id="equipsystem-manageparts">配件维护</button>
+		 	<button class="btn btn-info btn-xs left" id="equipsystem-manageparts" disabled onclick="showEquipParts()">配件维护</button>
 		</shiro:hasPermission>
 		<shiro:hasPermission name="equip:info:save">
 			<button class="btn btn-info btn-xs" id="equipsystem-addequip" onclick="showEquipInfo(0)">新增设备</button>

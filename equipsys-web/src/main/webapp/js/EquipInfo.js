@@ -13,14 +13,14 @@ function getEquipTree(e){
 		success:function(data){
 			var setting={
 					simpleData : {
-			            enable : true, // 设置启用简单数据格式[{id, pId, name}, {id, pId, name}]   
-			            idKey : "id",  // 节点数据中保存唯一标识的属性名称
-			            pIdKey : "parent",  // 节点数据中保存其父节点唯一标识的属性名称
-			            rootPId : null  // 根节点id
-			        },
-			        callback:{
-			        	onClick:clickEquipNode
-			        }
+		            enable : true, // 设置启用简单数据格式[{id, pId, name}, {id, pId, name}]   
+		            idKey : "id",  // 节点数据中保存唯一标识的属性名称
+		            pIdKey : "parent",  // 节点数据中保存其父节点唯一标识的属性名称
+		            rootPId : null  // 根节点id
+		        },
+		        callback:{
+		        	onClick:clickEquipNode
+        		}
 			};
 			$.fn.zTree.init($(e), setting, JSON.parse(data.equiptree));
 		}
@@ -100,6 +100,7 @@ function clickEquipNode(event, treeId, treeNode){
 				$("#equipid-hd").val(data.equip.id)
 				setEquipInfoToInfo(data.equip,treeNode,data.opstr,data.mpstr,data.enabledate);
 				changeBtnState(false)
+				$("#equipsystem-manageparts").removeAttr("disabled");
 			}
 		}
 	})
@@ -383,4 +384,52 @@ function changeBtnState(type){
 	$("#equipsystem-updateequip").attr("disabled",type);
 	$("#equipsystem-deleteequip").attr("disabled",type);
 	$("#equipsystem-manageparts").attr("disabled",type)
+}
+
+/**配件管理 */
+
+function showEquipParts(){
+	layer.open({
+		type:1,
+        skin:'', //样式类名
+        anim:2,
+        shade: 0.3,
+        title:'配件维护',
+        area:[ '580px', '650px' ],
+        btn:['保存','关闭'],
+        content: $("#setparts-form"),
+        success: function (layero, index){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				data:"type=4",
+				url:"../store/getgoodsmodelinfo.do",
+				success:function(data){
+					var setting={
+				        callback:{
+				        	onClick:clickEquipNode
+		        		}
+					};
+					$.fn.zTree.init($(e), setting, JSON.parse(data.equiptree));
+				}
+			})
+		},
+		yes:function(index){
+        	savePartsInfo(index);
+        },
+        btn2:function(index){
+        	layer.close(index);
+        },
+        end: function(index, layero){
+        	clearPartsInfo();
+        	$("#setparts-form").hide();        	
+        }
+	})
+}
+function savePartsInfo(index){
+	
+}
+function clearPartsInfo(){
+	
 }

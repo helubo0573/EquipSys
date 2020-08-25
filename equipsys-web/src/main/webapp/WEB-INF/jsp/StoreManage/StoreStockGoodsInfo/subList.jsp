@@ -25,12 +25,24 @@
 						<td>${model.quantity }</td>
 						<td>${model.unit }</td>
 						<td>
-							<i class="layui-icon point" title="入库" onclick="showChangeStorage(0,${model.id},'${model.modelNumberName }','${model.unit }')">&#xe61f;</i>&nbsp;
-							<i class="layui-icon point" title="出库" onclick="showChangeStorage(1,${model.id},'${model.modelNumberName }','${model.unit }')">&#xe616;</i>&nbsp;
-							<i class="layui-icon point" title="查看库存明细" onclick="queryChangeStorageLog(${model.id})">&#xe60a;</i>&nbsp;
-							<i class="layui-icon point" title="库存变更记录" onclick="queryChangeStorageLog(${model.id})">&#xe62d;</i>&nbsp;
-							<i class="layui-icon point" title="修改" onclick="showEmployeeInfo(${model.id})">&#xe642;</i>&nbsp;
-							<i class="layui-icon point" title="删除" onclick="deleteEmployee(${model.id})">&#xe640;</i>
+							<shiro:hasPermission name="store:goodsmodelnumber:income">
+								<i class="layui-icon point" title="入库" onclick="showChangeStorage(0,${model.id},'${model.modelNumberName }','${model.unit }')">&#xe61f;</i>&nbsp;
+							</shiro:hasPermission>
+							<shiro:hasPermission name="store:goodsmodelnumber:outcome">
+								<i class="layui-icon point" title="出库" onclick="showChangeStorage(1,${model.id},'${model.modelNumberName }','${model.unit }')">&#xe616;</i>&nbsp;
+							</shiro:hasPermission>
+							<shiro:hasPermission name="store:goodsmodelnumber:stockdetailinfo">
+								<i class="layui-icon point" title="查看库存明细" onclick="queryChangeStorageLog(${model.id})">&#xe60a;</i>&nbsp;
+							</shiro:hasPermission>
+							<shiro:hasPermission name="store:goodsmodelnumber:stockchangelog">
+								<i class="layui-icon point" title="库存变更记录" onclick="queryChangeStorageLog(${model.id})">&#xe62d;</i>&nbsp;
+							</shiro:hasPermission>
+							<shiro:hasPermission name="store:goodsmodelnumber:save">
+								<i class="layui-icon point" title="修改" onclick="showEmployeeInfo(${model.id})">&#xe642;</i>&nbsp;
+							</shiro:hasPermission>
+							<shiro:hasPermission name="store:goodsmodelnumber:delete">
+								<i class="layui-icon point" title="删除" onclick="deleteEmployee(${model.id})">&#xe640;</i>
+							</shiro:hasPermission>
 						</td>
 					</tr>
 				</c:forEach>

@@ -15,15 +15,15 @@ public class Create
 	final static String mapperpath = "config/mappers/";				// Mapper文件存储地址 默认在resources中
 	//以下是需要配置的参数
 	//表名
-	final static String table = "store_goods_stock_log";
+	final static String table = "equip_parts_info";
 	//类说明
-	final static String functionName = "数据字典";
+	final static String functionName = "设备配件信息";
 	//包路径
 	final static String packageName = "com.stone.equipsys";
 	//module名称
 	final static String moduleName = "core";
 	// 类名前缀
-	final static String classNamePrefix = "StoreGoodsStockLog";
+	final static String classNamePrefix = "EquipPartsInfo";
 	public static final Logger logger = LoggerFactory.getLogger(Create.class);
 
 	public static void main(String[] args){

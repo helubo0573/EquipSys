@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=2020060164"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008251"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
 <body>
@@ -36,5 +36,33 @@
 			</div>
 		</div>
 	</div>
+	<form id="setparts-form" class="form-horizontal box-div" style="display: none;"><!-- 配件维护 -->
+		<input type="hidden" id="equipid" name="equipid">
+		<table class="order-table table table-bordered layeropen">
+			<tr>
+				<th width="100px;">设备名称</th><td id="equipname" colspan="2"></td>
+				<th width="100px;">所属设备</th><td id="parantequip"></td>
+			</tr>
+			<tr>
+				<td colspan="2" width="150px;">
+					<div class="input-group input-group-sm">
+			            <input type="text" class="form-control" placeholder="输入配件名称搜索">
+			            <span class="input-group-addon point btn"><i class="layui-icon" style="font-size: 12px;">&#xe615;</i></span>
+			        </div>
+				</td>
+				<td colspan="3" style="text-align: right;">
+					<button class="btn btn-info btn-sm">新增自定义配件</button>
+				</td>
+			</tr>
+			<tr height="428px">
+				<td colspan="2">
+					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;" class="ztree">
+					</ul>
+				</td>
+				<td colspan="3">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
