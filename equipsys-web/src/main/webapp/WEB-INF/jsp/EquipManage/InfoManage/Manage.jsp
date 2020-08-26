@@ -38,14 +38,12 @@
 	<form id="setparts-form" class="form-horizontal box-div" style="display: none;"><!-- 配件维护 -->
 		<input type="hidden" id="equipid" name="equipid">
 		<table class="order-table table table-bordered layeropen">
-			<tr><td width="100px"></td><td width="50px"></td><td width="100px"></td><td width="100px"></td><td></td>
+			<tr>
+				<th width="100px">设备名称</th><td id="equipname" colspan="2" width="150px;"></td>
+				<th width="100px">所属设备</th><td id="parantequip" width="380px"></td>
 			</tr>
 			<tr>
-				<th>设备名称</th><td id="equipname" colspan="2" width="200px;"></td>
-				<th>所属设备</th><td id="parantequip"></td>
-			</tr>
-			<tr>
-				<td colspan="2">
+				<td colspan="2" width="150px">
 					<div class="input-group input-group-sm" style="width: 180px;">
 			            <input type="text" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
 			            <span class="input-group-addon point btn"><i class="layui-icon" style="font-size: 12px;">&#xe615;</i></span>
@@ -61,14 +59,18 @@
 					</ul>
 				</td>
 				<td colspan="3">
-					<table class="order-table table table-bordered layeropen">
-						<tr>
-							<th>配件类型</th>
-							<th>名称</th>
-							<th>规格</th>
-							<th>数量</th>
-						</tr>
-					</table>
+					<div style="height: 412px">
+						<table class="order-table table table-bordered layeropen" style="margin: 0px">
+							<tr><th width="100px">配件类型</th><th width="160px">名称</th><th width="160px">规格</th><th>数量</th></tr>
+						</table>
+						<div style="overflow-y:scroll;height: 378px">
+							<table id="partslist-table" class="order-table table table-bordered layeropen">
+								<tr>
+									<td width="100px">电气物料</td><td width="160px">剩余电流动作断路器（漏电断路器）</td><td width="160px">CWDZ15-P-01-A1-14-L300-GO-F</td><td>1</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</td>
 			</tr>
 		</table>
