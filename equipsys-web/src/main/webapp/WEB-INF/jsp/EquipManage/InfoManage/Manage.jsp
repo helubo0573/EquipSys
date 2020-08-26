@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202008255"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008266"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <body>
 	<div class="body-bdiv">
@@ -59,17 +59,10 @@
 					</ul>
 				</td>
 				<td colspan="3">
-					<div style="height: 412px">
-						<table class="order-table table table-bordered layeropen" style="margin: 0px">
-							<tr><th width="100px">配件类型</th><th width="160px">名称</th><th width="160px">规格</th><th>数量</th></tr>
+					<div style="height: 412px;overflow-y:scroll;">
+						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
+							<tr><th width="100px">配件类型</th><th width="145px">名称</th><th width="150px">规格</th><th width="70px">数量</th><th>移除</th></tr>
 						</table>
-						<div style="overflow-y:scroll;height: 378px">
-							<table id="partslist-table" class="order-table table table-bordered layeropen">
-								<tr>
-									<td width="100px">电气物料</td><td width="160px">剩余电流动作断路器（漏电断路器）</td><td width="160px">CWDZ15-P-01-A1-14-L300-GO-F</td><td>1</td>
-								</tr>
-							</table>
-						</div>
 					</div>
 				</td>
 			</tr>

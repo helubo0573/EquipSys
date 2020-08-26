@@ -428,9 +428,34 @@ function showEquipParts(){
 	})
 }
 function clickGoodsModelNumber(event, treeId, treeNode){
-	
+	if(!treeNode.isParent){
+		var flag=true;
+		$("#setparts-form #partslist-table tr").each(function(){
+			if($(this).find(":input:first").val()==treeNode.id){
+				layer.msg("此配件已选择");
+				flag=false;
+				console.log("break")
+			}
+			console.log("true")
+		})
+		if(flag){
+		var goodsnode=treeNode.getParentNode();
+		var goodstypenode=goodsnode.getParentNode();
+		var listindex=createindex()+1;
+		var trhtml="<tr><input type='hidden' name='model"+listindex+"' value='"+treeNode.id+"'>"+
+			"<td width='100px'>"+goodstypenode.name+"</td>"+
+			"<td width='145px'>"+goodsnode.name+"</td>"+
+			"<td width='150px'>"+treeNode.name+"</td>"+
+			"<td  width'70px'><input name='quantity"+listindex+"' type='number' class='form-control needing' style='height:20px;' value='1'></td>"+
+			"<td><i class='layui-icon point' title='删除' onclick=''>&#xe616</i></td></tr>"
+		$("#setparts-form #partslist-table").append(trhtml)			
+		}
+	}
 }
 
+function createindex(){
+	return $("#setparts-form #partslist-table tr").length;
+}
 function insertParts(){
 	
 }
