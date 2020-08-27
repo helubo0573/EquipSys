@@ -439,22 +439,35 @@ function clickGoodsModelNumber(event, treeId, treeNode){
 			console.log("true")
 		})
 		if(flag){
-		var goodsnode=treeNode.getParentNode();
-		var goodstypenode=goodsnode.getParentNode();
-		var listindex=createindex()+1;
-		var trhtml="<tr><input type='hidden' name='model"+listindex+"' value='"+treeNode.id+"'>"+
-			"<td width='100px'>"+goodstypenode.name+"</td>"+
-			"<td width='145px'>"+goodsnode.name+"</td>"+
-			"<td width='150px'>"+treeNode.name+"</td>"+
-			"<td  width'70px'><input name='quantity"+listindex+"' type='number' class='form-control needing' style='height:20px;' value='1'></td>"+
-			"<td><i class='layui-icon point' title='删除' onclick=''>&#xe616</i></td></tr>"
-		$("#setparts-form #partslist-table").append(trhtml)			
+			var goodsnode=treeNode.getParentNode();
+			var goodstypenode=goodsnode.getParentNode();
+			var trhtml=createindex(goodsnode,goodstypenode,treeNode);
+			$("#setparts-form #partslist-table").append(trhtml)
 		}
 	}
 }
 
-function createindex(){
-	return $("#setparts-form #partslist-table tr").length;
+function createindex(goodsnode,goodstypenode,treeNode){
+	var index=$("#setparts-form #partslist-table tr").length;
+	var thtml="<tr><input type='hidden' name='model"+index+"' value='"+treeNode.id+"'>"+
+				"<td width='100px'>"+goodstypenode.name+"</td>"+
+				"<td width='145px'>"+goodsnode.name+"</td>"+
+				"<td width='150px'>"+treeNode.name+"</td>"+
+				"<td  width'70px'><input name='quantity"+index+"' class='form-control needing' style='height:20px;' value='1'></td>"+
+				"<td><i class='layui-icon point' title='删除'  onclick='removeindex(this)'>&#xe616</i></td></tr>"
+	return thtml;
+}
+function removeindex(e){
+	layer.open({
+		type:0,
+		title:"删除",
+		btn:["确定","取消"],
+		content:"确定撤销增加此配件吗？?",
+		yes:function(){
+			$(e).parent().parent().remove();
+			layer.close(layer.index)
+		}
+	})
 }
 function insertParts(){
 	
