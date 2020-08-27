@@ -101,6 +101,7 @@ function clickEquipNode(event, treeId, treeNode){
 				setEquipInfoToInfo(data.equip,treeNode,data.opstr,data.mpstr,data.enabledate);
 				changeBtnState(false)
 				$("#equipsystem-manageparts").removeAttr("disabled");
+				getEquipPartsList(treeNode.id,1)
 			}
 		}
 	})
@@ -387,6 +388,14 @@ function changeBtnState(type){
 }
 
 /**配件管理 */
+function getEquipPartsList(equipid,pagenum){
+	var param={
+			equipid:equipid,
+			pageSize:10,
+			current:pagenum
+		}
+	$("#subequip-list").load("../equipparts/search.do",param)
+}
 
 function showEquipParts(){
 	layer.open({
@@ -403,7 +412,7 @@ function showEquipParts(){
 				contenType:'application/json',
 				Type:'POST',
 				dataType:'json',
-				data:"type=4",
+				data:"equipid="+$("#equip-info #equipid-hd").val(),
 				url:"../storestockgoodsinfo/goodsdetailjson.do",
 				success:function(data){
 					var setting={

@@ -1,8 +1,12 @@
 package com.stone.equipsys.core.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.EquipPartsInfo;
+import com.stone.equipsys.core.model.EquipPartsInfoModel;
 
 /**
  * 设备配件信息Dao
@@ -14,6 +18,6 @@ import com.stone.equipsys.core.domain.EquipPartsInfo;
 @RDBatisDao
 public interface EquipPartsInfoMapper extends BaseMapper<EquipPartsInfo, Long> {
 
-    
+    List<EquipPartsInfoModel> listSelectiveExt(HashMap<String, Object> param);
 
 }

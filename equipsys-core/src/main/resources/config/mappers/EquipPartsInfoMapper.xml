@@ -11,9 +11,23 @@
         <result column="quantity" property="quantity" jdbcType="INTEGER" />
     </resultMap>
     
+    <resultMap id="ExtResultMap" type="com.stone.equipsys.core.model.EquipPartsInfoModel" extends="BaseResultMap">
+        <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+        <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+        <result column="store_quantity" property="storeQuantity" jdbcType="INTEGER" />
+        <result column="goodstype_id" property="goodstypeId" jdbcType="BIGINT" />
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    </resultMap>
+    
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         id,equip_id,goods_model_id,parts_name,quantity 
+    </sql>
+    <!--扩展的配件-物料库存信息sql查询字段 公共引用...-->
+    <sql id="Ext_Column_List">
+        parts.id as id,parts.equip_id as equip_id,parts.goods_model_id as goods_model_id,parts.parts_name as parts_name,parts.quantity as quantity,model.model_number_name as model_name,goods.goods_name as goods_name,type.type_name as type_name,
+		model.quantity as store_quantity,type.id as goodstype_id,goods.id as goods_id
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
@@ -37,6 +51,26 @@
         </trim>
     </sql>
     
+    <!-- 扩展的sql查询条件公共引用 -->
+    <sql id="ext_searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                parts.id  = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="equipId != null and equipId != '' ">
+                and parts.equip_id = #{equipId,jdbcType=BIGINT}
+            </if>
+            <if test="goodsModelId != null and goodsModelId != '' ">
+                and parts.goods_model_id = #{goodsModelId,jdbcType=BIGINT}
+            </if>
+            <if test="partsName != null and partsName != '' ">
+                and parts.parts_name = #{partsName,jdbcType=VARCHAR}
+            </if>
+            <if test="quantity != null and quantity != '' ">
+                and parts.quantity = #{quantity,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
     
     <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipPartsInfo">
         insert into equip_parts_info(equip_id,goods_model_id,parts_name,quantity)values(#{equipId,jdbcType=BIGINT},#{goodsModelId,jdbcType=BIGINT},#{partsName,jdbcType=VARCHAR},#{quantity,jdbcType=INTEGER})
@@ -92,6 +126,13 @@
         <include refid="Base_Column_List" />
         from equip_parts_info
         <include refid="searchBy"/>
+    </select>
+    
+    <select id="listSelectiveExt" resultMap="ExtResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Ext_Column_List" />
+        from equip_parts_info as parts left join store_goods_model_number_info as model on parts.goods_model_id=model.id left join store_goods_info as goods on model.goods_id=goods.id left join store_goods_type as type on goods.goods_type=type.id
+        <include refid="ext_searchBy"/>
     </select>
     
 </mapper>

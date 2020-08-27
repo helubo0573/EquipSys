@@ -2,11 +2,13 @@ package com.stone.equipsys.manage.TreeUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import com.stone.equipsys.core.domain.EquipPartsInfo;
 import com.stone.equipsys.core.domain.StoreGoodsInfo;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 import com.stone.equipsys.core.domain.StoreGoodsType;
@@ -76,11 +78,18 @@ public class StoreStockGoodsUtil {
 		
 	}
 	
-	public static List<StockGoodsModelObject> CreateStockGoodsModelObjectList(List<StoreGoodsType> goodstypelist,List<StoreGoodsInfo> goodsinfolist,List<StoreGoodsModelNumberInfo> modelnumberlist){
+	public static List<StockGoodsModelObject> CreateStockGoodsModelObjectList(List<StoreGoodsType> goodstypelist,
+			List<StoreGoodsInfo> goodsinfolist,
+			List<StoreGoodsModelNumberInfo> modelnumberlist,
+			List<EquipPartsInfo> partslist){
+		List<Long> modelidlist=new ArrayList<>();
 		Map<String,StockGoodsModelObject> goodstypemap=new TreeMap<String,StockGoodsModelObject>();
 		Map<String,StockGoodsModelObject> goodsinfomap=new TreeMap<String,StockGoodsModelObject>();
 		Map<String,StockGoodsModelObject> goodsmodelmap=new TreeMap<String,StockGoodsModelObject>();
 		List<StockGoodsModelObject> relist=new ArrayList<StockGoodsModelObject>();
+		for(EquipPartsInfo parts:partslist) {
+			modelidlist.add(parts.getGoodsModelId());
+		}
 		for(StoreGoodsModelNumberInfo model:modelnumberlist) {
 			StockGoodsModelObject mob=new StockGoodsModelObject();
 			mob.id=model.getId();
@@ -105,7 +114,8 @@ public class StoreStockGoodsUtil {
 			goodsinfomap.put(goodsinfo.getId()+"", mob);
 		}
 		for(StockGoodsModelObject model:goodsmodelmap.values()) {
-			goodsinfomap.get(model.pId+"").children.add(model);
+			if(modelidlist.indexOf(model.id)==-1)
+				goodsinfomap.get(model.pId+"").children.add(model);
 		}
 		for(StockGoodsModelObject goods:goodsinfomap.values()) {
 			List<StockGoodsModelObject> tlist=goods.children;

@@ -22,7 +22,7 @@
 		</shiro:hasPermission>
 	</div>
 	<div class="search-div" style="padding: 3px;">
-		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;">
+		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;text-align: center;">
 			配件信息
 		</div>
 		<div id="subequip-list">

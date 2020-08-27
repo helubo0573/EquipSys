@@ -20,6 +20,7 @@ import com.stone.equipsys.core.common.constant.Constant;
 import com.stone.equipsys.core.common.constant.PathConstant;
 import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.domain.StoreGoodsInfo;
+import com.stone.equipsys.core.mapper.EquipPartsInfoMapper;
 import com.stone.equipsys.core.mapper.StoreGoodsInfoMapper;
 import com.stone.equipsys.core.mapper.StoreGoodsModelNumberInfoMapper;
 import com.stone.equipsys.core.mapper.StoreGoodsTypeMapper;
@@ -37,6 +38,8 @@ public class StoreStockGoodsInfoController {
 	private StoreGoodsTypeMapper StoreGoodsTypeMapper; 
 	@Resource
 	private StoreGoodsModelNumberInfoMapper ModelNumberInfoMapper;
+	@Resource
+	private EquipPartsInfoMapper PartsInfoMapper;
 	@RequestMapping(value="storestockgoodsinfo/manage")
 	public String toManagePage(HttpServletResponse response, HttpServletRequest request) {
 		
@@ -74,11 +77,14 @@ public class StoreStockGoodsInfoController {
 	}
 	
 	@RequestMapping("storestockgoodsinfo/goodsdetailjson")
-	public void getGoodsModelDetailInfoTree(HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+	public void getGoodsModelDetailInfoTree(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="equipid")Long equipid) throws UnsupportedEncodingException, IOException {
+		HashMap<String, Object> param=new HashMap<>();
+		param.put("equipId", equipid);
 		String treejson=JSONObject.toJSONString(StoreStockGoodsUtil.CreateStockGoodsModelObjectList(
 				StoreGoodsTypeMapper.listSelective(null), 
 				StoreGoodsInfoMapper.listSelective(null), 
-				ModelNumberInfoMapper.listSelective(null)));
+				ModelNumberInfoMapper.listSelective(null),
+				PartsInfoMapper.listSelective(param)));
 		ServletUtils.writeToResponse(response, treejson);
 	}
 }
