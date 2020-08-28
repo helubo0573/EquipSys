@@ -9,7 +9,7 @@ public class PathConstant {
 	
 	/***设备管理*/
 	public static final String EquipInfoManage="forward:/WEB-INF/jsp/EquipManage/InfoManage/Manage.jsp";					//设备信息管理
-	
+	public static final String EquipPartsList="forward:/WEB-INF/jsp/EquipManage/InfoManage/PartsList.jsp";					//
 	
 	//库存进销存管理
 	/**仓位名称管理**/

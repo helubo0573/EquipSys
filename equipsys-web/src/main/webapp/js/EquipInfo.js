@@ -425,7 +425,7 @@ function showEquipParts(){
 			})
 		},
 		yes:function(index){
-        	savePartsInfo(index);
+        	insertParts(index);
         },
         btn2:function(index){
         	layer.close(index);
@@ -458,11 +458,17 @@ function clickGoodsModelNumber(event, treeId, treeNode){
 
 function createindex(goodsnode,goodstypenode,treeNode){
 	var index=$("#setparts-form #partslist-table tr").length;
-	var thtml="<tr><input type='hidden' name='model"+index+"' value='"+treeNode.id+"'>"+
+	/*var thtml="<tr><input type='hidden' name='model"+index+"' value='"+treeNode.id+"'>"+
 				"<td width='100px'>"+goodstypenode.name+"</td>"+
 				"<td width='145px'>"+goodsnode.name+"</td>"+
 				"<td width='150px'>"+treeNode.name+"</td>"+
 				"<td  width'70px'><input name='quantity"+index+"' class='form-control needing' style='height:20px;' value='1'></td>"+
+				"<td><i class='layui-icon point' title='删除'  onclick='removeindex(this)'>&#xe616</i></td></tr>"*/
+	var thtml="<tr><input type='hidden' name='model' value='"+treeNode.id+"'>"+
+				"<td width='100px'>"+goodstypenode.name+"</td>"+
+				"<td width='145px'>"+goodsnode.name+"</td>"+
+				"<td width='150px'>"+treeNode.name+"</td>"+
+				"<td  width'70px'><input name='quantity' class='form-control needing' style='height:20px;' value='1'></td>"+
 				"<td><i class='layui-icon point' title='删除'  onclick='removeindex(this)'>&#xe616</i></td></tr>"
 	return thtml;
 }
@@ -478,12 +484,46 @@ function removeindex(e){
 		}
 	})
 }
-function insertParts(){
-	
+function insertParts(index){
+	var data=partslist();
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		data:JSON.stringify(data),
+		url:"../equipparts/insert.do",
+		success:function(data){
+			
+		}
+	})
 }
 
 function savePartsInfo(index){
 	
+}
+
+function createPartsParam(){
+	var modelid=$("#equip-info #equipid-hd").val();
+	var partslist=""
+	var params={
+		modelid:modelid,
+		partslist:partslist
+	}
+	return params;
+}
+
+function partslist(){
+	var modelid=$("#equip-info #equipid-hd").val();
+	var data=[];
+	$("#setparts-form #partslist-table tr:gt(0)").each(function(){
+		var EquipPartsInfo={};
+		EquipPartsInfo.equipId=modelid;
+		EquipPartsInfo.goodsModelId=$(this).find("input[name=model]").val();
+		EquipPartsInfo.partsName=$(this).children('td').eq(0).html()+"_"+$(this).children('td').eq(1).html()+"_"+$(this).children('td').eq(2).html();
+		EquipPartsInfo.quantity=$(this).find("input[name=quantity]").val();
+		data.push(EquipPartsInfo)
+	})
+	return data;
 }
 function clearPartsInfo(){
 	

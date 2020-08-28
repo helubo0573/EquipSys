@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202008277"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008281"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <body>
 	<div class="body-bdiv">

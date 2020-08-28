@@ -1,18 +1,23 @@
 package com.stone.equipsys.manage.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.Page;
 import com.stone.equipsys.core.common.constant.PathConstant;
 import com.stone.equipsys.core.common.util.RdPage;
+import com.stone.equipsys.core.domain.EquipPartsInfo;
 import com.stone.equipsys.core.model.EquipPartsInfoModel;
 import com.stone.equipsys.core.service.EquipPartsInfoService;
 
@@ -37,7 +42,9 @@ public class EquipPartsController {
 	}
 	
 	@RequestMapping(value="equipparts/insert")
-	public void insert(HttpServletResponse response, HttpServletRequest request) {
-		
+	public void insert(HttpServletResponse response, HttpServletRequest request,@RequestBody(required=false) List<EquipPartsInfo> partslist) {
+		for(EquipPartsInfo part:partslist) {
+			System.out.println(part.getEquipId()+"-"+part.getGoodsModelId()+"-"+part.getPartsName()+"-"+part.getQuantity());
+		}
 	}
 }
