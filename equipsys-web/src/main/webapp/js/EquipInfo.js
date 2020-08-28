@@ -101,7 +101,8 @@ function clickEquipNode(event, treeId, treeNode){
 				setEquipInfoToInfo(data.equip,treeNode,data.opstr,data.mpstr,data.enabledate);
 				changeBtnState(false)
 				$("#equipsystem-manageparts").removeAttr("disabled");
-				getEquipPartsList(treeNode.id,1)
+				$("#custompart-btn").removeAttr("disabled");
+				getEquipPartsList(1)
 			}
 		}
 	})
@@ -385,13 +386,15 @@ function changeBtnState(type){
 	$("#equipsystem-updateequip").attr("disabled",type);
 	$("#equipsystem-deleteequip").attr("disabled",type);
 	$("#equipsystem-manageparts").attr("disabled",type)
+	$("#custompart-btn").attr("disabled",type)
 }
 
 /**配件管理 */
-function getEquipPartsList(equipid,pagenum){
+function getEquipPartsList(pagenum){
+	var equipid=$("#equip-info #equipid-hd").val();
 	var param={
 			equipid:equipid,
-			pageSize:10,
+			pageSize:5,
 			current:pagenum
 		}
 	$("#subequip-list").load("../equipparts/search.do",param)
@@ -415,6 +418,8 @@ function showEquipParts(){
 				data:"equipid="+$("#equip-info #equipid-hd").val(),
 				url:"../storestockgoodsinfo/goodsdetailjson.do",
 				success:function(data){
+					$("#setparts-form #equipname").html($("#equipname-label").html());
+					$("#setparts-form #parantequip").html($("#equipparent-label").html()!=""?$("#equipparent-label").html():"无");
 					var setting={
 				        callback:{
 				        	onClick:clickGoodsModelNumber
@@ -457,13 +462,6 @@ function clickGoodsModelNumber(event, treeId, treeNode){
 }
 
 function createindex(goodsnode,goodstypenode,treeNode){
-	var index=$("#setparts-form #partslist-table tr").length;
-	/*var thtml="<tr><input type='hidden' name='model"+index+"' value='"+treeNode.id+"'>"+
-				"<td width='100px'>"+goodstypenode.name+"</td>"+
-				"<td width='145px'>"+goodsnode.name+"</td>"+
-				"<td width='150px'>"+treeNode.name+"</td>"+
-				"<td  width'70px'><input name='quantity"+index+"' class='form-control needing' style='height:20px;' value='1'></td>"+
-				"<td><i class='layui-icon point' title='删除'  onclick='removeindex(this)'>&#xe616</i></td></tr>"*/
 	var thtml="<tr><input type='hidden' name='model' value='"+treeNode.id+"'>"+
 				"<td width='100px'>"+goodstypenode.name+"</td>"+
 				"<td width='145px'>"+goodsnode.name+"</td>"+
@@ -490,26 +488,17 @@ function insertParts(index){
 		contenType:'application/json',
 		Type:'POST',
 		dataType:'json',
-		data:JSON.stringify(data),
+		data:"parts="+JSON.stringify(data),
 		url:"../equipparts/insert.do",
 		success:function(data){
-			
+			layer.msg(data.msg)
+				if(data.code==200){
+					getEquipPartsList(1)
+					clearPartsInfo();
+					layer.close(index);
+				}
 		}
 	})
-}
-
-function savePartsInfo(index){
-	
-}
-
-function createPartsParam(){
-	var modelid=$("#equip-info #equipid-hd").val();
-	var partslist=""
-	var params={
-		modelid:modelid,
-		partslist:partslist
-	}
-	return params;
 }
 
 function partslist(){
@@ -519,12 +508,49 @@ function partslist(){
 		var EquipPartsInfo={};
 		EquipPartsInfo.equipId=modelid;
 		EquipPartsInfo.goodsModelId=$(this).find("input[name=model]").val();
-		EquipPartsInfo.partsName=$(this).children('td').eq(0).html()+"_"+$(this).children('td').eq(1).html()+"_"+$(this).children('td').eq(2).html();
+		EquipPartsInfo.partsName=$(this).children('td').eq(1).html()+"_"+$(this).children('td').eq(2).html();   //$(this).children('td').eq(0).html()+"_"+
 		EquipPartsInfo.quantity=$(this).find("input[name=quantity]").val();
 		data.push(EquipPartsInfo)
 	})
 	return data;
 }
 function clearPartsInfo(){
+	$("#setparts-form input,textarea,select").val("");
+	$("#setparts-form #partslist-table tr:gt(0)").remove();
+	$("#setparts-form #equipname").html("");
+	$("#setparts-form #parantequip").html("");
+}
+
+function showCustomPart(){
+	layer.open({
+		type:1,
+        skin:'', //样式类名
+        anim:2,
+        shade: 0.3,
+        title:'自定义配件',
+        area:[ '300', '370px' ],
+        btn:['保存','关闭'],
+        content: $("#custompart-form"),
+        success: function (layero, index){
+			$("#custompart-form #equip-name").html($("#equipname-label").html())
+		},
+		yes:function(index){
+        	saveCustomPartInfo(index);
+        },
+        btn2:function(index){
+        	layer.close(index);
+        },
+        end: function(index, layero){
+        	clearPartsInfo();
+        	$("#custompart-form").hide();        	
+        }
+	})
+}
+
+function saveCustomPartInfo(index){
+	
+}
+
+function clearCustomPartInfo(){
 	
 }

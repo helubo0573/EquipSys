@@ -73,7 +73,7 @@ public class StoreInfoController {
 			res.put(Constant.RESPONSE_CODE_MSG, "保存成功");
 		}else {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
-			res.put(Constant.RESPONSE_CODE_MSG, "保存成功");
+			res.put(Constant.RESPONSE_CODE_MSG, "保存失败");
 		}
 		ServletUtils.writeToResponse(response, res);
 	}

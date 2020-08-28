@@ -14,18 +14,18 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202008281"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008285"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <body>
-	<div class="body-bdiv">
+	<div class="body-fdiv">
 		<div class="title-div">
 			设备信息管理
 		</div>
 		<div class="box-div" style="height: 700px;">
-			<div style="float:left;display: inline-block; width: 200px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
+			<div style="float:left;display: inline-block; width: 240px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
 				<%@include file="List.jsp" %>
 			</div>
-			<div id="equipsubinfo-div" style="margin-left: 210px;border: 1px solid;height: 100%;">
+			<div id="equipsubinfo-div" style="margin-left: 250px;border: 1px solid;height: 100%;">
 				<div>
 					<%@include file="info.jsp" %>
 				</div>
@@ -49,22 +49,48 @@
 			            <span class="input-group-addon point btn"><i class="layui-icon" style="font-size: 12px;">&#xe615;</i></span>
 			        </div>
 				</td>
-				<td colspan="3" style="text-align: right;">
-					<button class="btn btn-info btn-sm">新增自定义配件</button>
+				<td colspan="3" rowspan="2">
+					<div style="height: 458px;overflow-y:scroll;">
+						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
+							<tr><th width="100px">配件类型</th><th width="145px">名称</th><th width="150px">规格</th><th width="70px">数量</th><th>移除</th></tr>
+						</table>
+					</div>
 				</td>
+				<!-- <td colspan="3" style="text-align: right;">
+					<button class="btn btn-info btn-sm">新增自定义配件</button>
+				</td> -->
 			</tr>
 			<tr height="428px">
 				<td colspan="2">
 					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;" class="ztree">
 					</ul>
 				</td>
-				<td colspan="3">
-					<div style="height: 412px;overflow-y:scroll;">
-						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
-							<tr><th width="100px">配件类型</th><th width="145px">名称</th><th width="150px">规格</th><th width="70px">数量</th><th>移除</th></tr>
-						</table>
-					</div>
-				</td>
+				
+			</tr>
+		</table>
+	</form>
+	<form id="custompart-form" class="form-horizontal box-div" style="display: none;"><!-- 自定义配件 -->
+		<input type="hidden" id="equipid" name="equipid">
+		<table class="order-table table table-bordered layeropen">
+			<tr>
+				<th width="120px">设备名称</th>
+				<td width="200px" id="equip-name"></td>
+			</tr>
+			<tr>
+				<th width="120px">配件类型</th>
+				<td><input class="form-control"></td>
+			</tr>
+			<tr>
+				<th>关联库存物料</th>
+				<td><input class="form-control"></td>
+			</tr>
+			<tr>
+				<th>配件名称</th>
+				<td><input class="form-control"></td>
+			</tr>
+			<tr>
+				<th>需求数量</th>
+				<td><input class="form-control"></td>
 			</tr>
 		</table>
 	</form>
