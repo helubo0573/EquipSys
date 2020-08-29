@@ -28,7 +28,15 @@ import java.util.Date;
 
     /*** 数量*/
     private Integer quantity;
-
+    public EquipPartsInfo() {}
+    
+    public EquipPartsInfo(Long id,Long equipid,Long goodsmodelid,String partsname,int quantity) {
+    	if(id!=0) this.setId(id);
+    	this.setEquipId(equipid);
+    	this.setGoodsModelId(goodsmodelid);
+    	this.setPartsName(partsname);
+    	this.setQuantity(quantity);
+    }
 
     /*** 获取主键Id
     *

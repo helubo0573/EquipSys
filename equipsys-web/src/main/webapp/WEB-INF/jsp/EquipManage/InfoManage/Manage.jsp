@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202008285"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008295"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <body>
 	<div class="body-fdiv">
@@ -56,9 +56,6 @@
 						</table>
 					</div>
 				</td>
-				<!-- <td colspan="3" style="text-align: right;">
-					<button class="btn btn-info btn-sm">新增自定义配件</button>
-				</td> -->
 			</tr>
 			<tr height="428px">
 				<td colspan="2">
@@ -70,7 +67,10 @@
 		</table>
 	</form>
 	<form id="custompart-form" class="form-horizontal box-div" style="display: none;"><!-- 自定义配件 -->
+		<input type="hidden" id="partsid" name="partsid">
 		<input type="hidden" id="equipid" name="equipid">
+		<input type="hidden" id="goodstypeid">
+		<input type="hidden" id="model-id" name="modelid">
 		<table class="order-table table table-bordered layeropen">
 			<tr>
 				<th width="120px">设备名称</th>
@@ -78,19 +78,19 @@
 			</tr>
 			<tr>
 				<th width="120px">配件类型</th>
-				<td><input class="form-control"></td>
+				<td><input class="form-control point" id="goodstypename" readonly placeholder="点击选择配件类型"  onclick="PartshowGoodsType()"></td>
 			</tr>
 			<tr>
 				<th>关联库存物料</th>
-				<td><input class="form-control"></td>
+				<td><input class="form-control point" id="linkStockGoods" readonly placeholder="点击选择关联物料"  onclick="PartsetStockGoods()"></td>
 			</tr>
 			<tr>
 				<th>配件名称</th>
-				<td><input class="form-control"></td>
+				<td><input class="form-control needing" id="partname" name="partname"></td>
 			</tr>
 			<tr>
 				<th>需求数量</th>
-				<td><input class="form-control"></td>
+				<td><input class="form-control needing" id="quantity" name="quantity"></td>
 			</tr>
 		</table>
 	</form>

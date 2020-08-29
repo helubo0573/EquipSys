@@ -475,7 +475,7 @@ function removeindex(e){
 		type:0,
 		title:"删除",
 		btn:["确定","取消"],
-		content:"确定撤销增加此配件吗？?",
+		content:"确定撤销增加此配件吗?",
 		yes:function(){
 			$(e).parent().parent().remove();
 			layer.close(layer.index)
@@ -521,7 +521,7 @@ function clearPartsInfo(){
 	$("#setparts-form #parantequip").html("");
 }
 
-function showCustomPart(){
+function showCustomPart(id,goodstypeId,typeName,partsName,storeQuantity){
 	layer.open({
 		type:1,
         skin:'', //样式类名
@@ -533,6 +533,7 @@ function showCustomPart(){
         content: $("#custompart-form"),
         success: function (layero, index){
 			$("#custompart-form #equip-name").html($("#equipname-label").html())
+			$("#custompart-form #equipid").val($("#equip-info #equipid-hd").val())
 		},
 		yes:function(index){
         	saveCustomPartInfo(index);
@@ -541,16 +542,165 @@ function showCustomPart(){
         	layer.close(index);
         },
         end: function(index, layero){
-        	clearPartsInfo();
+        	clearCustomPartInfo();
         	$("#custompart-form").hide();        	
         }
 	})
 }
 
-function saveCustomPartInfo(index){
-	
+function updatePart(id,goodstypeId,typeName,partsName,storeQuantity,modelid){
+	$("#custompart-form #partsid").val(id);
+	$("#custompart-form #goodstypeid").val(goodstypeId);
+	$("#custompart-form #goodstypename").val(typeName);
+	$("#custompart-form #linkStockGoods").val(partsName);
+	$("#custompart-form #partname").val(partsName);
+	$("#custompart-form #quantity").val(storeQuantity);
+	$("#custompart-form #model-id").val(modelid)
+	showCustomPart();
 }
 
-function clearCustomPartInfo(){
+function deletepart(partid){
+	layer.open({
+		type:0,
+		title:"删除",
+		btn:["确定","取消"],
+		content:"确定删除此配件信息吗?",
+		yes:function(){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				data:"id="+partid,
+				url:"../equipparts/delet.do",
+				success:function(data){
+					layer.msg(data.msg)
+					if(data.code==200){
+						getEquipPartsList(1)
+					}
+				}
+			})
+		}
+	})
+}
+function PartshowGoodsType(){
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		url:"../goodstype/searchfortree.do",
+		success:function(data){
+			var DataNodes=JSON.parse(data);
+			var setting={
+			        callback:{
+			        	onClick:PartgetGoodsTypeInfo,
+			        }
+			};
+			layer.open({
+				type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                anim: 2,
+                area : [ '280px', '400px' ],
+                shadeClose: true, //开启遮罩关闭
+                content: '<ul id="typeztree" class="ztree"></ul>',
+                success: function (layero, index) {
+                	$.fn.zTree.init($("#typeztree"), setting, DataNodes);
+                }
+			})
+		}
+	})
+}
+function PartgetGoodsTypeInfo(event, treeId, treeNode){
+	$("#custompart-form #goodstypeid").val(treeNode.id)
+	$("#custompart-form #goodstypename").val(treeNode.name);
+	$("#custompart-form #model-id").val("")
+	$("#custompart-form #linkStockGoods").val("");
+	layer.close(layer.index)
+}
+
+function PartsetStockGoods(){
+	layer.open({
+		type:1,
+        skin:'', //样式类名
+        anim:2,
+        shade: 0.3,
+        title:'关联库存物料',
+        area:[ '300px', '500px' ],
+        content: '<ul id="PartLinkGoodsztree" class="ztree"></ul>',
+        success: function (layero, index){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				data:"equipid="+$("#equip-info #equipid-hd").val()+"&goodstype="+$("#custompart-form #goodstypeid").val(),
+				url:"../storestockgoodsinfo/goodsdetailjson.do",
+				success:function(data){
+					var setting={
+				        callback:{
+				        	onClick:setpartinfolinkgoods
+		        		}
+					};
+					$.fn.zTree.init($("#PartLinkGoodsztree"), setting, JSON.parse(data));
+				}
+			})
+		},
+        end: function(index, layero){
+        	$("#setparts-form").hide();
+        }
+	})
+}
+function setpartinfolinkgoods(event, treeId, treeNode){
+	var parentnode=treeNode.getParentNode();
+	var pparentnode=parentnode.getParentNode()
+	$("#custompart-form #model-id").val(treeNode.id)
+	$("#custompart-form #linkStockGoods").val(parentnode.name+"_"+treeNode.name);
+	$("#custompart-form #goodstypename").val(pparentnode.name)
+	$("#custompart-form #goodstypeid").val(pparentnode.id)
+	$("#custompart-form #partname").val(parentnode.name+"_"+treeNode.name)
+	layer.close(layer.index)
+}
+
+function saveCustomPartInfo(index){
+	if(custompart()){
+		$.ajax({
+			contenType:'application/json',
+			Type:'POST',
+			dataType:'json',
+			url:"../equipparts/saveCustomPart.do",
+			data:$("#custompart-form").serialize(),
+			success:function(data){
+				layer.msg(data.msg)
+				if(data.code==200){
+					getEquipPartsList(1)
+					clearCustomPartInfo();
+					layer.close(index);
+				}
+			}
+		})
+	}
+}
+
+function custompart(){
+/*	if($("#custompart-form #goodstypename").val()==""){
+		layer.msg("请选择配件的物料类型");
+		return false;
+	}*/
 	
+	if($("#custompart-form #partname").val()==""){
+		layer.msg("请填写配件名称")
+		return false;
+	}
+	
+	if($("#custompart-form #partname").val()==""){
+		layer.msg("请填写配件名称");
+		return false;
+	}
+	
+	if($("#custompart-form #quantity").val()==""){
+		layer.msg("请填写设备的配件需求数量")
+		return false;
+	}
+	return true;
+}
+function clearCustomPartInfo(){
+	$("#custompart-form input").val("");
 }

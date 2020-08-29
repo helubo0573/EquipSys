@@ -136,4 +136,9 @@
         order by id desc
     </select>
     
+    <delete id="deleteById" parameterType="java.lang.Long">
+    	delete 
+    	from equip_parts_info
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

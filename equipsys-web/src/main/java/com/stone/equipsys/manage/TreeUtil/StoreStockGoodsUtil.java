@@ -120,7 +120,7 @@ public class StoreStockGoodsUtil {
 		for(StockGoodsModelObject goods:goodsinfomap.values()) {
 			List<StockGoodsModelObject> tlist=goods.children;
 			if(tlist!=null) goods.children=tlist.stream().sorted(Comparator.comparing(StockGoodsModelObject::getModelName)).collect(Collectors.toList());
-			goodstypemap.get(goods.pId+"").children.add(goods);
+			if(goodstypemap.get(goods.pId+"")!=null) goodstypemap.get(goods.pId+"").children.add(goods);
 		}
 		for(StockGoodsModelObject goodstype:goodstypemap.values()) {
 			List<StockGoodsModelObject> tlist=goodstype.children;

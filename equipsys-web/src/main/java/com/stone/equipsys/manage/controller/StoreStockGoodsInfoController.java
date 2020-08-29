@@ -77,11 +77,15 @@ public class StoreStockGoodsInfoController {
 	}
 	
 	@RequestMapping("storestockgoodsinfo/goodsdetailjson")
-	public void getGoodsModelDetailInfoTree(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="equipid")Long equipid) throws UnsupportedEncodingException, IOException {
+	public void getGoodsModelDetailInfoTree(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="equipid")Long equipid,
+			@RequestParam(value="goodstype",defaultValue = "0")Long goodstype) throws UnsupportedEncodingException, IOException {
 		HashMap<String, Object> param=new HashMap<>();
+		HashMap<String,Object> goodstypeparam=new HashMap<>();
 		param.put("equipId", equipid);
+		if(goodstype!=0) goodstypeparam.put("id", goodstype); else goodstypeparam=null;
 		String treejson=JSONObject.toJSONString(StoreStockGoodsUtil.CreateStockGoodsModelObjectList(
-				StoreGoodsTypeMapper.listSelective(null), 
+				StoreGoodsTypeMapper.listSelective(goodstypeparam), 
 				StoreGoodsInfoMapper.listSelective(null), 
 				ModelNumberInfoMapper.listSelective(null),
 				PartsInfoMapper.listSelective(param)));

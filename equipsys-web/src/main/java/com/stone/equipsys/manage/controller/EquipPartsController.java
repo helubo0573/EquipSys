@@ -41,7 +41,7 @@ public class EquipPartsController {
 			params.put("equipId", equipid);
 			Page<EquipPartsInfoModel> partslist=PartsInfoService.searchExtEquipParts(params, current, pageSize);
 			request.setAttribute("partslist", partslist);
-			request.setAttribute("page", new RdPage(partslist).getPageStr("getPartslist"));
+			request.setAttribute("page", new RdPage(partslist).getPageStr("getEquipPartsList"));
 		return PathConstant.EquipPartsList;
 		
 	}
@@ -61,6 +61,45 @@ public class EquipPartsController {
 			e.printStackTrace();
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "保存失败");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
+	@RequestMapping(value="equipparts/saveCustomPart")
+	public void saveCustomPart(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="partsid",defaultValue = "0")Long id,
+			@RequestParam(value="equipid")Long equipid,
+			@RequestParam(value="modelid")Long modelid,
+			@RequestParam(value="partname")String partname,
+			@RequestParam(value="quantity")int quantity) {
+		EquipPartsInfo parts=new EquipPartsInfo(id,equipid,modelid,partname,quantity);
+		int n=0;
+		if(id==0) {
+			n=PartsInfoMapper.save(parts);			
+		}else {
+			n=PartsInfoMapper.update(parts);
+		}
+		HashMap<String, Object> res=new HashMap<>();
+		if(n>0) {
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "保存成功");
+		}else {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "保存失败");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("equipparts/delet")
+	public void deletePart(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long id) {
+		HashMap<String, Object> res=new HashMap<>();
+		try {
+			PartsInfoMapper.deleteById(id);
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除失败");
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
