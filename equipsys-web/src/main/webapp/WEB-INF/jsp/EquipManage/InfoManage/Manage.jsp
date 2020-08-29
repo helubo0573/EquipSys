@@ -59,7 +59,7 @@
 			</tr>
 			<tr height="428px">
 				<td colspan="2">
-					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;" class="ztree">
+					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;height: 412px;overflow-y: scroll;" class="ztree">
 					</ul>
 				</td>
 				
