@@ -9,7 +9,7 @@ import com.stone.equipsys.core.domain.SysUser;
 import com.stone.equipsys.core.model.MenuModel;
 
 /**
- * 系统菜单资源表Service
+ *	 系统菜单资源表Service
  * 
  * @author stone
  * @version 1.0.0

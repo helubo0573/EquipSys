@@ -1,7 +1,6 @@
 package com.stone.equipsys.core.common.exception;
 
-public class OperatorException extends BaseRuntimeException
-{
+public class OperatorException extends BaseRuntimeException{
 
 	private static final long serialVersionUID = -7400559552805824955L;
 

@@ -1,7 +1,6 @@
 package com.stone.equipsys.core.common.exception;
 
-public class BussinessException extends RuntimeException
-{
+public class BussinessException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package com.stone.equipsys.core.common.exception;
 
 public class BaseRuntimeException extends RuntimeException{
-
+	
 	private static final long serialVersionUID = 538922474277376456L;
 
 	public static final int TYPE_JSON = 1;

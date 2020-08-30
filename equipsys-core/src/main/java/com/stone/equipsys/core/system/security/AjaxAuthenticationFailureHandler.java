@@ -21,8 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stone.equipsys.core.common.constant.Constant;
 
 @SuppressWarnings("deprecation")
-public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler
-{
+public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler{
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	public AjaxAuthenticationFailureHandler()

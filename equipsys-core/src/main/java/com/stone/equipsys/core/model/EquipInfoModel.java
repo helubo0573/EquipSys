@@ -3,7 +3,7 @@ package com.stone.equipsys.core.model;
 import com.stone.equipsys.core.domain.EquipInfo;
 
 public class EquipInfoModel extends EquipInfo{
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String deptName;

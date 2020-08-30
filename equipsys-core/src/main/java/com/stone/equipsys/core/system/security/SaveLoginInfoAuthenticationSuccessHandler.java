@@ -32,8 +32,7 @@ import com.stone.equipsys.core.service.SysUserService;
 import com.stone.equipsys.core.system.constant.SystemConstant;
 
 @Service
-public class SaveLoginInfoAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler
-{
+public class SaveLoginInfoAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 
 	public static final Logger logger = LoggerFactory.getLogger(SaveLoginInfoAuthenticationSuccessHandler.class);
 

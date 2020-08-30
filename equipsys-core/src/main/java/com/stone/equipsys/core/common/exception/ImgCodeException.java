@@ -6,7 +6,7 @@ package com.stone.equipsys.core.common.exception;
  *
  */
 public class ImgCodeException extends BaseRuntimeException{
-
+	
 	private static final long serialVersionUID = 1L;
 
 	protected static final int IMGCODE_EXCEPTION__CODE = 400;

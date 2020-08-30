@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 库存物料类型表实体
+ * 	库存物料类型表实体
  * 
  * @author stone
  * @version 1.0.0

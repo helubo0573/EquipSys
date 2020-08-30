@@ -8,7 +8,7 @@ import com.stone.equipsys.core.domain.EquipMp;
 import com.stone.equipsys.core.model.EquipMpModel;
 
 /**
- * 设备基础信息表Dao
+ * 	设备基础信息表Dao
  * 
  * @author stone
  * @version 1.0.0

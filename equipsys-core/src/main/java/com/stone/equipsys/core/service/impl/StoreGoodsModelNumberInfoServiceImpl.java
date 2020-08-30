@@ -23,7 +23,7 @@ import com.stone.equipsys.core.service.StoreGoodsModelNumberInfoService;
 
 
 /**
- * 物料规格表ServiceImpl
+ * 	物料规格表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

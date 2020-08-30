@@ -1,7 +1,6 @@
 package com.stone.equipsys.core.system.constant;
 
-public class SystemConstant
-{
+public class SystemConstant{
 
 	public static final byte MENU_NO = 0;
 

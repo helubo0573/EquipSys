@@ -14,7 +14,7 @@ import com.stone.equipsys.core.service.StoreGoodsTypeService;
 
 
 /**
- * 库存物料类型表ServiceImpl
+ * 	库存物料类型表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <!-- sys_user表:系统用户表模块 -->
 <mapper namespace="com.stone.equipsys.core.mapper.SysUserMapper">
     <!--返回Map-->        

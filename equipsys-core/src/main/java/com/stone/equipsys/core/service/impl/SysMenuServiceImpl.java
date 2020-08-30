@@ -22,7 +22,7 @@ import com.stone.equipsys.core.service.SysMenuService;
 
 
 /**
- * 系统菜单资源表ServiceImpl
+ *	 系统菜单资源表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

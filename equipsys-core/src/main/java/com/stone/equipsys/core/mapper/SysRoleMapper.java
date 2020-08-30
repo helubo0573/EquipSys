@@ -5,7 +5,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.SysRole;
 
 /**
- * 系统角色表Dao
+ * 	系统角色表Dao
  * 
  * @author stone
  * @version 1.0.0

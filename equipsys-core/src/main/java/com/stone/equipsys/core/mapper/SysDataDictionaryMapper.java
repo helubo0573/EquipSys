@@ -5,7 +5,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.SysDataDictionary;
 
 /**
- * 数据字典Dao
+ * 	数据字典Dao
  * 
  * @author stone
  * @version 1.0.0

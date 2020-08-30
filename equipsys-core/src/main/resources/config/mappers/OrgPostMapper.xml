@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <!-- org_post表:设备基础信息表模块 -->
 <mapper namespace="com.stone.equipsys.core.mapper.OrgPostMapper">
     <!--返回Map-->        

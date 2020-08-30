@@ -18,7 +18,7 @@ import com.stone.equipsys.core.service.StoreGoodsStockLogService;
 
 
 /**
- * 物料明细存储纪录ServiceImpl
+ * 	物料明细存储纪录ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

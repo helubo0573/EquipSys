@@ -9,8 +9,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-public class AccessDecisionManager implements org.springframework.security.access.AccessDecisionManager
-{
+public class AccessDecisionManager implements org.springframework.security.access.AccessDecisionManager{
 
 	public void decide(Authentication auth, Object obj, Collection<ConfigAttribute> configs) throws AccessDeniedException, InsufficientAuthenticationException
 	{

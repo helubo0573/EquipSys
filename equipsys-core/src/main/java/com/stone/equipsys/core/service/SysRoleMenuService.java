@@ -4,7 +4,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.SysRoleMenu;
 
 /**
- * 系统角色菜单映射表Service
+ * 	系统角色菜单映射表Service
  * 
  * @author stone
  * @version 1.0.0

@@ -7,7 +7,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.OrgDept;
 
 /**
- * 设备基础信息表Service
+ * 	设备基础信息表Service
  * 
  * @author stone
  * @version 1.0.0

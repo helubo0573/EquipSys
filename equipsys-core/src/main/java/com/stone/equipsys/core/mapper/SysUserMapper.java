@@ -9,7 +9,7 @@ import com.stone.equipsys.core.domain.SysUser;
 import com.stone.equipsys.core.model.SysUserModel;
 
 /**
- * 系统用户表Dao
+ * 	系统用户表Dao
  * 
  * @author stone
  * @version 1.0.0

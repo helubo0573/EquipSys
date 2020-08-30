@@ -14,7 +14,7 @@ import com.stone.equipsys.core.service.StoreGoodsInfoService;
 
 
 /**
- * 物料信息表ServiceImpl
+ * 	物料信息表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

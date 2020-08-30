@@ -4,7 +4,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.StoreInfo;
 
 /**
- * 系统用户表Service
+ * 	系统用户表Service
  * 
  * @author stone
  * @version 1.0.0

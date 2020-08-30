@@ -19,7 +19,7 @@ import com.stone.equipsys.core.service.SysRoleService;
 
 
 /**
- * 系统角色表ServiceImpl
+ * 	系统角色表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

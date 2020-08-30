@@ -7,7 +7,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 
 /**
- * 物料规格表Service
+ * 	物料规格表Service
  * 
  * @author stone
  * @version 1.0.0

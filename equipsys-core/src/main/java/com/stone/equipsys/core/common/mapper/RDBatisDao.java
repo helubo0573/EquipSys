@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import org.springframework.stereotype.Component;
 
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented

@@ -7,7 +7,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.StoreGoodsStockLog;
 
 /**
- * 物料明细存储纪录Dao
+ * 	物料明细存储纪录Dao
  * 
  * @author stone
  * @version 1.0.0

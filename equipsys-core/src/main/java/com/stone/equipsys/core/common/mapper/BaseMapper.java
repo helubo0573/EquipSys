@@ -8,7 +8,6 @@ import java.util.Map;
 /**
  * 基础mapper处理接口
  * @author Administrator
- *
  * @param <T>
  * @param <ID>
  */

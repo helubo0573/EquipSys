@@ -6,8 +6,7 @@ import java.util.Collection;
 
 import org.springframework.security.access.ConfigAttribute;
 
-public class UserFunction implements Serializable
-{
+public class UserFunction implements Serializable{
 
 	private static final long serialVersionUID = -260181556678341867L;
 

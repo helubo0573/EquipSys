@@ -11,8 +11,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-public class SecurityContextMetadataSource implements FilterInvocationSecurityMetadataSource
-{
+public class SecurityContextMetadataSource implements FilterInvocationSecurityMetadataSource{
 
 	// private UrlMatcher urlMatcher = new AntUrlPathMatcher();
 

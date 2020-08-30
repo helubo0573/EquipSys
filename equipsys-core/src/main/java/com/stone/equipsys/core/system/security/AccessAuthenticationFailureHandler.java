@@ -20,8 +20,7 @@ import com.stone.equipsys.core.common.util.ServletUtils;
 
 
 @SuppressWarnings("unused")
-public class AccessAuthenticationFailureHandler implements AuthenticationFailureHandler
-{
+public class AccessAuthenticationFailureHandler implements AuthenticationFailureHandler{
 
 	private static final Logger logger = LoggerFactory.getLogger(AccessAuthenticationFailureHandler.class);
 	private String defaultFailureUrl;

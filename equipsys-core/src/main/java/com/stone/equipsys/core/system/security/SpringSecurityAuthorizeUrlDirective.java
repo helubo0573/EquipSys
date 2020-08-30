@@ -14,8 +14,7 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 
-public class SpringSecurityAuthorizeUrlDirective implements TemplateDirectiveModel
-{
+public class SpringSecurityAuthorizeUrlDirective implements TemplateDirectiveModel{
 
 	@SuppressWarnings("rawtypes")
 	@Override

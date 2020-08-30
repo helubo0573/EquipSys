@@ -5,7 +5,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 
 /**
- * 物料规格表Dao
+ * 	物料规格表Dao
  * 
  * @author stone
  * @version 1.0.0

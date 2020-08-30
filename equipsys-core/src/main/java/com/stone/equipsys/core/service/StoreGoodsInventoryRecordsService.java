@@ -5,7 +5,7 @@ import com.stone.equipsys.core.domain.StoreGoodsInventoryRecords;
 import com.stone.equipsys.core.model.SysUserModel;
 
 /**
- * 物料明细存储纪录Service
+ * 	物料明细存储纪录Service
  * 
  * @author stone
  * @version 1.0.0

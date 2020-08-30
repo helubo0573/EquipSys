@@ -7,7 +7,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.SysMenu;
 
 /**
- * 系统菜单资源表Dao
+ * 	系统菜单资源表Dao
  * 
  * @author stone
  * @version 1.0.0

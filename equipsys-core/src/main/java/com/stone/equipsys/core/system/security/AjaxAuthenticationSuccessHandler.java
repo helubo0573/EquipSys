@@ -17,8 +17,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stone.equipsys.core.common.constant.Constant;
 
-public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler
-{
+public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
 	public AjaxAuthenticationSuccessHandler()
 	{

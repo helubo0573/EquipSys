@@ -10,7 +10,7 @@ import com.stone.equipsys.core.domain.EquipInfo;
 import com.stone.equipsys.core.model.EquipInfoModel;
 
 /**
- * 设备基础信息表Service
+ *	 设备基础信息表Service
  * 
  * @author stone
  * @version 1.0.0

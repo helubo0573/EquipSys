@@ -1,7 +1,6 @@
 package com.stone.equipsys.core.common.exception;
 
-public class RDRuntimeException extends BaseRuntimeException
-{
+public class RDRuntimeException extends BaseRuntimeException{
 
 	private static final long serialVersionUID = 1L;
 

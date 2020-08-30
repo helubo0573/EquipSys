@@ -12,7 +12,7 @@ import com.stone.equipsys.core.domain.EmployeeInfo;
 import com.stone.equipsys.core.model.EmployeeInfoModel;
 
 /**
- * 设备基础信息表Service
+ *	 设备基础信息表Service
  * 
  * @author stone
  * @version 1.0.0

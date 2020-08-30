@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统菜单资源表实体
+ * 	系统菜单资源表实体
  * 
  * @author stone
  * @version 1.0.0

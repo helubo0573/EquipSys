@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class UserModularRealmAuthenticator extends ModularRealmAuthenticator{
+	
 	private static final Logger logger = LoggerFactory.getLogger(UserModularRealmAuthenticator.class);
 	
 	@Override

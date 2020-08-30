@@ -4,7 +4,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.StoreGoodsType;
 
 /**
- * 库存物料类型表Service
+ * 	库存物料类型表Service
  * 
  * @author stone
  * @version 1.0.0

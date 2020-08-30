@@ -25,7 +25,7 @@ import com.stone.equipsys.core.domain.SysUser;
 import com.stone.equipsys.core.service.SysUserService;
 
 /**
- * 系统用户表ServiceImpl
+ * 	系统用户表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

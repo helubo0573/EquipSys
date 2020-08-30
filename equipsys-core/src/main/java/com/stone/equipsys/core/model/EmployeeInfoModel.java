@@ -3,7 +3,7 @@ package com.stone.equipsys.core.model;
 import com.stone.equipsys.core.domain.EmployeeInfo;
 
 public class EmployeeInfoModel extends EmployeeInfo{
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	private Long deptid;

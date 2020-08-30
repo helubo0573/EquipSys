@@ -3,7 +3,7 @@ package com.stone.equipsys.core.model;
 import com.stone.equipsys.core.domain.SysUser;
 
 public class SysUserModel extends SysUser{
-	
+		
 	private static final long serialVersionUID = 1L;
 	private String empname;
 	

@@ -8,8 +8,7 @@ import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class UserRole extends User
-{
+public class UserRole extends User{
 
 	private static final long serialVersionUID = -1548996487718223988L;
 

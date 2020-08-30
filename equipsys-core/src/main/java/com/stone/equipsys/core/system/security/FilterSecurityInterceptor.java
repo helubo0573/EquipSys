@@ -15,8 +15,7 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-public class FilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter
-{
+public class FilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter{
 
 	private FilterInvocationSecurityMetadataSource securityMetadataSource;
 

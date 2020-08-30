@@ -18,7 +18,7 @@ import com.stone.equipsys.core.service.SysRoleMenuService;
 
 
 /**
- * 系统角色菜单映射表ServiceImpl
+ * 	系统角色菜单映射表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

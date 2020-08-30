@@ -21,7 +21,7 @@ import com.stone.equipsys.core.service.EmployeeInfoService;
 
 
 /**
- * 设备基础信息表ServiceImpl
+ * 	设备基础信息表ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

@@ -36,8 +36,7 @@ import com.stone.equipsys.core.service.SysUserService;
 
 
 
-public class ShiroRealm extends AuthorizingRealm
-{
+public class ShiroRealm extends AuthorizingRealm{
 
 	private static final Logger logger = Logger.getLogger(ShiroRealm.class);
 

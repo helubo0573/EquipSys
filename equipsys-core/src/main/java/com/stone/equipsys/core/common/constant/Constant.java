@@ -6,7 +6,7 @@ package com.stone.equipsys.core.common.constant;
  *
  */
 public class Constant {
-	
+	//
 	public static final String ROLEID = "roleId";
 	
 	public static final String SESSION_OPERATOR = "session_operator";

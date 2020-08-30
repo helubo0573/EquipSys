@@ -12,7 +12,7 @@ import com.stone.equipsys.core.domain.SysUser;
 import com.stone.equipsys.core.model.SysUserModel;
 
 /**
- * 系统用户表Service
+ * 	系统用户表Service
  * 
  * @author stone
  * @version 1.0.0

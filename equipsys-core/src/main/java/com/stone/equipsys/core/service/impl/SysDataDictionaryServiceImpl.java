@@ -14,7 +14,7 @@ import com.stone.equipsys.core.service.SysDataDictionaryService;
 
 
 /**
- * 数据字典ServiceImpl
+ * 	数据字典ServiceImpl
  * 
  * @author stone
  * @version 1.0.0

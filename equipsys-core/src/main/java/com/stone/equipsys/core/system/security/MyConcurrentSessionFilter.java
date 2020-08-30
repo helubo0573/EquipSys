@@ -31,8 +31,7 @@ import com.stone.equipsys.core.common.util.ServletUtils;
 
 
 @SuppressWarnings("unused")
-public class MyConcurrentSessionFilter extends GenericFilterBean
-{
+public class MyConcurrentSessionFilter extends GenericFilterBean{
 
 	private SessionRegistry sessionRegistry;
 	private String expiredUrl;

@@ -2,6 +2,7 @@ package com.stone.equipsys.core.system.security;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
+
 @SuppressWarnings("serial")
 public class UserToken extends UsernamePasswordToken{
 

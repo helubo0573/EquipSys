@@ -34,8 +34,7 @@ import tool.util.StringUtil;
 
 @SuppressWarnings("deprecation")
 @Service
-public class UserRoleDetailProvider implements UserDetailsService
-{
+public class UserRoleDetailProvider implements UserDetailsService{
 
 	public static final Logger logger = LoggerFactory.getLogger(UserRoleDetailProvider.class);
 

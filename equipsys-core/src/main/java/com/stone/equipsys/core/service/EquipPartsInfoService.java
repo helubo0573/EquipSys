@@ -8,7 +8,7 @@ import com.stone.equipsys.core.domain.EquipPartsInfo;
 import com.stone.equipsys.core.model.EquipPartsInfoModel;
 
 /**
- * 设备配件信息Service
+ * 	设备配件信息Service
  * 
  * @author stone
  * @version 1.0.0

@@ -20,8 +20,7 @@ import com.stone.equipsys.core.common.util.ServletUtils;
 
 
 @SuppressWarnings({ "deprecation", "unused" })
-public class RdAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint
-{
+public class RdAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint{
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	private static final Log logger = LogFactory.getLog(RdAuthenticationEntryPoint.class);

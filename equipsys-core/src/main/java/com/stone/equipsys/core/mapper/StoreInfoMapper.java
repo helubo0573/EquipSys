@@ -5,7 +5,7 @@ import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.StoreInfo;
 
 /**
- * 系统用户表Dao
+ * 	系统用户表Dao
  * 
  * @author stone
  * @version 1.0.0

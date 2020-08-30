@@ -10,8 +10,7 @@ import com.stone.equipsys.core.common.service.Crypto;
 
 
 
-public class PasswordEncoder extends BasePasswordEncoder
-{
+public class PasswordEncoder extends BasePasswordEncoder{
 
 	private Crypto crypto;
 

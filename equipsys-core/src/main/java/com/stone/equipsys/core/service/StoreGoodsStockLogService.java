@@ -4,7 +4,7 @@ import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.StoreGoodsStockLog;
 
 /**
- * 物料明细存储纪录Service
+ * 	物料明细存储纪录Service
  * 
  * @author stone
  * @version 1.0.0

@@ -1,7 +1,6 @@
 package com.stone.equipsys.core.common.exception;
 
-public class ErongBaseException extends Exception
-{
+public class ErongBaseException extends Exception{
 
 	private static final long serialVersionUID = 2762206975774689502L;
 
