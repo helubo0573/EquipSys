@@ -21,7 +21,7 @@ function insertGoodsType(){
 		})
 	}
 }
-
+	
 function updateGoodsType(){
 	if(checkGoodsType()){
 		layer.open({

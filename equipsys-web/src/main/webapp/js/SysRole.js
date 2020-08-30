@@ -1,8 +1,6 @@
 /**
  * 
  */
-
-
 function getRoleTree(e){
 	$.ajax({
 		contenType:'application/json',

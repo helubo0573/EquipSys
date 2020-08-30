@@ -1,5 +1,4 @@
 /**
- * 
  */
 function showEmployeeInfo(type,empid){
 	layer.open({

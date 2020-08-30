@@ -1,4 +1,4 @@
-
+ 
 function InsertDept(){
 	if(checkDeptInfo()){
 		$.ajax({

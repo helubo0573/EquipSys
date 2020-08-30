@@ -1,5 +1,5 @@
 /**
- * 新增菜单资源
+	 * 新增菜单资源
  */
 function InsertMenu(){
 	if(CheckMenuInfo()){

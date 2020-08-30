@@ -1,5 +1,4 @@
 /**
- * 
  */
 $(function(){
 	$("#register-btn").click(function(){
