@@ -426,6 +426,7 @@ function showEquipParts(){
 		        		}
 					};
 					$.fn.zTree.init($("#setparts-form #equipsparts-tree"), setting, JSON.parse(data));
+					fuzzySearch('equipsparts-tree','#partstree-search',null,true);
 				}
 			})
 		},
@@ -521,7 +522,7 @@ function clearPartsInfo(){
 	$("#setparts-form #parantequip").html("");
 }
 
-function showCustomPart(id,goodstypeId,typeName,partsName,storeQuantity){
+function showCustomPart(){
 	layer.open({
 		type:1,
         skin:'', //样式类名

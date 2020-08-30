@@ -1,4 +1,4 @@
-CREATE TABLE `NewTable` (
+CREATE TABLE `equip_parts_info` (
 `id`  bigint(20) NOT NULL ,
 `equip_id`  bigint(20) NOT NULL COMMENT '设备id' ,
 `goods_model_id`  bigint(20) NULL DEFAULT NULL COMMENT '对应的库存物料id' ,

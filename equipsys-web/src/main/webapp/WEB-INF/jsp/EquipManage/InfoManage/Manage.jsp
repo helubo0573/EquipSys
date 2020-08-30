@@ -14,8 +14,11 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202008295"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202008296"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/fuzzysearch.js"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
@@ -45,7 +48,7 @@
 			<tr>
 				<td colspan="2" width="150px">
 					<div class="input-group input-group-sm" style="width: 180px;">
-			            <input type="text" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
+			            <input type="text" id="partstree-search" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
 			            <span class="input-group-addon point btn"><i class="layui-icon" style="font-size: 12px;">&#xe615;</i></span>
 			        </div>
 				</td>
