@@ -426,7 +426,7 @@ function showEquipParts(){
 		        		}
 					};
 					$.fn.zTree.init($("#setparts-form #equipsparts-tree"), setting, JSON.parse(data));
-					fuzzySearch('equipsparts-tree','#partstree-search',null,true);
+					//fuzzySearch('equipsparts-tree','#partstree-search',null,true);
 				}
 			})
 		},
@@ -704,4 +704,32 @@ function custompart(){
 }
 function clearCustomPartInfo(){
 	$("#custompart-form input").val("");
+}
+function partsseachgoods(){
+	var param=$("#setparts-form #partstree-search").val();
+	var treeObj = $.fn.zTree.getZTreeObj("equipsparts-tree");
+	treeObj.expandAll(false);
+	console.log("关闭")
+	var nodes = treeObj.getNodesByParamFuzzy("name", param, null);
+	if(nodes!=[]){
+		for( var i=0, l=nodes.length; i<l; i++ ){
+			//nodes[i].highlight = highlight;
+			var node = nodes[i];
+			console.log(node.isParent+"----"+!node.open)
+			if(node.isParent && !node.open) {
+				console.log("子项打开")
+				treeObj.expandNode(node,true,false,null);
+				}
+			treeObj.updateNode(nodes[i]);
+			while( true ){
+				if (node.getParentNode()==null) break;
+				node = node.getParentNode();
+				if (!node.open){
+					console.log("节点打开");			
+					treeObj.expandNode(node,true,false,null);
+				} 
+			}
+		}
+	}
+	
 }
