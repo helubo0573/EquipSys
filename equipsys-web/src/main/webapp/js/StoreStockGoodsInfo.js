@@ -66,8 +66,8 @@ function showGoodsType(){
 
 function getGoodsTypeInfo(event, treeId, treeNode){
 	$("#goodsmodelnumberinfo-form #stockgoods-id").val(treeNode.id)
-	$("#goodstype-id").val(treeNode.id);
-	$("#goodstypename").val(treeNode.name);
+	$("#storegoods-form #goodstype-id").val(treeNode.id);
+	$("#storegoods-form #goodstypename").val(treeNode.name);
 	layer.close(layer.index)
 }
 

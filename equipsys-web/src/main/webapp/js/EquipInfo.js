@@ -719,10 +719,10 @@ function partsseachgoods(){
 			if(node.isParent && !node.open) {
 				console.log("子项打开")
 				treeObj.expandNode(node,true,false,null);
-				}
+			}
 			treeObj.updateNode(nodes[i]);
-			while( true ){
-				if (node.getParentNode()==null) break;
+			while( node.getParentNode()!=null ){
+				//if (node.getParentNode()==null) break;
 				node = node.getParentNode();
 				if (!node.open){
 					console.log("节点打开");			
@@ -731,5 +731,4 @@ function partsseachgoods(){
 			}
 		}
 	}
-	
 }
