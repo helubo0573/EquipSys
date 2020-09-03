@@ -68,7 +68,7 @@
 				zTreeObj.showNode(node);//show node with matching keywords
 				return true; //return true and show this node
 			}
-			
+			console.log("hide node that not matched")
 			zTreeObj.hideNode(node); // hide node that not matched
 			return false; //return false for node not matched
 		}
@@ -83,7 +83,7 @@
 	function processShowNodes(nodesShow,_keywords){
 		if(nodesShow && nodesShow.length>0){
 			//process the ancient nodes if _keywords is not blank
-			if(_keywords.length>0){ 
+			if(_keywords.length>0){
 				$.each(nodesShow, function(n,obj){
 					var pathOfOne = obj.getPath();//get all the ancient nodes including current node
 					if(pathOfOne && pathOfOne.length>0){ 
@@ -93,11 +93,25 @@
 							zTreeObj.expandNode(pathOfOne[i],true); //expand node
 						}
 					}
+					if(obj.isParent){
+						var cnodes=obj.children;
+						console.log(cnodes+"---"+cnodes.length)
+						if(cnodes.length>0){
+							zTreeObj.showNodes(cnodes);
+							zTreeObj.expandNode(obj,true);
+							/*for(var i=0;i<=cnode.length-1;i++){
+								console.log("treeObj.showNodes(nodes);")
+								zTreeObj.showNode(cnode[i]); //show node 
+								zTreeObj.expandNode(cnode[i],true); //expand node
+							}*/
+						}
+					}
 				});	
 			}else{ //show all nodes when _keywords is blank and expand the root nodes
 				var rootNodes = zTreeObj.getNodesByParam('level','0');//get all root nodes
 				$.each(rootNodes,function(n,obj){
-					zTreeObj.expandNode(obj,true); //expand all root nodes
+					//zTreeObj.expandNode(obj,false); //expand all root nodes
+					zTreeObj.expandAll(false);
 				});
 			}
 		}

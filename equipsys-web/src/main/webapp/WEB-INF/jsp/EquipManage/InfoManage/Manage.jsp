@@ -18,7 +18,7 @@
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
-<script type="text/javascript" src="../plugins/zTree/js/fuzzysearch.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/fuzzysearch.js?d=202009034"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
