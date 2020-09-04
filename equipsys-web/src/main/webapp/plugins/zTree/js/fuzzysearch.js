@@ -117,14 +117,20 @@
 		}
 	}
 	
-	//listen to change in input element
+	/*//listen to change in input element
 	$(searchField).bind('input propertychange', function() {
 		var _keywords = $(this).val();
 		searchNodeLazy(_keywords); //call lazy load
-	});
+	});*/
 
+	//监听查询按钮点击事件
+	$(searchField).bind('span click', function() {
+		var _keywords = $(this).prev().val();
+		searchNodeLazy(_keywords); //call lazy load
+	});
+	
 	var timeoutId = null;
-  var lastKeyword = '';
+  	var lastKeyword = '';
 	// excute lazy load once after input change, the last pending task will be cancled  
 	function searchNodeLazy(_keywords) {
 		if (timeoutId) { 
@@ -132,7 +138,7 @@
 			clearTimeout(timeoutId);
 		}
 		timeoutId = setTimeout(function() {
-      if (lastKeyword === _keywords) {
+    	if (lastKeyword === _keywords) {
         return;
       }
 			ztreeFilter(zTreeObj,_keywords); //lazy load ztreeFilter function 

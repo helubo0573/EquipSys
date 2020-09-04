@@ -426,7 +426,7 @@ function showEquipParts(){
 		        		}
 					};
 					$.fn.zTree.init($("#setparts-form #equipsparts-tree"), setting, JSON.parse(data));
-					fuzzySearch('equipsparts-tree','#partstree-search',null,true);
+					fuzzySearch('equipsparts-tree','#setparts-form #sreach-btn',null,true);
 				}
 			})
 		},

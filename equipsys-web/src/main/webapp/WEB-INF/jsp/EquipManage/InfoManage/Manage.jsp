@@ -14,11 +14,11 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202009014"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202009041"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
-<script type="text/javascript" src="../plugins/zTree/js/fuzzysearch.js?d=202009034"></script>
+<script type="text/javascript" src="../plugins/zTree/js/fuzzysearch.js?d=202009041"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
@@ -49,7 +49,9 @@
 				<td colspan="2" width="150px">
 					<div class="input-group input-group-sm" style="width: 180px;">
 			            <input type="text" id="partstree-search" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
-			            <span class="input-group-addon point btn" onclick="partsseachgoods()"><i class="layui-icon" style="font-size: 12px;">&#xe615;</i></span>
+			            <span class="input-group-addon point btn" id="sreach-btn">
+			            	<i class="layui-icon" style="font-size: 12px;">&#xe615;</i>
+			            </span>
 			        </div>
 				</td>
 				<td colspan="3" rowspan="2">
