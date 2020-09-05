@@ -8,14 +8,15 @@ function getStockGoodsTree(e){
 		url:"../storestockgoodsinfo/search.do",
 		success:function(data){
 			var setting={
-					simpleData : {
+/*					simpleData : {
 			            enable : true, // 设置启用简单数据格式[{id, pId, name}, {id, pId, name}]   
-			        },
+			        },*/
 			        callback:{
 			        	onClick:clickStockGoodsNode
 			        }
 			};
 			$.fn.zTree.init($(e), setting, JSON.parse(data));
+			fuzzySearch('stockgoods-tree','#stockgoods-search #sreach-btn',null,true);
 		}
 	})
 }
@@ -157,6 +158,7 @@ function showGoodsModelNumberInfo(type){
         btn:['保存','关闭'],
         content: $("#goodsmodelnumberinfo-form"),
         success: function (layero, index){
+			$("#goodsmodelnumberinfo-form #goods-id").val($("#storegoods-form #storegoods-id").val())
         	$("#goodsmodelnumberinfo-form #stockgoodsname").text($("#storegoods-info #goodsname-label").text())
         	$("#goodsmodelnumberinfo-form #goodstypename").text($("#storegoods-info #goodstypename-label").text())
         },
@@ -198,7 +200,8 @@ function getModelNumberList(pagenum){
 	var gid=$("#storegoods-form #storegoods-id").val();
 	var param={
 			goodsid:gid,
-			pagenum:pagenum
+			pagenum:pagenum,
+			pageSize:8
 	}
 	$("#modelnumber-list").load("../modelnumber/search.do",param)
 }

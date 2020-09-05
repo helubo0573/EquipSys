@@ -23,6 +23,7 @@ function getEquipTree(e){
         		}
 			};
 			$.fn.zTree.init($(e), setting, JSON.parse(data.equiptree));
+			fuzzySearch('equipinfo-tree','#equipinfo-search #sreach-btn',null,true);
 		}
 	})
 }
@@ -243,16 +244,26 @@ function showEquipparentTree(){
 		url:"../equip/getequiptree.do",
 		data:"type=2&id="+id,	//type=2表示设备类型要小于2，就是不查询设备级,
 		success:function(data){
+			var htmlstr="<div style='padding:10px'>"+
+					"<div id='equipeparenttree-search' class='input-group input-group-sm' style='width: 180px;'>"+
+	            		"<input type='text' id='partstree-search' class='form-control' style='width: 150px;' placeholder='输入设备名称搜索'>"+
+	            		"<span class='input-group-addon point btn' id='sreach-btn'>"+
+	            			"<i class='layui-icon' style='font-size: 12px;'>&#xe615;</i>"+
+	            		"</span>"+
+	        		"</div>"+
+					"<ul id='equipeparenttree' class='ztree' style='color: #555'></ul>"+
+				"</div>"
 			layer.open({
 				type: 1,
                 skin: 'layui-layer-demo', //样式类名
                 anim: 2,
                 area : [ '400px', '500px' ],
                 shadeClose: true, //开启遮罩关闭
-                content: '<ul id="equipeparenttree" class="ztree" style="color: #555"></ul>',
+                content: htmlstr,
                 btn:['确定','清空','取消'],
                 success: function (layero, index) {
                 	$.fn.zTree.init($("#equipeparenttree"), {}, JSON.parse(data.equiptree));
+					fuzzySearch('equipeparenttree','#equipeparenttree-search #sreach-btn',null,true);
                 },yes:function(index,layero){
                 	var treeObj = $.fn.zTree.getZTreeObj("equipeparenttree");
                 	var node=treeObj.getSelectedNodes();
@@ -590,21 +601,25 @@ function PartshowGoodsType(){
 		dataType:'json',
 		url:"../goodstype/searchfortree.do",
 		success:function(data){
-			var DataNodes=JSON.parse(data);
-			var setting={
-			        callback:{
-			        	onClick:PartgetGoodsTypeInfo,
-			        }
-			};
+			var htmlstr="<div style='padding:10px'>"+
+					"<div id='typeztree-search' class='input-group input-group-sm' style='width: 180px;'>"+
+	            		"<input type='text' id='partstree-search' class='form-control' style='width: 150px;' placeholder='输入设备名称搜索'>"+
+	            		"<span class='input-group-addon point btn' id='sreach-btn'>"+
+	            			"<i class='layui-icon' style='font-size: 12px;'>&#xe615;</i>"+
+	            		"</span>"+
+	        		"</div>"+
+					"<ul id='typeztree' class='ztree'></ul>"+
+				"</div>"
 			layer.open({
 				type: 1,
                 skin: 'layui-layer-demo', //样式类名
                 anim: 2,
                 area : [ '280px', '400px' ],
                 shadeClose: true, //开启遮罩关闭
-                content: '<ul id="typeztree" class="ztree"></ul>',
+                content: htmlstr,
                 success: function (layero, index) {
-                	$.fn.zTree.init($("#typeztree"), setting, DataNodes);
+                	$.fn.zTree.init($("#typeztree"), { callback:{ onClick:PartgetGoodsTypeInfo} }, JSON.parse(data));
+					fuzzySearch('typeztree','#typeztree-search #sreach-btn',null,true);
                 }
 			})
 		}
@@ -619,6 +634,15 @@ function PartgetGoodsTypeInfo(event, treeId, treeNode){
 }
 
 function PartsetStockGoods(){
+	var htmlstr="<div style='padding:10px'>"+
+					"<div id='PartLinkGoodsztree-search' class='input-group input-group-sm' style='width: 180px;'>"+
+	            		"<input type='text' id='partstree-search' class='form-control' style='width: 150px;' placeholder='输入配件名称搜索'>"+
+	            		"<span class='input-group-addon point btn' id='sreach-btn'>"+
+	            			"<i class='layui-icon' style='font-size: 12px;'>&#xe615;</i>"+
+	            		"</span>"+
+	        		"</div>"+
+					"<ul id='PartLinkGoodsztree' class='ztree'></ul>"+
+				"</div>"
 	layer.open({
 		type:1,
         skin:'', //样式类名
@@ -626,7 +650,7 @@ function PartsetStockGoods(){
         shade: 0.3,
         title:'关联库存物料',
         area:[ '300px', '500px' ],
-        content: '<ul id="PartLinkGoodsztree" class="ztree"></ul>',
+        content: htmlstr,
         success: function (layero, index){
 			$.ajax({
 				contenType:'application/json',
@@ -641,6 +665,7 @@ function PartsetStockGoods(){
 		        		}
 					};
 					$.fn.zTree.init($("#PartLinkGoodsztree"), setting, JSON.parse(data));
+					fuzzySearch('PartLinkGoodsztree','#PartLinkGoodsztree-search #sreach-btn',null,true);
 				}
 			})
 		},

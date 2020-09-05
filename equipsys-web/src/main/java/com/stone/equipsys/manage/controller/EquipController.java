@@ -55,7 +55,9 @@ public class EquipController {
 	private EquipInfoMapper equipmapper;
 	@RequestMapping(value="equip/manageequip")
 	public String toEquipPage(HttpServletRequest request) {
-		List<OrgDept> deptlist=deptmapper.listSelective(null);
+		HashMap<String, Object> deptparam=new HashMap<String, Object>();
+		deptparam.put("deptType", 0);
+		List<OrgDept> deptlist=deptmapper.listSelective(deptparam);
 		request.setAttribute("deptlist", deptlist);
 		return PathConstant.EquipInfoManage;
 	}
@@ -95,8 +97,7 @@ public class EquipController {
 		if(!"".equals(id) && id!=null) {
 			map.put("debarid", Integer.parseInt(id));
 		}
-		List<EquipObject> equiplist=EquipUtile.createEquipTree(equipmapper.listSelective(map));
-		String treejson=JSONObject.toJSONString(EquipUtile.setTreeIcon(equiplist));
+		String treejson=JSONObject.toJSONString(EquipUtile.setTreeIcon(EquipUtile.createEquipTree(equipmapper.listSelective(map))));
 		Map<String, Object> res = new HashMap<String, Object>();
 		if(treejson!=null) {
 			res.put("equiptree", treejson);

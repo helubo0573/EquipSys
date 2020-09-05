@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/P-Main.css?d=202003083">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
 </head>
-<script src="${pageContext.request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <body style="background-color: black;">
 	<div class="body-div">

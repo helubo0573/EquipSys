@@ -13,14 +13,14 @@
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;">
 			库存物料信息
 		</div>
-		<div id="storegoods-info" class="info-div">
+		<div id="storegoods-info" class="info-div" style="margin-bottom: 10px;">
 			<table id="storegoodsinfo-table" class="table table-bordered">
 			<tr>
 				<th width="100px;">物料名称</th><td width="200px"><label id="goodsname-label" class="col-lg-12" style="height: 18px;"></label></td>
 				<th width="100px;">物料类型</th><td><label class="col-lg-12" id="goodstypename-label" style="height: 18px;"></label></td>
 			</tr>
 			<tr>
-				<th>备注</th><td colspan="3"><label style="height: 56px;text-align: left;" class="col-lg-12" id="remarks-label"></label></td>
+				<th>备注</th><td colspan="3"><label style="height: 36px;text-align: left;" class="col-lg-12" id="remarks-label"></label></td>
 			</tr>
 			<tr>
 				<td colspan="4">
@@ -42,7 +42,7 @@
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;">
 			库存物料信息
 		</div>
-		<div style="border: white 1px solid;height: 395px;width: 100%;text-align: center;">
+		<div style="border: white 1px solid;height: 430px;width: 100%;text-align: center;">
 			<div class="btn-Rdiv" style="margin: 8px 0px">
 				<shiro:hasPermission name="store:goodsmodelnumber:save">
 					<button class="btn btn-info btn-xs" id="addmodelnumber" onclick="showGoodsModelNumberInfo(0)" disabled>新增物料规格</button>

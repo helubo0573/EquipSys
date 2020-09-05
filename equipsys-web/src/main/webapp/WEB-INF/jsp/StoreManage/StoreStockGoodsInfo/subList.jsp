@@ -12,10 +12,10 @@
 <body>
 	<table class="table table-hover table-bordered table-striped" id="contracttb" style="margin-bottom: 3px;">
 		<tr>
-			<th width="150px">型号</th>
+			<th>型号</th>
 			<th width="80px;">数量</th>
-			<th width="120px">单位</th>
-			<th width="120px">操作</th>
+			<th width="80px">单位</th>
+			<th width="160px">操作</th>
 		</tr>
 		<c:choose>
 			<c:when test="${not empty modellist }">

@@ -68,7 +68,6 @@
 				zTreeObj.showNode(node);//show node with matching keywords
 				return true; //return true and show this node
 			}
-			console.log("hide node that not matched")
 			zTreeObj.hideNode(node); // hide node that not matched
 			return false; //return false for node not matched
 		}
@@ -95,7 +94,6 @@
 					}
 					if(obj.isParent){
 						var cnodes=obj.children;
-						console.log(cnodes+"---"+cnodes.length)
 						if(cnodes.length>0){
 							zTreeObj.showNodes(cnodes);
 							zTreeObj.expandNode(obj,true);

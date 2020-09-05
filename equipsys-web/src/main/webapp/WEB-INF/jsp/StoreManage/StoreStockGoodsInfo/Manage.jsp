@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009011"></script>
+<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009052"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202006028"></script>
 <body>
 	<div class="body-bdiv">
@@ -16,10 +16,10 @@
 			物料库存信息管理
 		</div>
 		<div class="box-div" style="height: 700px;">
-			<div style="float:left;display: inline-block; width: 160px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
+			<div style="float:left;display: inline-block; width: 200px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
 				<%@include file="List.jsp" %>
 			</div>
-			<div id="stockgoodsInfo-div" style="margin-left: 170px;border: 1px solid;height: 100%;">
+			<div id="stockgoodsInfo-div" style="margin-left: 210px;border: 1px solid;height: 100%;">
 				<div>
 					<%@include file="Info.jsp" %>
 				</div>
