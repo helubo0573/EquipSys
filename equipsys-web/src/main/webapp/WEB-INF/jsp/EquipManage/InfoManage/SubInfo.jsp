@@ -26,6 +26,9 @@
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;text-align: center;">
 			配件信息
 		</div>
+		<div id="partssearch-div">
+			<input>
+		</div>
 		<div id="subequip-list">
 			<%@include file="PartsList.jsp" %>
 		</div>
