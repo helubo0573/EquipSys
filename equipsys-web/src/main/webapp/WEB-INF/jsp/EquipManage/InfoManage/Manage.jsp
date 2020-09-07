@@ -14,13 +14,13 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202009052"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202009054"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
 			设备信息管理
 		</div>
-		<div class="box-div" style="height: 760px;">
+		<div class="box-div" style="height: 708px;">
 			<div style="float:left;display: inline-block; width: 240px; height: 100%; padding: 10px; border: 1px solid #ddd; overflow: auto;">
 				<%@include file="List.jsp" %>
 			</div>
@@ -28,7 +28,7 @@
 				<div>
 					<%@include file="info.jsp" %>
 				</div>
-				<div id="equipsublist-div" style="height: 458px;padding: 10px;">
+				<div id="equipsublist-div" style="height: 405px;padding: 10px;">
 					<%@include file="SubInfo.jsp" %>
 				</div>
 			</div>

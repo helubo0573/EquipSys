@@ -22,12 +22,21 @@
 			<button class="btn btn-danger btn-xs" id="equipsystem-deleteequip" onclick="deleteEquipInfo()" disabled="disabled">删除设备</button>
 		</shiro:hasPermission>
 	</div>
-	<div class="search-div" style="padding: 3px;">
+	<div id="search-div" style="padding: 3px;">
+		<input type="hidden" id="search-modelid">
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;text-align: center;">
 			配件信息
 		</div>
-		<div id="partssearch-div">
-			<input>
+		<div>
+			<div id="partssearch-div" class="input-group col-lg-9">
+				<span class="input-group-addon">配件类型</span>
+	            <input type="text" class="form-control point" style="width: 150px;" placeholder="点击选择" readonly onclick="">
+	            <span class="input-group-addon">配件名称</span>
+	            <input type="text" class="form-control" style="width: 150px;"placeholder="输入配件名称" id="search-partsname">
+	            <span class="input-group-addon">需求数量</span>
+	            <input type="text" class="form-control" style="width: 150px;" placeholder="输入需求数量" id="search-quantity">
+			</div>
+			<button class="btn btn-info btn-ms" style="float: right;position: relative;bottom:0px;top:0px;margin-top: -30px;" onclick="searchParts()">查询</button>
 		</div>
 		<div id="subequip-list">
 			<%@include file="PartsList.jsp" %>

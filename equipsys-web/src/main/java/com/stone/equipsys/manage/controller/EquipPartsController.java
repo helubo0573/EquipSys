@@ -34,10 +34,16 @@ public class EquipPartsController {
 	private EquipPartsInfoMapper PartsInfoMapper;
 	@RequestMapping("equipparts/search")
 	public String search(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="goodstype",defaultValue = "0")Long goodstype,
+			@RequestParam(value = "partsname")String partsname,
+			@RequestParam(value="quantity",defaultValue = "0")int quantity,
 			@RequestParam(value ="equipid")Long equipid,
 			@RequestParam(value="pageSize")int pageSize,
 			@RequestParam(value="current")int current) {
 			HashMap<String, Object> params=new HashMap<>();
+			params.put("goodstypeId", goodstype==0?null:goodstype);
+			params.put("partsName", partsname);
+			params.put("quantity",quantity==0?null:quantity);
 			params.put("equipId", equipid);
 			Page<EquipPartsInfoModel> partslist=PartsInfoService.searchExtEquipParts(params, current, pageSize);
 			request.setAttribute("partslist", partslist);

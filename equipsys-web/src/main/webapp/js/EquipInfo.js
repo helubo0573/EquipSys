@@ -402,10 +402,16 @@ function changeBtnState(type){
 
 /**配件管理 */
 function getEquipPartsList(pagenum){
+	var goodstype=$("#search-div #search-modelid").val()
+	var partsname=$("#search-div #search-partsname").val()
+	var quantity=$("#search-div #search-quantity").val()
 	var equipid=$("#equip-info #equipid-hd").val();
 	var param={
+			goodstype:goodstype,
+			partsname:partsname,
+			quantity:quantity,
 			equipid:equipid,
-			pageSize:5,
+			pageSize:6,
 			current:pagenum
 		}
 	$("#subequip-list").load("../equipparts/search.do",param)
@@ -756,4 +762,8 @@ function partsseachgoods(){
 			}
 		}
 	}
+}
+
+function searchParts(){
+	getEquipPartsList(1);
 }

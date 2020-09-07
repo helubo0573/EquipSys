@@ -63,8 +63,11 @@
             <if test="goodsModelId != null and goodsModelId != '' ">
                 and parts.goods_model_id = #{goodsModelId,jdbcType=BIGINT}
             </if>
+            <if test="goodstypeId != null and goodstypeId != '' ">
+                and parts.goodstype_id = #{goodstypeId,jdbcType=BIGINT}
+            </if>
             <if test="partsName != null and partsName != '' ">
-                and parts.parts_name = #{partsName,jdbcType=VARCHAR}
+                and parts.parts_name  like CONCAT("%",#{partsName,jdbcType=VARCHAR},"%")
             </if>
             <if test="quantity != null and quantity != '' ">
                 and parts.quantity = #{quantity,jdbcType=INTEGER}

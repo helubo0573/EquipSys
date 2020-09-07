@@ -23,12 +23,12 @@
 			<input type="hidden" id="equipid-hd">
 			<table id="equipinfo-table" class="table table-bordered">
 				<tr>
-					<th width="88px;">设备名称</th><td width="200px"><label id="equipname-label"></label></td>
-					<th width="88px;">设备等级</th><td width="200px"><label id="equiplevel-label"></label></td>
-					<th width="88px;">所属设备</th><td><label id="equipparent-label"></label></td>
+					<th width="68px;">设备名称</th><td width="180px"><label id="equipname-label"></label></td>
+					<th width="68px;">设备等级</th><td width="180px"><label id="equiplevel-label"></label></td>
+					<th width="68px;">设备编号</th><td><label id="equipcode-label"></label></td>
 				</tr>
 				<tr>
-					<th>设备编号</th><td><label id="equipcode-label"></label></td>
+					<th>所属设备</th><td><label id="equipparent-label"></label></td>
 					<th>启用日期</th><td><label id="equipenabledate-label"></label></td>
 					<th>设备型号</th><td></td>
 				</tr>
