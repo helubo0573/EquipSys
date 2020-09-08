@@ -24,11 +24,14 @@ import java.util.Date;
 
     /*** 备设编号*/
     private String equipCode;
-
+    
+    /*** 设备型号*/
+    private String equipModelNumber;
+    
     /*** 所属设备id*/
     private Integer parentId;
 
-    /*** */
+    /*** 设备登记*/
     private Integer equipLevel;
 
     /*** 启用日期*/
@@ -39,26 +42,34 @@ import java.util.Date;
 
     /*** 供应商*/
     private String supplier;
-
+    
+    /*** 供应商电话*/
+    private String supplierNumber;
     /*** 在所位置*/
     private String location;
+    
+    /*** 备注*/
+    private String remarks;
 
     public EquipInfo() {}
     
-    public EquipInfo(String id,String equipname,String equipcode,String parentid,String level,String enabledate,String attrdept,String supplier,String location) throws ParseException {
+    public EquipInfo(String id,String equipname,String equipcode,String equipmodelnumber,String parentid,String level,String enabledate,String attrdept,String supplier,String suppliernumber,String location,String remarks) throws ParseException {
     	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
     	if(!"".equals(id) && id!=null)	this.setId(Long.parseLong(id));
     	if(!"".equals(parentid) && parentid!=null) //如果没有则表示为系统级，初始化为0
     		this.setParentId(Integer.parseInt(parentid));
     	else
-    		this.setParentId(0);	
+    		this.setParentId(0);
+    	if(!"".equals(equipmodelnumber) && equipmodelnumber!=null) this.setEquipModelNumber(equipmodelnumber);
     	if(!"".equals(equipname) && equipname!=null)	this.setEquipName(equipname);
     	if(!"".equals(enabledate) && enabledate!=null) this.setEnableDate(sdf.parse(enabledate));
     	if(!"".equals(equipcode) && equipcode!=null)	this.setEquipCode(equipcode);
     	if(!"".equals(supplier) && supplier!=null)	this.setSupplier(supplier);
+    	if(!"".equals(suppliernumber) && suppliernumber!=null) this.setSupplierNumber(suppliernumber);
     	if(!"".equals(location) && location!=null)	this.setLocation(location);
     	if(!"".equals(attrdept) && attrdept!=null)	this.setAttrDept(Integer.parseInt(attrdept));
     	if(!"".equals(level) && level!=null)	this.setEquipLevel(Integer.parseInt(level));
+    	if(!"".equals(remarks) && remarks!=null)	this.setRemarks(remarks);
     }
 
     /*** 获取主键Id
@@ -204,5 +215,29 @@ import java.util.Date;
     public void setLocation(String location){
         this.location = location;
     }
+
+	public String getEquipModelNumber() {
+		return equipModelNumber;
+	}
+
+	public void setEquipModelNumber(String equipModelNumber) {
+		this.equipModelNumber = equipModelNumber;
+	}
+
+	public String getSupplierNumber() {
+		return supplierNumber;
+	}
+
+	public void setSupplierNumber(String supplierNumber) {
+		this.supplierNumber = supplierNumber;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
 }

@@ -10,3 +10,9 @@ ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 ROW_FORMAT=COMPACT
 ;
+
+
+
+alter table equip_info add equip_model_number varchar(30) comment '设备型号';
+alter table equip_info add supplier_number varchar(20) comment '供应商电话';
+alter table equip_info add remarks varchar(255) comment '备注';
