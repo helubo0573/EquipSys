@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202009054"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202009092"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
@@ -34,6 +34,83 @@
 			</div>
 		</div>
 	</div>
+	<form id="equipinfo-form" class="form-horizontal box-div" style="display: none;">
+		<!-- <input type="hidden" id="show-type"> -->
+		<input type="hidden" id="equip-id" name="id">
+		<table class="order-table table table-bordered layeropen">
+			<tbody>
+				<tr>
+					<th><label class="control-label">设备名称</label></th>
+					<td>
+						<input class="form-control needing" id="subequip-name" name="name">
+					</td>
+					<th><label class="control-label">设备编号</label></th>
+					<td>
+						<input class="form-control needing" id="subequip-code" name="code">
+					</td>
+				</tr>
+				<tr>
+					<th><label class="control-label">设备级别</label></th>
+					<td>
+						<div class="needing">
+							<label class="radio-inline" for="subequiplv-flagship">
+								<input type="radio" value="0" name="level" id="subequiplv-flagship">-系统级
+							</label>
+							<label class="radio-inline" for="subequiplv-model">
+								<input type="radio" value="1" name="level" id="subequiplv-model">-模组级
+							</label>
+							<label class="radio-inline" for="subequiplv-equip">
+								<input type="radio" value="2" name="level" id="subequiplv-equip">-设备级
+							</label>
+						</div>
+					</td>
+					<th><label class="control-label">设备型号</label></th>
+					<td><input class="form-control" id="subequip-equipnumber" name="equipnumber"></td>
+				</tr>
+				<tr>
+					<th><label class="control-label">启用日期</label></th>
+					<td>
+						<input class="layui-input form-control point needing layedate" name="enabledate" id="subequip-enabledate" placeholder="yyyy-MM-dd" readonly>
+					</td>
+					<th><label class="control-label">所在位置</label></th><td><input class="form-control" id="subequip-location" name="location"></td>
+				</tr>
+				<tr>
+					<th><label class="control-label">所属设备</label></th><td><input class="form-control point" data-parent="" id="subequip-parent" name="parent" readonly onclick="showEquipparentTree()"></td>
+					<th rowspan="2" style="vertical-align: middle;"><label class="control-label">供应商</label></th><td><input class="form-control" name="supplier" id="subequip-supplier" placeholder="供应商名称"></td>
+				</tr>
+				<tr>
+					<th><label class="control-label">所属部门</label></th>
+					<td>
+						<select class="form-control point needing" name="attrdept" id="subequip-attrdept">
+							<option value="-1">选择所属部门</option>
+							<c:forEach items="${deptlist }" var="dept">
+								<option value="${dept.id }">${dept.deptName }</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td>
+						<input class="form-control" id="subequip-suppliernumber" name="suppliernumber" placeholder="供应商联系电话">
+					</td>
+				</tr>
+				<tr>
+					<th><label class="control-label">操作人员</label></th>
+					<td>
+						<input data-emp="" class="form-control point" id="subequip-op" onclick="showEmpTree(0,this)" readonly>
+					</td>
+					<th><label class="control-label">维修人员</label></th>
+					<td>
+						<input data-emp="" class="form-control point" id="subequip-mp" onclick="showEmpTree(1,this)" readonly>
+					</td>
+				</tr>
+				<tr>
+					<th><label class="control-label">备注</label></th>
+					<td colspan="3">
+						<textarea class="form-control" rows="2" style="resize: none;" name="remarks"></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 	<form id="setparts-form" class="form-horizontal box-div" style="display: none;"><!-- 配件维护 -->
 		<input type="hidden" id="equipid" name="equipid">
 		<table class="order-table table table-bordered layeropen">

@@ -67,6 +67,7 @@ public class EquipController {
 		String eid=request.getParameter("id");
 		String op=request.getParameter("op");
 		String mp=request.getParameter("mp");
+		System.out.println("id="+eid);
 		int id=0;
 		Map<String, Object> res = new HashMap<String, Object>();
 		try {

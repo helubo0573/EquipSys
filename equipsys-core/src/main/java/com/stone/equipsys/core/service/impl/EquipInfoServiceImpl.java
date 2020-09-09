@@ -46,12 +46,15 @@ public class EquipInfoServiceImpl extends BaseServiceImpl<EquipInfo, Long> imple
 		EquipInfo equip=new EquipInfo("",
 				request.getParameter("name"),
 				request.getParameter("code"),
+				request.getParameter("equipnumber"),
 				request.getParameter("parent"),
 				request.getParameter("level"),
 				request.getParameter("enabledate"),
 				request.getParameter("attrdept"),
 				request.getParameter("supplier"),
-				request.getParameter("location"));
+				request.getParameter("suppliernumber"),
+				request.getParameter("location"),
+				request.getParameter("remarks"));
 				equipInfoMapper.insertReturnId(equip);
 		
 		return Integer.parseInt(String.valueOf(equip.getId()));
@@ -63,12 +66,15 @@ public class EquipInfoServiceImpl extends BaseServiceImpl<EquipInfo, Long> imple
 		EquipInfo equip=new EquipInfo(request.getParameter("id"),
 				request.getParameter("name"),
 				request.getParameter("code"),
+				request.getParameter("equipnumber"),
 				request.getParameter("parent"),
 				request.getParameter("level"),
 				request.getParameter("enabledate"),
 				request.getParameter("attrdept"),
 				request.getParameter("supplier"),
-				request.getParameter("location"));
+				request.getParameter("suppliernumber"),
+				request.getParameter("location"),
+				request.getParameter("remarks"));
 				equipInfoMapper.update(equip);
 				
 		return Integer.parseInt(String.valueOf(equip.getId())) ;

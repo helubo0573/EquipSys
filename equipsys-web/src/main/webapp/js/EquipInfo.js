@@ -30,14 +30,14 @@ function getEquipTree(e){
 
 /**弹出设备信息维护层 **/
 function showEquipInfo(type){
-	$("#show-type").val(type)
+	//$("#show-type").val(type)
 	layer.open({
 		type:1,
         skin:'layui-layer-demo', //样式类名
         anim:2,
         shade: 0.3,
         title:'设备信息',
-        area:[ '660px', '430px' ],
+        area:[ '660px', '500px' ],
         btn:['保存','关闭'],
         content: $("#equipinfo-form"),
         success: function (layero, index){
@@ -52,19 +52,21 @@ function showEquipInfo(type){
         			success:function(data){
         				var equip=data.equip;
         				if(equip!=null){
-        					$("#subequip-name").val(equip.equipName);
-        					$("#subequip-code").val(equip.equipCode);
-        					$('input:radio[name=subequip-level]')[equip.equipLevel].checked = true;
-        					$("#subequip-parent").val(equip.parentequipName);
-        					$("#subequip-parent").attr("data-parent",equip.parentId);
-        					$("#subequip-enabledate").val(data.enabledate);
-        					$("#subequip-supplier").val(equip.supplier);
-        					$("#subequip-attrdept").val(equip.attrDept);
-        					$("#subequip-location").val(equip.location);
-        					$("#subequip-op").val(data.opstr.opname)
-        					$("#subequip-op").attr("data-emp",data.opstr.opid)
-        					$("#subequip-mp").val(data.mpstr.mpname)
-        					$("#subequip-mp").attr("data-emp",data.mpstr.mpid)
+							console.log(equipid)
+							$("#equipinfo-form #equip-id").val(equipid);
+        					$("#equipinfo-form #subequip-name").val(equip.equipName);
+        					$("#equipinfo-form #subequip-code").val(equip.equipCode);
+        					$("#equipinfo-form input:radio[name=level]")[equip.equipLevel].checked = true;
+        					$("#equipinfo-form #subequip-parent").val(equip.parentequipName);
+        					$("#equipinfo-form #subequip-parent").attr("data-parent",equip.parentId);
+        					$("#equipinfo-form #subequip-enabledate").val(data.enabledate);
+        					$("#equipinfo-form #subequip-supplier").val(equip.supplier);
+        					$("#equipinfo-form #subequip-attrdept").val(equip.attrDept);
+        					$("#equipinfo-form #subequip-location").val(equip.location);
+        					$("#equipinfo-form #subequip-op").val(data.opstr.opname)
+        					$("#equipinfo-form #subequip-op").attr("data-emp",data.opstr.opid)
+        					$("#equipinfo-form #subequip-mp").val(data.mpstr.mpname)
+        					$("#equipinfo-form #subequip-mp").attr("data-emp",data.mpstr.mpid)
         				}
         			}
         		})
@@ -146,7 +148,7 @@ function setEquipInfoToInfo(equip,node,op,mp,enabledate){
  * @returns
  */
 function createEquipData(){
-	var type=$("#show-type").val()
+	/*var type=$("#show-type").val()
 	var id=type==1?$("#equipid-hd").val():"";
 	var name=$("#subequip-name").val();
 	var code=$("#subequip-code").val();
@@ -156,10 +158,10 @@ function createEquipData(){
 	var supplier=$("#subequip-supplier").val();
 	var attrdept=$("#subequip-attrdept").val();
 	var location=$("#subequip-location").val();
+	var param="id="+id+"&name="+name+"&code="+code+"&level="+level+"&parent="+parent+"&enabledate="+enabledate+"&supplier="+supplier+"&attrdept="+attrdept+"&location="+location+"&op="+op+"&mp="+mp;*/
 	var op=$("#subequip-op").attr("data-emp");
 	var mp=$("#subequip-mp").attr("data-emp");
-	var param="id="+id+"&name="+name+"&code="+code+"&level="+level+"&parent="+parent+"&enabledate="+enabledate+"&supplier="+supplier+"&attrdept="+attrdept+"&location="+location+"&op="+op+"&mp="+mp;
-	return param;
+	return $("#equipinfo-form").serialize()+"&op="+op+"&mp="+mp;
 }
 /**
  * 信息合法性校验
@@ -174,7 +176,7 @@ function checkEquipInfo(){
 		layer.msg("设备编号不能为空");
 		return false;
 	}
-	if($('input:radio[name=subequip-level]:checked').val()==null){
+	if($('input:radio[name=level]:checked').val()==null){
 		layer.msg("选择设备等级")
 		return false;
 	}
@@ -187,7 +189,7 @@ function checkEquipInfo(){
 		layer.msg("请选择所属部门")
 		return false;
 	}
-	if($("input[name='subequip-level']:checked").val()!=0){
+	if($("input[name='level']:checked").val()!=0){
 		if($("#subequip-parent").attr("data-parent")==""){
 			layer.msg("设备级别不是系统级时清选择所属设备")
 		}
@@ -267,10 +269,10 @@ function showEquipparentTree(){
                 },yes:function(index,layero){
                 	var treeObj = $.fn.zTree.getZTreeObj("equipeparenttree");
                 	var node=treeObj.getSelectedNodes();
-                	var level=$("input[name='subequip-level']:checked").val();
+                	var level=$("input[name='level']:checked").val();
                 	if(node[0].level-level<=0){
                 		var tlevel=node[0].level+1;
-                		$('input:radio[name=subequip-level]')[tlevel].checked = true;
+                		$('input:radio[name=level]')[tlevel].checked = true;
                 	}
                 	$("#subequip-parent").val(node[0].name);
                 	$("#subequip-parent").attr("data-parent",node[0].id);
@@ -384,8 +386,8 @@ function clearEquipInfo(){
  */
 function clearSubEquipInfo(){
 	$("#equipinfo-form input[type!=radio],textarea,select").val("");
-	$("input:radio[name='subequip-level']:checked").prop("checked",false);
-	$("input:radio[name='subequip-level']").removeAttr("disabled");
+	$("input:radio[name='level']:checked").prop("checked",false);
+	$("input:radio[name='level']").removeAttr("disabled");
 }
 
 /**
