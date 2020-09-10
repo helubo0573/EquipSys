@@ -73,23 +73,28 @@
     
     
     <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipInfo">
-        insert into equip_info(equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location)values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR})
+        insert into equip_info(equip_name,equip_code,equip_model_number,parent_id,equip_level,enable_date,attr_dept,supplier,supplier_number,location,remarks)
+        values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{equipModelNumber,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{supplierNumber,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
     </insert>
 
 	<insert id="insertReturnId" parameterType="com.stone.equipsys.core.domain.EquipInfo" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into equip_info(equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location)values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR})
+        insert into equip_info(equip_name,equip_code,equip_model_number,parent_id,equip_level,enable_date,attr_dept,supplier,supplier_number,location,remarks)
+        values(#{equipName,jdbcType=VARCHAR},#{equipCode,jdbcType=VARCHAR},#{equipModelNumber,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER},#{equipLevel,jdbcType=INTEGER},#{enableDate,jdbcType=TIMESTAMP},#{attrDept,jdbcType=INTEGER},#{supplier,jdbcType=VARCHAR},#{supplierNumber,jdbcType=VARCHAR},#{location,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
     </insert>
     
     <update id="update" parameterType="com.stone.equipsys.core.domain.EquipInfo">
         update equip_info set 
             equip_name = #{equipName,jdbcType=VARCHAR},
             equip_code = #{equipCode,jdbcType=VARCHAR},
+            equip_model_number = #{equipModelNumber,jdbcType=VARCHAR},
             parent_id = #{parentId,jdbcType=INTEGER},
             equip_level = #{equipLevel,jdbcType=INTEGER},
             enable_date = #{enableDate,jdbcType=TIMESTAMP},
             attr_dept = #{attrDept,jdbcType=INTEGER},
             supplier = #{supplier,jdbcType=VARCHAR},
-            location = #{location,jdbcType=VARCHAR}
+            supplier_number = #{supplierNumber,jdbcType=VARCHAR},
+            location = #{location,jdbcType=VARCHAR},
+            remarks = #{remarks,jdbcType=VARCHAR}
         where id = #{id ,jdbcType=INTEGER}
     </update>
 
@@ -102,6 +107,9 @@
             </if>
             <if test="equipCode != null and equipCode != '' ">        
                 equip_code = #{equipCode,jdbcType=VARCHAR},                
+            </if>
+            <if test="equipModelNumber != null and equipModelNumber != '' ">        
+                equip_model_number = #{equipModelNumber,jdbcType=VARCHAR},                
             </if>
             <if test="parentId != null and parentId != '' ">        
                 parent_id = #{parentId,jdbcType=INTEGER},                
@@ -118,8 +126,14 @@
             <if test="supplier != null and supplier != '' ">        
                 supplier = #{supplier,jdbcType=VARCHAR},                
             </if>
+            <if test="supplierNumber != null and supplierNumber != '' ">        
+                supplier_number = #{supplierNumber,jdbcType=VARCHAR},                
+            </if>
             <if test="location != null and location != '' ">        
                 location = #{location,jdbcType=VARCHAR}                
+            </if>
+            <if test="remarks != null and remarks != '' ">        
+                remarks = #{remarks,jdbcType=VARCHAR}                
             </if>
         </set>    
         where id = #{id ,jdbcType=INTEGER}

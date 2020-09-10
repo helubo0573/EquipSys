@@ -17,7 +17,7 @@ import java.util.Date;
     private static final long serialVersionUID = 1L;
 
     /*** 主键Id*/
-    private Long id;
+    private int id;
 
     /*** 设备名称*/
     private String equipName;
@@ -53,9 +53,24 @@ import java.util.Date;
 
     public EquipInfo() {}
     
+    public EquipInfo(int id,String equipname,String equipcode,String equipmodelnumber,int parentid,int equiplevel,Date enabledate,int attrdept,String supplier,String suppliernumber,String location,String remarks) {
+    	if(id!=0)this.setId(id);
+    	this.setEquipName(equipname);
+    	this.setEquipCode(equipcode);
+    	this.setEquipModelNumber(equipmodelnumber);
+    	this.setParentId(parentid);
+    	this.setEquipLevel(equiplevel);
+    	this.setEnableDate(enabledate);
+    	this.setAttrDept(attrdept);
+    	this.setSupplier(supplier);
+    	this.setSupplierNumber(suppliernumber);
+    	this.setLocation(location);
+    	this.setRemarks(remarks);
+    }
+    
     public EquipInfo(String id,String equipname,String equipcode,String equipmodelnumber,String parentid,String level,String enabledate,String attrdept,String supplier,String suppliernumber,String location,String remarks) throws ParseException {
     	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-    	if(!"".equals(id) && id!=null)	this.setId(Long.parseLong(id));
+    	//if(!"".equals(id) && id!=null)	this.setId(Integer.parseInt(id));
     	if(!"".equals(parentid) && parentid!=null) //如果没有则表示为系统级，初始化为0
     		this.setParentId(Integer.parseInt(parentid));
     	else
@@ -76,7 +91,7 @@ import java.util.Date;
     *
     * @return id
     */
-    public Long getId(){
+    public int getId(){
         return id;
     }
 
@@ -84,7 +99,7 @@ import java.util.Date;
     * 
     * @param 要设置的主键Id
     */
-    public void setId(Long id){
+    public void setId(int id){
         this.id = id;
     }
 

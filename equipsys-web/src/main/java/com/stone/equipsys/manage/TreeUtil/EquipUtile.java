@@ -18,7 +18,7 @@ public class EquipUtile {
 	static final String equip="../static/img/equip.png";
 	
 	public static class EquipObject{
-		public Long id;
+		public int id;
 		public Object pId;
 		public String name;
 		public String title;
@@ -28,7 +28,7 @@ public class EquipUtile {
 //		public Boolean expanded = true;
 		public List<EquipObject> children = null;// new ArrayList();
 		
-		public Long getId() {
+		public int getId() {
 			return this.id;
 		}
 	}

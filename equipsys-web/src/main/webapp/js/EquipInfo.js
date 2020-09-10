@@ -56,13 +56,16 @@ function showEquipInfo(type){
 							$("#equipinfo-form #equip-id").val(equipid);
         					$("#equipinfo-form #subequip-name").val(equip.equipName);
         					$("#equipinfo-form #subequip-code").val(equip.equipCode);
+							$("#equipinfo-form #subequip-equipnumber").val(equip.equipModelNumber);
         					$("#equipinfo-form input:radio[name=level]")[equip.equipLevel].checked = true;
         					$("#equipinfo-form #subequip-parent").val(equip.parentequipName);
         					$("#equipinfo-form #subequip-parent").attr("data-parent",equip.parentId);
         					$("#equipinfo-form #subequip-enabledate").val(data.enabledate);
         					$("#equipinfo-form #subequip-supplier").val(equip.supplier);
+							$("#equipinfo-form #subequip-suppliernumber").val(equip.supplierNumber);
         					$("#equipinfo-form #subequip-attrdept").val(equip.attrDept);
         					$("#equipinfo-form #subequip-location").val(equip.location);
+							$("#equipinfo-form #equipinfo-remarks").val(equip.remarks);
         					$("#equipinfo-form #subequip-op").val(data.opstr.opname)
         					$("#equipinfo-form #subequip-op").attr("data-emp",data.opstr.opid)
         					$("#equipinfo-form #subequip-mp").val(data.mpstr.mpname)
@@ -134,13 +137,17 @@ function setEquipInfoToInfo(equip,node,op,mp,enabledate){
 	var parentnode=node.getParentNode();
 	$("#equipcode-label").html(equip.equipCode!=null?equip.equipCode:"");
 	$("#equipenabledate-label").html(enabledate);
+	$("#equipmodelnumber-label").html(equip.equipModelNumber!=null?equip.equipModelNumber:"");
 	$("#equipparent-label").html(parentnode!=null?parentnode.name:"");
 	$("#equiplocation-label").html(equip.location!=null?equip.location:"");
 	$("#equipsupplier-label").html(equip.supplier!=null?equip.supplier:"");
+	$("#equipsuppliernumber-label").html(equip.supplierNumber!=null?equip.supplierNumber:"");
 	$("#equipdept-label").html(getDeptName(equip.attrDept));
 	$("#equipop-label").html(op.opname);
 	$("#equipmp-label").html(mp.mpname);
+	$("#remarks-label").html(equip.remarks!=null?equip.remarks:"");
 }
+
 
 
 /**

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,18 +65,29 @@ public class EquipController {
 	}
 	@RequestMapping(value="equip/saveequip")
 	@RequiresPermissions("equip:info:save")
-	public void save(HttpServletResponse response, HttpServletRequest request) {
-		String eid=request.getParameter("id");
-		String op=request.getParameter("op");
-		String mp=request.getParameter("mp");
-		System.out.println("id="+eid);
-		int id=0;
+	public void save(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "id",defaultValue = "0")int id,
+			@RequestParam(value = "name")String name,
+			@RequestParam(value = "code")String code,
+			@RequestParam(value = "equipnumber")String equipnumber,
+			@RequestParam(value = "parent",defaultValue = "0")int parent,
+			@RequestParam(value = "level")int level,
+			@RequestParam(value = "enabledate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date enabledate,
+			@RequestParam(value = "attrdept")int attrdept,
+			@RequestParam(value = "supplier")String supplier,
+			@RequestParam(value = "suppliernumber")String suppliernumber,
+			@RequestParam(value = "location")String location,
+			@RequestParam(value = "remarks")String remarks,
+			@RequestParam(value = "op")String op,
+			@RequestParam(value = "mp")String mp) {
+		EquipInfo equip=new EquipInfo(id,name,code,equipnumber,parent,level,enabledate,attrdept,supplier,suppliernumber,location,remarks);
 		Map<String, Object> res = new HashMap<String, Object>();
+		Long eid=0L;
 		try {
-			if("".equals(eid)) {
-				id=EquipServoce.insertReturnId(request);
+			if(id==0) {
+				id=EquipServoce.insertReturnId(equip);
 			}else {
-				id=EquipServoce.updateRetuenId(request);
+				id=EquipServoce.updateRetuenId(equip);
 			}
 			EquipOpService.saveOpToList(op.length()>0?StringUtil.convertStringToIntegerList(op, ","):null, id);
 			EquipMpService.saveMpToList(mp.length()>0?StringUtil.convertStringToIntegerList(mp, ","):null, id);

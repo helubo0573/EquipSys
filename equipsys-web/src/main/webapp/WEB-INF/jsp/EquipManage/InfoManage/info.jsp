@@ -30,7 +30,7 @@
 				<tr>
 					<th>所属设备</th><td><label id="equipparent-label"></label></td>
 					<th>启用日期</th><td><label id="equipenabledate-label"></label></td>
-					<th>设备型号</th><td></td>
+					<th>设备型号</th><td><label id="equipmodelnumber-label"></td>
 				</tr>
 				<tr>
 					<th>所属部门</th><td><label id="equipdept-label"></label></td>
@@ -40,10 +40,10 @@
 				<tr>
 					<th>操作员</th><td><label id="equipop-label" style="text-align: left;"></label></td>
 					<th>维修员</th><td><label id="equipmp-label" style="text-align: left;"></label></td>
-					<td></td>
+					<td><label id="equipsuppliernumber-label"></td>
 				</tr>
 				<tr>
-					<th>备注</th><td colspan="5"></td>
+					<th>备注</th><td colspan="5"><label id="remarks-label"></td>
 				</tr>
 			</table>
 		</div>

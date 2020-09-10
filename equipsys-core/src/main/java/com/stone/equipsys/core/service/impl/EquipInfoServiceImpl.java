@@ -42,39 +42,14 @@ public class EquipInfoServiceImpl extends BaseServiceImpl<EquipInfo, Long> imple
 	}
 
 	@Override
-	public int insertReturnId(HttpServletRequest request) throws ParseException {
-		EquipInfo equip=new EquipInfo("",
-				request.getParameter("name"),
-				request.getParameter("code"),
-				request.getParameter("equipnumber"),
-				request.getParameter("parent"),
-				request.getParameter("level"),
-				request.getParameter("enabledate"),
-				request.getParameter("attrdept"),
-				request.getParameter("supplier"),
-				request.getParameter("suppliernumber"),
-				request.getParameter("location"),
-				request.getParameter("remarks"));
+	public int insertReturnId(EquipInfo equip) throws ParseException {
 				equipInfoMapper.insertReturnId(equip);
 		
 		return Integer.parseInt(String.valueOf(equip.getId()));
 	}
 
 	@Override
-	public int updateRetuenId(HttpServletRequest request) throws ParseException {
-		System.out.println(request.getParameter("id"));
-		EquipInfo equip=new EquipInfo(request.getParameter("id"),
-				request.getParameter("name"),
-				request.getParameter("code"),
-				request.getParameter("equipnumber"),
-				request.getParameter("parent"),
-				request.getParameter("level"),
-				request.getParameter("enabledate"),
-				request.getParameter("attrdept"),
-				request.getParameter("supplier"),
-				request.getParameter("suppliernumber"),
-				request.getParameter("location"),
-				request.getParameter("remarks"));
+	public int updateRetuenId(EquipInfo equip) throws ParseException {
 				equipInfoMapper.update(equip);
 				
 		return Integer.parseInt(String.valueOf(equip.getId())) ;

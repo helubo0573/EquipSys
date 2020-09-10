@@ -18,9 +18,9 @@ import com.stone.equipsys.core.model.EquipInfoModel;
  */
 public interface EquipInfoService extends BaseService<EquipInfo, Long>{
 	
-	int insertReturnId(HttpServletRequest request) throws ParseException;
+	int insertReturnId(EquipInfo equip) throws ParseException;
 
-	int updateRetuenId(HttpServletRequest request) throws ParseException;
+	int updateRetuenId(EquipInfo equip) throws ParseException;
 	
 	List<EquipInfo> getEquip(int type);
 	

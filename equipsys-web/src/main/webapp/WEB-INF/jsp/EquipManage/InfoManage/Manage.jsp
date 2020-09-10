@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202009092"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=2020090101"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
@@ -105,7 +105,7 @@
 				<tr>
 					<th><label class="control-label">备注</label></th>
 					<td colspan="3">
-						<textarea class="form-control" rows="2" style="resize: none;" name="remarks"></textarea>
+						<textarea class="form-control" rows="2" style="resize: none;" id="equipinfo-remarks" name="remarks"></textarea>
 					</td>
 				</tr>
 			</tbody>
