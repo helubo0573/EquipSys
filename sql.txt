@@ -16,3 +16,15 @@ ROW_FORMAT=COMPACT
 alter table equip_info add equip_model_number varchar(30) comment '设备型号';
 alter table equip_info add supplier_number varchar(20) comment '供应商电话';
 alter table equip_info add remarks varchar(255) comment '备注';
+
+
+CREATE TABLE `equip_servicing_application` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`equip_id`  bigint(20) NOT NULL COMMENT '设备id' ,
+`proposer`  bigint(20) NOT NULL COMMENT '申请人id' ,
+`application_time`  datetime NULL DEFAULT NULL COMMENT '申请维修时间' ,
+`backfire_time`  datetime NULL DEFAULT NULL COMMENT '故障发生时间' ,
+`remarks`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '故障简述' ,
+`status`  int(11) NULL DEFAULT 0 COMMENT '申请单状态:0新申请 1:维修中 2:维修完毕  3:验收通过 4:验收不通过' ,
+PRIMARY KEY (`id`)
+)
