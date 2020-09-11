@@ -14,7 +14,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=2020090101"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=2020090111"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">
@@ -75,7 +75,7 @@
 					<th><label class="control-label">所在位置</label></th><td><input class="form-control" id="subequip-location" name="location"></td>
 				</tr>
 				<tr>
-					<th><label class="control-label">所属设备</label></th><td><input class="form-control point" data-parent="" id="subequip-parent" name="parent" readonly onclick="showEquipparentTree()"></td>
+					<th><label class="control-label">所属设备</label></th><td><input class="form-control point" data-parent="" id="subequip-parent" readonly onclick="showEquipparentTree()"></td>
 					<th rowspan="2" style="vertical-align: middle;"><label class="control-label">供应商</label></th><td><input class="form-control" name="supplier" id="subequip-supplier" placeholder="供应商名称"></td>
 				</tr>
 				<tr>

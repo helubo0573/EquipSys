@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- equip_servicing_application表:设备维修申请模块 -->
+<mapper namespace="com.stone.equipsys.core.mapper.EquipServicingApplicationMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.EquipServicingApplication">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="equip_id" property="equipId" jdbcType="BIGINT" />
+        <result column="proposer" property="proposer" jdbcType="BIGINT" />
+        <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
+        <result column="backfire_time" property="backfireTime" jdbcType="TIMESTAMP" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    <resultMap type="com.stone.equipsys.core.model.EquipServicingApplicationModel" id="BaseResultMapModel" extends="BaseResultMap">
+    	<result column="equip_name" property="equipName" jdbcType="VARCHAR" />
+    	<result column="location" property="location" jdbcType="VARCHAR" />
+    	<result column="equip_model_number" property="equipModelNumber" jdbcType="VARCHAR" />
+    	<result column="proposer_name" property="proposerName" jdbcType="VARCHAR" />
+    	<result column="propos_dept" property="proposDept" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,equip_id,proposer,application_time,backfire_time,remarks,status
+    </sql>
+    
+    <sql id="Base_Column_List_Ext">
+    	esa.id as id,esa.equip_id as equip_id,esa.proposer as proposer,esa.application_time as application_time,esa.backfire_time as backfire_time,esa.remarks as remarks,esa.status as status,
+    	ei.equip_name as equip_name,ei.location as location,ei.equip_model_number as equip_model_number,emp.emp_name as proposer_name,dept.dept_name as propos_dept
+    </sql>
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="equipId != null and equipId != '' ">
+                and equip_id = #{equipId,jdbcType=BIGINT}
+            </if>
+            <if test="proposer != null and proposer != '' ">
+                and proposer = #{proposer,jdbcType=BIGINT}
+            </if>
+            <if test="applicationTime != null">
+                and application_time = #{applicationTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="backfireTime != null">
+                and backfire_time = #{backfireTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    <!-- 扩展的sql查询条件公共引用 -->
+    <sql id="searchByExt">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                esa.id  = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="equipId != null and equipId != '' ">
+                and esa.equip_id = #{equipId,jdbcType=BIGINT}
+            </if>
+            <if test="proposer != null and proposer != '' ">
+                and esa.proposer = #{proposer,jdbcType=BIGINT}
+            </if>
+            <if test="applicationTime != null">
+                and esa.application_time = #{applicationTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="backfireTime != null">
+                and esa.backfire_time = #{backfireTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and esa.remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != '' ">
+                and esa.status = #{status,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipServicingApplication">
+        insert into equip_servicing_application(equip_id,proposer,application_time,backfire_time,remarks)values(#{equipId,jdbcType=BIGINT},#{proposer,jdbcType=BIGINT},#{applicationTime,jdbcType=TIMESTAMP},#{backfireTime,jdbcType=TIMESTAMP},#{remarks,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.equipsys.core.domain.EquipServicingApplication">
+        update equip_servicing_application set 
+            equip_id = #{equipId,jdbcType=BIGINT},
+            proposer = #{proposer,jdbcType=BIGINT},
+            application_time = #{applicationTime,jdbcType=TIMESTAMP},
+            backfire_time = #{backfireTime,jdbcType=TIMESTAMP},
+            remarks = #{remarks,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update equip_servicing_application
+          <set>
+            <if test="equipId != null and equipId != '' ">        
+                equip_id = #{equipId,jdbcType=BIGINT},                
+            </if>
+            <if test="proposer != null and proposer != '' ">        
+                proposer = #{proposer,jdbcType=BIGINT},                
+            </if>
+            <if test="applicationTime != null">
+                application_time = #{applicationTime,jdbcType=TIMESTAMP},                
+            </if>
+            <if test="backfireTime != null">
+                backfire_time = #{backfireTime,jdbcType=TIMESTAMP},                
+            </if>
+            <if test="remarks != null and remarks != '' ">        
+                remarks = #{remarks,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from equip_servicing_application
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findExtByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List_Ext" />
+        from equip_servicing_application as esa left join equip_info as ei on esa.equip_id=ei.id left join employee_info as emp on esa.proposer=emp.id left join org_dept as dept on emp.emp_dept=dept.id
+        where esa.id = #{id,jdbcType=INTEGER}
+    </select>
+    
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from equip_servicing_application
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from equip_servicing_application
+        <include refid="searchBy"/>
+    </select>
+    
+    <select id="listExtSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List_Ext" />
+        from equip_servicing_application
+        <include refid="searchBy"/>
+    </select>
+</mapper>
