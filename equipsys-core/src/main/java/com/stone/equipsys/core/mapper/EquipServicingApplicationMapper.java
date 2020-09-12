@@ -1,8 +1,12 @@
 package com.stone.equipsys.core.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.EquipServicingApplication;
+import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 
 /**
  * 设备维修申请Dao
@@ -14,6 +18,7 @@ import com.stone.equipsys.core.domain.EquipServicingApplication;
 @RDBatisDao
 public interface EquipServicingApplicationMapper extends BaseMapper<EquipServicingApplication, Long> {
 
+	List<EquipServicingApplicationModel> listExtSelective(HashMap<String, Object> param);
     
 
 }

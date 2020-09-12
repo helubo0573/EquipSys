@@ -26,10 +26,12 @@ import com.stone.equipsys.core.domain.EmployeeInfo;
 import com.stone.equipsys.core.mapper.EmployeeInfoMapper;
 import com.stone.equipsys.core.mapper.OrgDeptMapper;
 import com.stone.equipsys.core.model.EmployeeInfoModel;
+import com.stone.equipsys.core.model.SysUserModel;
 import com.stone.equipsys.core.service.EmployeeInfoService;
 import com.stone.equipsys.manage.Action.SysUserAction;
 
 @Controller
+@RequestMapping("employee")
 @RequiresPermissions("sys:admin")
 public class EmployeeController{
 
@@ -40,14 +42,14 @@ public class EmployeeController{
 	@Resource
 	private EmployeeInfoMapper employeemapper;
 	
-	@RequestMapping(value="employee/manage")
+	@RequestMapping("/manage")
 	public String toManage(HttpServletResponse response, HttpServletRequest request) {
 		Page<EmployeeInfoModel> employee=employeeservice.searchExtEmployee(null, 1, 12);
 		request.setAttribute("employee", employee);
 		request.setAttribute("page", new RdPage(employee).getPageStr("getEmployeePage"));
 		return PathConstant.EmployeeManage;
 	}
-	@RequestMapping(value="employee/save")
+	@RequestMapping("/save")
 	@RequiresPermissions("org:employee:save")
 	public void save(HttpServletResponse response, HttpServletRequest request) {
 		Long id=employeeservice.saveEmployeeInfo(request);
@@ -62,7 +64,7 @@ public class EmployeeController{
 		ServletUtils.writeToResponse(response, res);
 	}
 
-	@RequestMapping(value="employee/search")
+	@RequestMapping("/search")
 	public String search(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="empname")String empname,
 			@RequestParam(value="deptname")String deptname,
@@ -79,7 +81,7 @@ public class EmployeeController{
 		request.setAttribute("page", new RdPage(employee).getPageStr("getEmployeePage"));
 		return PathConstant.EmployeeList;
 	}
-	@RequestMapping(value="employee/delete")
+	@RequestMapping("/delete")
 	@RequiresPermissions("org:employee:delete")
 	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long id) {
 		int n=employeeservice.dimissionEmployee(id);
@@ -94,7 +96,7 @@ public class EmployeeController{
 		ServletUtils.writeToResponse(response, res);
 	}
 	
-	@RequestMapping(value="employee/findEmpById")
+	@RequestMapping("/findEmpById")
 	public void findEmployeeById(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long id) {
 		EmployeeInfoModel employee=employeemapper.findEmployeeExtInfoById(id);
 		Map<String, Object> res = new HashMap<String, Object>();
@@ -109,7 +111,7 @@ public class EmployeeController{
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
-	@RequestMapping(value="employee/getemployeetree")
+	@RequestMapping("/getemployeetree")
 	public void getEmployeeTree(HttpServletResponse response, HttpServletRequest request) {
 		String emptreejson=SysUserAction.createEmployeeTree(deptmapper.listSelective(null), employeeservice.getEmployeeTree(null));
 		Map<String, Object> res = new HashMap<String, Object>();
@@ -123,7 +125,7 @@ public class EmployeeController{
 		ServletUtils.writeToResponse(response, res);
 	}
 	
-	@RequestMapping(value="employee/getUnPostEmployeeTree")
+	@RequestMapping("/getUnPostEmployeeTree")
 	public void getUnPostEmployeeTree(HttpServletResponse response, HttpServletRequest request) {
 		HashMap<String,	Object> param=new HashMap<String,Object>();
 		param.put("parentId", 0);
@@ -137,5 +139,11 @@ public class EmployeeController{
 			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
 		}
 		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/getEmployeeBySession")
+	public void getEmployeeBySession(HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+		SysUserModel user=(SysUserModel) request.getSession().getAttribute("SysUser");
+		ServletUtils.writeToResponse(response, user);
 	}
 }

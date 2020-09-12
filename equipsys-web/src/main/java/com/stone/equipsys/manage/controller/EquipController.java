@@ -82,7 +82,6 @@ public class EquipController {
 			@RequestParam(value = "mp")String mp) {
 		EquipInfo equip=new EquipInfo(id,name,code,equipnumber,parent,level,enabledate,attrdept,supplier,suppliernumber,location,remarks);
 		Map<String, Object> res = new HashMap<String, Object>();
-		Long eid=0L;
 		try {
 			if(id==0) {
 				id=EquipServoce.insertReturnId(equip);
@@ -102,12 +101,14 @@ public class EquipController {
 	}
 
 	@RequestMapping("equip/getequiptree")
-	public void search(HttpServletResponse response, HttpServletRequest request)
+	public void search(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="type",defaultValue = "4")int type,
+			@RequestParam(value = "dept",defaultValue = "0")int deptid)
 			throws UnsupportedEncodingException, IOException {
-		int type=Integer.parseInt(request.getParameter("type"));
 		String id=request.getParameter("id");
 		HashMap<String, Object> map=new HashMap<String,Object>();
 		map.put("maxlevel", type);
+		if(deptid!=0) map.put("attrDept", deptid);
 		if(!"".equals(id) && id!=null) {
 			map.put("debarid", Integer.parseInt(id));
 		}
@@ -154,9 +155,12 @@ public class EquipController {
 		ServletUtils.writeToResponse(response, res);
 	}
 	
-	@RequestMapping(value="equip/manageparts")
-	@RequiresPermissions("equip:info:setparts")
-	public void manageSetParts(HttpServletResponse response, HttpServletRequest request) {
-		
-	}
+	/*
+	 * @RequestMapping(value="equip/manageparts")
+	 * 
+	 * @RequiresPermissions("equip:info:setparts") public void
+	 * manageSetParts(HttpServletResponse response, HttpServletRequest request) {
+	 * 
+	 * }
+	 */
 }

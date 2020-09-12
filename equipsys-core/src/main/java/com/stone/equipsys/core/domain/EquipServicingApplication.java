@@ -33,6 +33,19 @@ import java.util.Date;
     private String remarks;
 
     private int status;
+    
+    public EquipServicingApplication() {
+    	
+    }
+    
+    public EquipServicingApplication(Long id,Long equipid,Long proposer,Date applicationtime,Date backfiretime,String remarks) {
+    	if(id!=0)	this.setId(id);
+    	this.setEquipId(equipid);
+    	this.setProposer(proposer);
+    	this.setApplicationTime(applicationtime);
+    	this.setBackfireTime(backfiretime);
+    	this.setRemarks(remarks);
+    }
     /*** 获取主键Id
     *
     * @return id

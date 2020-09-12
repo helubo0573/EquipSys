@@ -1,7 +1,11 @@
 package com.stone.equipsys.core.service;
 
+import java.util.HashMap;
+
+import com.github.pagehelper.Page;
 import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.EquipServicingApplication;
+import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 
 /**
  * 设备维修申请Service
@@ -12,4 +16,5 @@ import com.stone.equipsys.core.domain.EquipServicingApplication;
  */
 public interface EquipServicingApplicationService extends BaseService<EquipServicingApplication, Long>{
 
+	Page<EquipServicingApplicationModel> searchApplicationExtList(HashMap<String, Object> param,int currentPage, int pageSize);
 }

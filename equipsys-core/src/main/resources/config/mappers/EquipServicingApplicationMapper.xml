@@ -150,7 +150,7 @@
     <select id="listExtSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List_Ext" />
-        from equip_servicing_application
+        from equip_servicing_application as esa left join equip_info as ei on esa.equip_id=ei.id left join employee_info as emp on esa.proposer=emp.id left join org_dept as dept on emp.emp_dept=dept.id
         <include refid="searchBy"/>
     </select>
 </mapper>
