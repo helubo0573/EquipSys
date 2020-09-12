@@ -27,7 +27,7 @@
 		        <span class="th input-group-addon">所在岗位</span>
 		        <input class="form-control"  id="search-post" placeholder="">
 		    </div>
-		    <button class="search-btn btn btn-info right" style="height: 100%;width: 100px;" onclick="getEmployeePage(1)">查询</button>
+		    <button class="search-btn btn btn-info right" style="height: 100%;width: 100px;" onclick="">查询</button>
 		</div>
 		<div id="emp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
 				<button class="btn btn-success" onclick="">新增设备维修申请</button>
