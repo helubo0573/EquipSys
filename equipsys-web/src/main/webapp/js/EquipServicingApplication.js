@@ -9,7 +9,7 @@ function getEquipServicingApplicationList(page){
 		}
 	$("#servicingAppManage-list").load("../EquipServicingApplication/search.do",param);
 }
-function showApplicationInfo(type){
+function showApplicationInfo(type,id){
 	layer.open({
 		type:1,
         skin:'layui-layer-demo', //样式类名
@@ -17,7 +17,7 @@ function showApplicationInfo(type){
         shade: 0.3,
         title:type==0?'新增设备维修申请':"修改设备维修申请",
         area:[ '540px', '460px' ],
-        btn:['保存','关闭'],
+        btn:type!=2?['保存','关闭']:"",
         content: $("#servicingAppManage-info"),
         success: function (layero, index){
 			if(type==0){
@@ -37,10 +37,20 @@ function showApplicationInfo(type){
         			contenType:'application/json',
         			Type:'POST',
         			dataType:'json',
-        			url:"../equip/getequipinfo.do",
+					data:"id="+id,
+        			url:"../EquipServicingApplication/getApplication.do",
         			success:function(data){
-						$("#servicingAppManage-info #dept").html(data.deptname);
-						$("#servicingAppManage-info #proposer").html(data.empName);
+						var appinfo=data.application;
+						$("#servicingAppManage-info #id").val(appinfo.id);
+						$("#servicingAppManage-info #dept").html(appinfo.proposDept);
+						$("#servicingAppManage-info #proposer").html(appinfo.proposerName);
+						$("#servicingAppManage-info #application_time").val(data.applicationTime);
+						$("#servicingAppManage-info #backfire_time").val(data.backfireTime);
+						$("#servicingAppManage-info #equip-name").val(appinfo.equipName);
+						$("#servicingAppManage-info #equip-id").val(appinfo.equipId);
+						$("#servicingAppManage-info #modelnumber").html(appinfo.equipModelNumber);
+						$("#servicingAppManage-info #location").html(appinfo.location);
+						$("#servicingAppManage-info #remarks").val(appinfo.remarks);
 					}
 				})
 			}

@@ -20,5 +20,5 @@ public interface EquipServicingApplicationMapper extends BaseMapper<EquipServici
 
 	List<EquipServicingApplicationModel> listExtSelective(HashMap<String, Object> param);
     
-
+	EquipServicingApplicationModel findExtByPrimary(Long id);
 }

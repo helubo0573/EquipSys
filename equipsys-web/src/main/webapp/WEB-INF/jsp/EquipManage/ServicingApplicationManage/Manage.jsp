@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009126"></script>
+<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009134"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -51,6 +51,7 @@ layui.use('laydate', function(){
 		</div>
 	</div>
 	<form id="servicingAppManage-info" class="form-horizontal box-div" style="display: none;">
+		<input type="hidden" id="id" name="id">
 		<input type="hidden" id="dept-id">
 		<input type="hidden" id="equip-id" name="equipid">
 		<table class="table table-bordered layeropen">

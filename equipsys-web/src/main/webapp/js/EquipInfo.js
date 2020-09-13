@@ -155,16 +155,6 @@ function setEquipInfoToInfo(equip,node,op,mp,enabledate){
  * @returns
  */
 function createEquipData(){
-	/*var type=$("#show-type").val()
-	var id=type==1?$("#equipid-hd").val():"";
-	var name=$("#subequip-name").val();
-	var code=$("#subequip-code").val();
-	var level=$("input[name='subequip-level']:checked").val();
-	var enabledate=$("#subequip-enabledate").val();
-	var supplier=$("#subequip-supplier").val();
-	var attrdept=$("#subequip-attrdept").val();
-	var location=$("#subequip-location").val();
-	var param="id="+id+"&name="+name+"&code="+code+"&level="+level+"&parent="+parent+"&enabledate="+enabledate+"&supplier="+supplier+"&attrdept="+attrdept+"&location="+location+"&op="+op+"&mp="+mp;*/
 	var parent=$("#subequip-parent").attr("data-parent");
 	var op=$("#subequip-op").attr("data-emp");
 	var mp=$("#subequip-mp").attr("data-emp");

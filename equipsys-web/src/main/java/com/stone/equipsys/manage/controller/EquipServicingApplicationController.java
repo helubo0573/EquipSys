@@ -1,5 +1,8 @@
 package com.stone.equipsys.manage.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -72,6 +75,18 @@ public class EquipServicingApplicationController {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "保存失败");
 		}
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/getApplication")
+	public void getApplicationById(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="id")Long id) throws UnsupportedEncodingException, IOException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		EquipServicingApplicationModel application=ServicingApplicationMapper.findExtByPrimary(id);
+		HashMap<String, Object> res=new HashMap<String, Object>();
+		res.put("application", application);
+		res.put("applicationTime", sdf.format(application.getApplicationTime()));
+		res.put("backfireTime", sdf.format(application.getBackfireTime()));
 		ServletUtils.writeToResponse(response, res);
 	}
 }
