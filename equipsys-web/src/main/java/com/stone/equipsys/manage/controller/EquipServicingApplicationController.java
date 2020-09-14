@@ -2,6 +2,7 @@ package com.stone.equipsys.manage.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,15 +38,29 @@ public class EquipServicingApplicationController {
 	
 	@RequestMapping("/Manage")
 	public String toPage(HttpServletResponse response, HttpServletRequest request) {
+		Page<EquipServicingApplicationModel> applicationList=ServicingApplicationService.searchApplicationExtList(null, 1, 10);
+		request.setAttribute("applicationList", applicationList);
+		request.setAttribute("page", new RdPage(applicationList).getPageStr("getEquipServicingApplicationList"));
 		return PathConstant.EquipServicingApplicationManage;
 	}
 	
 	@RequestMapping("/search")
 	public String search(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="equipname",defaultValue = "")String equipname,
+			@RequestParam(value="sappdate",defaultValue = "")String sappdate,
+			@RequestParam(value="eappdate",defaultValue = "")String eappdate,
+			@RequestParam(value="sbackfiredate",defaultValue = "")String sbackfiredate,
+			@RequestParam(value="ebackfiredate",defaultValue = "")String ebackfiredate,
 			@RequestParam(value="pageSize")int pageSize,
-			@RequestParam(value="current")int current) {
+			@RequestParam(value="current")int current) throws ParseException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(sappdate+":::test");
 		HashMap<String, Object> param=new HashMap<String, Object>();
-		
+		if(equipname!="")	param.put("equipName", equipname);
+		if(!"".equals(sappdate))	param.put("sappDate", sdf.parse(sappdate));
+		if(!"".equals(eappdate))	param.put("eappDate", sdf.parse(eappdate));
+		if(!"".equals(sbackfiredate))	param.put("sbackfireDate", sdf.parse(sbackfiredate));
+		if(!"".equals(ebackfiredate))	param.put("ebackfireDate", sdf.parse(ebackfiredate));
 		Page<EquipServicingApplicationModel> applicationList=ServicingApplicationService.searchApplicationExtList(param, current, pageSize);
 		request.setAttribute("applicationList", applicationList);
 		request.setAttribute("page", new RdPage(applicationList).getPageStr("getEquipServicingApplicationList"));

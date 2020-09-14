@@ -2,12 +2,22 @@
  * 
  */
 function getEquipServicingApplicationList(page){
-	var param={
-		
+	var equipname=$("#servicingAppManage-seach #search-equipname").val();
+	var sappdate=$("#servicingAppManage-seach #search-sappdate").val();
+	var eappdate=$("#servicingAppManage-seach #search-eappdate").val();
+	var sbackfiredate=$("#servicingAppManage-seach #search-sbackfiredate").val();
+	var ebackfiredate=$("#servicingAppManage-seach #search-ebackfiredate").val();
+	var params={
+			equipname:equipname,
+			sappdate:sappdate,
+			eappdate:eappdate,
+			sbackfiredate:sbackfiredate,
+			ebackfiredate:ebackfiredate,
 			pageSize:12,
 			current:page
 		}
-	$("#servicingAppManage-list").load("../EquipServicingApplication/search.do",param);
+	//var params="equipname="+equipname+"&sappdate="+sappdate+"&eappdate="+eappdate+"&sbackfiredate="+sbackfiredate+"&ebackfiredate="+ebackfiredate+"&pageSize=12&current="+page;
+	$("#servicingAppManage-list").load("../EquipServicingApplication/search.do",params);
 }
 function showApplicationInfo(type,id){
 	layer.open({

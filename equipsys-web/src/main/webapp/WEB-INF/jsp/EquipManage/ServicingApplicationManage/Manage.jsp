@@ -10,15 +10,22 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009134"></script>
+<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009142"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
-	$(".layedate").each(function(){
+/* 	$(".layedate").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',
 	  	value:new Date()
+		});		
+	}) */
+	$(".searchdate").each(function(){
+	  	laydate.render({
+	  	elem: this,
+	  	format: 'yyyy-MM-dd',
+	  	value:""
 		});		
 	})
 })
@@ -31,17 +38,21 @@ layui.use('laydate', function(){
 		<div id="servicingAppManage-seach" class="box-div form-inline" style="overflow: hidden;text-align: left;">
 			<div class="input-group input-group-sm col-lg-3">
 		        <span class="th input-group-addon">设备名称</span>
-		        <input class="form-control" id="search-name" placeholder="">
+		        <input class="form-control" id="search-equipname" placeholder="输入查询关键字">
 		    </div>
-		    <div class="input-group input-group-sm col-lg-3">
+		    <div class="input-group input-group-sm col-lg-4">
 		        <span class="th input-group-addon">申请时间</span>
-		        <input class="form-control" id="search-dept" placeholder="">
+		        <input class="layui-input form-control point layedate searchdate" id="search-sappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
+		        <span class="th input-group-addon">-</span>
+		        <input class="layui-input form-control point layedate searchdate" id="search-eappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
 		    </div>
-		    <div class="input-group input-group-sm col-lg-3">
+		    <div class="input-group input-group-sm col-lg-4">
 		        <span class="th input-group-addon">故障时间</span>
-		        <input class="form-control"  id="search-post" placeholder="">
+		        <input class="layui-input form-control point layedate searchdate" id="search-sbackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
+		        <span class="th input-group-addon">-</span>
+		        <input class="layui-input form-control point layedate searchdate" id="search-ebackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
 		    </div>
-		    <button class="search-btn btn btn-info right" style="height: 100%;width: 100px;" onclick="getEquipServicingApplicationList(1)">查询</button>
+		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingApplicationList(1)">查询</button>
 		</div>
 		<div id="emp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
 				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修申请</button>

@@ -77,6 +77,21 @@
             <if test="status != null and status != '' ">
                 and esa.status = #{status,jdbcType=INTEGER}
             </if>
+            <if test="equipName != null and equipName != '' ">
+                and ei.equip_name like CONCAT("%",#{equipName,jdbcType=VARCHAR},"%")
+            </if>
+            <if test="sappDate != null and sappDate != '' ">
+                and esa.application_time &gt;= #{sappDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="eappDate != null and eappDate != '' ">
+                and esa.application_time &lt;= #{eappDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="sbackfireDate != null and sbackfireDate != '' ">
+                and esa.backfire_time &gt;= #{sbackfireDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ebackfireDate != null and ebackfireDate != '' ">
+                and esa.backfire_time &lt;= #{ebackfireDate,jdbcType=TIMESTAMP}
+            </if>
         </trim>
     </sql>
     
@@ -151,6 +166,6 @@
         select
         <include refid="Base_Column_List_Ext" />
         from equip_servicing_application as esa left join equip_info as ei on esa.equip_id=ei.id left join employee_info as emp on esa.proposer=emp.id left join org_dept as dept on emp.emp_dept=dept.id
-        <include refid="searchBy"/>
+        <include refid="searchByExt"/>
     </select>
 </mapper>
