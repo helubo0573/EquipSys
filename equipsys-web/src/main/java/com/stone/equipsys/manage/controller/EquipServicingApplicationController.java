@@ -54,7 +54,7 @@ public class EquipServicingApplicationController {
 			@RequestParam(value="pageSize")int pageSize,
 			@RequestParam(value="current")int current) throws ParseException {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(sappdate+":::test");
+		System.out.println("test-"+sappdate);
 		HashMap<String, Object> param=new HashMap<String, Object>();
 		if(equipname!="")	param.put("equipName", equipname);
 		if(!"".equals(sappdate))	param.put("sappDate", sdf.parse(sappdate));
