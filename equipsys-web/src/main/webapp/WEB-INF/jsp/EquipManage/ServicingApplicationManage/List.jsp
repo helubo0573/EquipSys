@@ -37,7 +37,7 @@
 						<td>
 							<c:if test="${application.status==0 }">
 								<i class="layui-icon point" title="修改申请单" onclick="showApplicationInfo('1','${application.id}')">&#xe642;</i>&nbsp;
-								<i class="layui-icon point" title="撤销申请单">&#xe640;</i>&nbsp;
+								<i class="layui-icon point" title="撤销申请单" onclick="deleteApplication('${application.id}')">&#xe640;</i>&nbsp;
 							</c:if>
 							<c:if test="${application.status==2 }">
 								<i class="layui-icon point" title="维修验收">&#xe6b2;</i>&nbsp;

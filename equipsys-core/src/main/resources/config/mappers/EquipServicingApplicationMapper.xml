@@ -80,16 +80,16 @@
             <if test="equipName != null and equipName != '' ">
                 and ei.equip_name like CONCAT("%",#{equipName,jdbcType=VARCHAR},"%")
             </if>
-            <if test="sappDate != null and sappDate != '' ">
+            <if test="sappDate != null ">
                 and esa.application_time &gt;= #{sappDate,jdbcType=TIMESTAMP}
             </if>
-            <if test="eappDate != null and eappDate != '' ">
+            <if test="eappDate != null">
                 and esa.application_time &lt;= #{eappDate,jdbcType=TIMESTAMP}
             </if>
-            <if test="sbackfireDate != null and sbackfireDate != '' ">
+            <if test="sbackfireDate != null">
                 and esa.backfire_time &gt;= #{sbackfireDate,jdbcType=TIMESTAMP}
             </if>
-            <if test="ebackfireDate != null and ebackfireDate != '' ">
+            <if test="ebackfireDate != null">
                 and esa.backfire_time &lt;= #{ebackfireDate,jdbcType=TIMESTAMP}
             </if>
         </trim>
@@ -168,4 +168,10 @@
         from equip_servicing_application as esa left join equip_info as ei on esa.equip_id=ei.id left join employee_info as emp on esa.proposer=emp.id left join org_dept as dept on emp.emp_dept=dept.id
         <include refid="searchByExt"/>
     </select>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+    	delete 
+    	from equip_servicing_application
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

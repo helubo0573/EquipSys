@@ -148,3 +148,27 @@ function setServicingEquipForTree(event, treeId, treeNode){
 		}
 	})
 }
+
+function deleteApplication(id){
+	layer.open({
+		type:0,
+		title:"撤销申请单",
+		btn:["确定","取消"],
+		content:"是否确定撤销此设备维修申请单?",
+		yes:function(){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				url:"../EquipServicingApplication/delete.do",
+				data:"id="+id,
+				success:function(data){
+					layer.msg(data.msg)
+					if(data.code==200){
+						getEquipServicingApplicationList(1)
+					}
+				}
+			})
+		}
+	})
+}
