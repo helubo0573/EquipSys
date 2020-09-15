@@ -11,7 +11,9 @@ public class PathConstant {
 	public static final String EquipInfoManage="forward:/WEB-INF/jsp/EquipManage/InfoManage/Manage.jsp";					//设备信息管理
 	public static final String EquipPartsList="forward:/WEB-INF/jsp/EquipManage/InfoManage/PartsList.jsp";					//
 	public static final String EquipServicingApplicationManage="forward:/WEB-INF/jsp/EquipManage/ServicingApplicationManage/Manage.jsp";//设备维修申请管理页面
-	public static final String EquipServicingApplicationList="forward:/WEB-INF/jsp/EquipManage/ServicingApplicationManage/List.jsp";//设备维修申请管理页面
+	public static final String EquipServicingApplicationList="forward:/WEB-INF/jsp/EquipManage/ServicingApplicationManage/List.jsp";//设备维修申请列表
+	public static final String EquipServicingImplementManage="forward:/WEB-INF/jsp/EquipManage/ServicingImplementManage/Manage.jsp";//设备维修单管理页面
+	public static final String EquipServicingImplementList="forward:/WEB-INF/jsp/EquipManage/ServicingImplementManage/List.jsp";//设备维修单列表
 	//库存进销存管理
 	/**仓位名称管理**/
 	public static final String StoreInfo="forward:/WEB-INF/jsp/StoreManage/StoreInfo/Manage.jsp";							

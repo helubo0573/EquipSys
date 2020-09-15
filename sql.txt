@@ -28,3 +28,56 @@ CREATE TABLE `equip_servicing_application` (
 `status`  int(11) NULL DEFAULT 0 COMMENT '申请单状态:0新申请 1:维修中 2:维修完毕  3:验收通过 4:验收不通过' ,
 PRIMARY KEY (`id`)
 )
+
+2020-09-15
+CREATE TABLE `equip_servicing_implement` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`application_id`  bigint(20) NOT NULL DEFAULT '' COMMENT '申请单id' ,
+`servicing_dept`  int(11) NULL DEFAULT NULL COMMENT '维修单位' ,
+`servicing_time_start`  datetime NULL DEFAULT NULL COMMENT '维修开始时间' ,
+`servicing_time_end`  datetime NULL DEFAULT NULL COMMENT '维修结束时间' ,
+`failure_bewrite`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '故障描述' ,
+`failure_cause`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '故障原因分析' ,
+`servicing_cause`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '维修情况描述' ,
+`servicing_status`  int(11) NULL DEFAULT NULL COMMENT '维修结果 0:接受申请 1:维修完成 2:维修失败' ,
+`serviceman_confirm`  tinyint(1) NULL DEFAULT 0 COMMENT '维修负责人确认' ,
+`equip_op_confirm`  tinyint(1) NULL DEFAULT 0 COMMENT '设备操作人验收' ,
+`department_manager_confirm`  tinyint(1) NULL DEFAULT 0 COMMENT '车间主任确认' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='设备维修信息管理表'
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `equip_servicing_implement_op` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`implement_id`  bigint(20) NULL DEFAULT NULL COMMENT '维修单id' ,
+`employee_id`  int(11) NULL DEFAULT NULL COMMENT '维修人员id' ,
+`leading`  tinyint(1) NULL DEFAULT NULL COMMENT '是否为负责人 0:否 1:是' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='设备维修人员记录表'
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `equip_servicing_implement_parts` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`implement_id`  bigint(20) NULL DEFAULT NULL COMMENT '维修单id' ,
+`parts_id`  bigint(20) NULL DEFAULT NULL COMMENT '配件id' ,
+`parts_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '配件材料名称' ,
+`use_type`  tinyint(1) NULL DEFAULT NULL COMMENT '使用类型  0:更换  1:消耗' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='设备维修零件耗用表'
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
