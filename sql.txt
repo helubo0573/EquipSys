@@ -32,7 +32,7 @@ PRIMARY KEY (`id`)
 2020-09-15
 CREATE TABLE `equip_servicing_implement` (
 `id`  bigint(20) NOT NULL AUTO_INCREMENT ,
-`application_id`  bigint(20) NOT NULL DEFAULT '' COMMENT '申请单id' ,
+`application_id`  bigint(20) NOT NULL DEFAULT '0' COMMENT '申请单id' ,
 `servicing_dept`  int(11) NULL DEFAULT NULL COMMENT '维修单位' ,
 `servicing_time_start`  datetime NULL DEFAULT NULL COMMENT '维修开始时间' ,
 `servicing_time_end`  datetime NULL DEFAULT NULL COMMENT '维修结束时间' ,
