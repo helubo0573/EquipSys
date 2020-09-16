@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009143"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009143"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -54,8 +54,8 @@ layui.use('laydate', function(){
 		    </div>
 		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingApplicationList(1)">查询</button>
 		</div>
-		<div id="emp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
-				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修申请</button>
+		<div id="eqsrvapp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
+				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修单</button>
 		</div>
 		<div id="servicingAppManage-list" class="box-div form-inline" style="height: 600px;">
 			<%@include file="List.jsp" %>
