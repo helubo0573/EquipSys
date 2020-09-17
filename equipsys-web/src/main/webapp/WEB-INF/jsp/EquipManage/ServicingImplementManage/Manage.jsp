@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 </head>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009171"></script>
 <body>
 	<div class="body-bdiv">
 		<div class="title-div">
@@ -31,10 +32,10 @@
 		        <span class="th input-group-addon">-</span>
 		        <input class="layui-input form-control point layedate searchdate" id="search-ebackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
 		    </div>
-		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingApplicationList(1)">查询</button>
+		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingImplementList(1)">查询</button>
 		</div>
 		<div id="eqimp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
-				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修申请</button>
+				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修单</button>
 		</div>
 		<div id="servicingImpManage-list" class="box-div form-inline" style="height: 600px;">
 			<%@include file="List.jsp" %>

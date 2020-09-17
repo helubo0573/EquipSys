@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009143"></script>
+<script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009143"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;

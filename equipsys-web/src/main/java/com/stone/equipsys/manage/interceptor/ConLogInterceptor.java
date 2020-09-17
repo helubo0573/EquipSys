@@ -28,8 +28,7 @@ public class ConLogInterceptor implements HandlerInterceptor
 	private static final ThreadLocal<Long> startTimeThreadLocal = new NamedThreadLocal<Long>("ThreadLocal StartTime");
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
-	{
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		System.out.println("拦截");
 		Session session = SecurityUtils.getSubject().getSession();
 		if (null == SecurityUtils.getSubject() || session == null)
