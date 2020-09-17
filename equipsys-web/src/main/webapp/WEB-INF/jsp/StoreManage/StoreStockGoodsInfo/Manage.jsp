@@ -98,7 +98,7 @@
 					</td>
 					<th><label class="control-label" id="changedate">时间</label></th>
 					<td>
-						<input class="layui-input form-control point needing layedate" placeholder="yyyy-MM-dd" readonly id="changedate-input" name="changedate">
+						<input class="layui-input form-control point needing layedate date-input" placeholder="yyyy-MM-dd" readonly id="changedate-input" name="changedate">
 					</td>
 				</tr>
 				<tr>
@@ -157,7 +157,7 @@
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
-	$(".layedate").each(function(){
+	$(".date-input").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',

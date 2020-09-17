@@ -21,7 +21,7 @@ layui.use('laydate', function(){
 	  	value:new Date()
 		});		
 	}) */
-	$(".searchdate").each(function(){
+	$(".date-search").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',
@@ -42,15 +42,15 @@ layui.use('laydate', function(){
 		    </div>
 		    <div class="input-group input-group-sm col-lg-4">
 		        <span class="th input-group-addon">申请时间</span>
-		        <input class="layui-input form-control point layedate searchdate" id="search-sappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
+		        <input class="layui-input form-control point layedate date-search" id="search-sappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
 		        <span class="th input-group-addon">-</span>
-		        <input class="layui-input form-control point layedate searchdate" id="search-eappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
+		        <input class="layui-input form-control point layedate date-search" id="search-eappdate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
 		    </div>
 		    <div class="input-group input-group-sm col-lg-4">
 		        <span class="th input-group-addon">故障时间</span>
-		        <input class="layui-input form-control point layedate searchdate" id="search-sbackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
+		        <input class="layui-input form-control point layedate date-search" id="search-sbackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询开始时间" readonly>
 		        <span class="th input-group-addon">-</span>
-		        <input class="layui-input form-control point layedate searchdate" id="search-ebackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
+		        <input class="layui-input form-control point layedate date-search" id="search-ebackfiredate" style="width: 95px" name="application_time" id="application_time" placeholder="查询结束时间" readonly>
 		    </div>
 		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingApplicationList(1)">查询</button>
 		</div>

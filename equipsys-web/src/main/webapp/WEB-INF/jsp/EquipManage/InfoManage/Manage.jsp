@@ -70,7 +70,7 @@
 				<tr>
 					<th><label class="control-label">启用日期</label></th>
 					<td>
-						<input class="layui-input form-control point needing layedate" name="enabledate" id="subequip-enabledate" placeholder="yyyy-MM-dd" readonly>
+						<input class="layui-input form-control point needing layedate date-input" name="enabledate" id="subequip-enabledate" placeholder="yyyy-MM-dd" readonly>
 					</td>
 					<th><label class="control-label">所在位置</label></th><td><input class="form-control" id="subequip-location" name="location"></td>
 				</tr>

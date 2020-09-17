@@ -35,11 +35,44 @@
 		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingImplementList(1)">查询</button>
 		</div>
 		<div id="eqimp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
-				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修单</button>
+				<button class="btn btn-success" onclick="showImplementInfo('0')">新增设备维修单</button>
 		</div>
 		<div id="servicingImpManage-list" class="box-div form-inline" style="height: 600px;">
 			<%@include file="List.jsp" %>
 		</div>
 	</div>
+	<form id="servicingImpManage-info" class="form-horizontal box-div" style="display: none;">
+		<input type="hidden" id="id" name="id">
+		<input type="hidden" id="dept-id">
+		<input type="hidden" id="equip-id" name="equipid">
+		<table class="table table-bordered layeropen">
+			<tr>
+				<th width="80px;">申请部门</th><td><label id="dept"></label></td>
+				<th width="80px;">申请人</th><td><label id="proposer"></label></td>
+			</tr>
+			<tr>
+				<th>申请时间</th><td><input class="layui-input form-control point needing layedate" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
+				<th>故障时间</th><td><input class="layui-input form-control point needing layedate" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
+			</tr>
+			<tr>
+				<th>设备名称</th>
+				<td colspan="3">
+					<input class="form-control point" data-parent="" id="equip-name" readonly onclick="setServicingEquip()">
+				</td>
+			</tr>
+			<tr>				
+				<th>设备型号</th><td colspan="3"><label id="modelnumber"></label></td>
+			</tr>
+			<tr>
+				<th>所在地点</th><td colspan="3"><label id="location"></label></td>
+			</tr>
+			<tr>
+				<th>故障简述</th>
+				<td colspan="3" style="vertical-align: middle;">
+					<textarea class="form-control" id="remarks" name="remarks" rows="4" style="resize:none;"></textarea>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

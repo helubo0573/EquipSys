@@ -46,7 +46,7 @@
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
-	$(".layedate").each(function(){
+	$(".date-input").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',
