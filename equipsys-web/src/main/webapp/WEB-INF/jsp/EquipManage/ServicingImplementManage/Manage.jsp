@@ -8,8 +8,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009171"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009181"></script>
+<script type="text/javascript">
+layui.use('laydate', function(){
+  	var laydate = layui.laydate;
+ 	$(".date-input").each(function(){
+	  	laydate.render({
+	  	elem: this,
+	  	format: 'yyyy-MM-dd',
+	  	value:new Date()
+		});		
+	})
+	$(".searchdate").each(function(){
+	  	laydate.render({
+	  	elem: this,
+	  	format: 'yyyy-MM-dd',
+	  	value:""
+		});		
+	})
+})
+</script>
 <body>
 	<div class="body-bdiv">
 		<div class="title-div">
@@ -47,24 +67,28 @@
 		<input type="hidden" id="equip-id" name="equipid">
 		<table class="table table-bordered layeropen">
 			<tr>
-				<th width="80px;">申请部门</th><td><label id="dept"></label></td>
-				<th width="80px;">申请人</th><td><label id="proposer"></label></td>
+				<th>申请时间</th><td><input class="layui-input form-control point needing layedate date-input" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
+				<th>故障时间</th><td><input class="layui-input form-control point needing layedate date-input" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
 			</tr>
 			<tr>
-				<th>申请时间</th><td><input class="layui-input form-control point needing layedate" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
-				<th>故障时间</th><td><input class="layui-input form-control point needing layedate" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
-			</tr>
-			<tr>
-				<th>设备名称</th>
-				<td colspan="3">
+				<th width="80px;">申请人</th>
+				<td>
+					<div class="input-group input-group-sm col-lg-12">
+						<input class="form-control point" id="proposer" style="width: 120px" readonly onclick="setServicingAppproposer()" placeholder="点击选择">
+				        <span id="dept" style="width: 140px" class="th input-group-addon"></span>
+				    </div>
+				</td>
+				<th width="80px;">设备名称</th>
+				<td>
 					<input class="form-control point" data-parent="" id="equip-name" readonly onclick="setServicingEquip()">
 				</td>
 			</tr>
 			<tr>				
-				<th>设备型号</th><td colspan="3"><label id="modelnumber"></label></td>
+				<th>设备型号</th><td><label id="modelnumber"></label></td>
+				<th>所在地点</th><td><label id="location"></label></td>
 			</tr>
 			<tr>
-				<th>所在地点</th><td colspan="3"><label id="location"></label></td>
+				<td colspan="4">
 			</tr>
 			<tr>
 				<th>故障简述</th>

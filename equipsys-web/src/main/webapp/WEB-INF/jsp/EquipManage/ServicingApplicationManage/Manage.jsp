@@ -21,7 +21,7 @@ layui.use('laydate', function(){
 	  	value:new Date()
 		});		
 	}) */
-	$(".date-search").each(function(){
+	$(".searchdate").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',
