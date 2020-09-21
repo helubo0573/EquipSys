@@ -1,5 +1,7 @@
 package com.stone.equipsys.manage.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,7 @@ import com.stone.equipsys.core.mapper.StoreGoodsStockLogMapper;
 import com.stone.equipsys.core.service.StoreGoodsModelNumberInfoService;
 
 @Controller
+@RequestMapping("modelnumber")
 public class StoreGoodsModelNumberController {
 	
 	@Resource
@@ -33,7 +36,7 @@ public class StoreGoodsModelNumberController {
 	@Resource
 	private StoreGoodsModelNumberInfoService StoreGoodsModelNumberInfoService;
 	
-	@RequestMapping("modelnumber/save")
+	@RequestMapping("/save")
 	@RequiresPermissions(value = "store:goodsmodelnumber:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="id",defaultValue="0")Long id,
@@ -57,7 +60,7 @@ public class StoreGoodsModelNumberController {
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
-	@RequestMapping("modelnumber/search")
+	@RequestMapping("/search")
 	public String search(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="goodsid")Long goodsid,
 			@RequestParam(value="pagenum",defaultValue="1")int currentPage,
@@ -69,5 +72,13 @@ public class StoreGoodsModelNumberController {
 			request.setAttribute("page", new RdPage(modellist).getPageStr("getModelNumberList"));
 		return PathConstant.ModelNumberList;
 		
+	}
+	
+	@RequestMapping("/getDetailInfo")
+	public void getinfo(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) throws UnsupportedEncodingException, IOException {
+		StoreGoodsModelNumberInfo goodsmodel=StoreGoodsModelNumberMapper.findByPrimary(id);
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("model", goodsmodel);
+		ServletUtils.writeToResponse(response, res);
 	}
 }

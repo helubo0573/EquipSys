@@ -147,7 +147,7 @@ function clearStoreGoodsData(){
 }
 
 
-function showGoodsModelNumberInfo(type){
+function showGoodsModelNumberInfo(type,id){
 	layer.open({
 		type:1,
         skin:'layui-layer-demo', //样式类名
@@ -161,6 +161,20 @@ function showGoodsModelNumberInfo(type){
 			$("#goodsmodelnumberinfo-form #goods-id").val($("#storegoods-form #storegoods-id").val())
         	$("#goodsmodelnumberinfo-form #stockgoodsname").text($("#storegoods-info #goodsname-label").text())
         	$("#goodsmodelnumberinfo-form #goodstypename").text($("#storegoods-info #goodstypename-label").text())
+			if(type!=0){
+				$.ajax({
+					contenType:'application/json',
+					Type:'POST',
+					dataType:'json',
+					data:"id="+id,
+					url:"../modelnumber/getDetailInfo.do",
+					success:function(data){
+						if(data!=null){
+							
+						}
+					}
+				})
+			}
         },
         yes:function(index){
         	saveStockGoodsModelNumberInfo(index);
