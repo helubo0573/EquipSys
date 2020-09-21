@@ -96,3 +96,18 @@ COMMENT='员工奖惩记录'
 AUTO_INCREMENT=1
 ROW_FORMAT=COMPACT
 ;
+
+2020-09-21
+
+CREATE TABLE `store_goods_model_store` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`model_id`  bigint(20) NULL DEFAULT NULL COMMENT '物料规格id' ,
+`store_id`  bigint(20) NULL DEFAULT NULL COMMENT '仓位id' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='物料库存映射表'
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;

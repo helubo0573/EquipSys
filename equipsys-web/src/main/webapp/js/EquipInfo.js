@@ -331,7 +331,6 @@ function showEmpTree(m,obj){
                 			}
                 		}
                 	}
-                	
                 },
                 yes:function(index){
                 	var zTree = $.fn.zTree.getZTreeObj("equipemptree");

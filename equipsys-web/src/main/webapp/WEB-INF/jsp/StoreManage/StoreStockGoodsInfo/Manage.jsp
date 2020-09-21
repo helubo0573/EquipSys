@@ -6,10 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
-<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009212"></script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202006028"></script>
+<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009214"></script>
 <body>
 	<div class="body-bdiv">
 		<div class="title-div">
@@ -47,7 +45,7 @@
 			<tbody>
 				<tr>
 					<th width="80px"><label class="control-label">物料名称</label></th>
-					<td>
+					<td width="160px">
 						<label class="control-label" id="stockgoodsname"></label>
 					</td>
 					<th width="80px"><label class="control-label">物料类型</label></th>
@@ -57,20 +55,21 @@
 				</tr>
 				<tr>
 					<th><label class="control-label">型号</label></th>
-					<td><input class="needing form-control" id="modelname" name="modelname"></td>
+					<td colspan="3"><input class="needing form-control" id="modelname" name="modelname"></td>
+				</tr>
+				<tr>
 					<th><label class="control-label">库存仓位</label></th>
-					<td><input class="needing form-control point" id="storename" readonly onclick="setstore()" placeholder="点击选择"></td>
+					<td colspan="3"><input class="needing form-control point" id="storename" readonly onclick="setstore()" placeholder="点击选择"></td>
 				</tr>
 				<tr>
 					<th><label class="control-label">单位</label></th>
 					<td><input class="form-control needing" id="unit" name="unit"></td>
-					<th></th>
-					<td></td>
+					<th colspan="2"></th>
 				</tr>
 				<tr>
 					<th><label class="control-label">备注</label>
 					<td colspan="3">
-						<textarea rows="2" class="form-control" style="resize:none;" name="remarks"></textarea>
+						<textarea rows="2" class="form-control" style="resize:none;" id="remarks" name="remarks"></textarea>
 					</td>
 			</tbody>
 		</table>

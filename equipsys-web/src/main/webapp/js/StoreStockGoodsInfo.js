@@ -170,6 +170,11 @@ function showGoodsModelNumberInfo(type,id){
 					url:"../modelnumber/getDetailInfo.do",
 					success:function(data){
 						if(data!=null){
+							$("#goodsmodelnumberinfo-form #id").val(data.model.id)
+							$("#goodsmodelnumberinfo-form #goods-id").val(data.model.goodsId)
+							$("#goodsmodelnumberinfo-form #modelname").val(data.model.modelNumberName)
+							$("#goodsmodelnumberinfo-form #unit").val(data.model.unit)
+							$("#goodsmodelnumberinfo-form #remarks").val(data.model.remarks)
 							
 						}
 					}
@@ -246,12 +251,6 @@ function setstore(){
 		dataType:'json',
 		url:"../storeinfo/search.do",
 		success:function(data){
-			var DataNodes=JSON.parse(data);
-			var setting={
-			        callback:{
-			        	onClick:getStoreInfo,
-			        }
-			};
 			layer.open({
 				type: 1,
                 skin: 'layui-layer-demo', //样式类名
@@ -259,19 +258,58 @@ function setstore(){
                 area : [ '280px', '400px' ],
                 shadeClose: true, //开启遮罩关闭
                 content: '<ul id="storeztree" class="ztree"></ul>',
+				btn:['确定','清空','取消'],
                 success: function (layero, index) {
-                	$.fn.zTree.init($("#storeztree"), setting, DataNodes);
+					var DataNodes=JSON.parse(data);
+					var setting={
+						check: {
+	    					enable: true,
+	    				    chkStyle : "checkbox",
+							chkboxType: { "N": "", "Y": "" },
+        				}
+					};
+                	var ztree=$.fn.zTree.init($("#storeztree"), setting, DataNodes);
+					var stores=$("#goodsmodelnumberinfo-form #storeid").val().split(',');
+                	var names=$("#goodsmodelnumberinfo-form #storename").val().split(',');
+                	for(var i = 0;i<stores.length;i++){
+                		var nodeList=ztree.getNodesByParam("name", names[i], null);
+                		for( var n=0;n<nodeList.length; n++ ){
+                			if(nodeList[n].id==ids[i]){
+                				ztree.checkNode(nodeList[n],true,true);
+                			}
+                		}
+                	}
+                },
+				yes:function(index){
+                	var zTree = $.fn.zTree.getZTreeObj("storeztree");
+                	var nodes = zTree.getCheckedNodes(true),
+                	v = "";
+                	k="";
+        			for (var i=0, l=nodes.length; i<l; i++) {
+        				v += nodes[i].name + ",";
+        				k += nodes[i].id + ",";
+        			}
+        			if (v.length > 0 ) v = v.substring(0, v.length-1);
+        			if (k.length > 0 ) k = k.substring(0, k.length-1);
+                	$("#goodsmodelnumberinfo-form #storeid").val(k);
+                	$("#goodsmodelnumberinfo-form #storename").val(v);
+                	layer.close(index)
+                },
+                btn2:function(index){
+					$(obj).val("")
+					$(obj).attr("data-emp","");
+                	layer.close(index)
                 }
 			})
 		}
 	})
 }
 
-function getStoreInfo(event, treeId, treeNode){
+/*function getStoreInfo(event, treeId, treeNode){
 	$("#goodsmodelnumberinfo-form #storename").val(treeNode.name)
 	$("#goodsmodelnumberinfo-form #storeid").val(treeNode.id)
 	layer.close(layer.index)
-}
+}*/
 function createrStockGoodsModelNumberInfo(){
 	return $("#goodsmodelnumberinfo-form").serialize()
 }
