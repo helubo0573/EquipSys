@@ -18,7 +18,7 @@ import java.util.Date;
     private Long id;
 
     /*** */
-    private String stroeName;
+    private String storeName;
 
     /*** 父id*/
     private Long parentId;
@@ -33,7 +33,7 @@ import java.util.Date;
     
     public StoreInfo(Long id, Long parentid, String storename, int order, String remarks) {
 		if(id!=-1) this.setId(id);
-		this.setStroeName(storename);
+		this.setStoreName(storename);
 		this.setParentId(parentid);
 		this.setStoreOrder(order);
 		this.setRemarks(remarks);
@@ -59,16 +59,16 @@ import java.util.Date;
     *
     * @return 
     */
-    public String getStroeName(){
-        return stroeName;
+    public String getStoreName(){
+        return storeName;
     }
 
     /*** 设置
     * 
     * @param stroeName 要设置的
     */
-    public void setStroeName(String stroeName){
-        this.stroeName = stroeName;
+    public void setStoreName(String storeName){
+        this.storeName = storeName;
     }
 
     /*** 获取父id

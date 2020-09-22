@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009214"></script>
+<script type="text/javascript" src="../js/StoreStockGoodsInfo.js?d=202009231"></script>
 <body>
 	<div class="body-bdiv">
 		<div class="title-div">

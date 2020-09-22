@@ -1,5 +1,6 @@
 package com.stone.equipsys.core.mapper;
 
+
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;

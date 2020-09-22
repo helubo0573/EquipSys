@@ -3,6 +3,7 @@ package com.stone.equipsys.manage.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,9 +24,10 @@ import com.stone.equipsys.core.common.util.StringUtil;
 import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 import com.stone.equipsys.core.mapper.StoreGoodsModelNumberInfoMapper;
 import com.stone.equipsys.core.mapper.StoreGoodsStockLogMapper;
+import com.stone.equipsys.core.model.StoreGoodsModelStoreModel;
 import com.stone.equipsys.core.service.StoreGoodsModelNumberInfoService;
 import com.stone.equipsys.core.service.StoreGoodsModelStoreService;
-
+import com.stone.equipsys.core.mapper.StoreGoodsModelStoreMapper;
 @Controller
 @RequestMapping("modelnumber")
 public class StoreGoodsModelNumberController {
@@ -38,7 +40,8 @@ public class StoreGoodsModelNumberController {
 	private StoreGoodsModelNumberInfoService StoreGoodsModelNumberInfoService;
 	@Resource
 	private StoreGoodsModelStoreService StoreGoodsModelStoreService;
-	
+	@Resource
+	private StoreGoodsModelStoreMapper StoreGoodsModelStoreMapper;
 	@RequestMapping("/save")
 	@RequiresPermissions(value = "store:goodsmodelnumber:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
@@ -82,8 +85,19 @@ public class StoreGoodsModelNumberController {
 	@RequestMapping("/getDetailInfo")
 	public void getinfo(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) throws UnsupportedEncodingException, IOException {
 		StoreGoodsModelNumberInfo goodsmodel=StoreGoodsModelNumberMapper.findByPrimary(id);
+		List<StoreGoodsModelStoreModel> modelstorelist=StoreGoodsModelStoreMapper.listSelectiveExt(id);
+		String storeid="";
+		String storename="";
+		HashMap<String, String> storemap=new HashMap<String,String>();
+		for(StoreGoodsModelStoreModel modelstore:modelstorelist) {
+			storeid+=modelstore.getStoreId()+",";
+			storename+=modelstore.getStorename()+",";
+		}
+		storemap.put("storeids", storeid.length()>0?storeid.substring(0, storeid.length()-1):storeid);
+		storemap.put("storenames", storename.length()>0?storename.substring(0, storename.length()-1):storename);
 		Map<String, Object> res = new HashMap<String, Object>();
 		res.put("model", goodsmodel);
+		res.put("storelist", storemap);
 		ServletUtils.writeToResponse(response, res);
 	}
 }

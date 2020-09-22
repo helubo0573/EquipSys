@@ -170,12 +170,13 @@ function showGoodsModelNumberInfo(type,id){
 					url:"../modelnumber/getDetailInfo.do",
 					success:function(data){
 						if(data!=null){
-							$("#goodsmodelnumberinfo-form #id").val(data.model.id)
-							$("#goodsmodelnumberinfo-form #goods-id").val(data.model.goodsId)
-							$("#goodsmodelnumberinfo-form #modelname").val(data.model.modelNumberName)
-							$("#goodsmodelnumberinfo-form #unit").val(data.model.unit)
-							$("#goodsmodelnumberinfo-form #remarks").val(data.model.remarks)
-							
+							$("#goodsmodelnumberinfo-form #id").val(data.model.id);
+							$("#goodsmodelnumberinfo-form #goods-id").val(data.model.goodsId);
+							$("#goodsmodelnumberinfo-form #modelname").val(data.model.modelNumberName);
+							$("#goodsmodelnumberinfo-form #unit").val(data.model.unit);
+							$("#goodsmodelnumberinfo-form #remarks").val(data.model.remarks);
+							$("#goodsmodelnumberinfo-form #storeid").val(data.storelist.storeids);
+							$("#goodsmodelnumberinfo-form #storename").val(data.storelist.storenames);
 						}
 					}
 				})
@@ -274,7 +275,7 @@ function setstore(){
                 	for(var i = 0;i<stores.length;i++){
                 		var nodeList=ztree.getNodesByParam("name", names[i], null);
                 		for( var n=0;n<nodeList.length; n++ ){
-                			if(nodeList[n].id==ids[i]){
+                			if(nodeList[n].id==stores[i]){
                 				ztree.checkNode(nodeList[n],true,true);
                 			}
                 		}
@@ -296,8 +297,8 @@ function setstore(){
                 	layer.close(index)
                 },
                 btn2:function(index){
-					$(obj).val("")
-					$(obj).attr("data-emp","");
+					$("#goodsmodelnumberinfo-form #storeid").val("")
+					$("#goodsmodelnumberinfo-form #storename").val("");
                 	layer.close(index)
                 }
 			})

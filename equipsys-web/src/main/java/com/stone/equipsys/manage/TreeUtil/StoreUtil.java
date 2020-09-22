@@ -42,7 +42,7 @@ public class StoreUtil {
 			StoreObject storeob=new StoreObject();
 			storeob.id=store.getId();
 			storeob.pId=store.getParentId();
-			storeob.name=store.getStroeName();
+			storeob.name=store.getStoreName();
 			storeob.order=store.getStoreOrder();
 			storeob.remarks=store.getRemarks();
 			storemap.put(store.getId().toString(), storeob);

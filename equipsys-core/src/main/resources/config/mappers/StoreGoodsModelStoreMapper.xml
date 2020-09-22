@@ -9,9 +9,17 @@
         <result column="store_id" property="storeId" jdbcType="BIGINT" />
     </resultMap>
     
+    <resultMap type="com.stone.equipsys.core.model.StoreGoodsModelStoreModel" id="ExtResultMap" extends="BaseResultMap">
+    	<result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+    </resultMap>
+    
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         id,model_id,store_id 
+    </sql>
+    
+    <sql id="Ext_Column_List">
+    	ms.id,ms.model_id,ms.store_id,s.store_name
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
@@ -29,6 +37,20 @@
         </trim>
     </sql>
     
+    <!-- 扩展的sql查询条件公共引用 -->
+    <sql id="searchByExt">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                ms.id  = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="modelId != null and modelId != '' ">
+                and ms.model_id = #{modelId,jdbcType=BIGINT}
+            </if>
+            <if test="storeId != null and storeId != '' ">
+                and ms.store_id = #{storeId,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </sql>
     
     <insert id="save" parameterType="com.stone.equipsys.core.domain.StoreGoodsModelStore">
         insert into store_goods_model_store(model_id,store_id)values(#{modelId,jdbcType=BIGINT},#{storeId,jdbcType=BIGINT})
@@ -76,6 +98,14 @@
         <include refid="Base_Column_List" />
         from store_goods_model_store
         <include refid="searchBy"/>
+    </select>
+    
+    <select id="listSelectiveExt" resultMap="ExtResultMap"  parameterType="java.lang.Long">
+    	select
+        <include refid="Ext_Column_List" />
+        from store_goods_model_store as ms left join store_info as s on ms.store_id=s.id
+        WHERE 
+		ms.model_id = #{id};
     </select>
     
     <delete id="deleteByModelid" parameterType="java.lang.Long">
