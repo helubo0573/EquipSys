@@ -18,4 +18,6 @@ public interface StoreGoodsModelNumberInfoService extends BaseService<StoreGoods
 	Page<StoreGoodsModelNumberInfo> searchForPage(HashMap<String,Object> params,int currentPage,int pageSize);
 	
 	public void updateQuantity(Long modelid,int Quantity);
+	
+	void deleteModelNumber(Long id);
 }

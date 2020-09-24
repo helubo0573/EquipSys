@@ -75,6 +75,7 @@ public class StoreGoodsModelNumberController {
 			@RequestParam(value="pageSize",defaultValue="10")int pageSize) {
 			HashMap<String, Object> param=new HashMap<String,Object>();
 			param.put("goodsId", goodsid);
+			param.put("logicalState", false);
 			Page<StoreGoodsModelNumberInfo> modellist=StoreGoodsModelNumberInfoService.searchForPage(param, currentPage, pageSize);
 			request.setAttribute("modellist", modellist);
 			request.setAttribute("page", new RdPage(modellist).getPageStr("getModelNumberList"));
@@ -98,6 +99,21 @@ public class StoreGoodsModelNumberController {
 		Map<String, Object> res = new HashMap<String, Object>();
 		res.put("model", goodsmodel);
 		res.put("storelist", storemap);
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/delete")
+	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+		try {
+			StoreGoodsModelNumberInfoService.deleteModelNumber(id);
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除失败");
+		}
 		ServletUtils.writeToResponse(response, res);
 	}
 }

@@ -169,6 +169,12 @@
         <include refid="searchByExt"/>
     </select>
     
+    <select id="countByEquipId" resultType="java.lang.Integer" parameterType="java.lang.Long">
+    	select	count(id)
+        from equip_servicing_application
+        where equip_id = #{equipid}
+    </select>
+    
     <delete id="deleteById" parameterType="java.lang.Long">
     	delete 
     	from equip_servicing_application

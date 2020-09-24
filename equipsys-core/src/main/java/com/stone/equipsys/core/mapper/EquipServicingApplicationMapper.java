@@ -23,4 +23,6 @@ public interface EquipServicingApplicationMapper extends BaseMapper<EquipServici
 	EquipServicingApplicationModel findExtByPrimary(Long id);
 	
 	void deleteById(Long id);
+	
+	int countByEquipId(Long equipid);
 }

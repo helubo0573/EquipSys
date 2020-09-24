@@ -216,6 +216,32 @@ function saveStockGoodsModelNumberInfo(index){
 	}
 }
 
+function deleteGoodsModelNumber(id){
+	layer.open({
+		type:0,
+		title:"删除物料规格",
+		btn:["确定","取消"],
+		content:"如果物料规格无任何关联数据则将彻底删除，如系统检测到存在关联数据则将设备设置为不可见，确认删除此物料规格吗?",
+		yes:function(index){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				data:"id="+id,
+				url:"../modelnumber/delete.do",
+				success:function(data){
+					layer.msg(data.msg)
+					if(data.code==200){
+						layer.msg(data.msg);
+						layer.close(index);
+						getModelNumberList(1)
+					}
+				}
+			})
+		}
+	})
+}
+
 function getModelNumberList(pagenum){
 	var gid=$("#storegoods-form #storegoods-id").val();
 	var param={

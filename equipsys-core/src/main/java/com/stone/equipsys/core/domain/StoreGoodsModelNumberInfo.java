@@ -35,6 +35,7 @@ import java.util.Date;
     /*** */
     private String remarks;
 
+    private Boolean logicalState;
 
     public StoreGoodsModelNumberInfo() {}
     
@@ -158,5 +159,13 @@ import java.util.Date;
     public void setRemarks(String remarks){
         this.remarks = remarks;
     }
+
+	public Boolean getLogicalState() {
+		return logicalState;
+	}
+
+	public void setLogicalState(Boolean logicalState) {
+		this.logicalState = logicalState;
+	}
 
 }

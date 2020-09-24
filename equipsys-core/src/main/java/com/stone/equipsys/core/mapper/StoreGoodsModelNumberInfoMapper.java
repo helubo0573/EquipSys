@@ -15,6 +15,6 @@ import com.stone.equipsys.core.domain.StoreGoodsModelNumberInfo;
 @RDBatisDao
 public interface StoreGoodsModelNumberInfoMapper extends BaseMapper<StoreGoodsModelNumberInfo, Long> {
 
-    
+    void LogicalDeletionById(Long id);
 
 }

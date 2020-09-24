@@ -116,3 +116,6 @@ ROW_FORMAT=COMPACT
 
 alter table equip_info add column logical_state boolean NULL DEFAULT 0  comment'Âß¼­×´Ì¬';
 update equip_info set logical_state=0;
+
+alter table store_goods_model_number_info add column logical_state boolean NULL DEFAULT 0  comment'Âß¼­×´Ì¬';
+update store_goods_model_number_info set logical_state=0;

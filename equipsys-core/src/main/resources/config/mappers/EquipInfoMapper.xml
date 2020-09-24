@@ -69,7 +69,7 @@
             <if test="debarid !=null and debarid !=''">
             	and id &lt;&gt; #{debarid,jdbcType=INTEGER} and parent_id &lt;&gt; #{debarid,jdbcType=INTEGER}
             </if>
-            <if test="logicalState !=null and logicalState !=''">
+            <if test="logicalState !=null">
             	and logical_state = #{logicalState,jdbcType=BOOLEAN}
             </if>
         </trim>
@@ -146,7 +146,7 @@
 	<update id="LogicalDeletionById" parameterType="java.lang.Long">
 		update equip_info set 
             logical_state=1
-        where id = #{id ,jdbcType=INTEGER}
+        where id = #{id}
 	</update>
 
     <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">

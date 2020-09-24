@@ -82,6 +82,11 @@ public class StoreGoodsModelNumberInfoServiceImpl extends BaseServiceImpl<StoreG
 		param.put("quantity", Quantity);
 		ModelNumberMapper.updateSelective(param);
 	}
+
+	@Override
+	public void deleteModelNumber(Long id) {
+		ModelNumberMapper.LogicalDeletionById(id);	
+	}
 	
 	
 }

@@ -2,7 +2,6 @@ package com.stone.equipsys.manage.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,8 +23,6 @@ import com.stone.equipsys.core.common.constant.Constant;
 import com.stone.equipsys.core.common.constant.PathConstant;
 import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.common.util.StringUtil;
-import com.stone.equipsys.core.common.util.Tree;
-import com.stone.equipsys.core.common.util.Tree.TreeObject;
 import com.stone.equipsys.core.domain.EquipInfo;
 import com.stone.equipsys.core.domain.OrgDept;
 import com.stone.equipsys.core.mapper.EquipInfoMapper;
@@ -38,7 +33,6 @@ import com.stone.equipsys.core.service.EquipMpService;
 import com.stone.equipsys.core.service.EquipOpService;
 import com.stone.equipsys.core.service.OrgDeptService;
 import com.stone.equipsys.manage.TreeUtil.EquipUtile;
-import com.stone.equipsys.manage.TreeUtil.EquipUtile.EquipObject;
 @Controller
 @RequiresPermissions("sys:admin")
 @RequestMapping("equip")
@@ -56,6 +50,7 @@ public class EquipController {
 	private OrgDeptMapper deptmapper; 
 	@Resource
 	private EquipInfoMapper equipmapper;
+	
 	@RequestMapping("/manageequip")
 	public String toEquipPage(HttpServletRequest request) {
 		HashMap<String, Object> deptparam=new HashMap<String, Object>();
@@ -109,7 +104,7 @@ public class EquipController {
 		String id=request.getParameter("id");
 		HashMap<String, Object> map=new HashMap<String,Object>();
 		map.put("maxlevel", type);
-		map.put("logical_state", 0);
+		map.put("logicalState", false);
 		if(deptid!=0) map.put("attrDept", deptid);
 		if(!"".equals(id) && id!=null) {
 			map.put("debarid", Integer.parseInt(id));

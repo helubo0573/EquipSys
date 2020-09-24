@@ -41,7 +41,7 @@
 								<i class="layui-icon point" title="修改" onclick="showGoodsModelNumberInfo('1',${model.id})">&#xe642;</i>&nbsp;
 							</shiro:hasPermission>
 							<shiro:hasPermission name="store:goodsmodelnumber:delete">
-								<i class="layui-icon point" title="删除" onclick="deleteEmployee(${model.id})">&#xe640;</i>
+								<i class="layui-icon point" title="删除" onclick="deleteGoodsModelNumber(${model.id})">&#xe640;</i>
 							</shiro:hasPermission>
 						</td>
 					</tr>
