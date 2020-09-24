@@ -41,6 +41,7 @@ import com.stone.equipsys.manage.TreeUtil.EquipUtile;
 import com.stone.equipsys.manage.TreeUtil.EquipUtile.EquipObject;
 @Controller
 @RequiresPermissions("sys:admin")
+@RequestMapping("equip")
 public class EquipController {
 
 	@Resource
@@ -55,7 +56,7 @@ public class EquipController {
 	private OrgDeptMapper deptmapper; 
 	@Resource
 	private EquipInfoMapper equipmapper;
-	@RequestMapping(value="equip/manageequip")
+	@RequestMapping("/manageequip")
 	public String toEquipPage(HttpServletRequest request) {
 		HashMap<String, Object> deptparam=new HashMap<String, Object>();
 		deptparam.put("deptType", 0);
@@ -63,7 +64,7 @@ public class EquipController {
 		request.setAttribute("deptlist", deptlist);
 		return PathConstant.EquipInfoManage;
 	}
-	@RequestMapping(value="equip/saveequip")
+	@RequestMapping("/saveequip")
 	@RequiresPermissions("equip:info:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")int id,
@@ -100,7 +101,7 @@ public class EquipController {
 
 	}
 
-	@RequestMapping("equip/getequiptree")
+	@RequestMapping("/getequiptree")
 	public void search(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="type",defaultValue = "4")int type,
 			@RequestParam(value = "dept",defaultValue = "0")int deptid)
@@ -108,6 +109,7 @@ public class EquipController {
 		String id=request.getParameter("id");
 		HashMap<String, Object> map=new HashMap<String,Object>();
 		map.put("maxlevel", type);
+		map.put("logical_state", 0);
 		if(deptid!=0) map.put("attrDept", deptid);
 		if(!"".equals(id) && id!=null) {
 			map.put("debarid", Integer.parseInt(id));
@@ -123,44 +125,42 @@ public class EquipController {
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
-
-	@Transactional(propagation=Propagation.REQUIRED)
+	
+	@RequestMapping("/delete")
 	@RequiresPermissions("equip:info:delete")
-	public void delete(HttpServletResponse response, HttpServletRequest request) {
-		int eid=Integer.parseInt(request.getParameter("id"));
-		EquipMpService.deleteMpByEquipId(eid);
-		EquipOpService.deleteOpByEquipId(eid);
-		EquipServoce.deleteEquipById(Long.parseLong(request.getParameter("id")));
+	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+		try {
+			EquipServoce.deleteEquipById(id);
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除失败");
+		}
+		ServletUtils.writeToResponse(response, res);
 	}
 
-	@SuppressWarnings("unused")
-	@RequestMapping(value="equip/getequipinfo")
+	@RequestMapping("/getequipinfo")
 	public void getEquipInfo(HttpServletResponse response, HttpServletRequest request,@RequestParam(value="id")Long equipid) {
-		EquipInfoModel equip=EquipServoce.getEquipExtInfoById(equipid);
-		int eid=Integer.parseInt(String.valueOf(equip.getId()));
-		HashMap<String,String> opmap=EquipOpService.getOpByEquipid(eid);
-		HashMap<String,String> mpmap=EquipMpService.getMpByEquipid(eid);
 		Map<String,Object> res=new HashMap<String,Object>();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		if(equip!=null) {
+		try {
+			EquipInfoModel equip=EquipServoce.getEquipExtInfoById(equipid);
+			int eid=Integer.parseInt(String.valueOf(equip.getId()));
+			HashMap<String,String> opmap=EquipOpService.getOpByEquipid(eid);
+			HashMap<String,String> mpmap=EquipMpService.getMpByEquipid(eid);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			res.put("equip", equip);
 			res.put("opstr", opmap);
 			res.put("mpstr", mpmap);
 			res.put("enabledate", sdf.format(equip.getEnableDate()));
 			res.put(Constant.RESPONSE_CODE_MSG, "查询成功");
-		}else {
+		} catch (Exception e) {
+			e.printStackTrace();
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
-	
-	/*
-	 * @RequestMapping(value="equip/manageparts")
-	 * 
-	 * @RequiresPermissions("equip:info:setparts") public void
-	 * manageSetParts(HttpServletResponse response, HttpServletRequest request) {
-	 * 
-	 * }
-	 */
 }

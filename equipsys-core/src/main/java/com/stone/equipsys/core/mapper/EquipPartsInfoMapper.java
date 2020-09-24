@@ -21,4 +21,6 @@ public interface EquipPartsInfoMapper extends BaseMapper<EquipPartsInfo, Long> {
     List<EquipPartsInfoModel> listSelectiveExt(HashMap<String, Object> param);
 
     void deleteById(Long id);
+    
+    int countByEquipId(Long equipid);
 }

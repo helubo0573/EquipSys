@@ -225,9 +225,31 @@ function saveEquipInfo(index){
  * @returns
  */
 function deleteEquipInfo(){
-	var treeObj = $.fn.zTree.getZTreeObj("equipinfo-tree");
-	var node=treeObj.getSelectedNodes();
-	var cnode=node[0].children;
+	layer.open({
+		type:0,
+		title:"删除设备",
+		btn:["确定","取消"],
+		content:"如果设备无任何关联数据则会彻底删除，如系统检测到存在关联数据则会将设备设置为不可见，确认删除此设备吗?",
+		yes:function(){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				data:"id="+$("#equip-info #equipid-hd").val(),
+				url:"../equip/delete.do",
+				success:function(data){
+					layer.msg(data.msg)
+					if(data.code==200){
+						getEquipTree("#equipinfo-tree");
+						clearEquipInfo();
+						clearSubEquipInfo();
+						changeBtnState(true)
+						layer.close(index);
+					}
+				}
+			})
+		}
+	})
 }
 
 /**

@@ -111,3 +111,8 @@ COMMENT='ÎïÁÏ¿â´æÓ³Éä±í'
 AUTO_INCREMENT=1
 ROW_FORMAT=COMPACT
 ;
+
+2020-09-24
+
+alter table equip_info add column logical_state boolean NULL DEFAULT 0  comment'Âß¼­×´Ì¬';
+update equip_info set logical_state=0;

@@ -395,6 +395,20 @@ public final class StringUtil extends tool.util.StringUtil
 		}
 	}
 	
+	public static List<Long> convertStringToLongList(String s,String sb){
+		List<Long> l=new ArrayList<Long>();		
+		if(!"".equals(s)) {
+			String[] ss=s.split(sb);
+			for(int i=0;i<ss.length;i++) {
+				System.out.println(ss[i]);
+				l.add(Long.parseLong(trim(ss[i])));
+			}
+			return l;
+		}else {
+			return null;
+		}
+	}
+	
 	public static int compareVersion(String version1, String version2) throws Exception
 	{
 		if (version1 == null || version2 == null)

@@ -50,6 +50,8 @@ import java.util.Date;
     
     /*** 备注*/
     private String remarks;
+    
+    private boolean logicalState;
 
     public EquipInfo() {}
     
@@ -254,5 +256,14 @@ import java.util.Date;
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	public boolean isLogicalState() {
+		return logicalState;
+	}
+
+	public void setLogicalState(boolean logicalState) {
+		this.logicalState = logicalState;
+	}
+
 
 }

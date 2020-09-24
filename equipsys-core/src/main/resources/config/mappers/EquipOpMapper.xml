@@ -104,4 +104,10 @@
 			left Join employee_info as emp ON op.op_id = emp.id
 		where op.equip_id=#{equipId};
     </select>
+    
+    <select id="countByEquipid" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    	select	count(id)
+        from equip_op
+        where equip_id = #{equipId}
+    </select>
 </mapper>

@@ -15,6 +15,9 @@ import com.github.pagehelper.PageHelper;
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.service.impl.BaseServiceImpl;
 import com.stone.equipsys.core.mapper.EquipInfoMapper;
+import com.stone.equipsys.core.mapper.EquipMpMapper;
+import com.stone.equipsys.core.mapper.EquipOpMapper;
+import com.stone.equipsys.core.mapper.EquipPartsInfoMapper;
 import com.stone.equipsys.core.model.EquipInfoModel;
 import com.stone.equipsys.core.domain.EquipInfo;
 import com.stone.equipsys.core.service.EquipInfoService;
@@ -35,7 +38,12 @@ public class EquipInfoServiceImpl extends BaseServiceImpl<EquipInfo, Long> imple
    
     @Resource
     private EquipInfoMapper equipInfoMapper;
-
+    @Resource
+    private EquipPartsInfoMapper equipPartsInfoMapper;
+    @Resource
+    private EquipMpMapper equipMpMapper;
+    @Resource
+    private EquipOpMapper equipOpMapper;  
 	@Override
 	public BaseMapper<EquipInfo, Long> getMapper() {
 		return equipInfoMapper;
@@ -70,10 +78,14 @@ public class EquipInfoServiceImpl extends BaseServiceImpl<EquipInfo, Long> imple
 
 	@Override
 	public void deleteEquipById(Long eid) {
-		boolean state=true;
-		while (state) {
-			boolean s=equipInfoMapper.deleteEquipById(eid);
-			
+		int cequipnum=equipInfoMapper.countByParentid(eid);	//查询设备的下级设备
+		int partsnum=equipPartsInfoMapper.countByEquipId(eid);//查询设备的配件信息
+		int mpnum=equipMpMapper.countByEquipid(eid);//查询设备的修理人员
+		int opnum=equipOpMapper.countByEquipid(eid);//查询设备的操作人员
+		if(cequipnum+partsnum+mpnum+opnum>0) {//如果存在外键数据则逻辑删除
+			equipInfoMapper.LogicalDeletionById(eid);
+		}else {//否则物理删除
+			equipInfoMapper.deleteById(eid);
 		}
 	}
 	

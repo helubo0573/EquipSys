@@ -24,7 +24,9 @@ public interface EquipInfoMapper extends BaseMapper<EquipInfo, Long> {
 
 	EquipInfoModel getEquipExtInfoById(Long id);
 
-	boolean deleteEquipById(Long eid);
-    
-
+	boolean deleteById(Long eid);
+ 
+	void LogicalDeletionById(Long id);
+	
+	int countByParentid(Long parentId);
 }

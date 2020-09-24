@@ -21,6 +21,6 @@ public interface EquipMpMapper extends BaseMapper<EquipMp, Long> {
 
 	List<EquipMpModel> getMpByEquipid(int equipId);
 
-    
+    int countByEquipid(Long equipId);
 
 }

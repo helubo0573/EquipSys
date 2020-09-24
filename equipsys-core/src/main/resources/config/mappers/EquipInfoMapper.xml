@@ -17,6 +17,7 @@
         <result column="supplier_number" property="supplierNumber" jdbcType="VARCHAR" />
         <result column="location" property="location" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="logical_state" property="logicalState" jdbcType="BOOLEAN" />
     </resultMap>
     
     <resultMap id="BaseExtResultMap" type="com.stone.equipsys.core.model.EquipInfoModel"  extends="BaseResultMap">
@@ -25,12 +26,12 @@
     </resultMap>
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location 
+        id,equip_name,equip_code,parent_id,equip_level,enable_date,attr_dept,supplier,location,remarks,logical_state
     </sql>
     <sql id="Base_Ext_Column_List">
     	equip.id as id,equip.equip_name as equip_name,equip.equip_code as equip_code,equip.equip_model_number as equip_model_number,equip.parent_id as parent_id,equip.equip_level as equip_level,
 		equip.enable_date as enable_date,equip.attr_dept as attr_dept,equip.supplier as supplier,equip.supplier_number as supplier_number,equip.location as location,
-		dept.dept_name as dept_name,pequip.equip_name as parentequip_name,equip.remarks as remarks
+		dept.dept_name as dept_name,pequip.equip_name as parentequip_name,equip.remarks as remarks,equip.logical_state as logical_state
     </sql>
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
@@ -67,6 +68,9 @@
             </if>
             <if test="debarid !=null and debarid !=''">
             	and id &lt;&gt; #{debarid,jdbcType=INTEGER} and parent_id &lt;&gt; #{debarid,jdbcType=INTEGER}
+            </if>
+            <if test="logicalState !=null and logicalState !=''">
+            	and logical_state = #{logicalState,jdbcType=BOOLEAN}
             </if>
         </trim>
     </sql>
@@ -139,6 +143,11 @@
         where id = #{id ,jdbcType=INTEGER}
     </update>
 
+	<update id="LogicalDeletionById" parameterType="java.lang.Long">
+		update equip_info set 
+            logical_state=1
+        where id = #{id ,jdbcType=INTEGER}
+	</update>
 
     <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -171,4 +180,17 @@
 		WHERE
 			equip.id=#{id}
     </select>
+    
+    <select id="countByParentid" resultType="java.lang.Integer" parameterType="java.lang.Long">
+    	select	count(id)
+        from equip_info
+        where parent_id = #{parentId}
+    </select>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+    	delete 
+    	from equip_info
+    	where id = #{id}
+    </delete>
+    
 </mapper>

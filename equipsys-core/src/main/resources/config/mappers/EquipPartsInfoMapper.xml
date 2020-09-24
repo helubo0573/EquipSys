@@ -139,6 +139,11 @@
         order by id desc
     </select>
     
+    <select id="countByEquipId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    	select	count(id)
+        from equip_parts_info
+        where equip_id = #{parentId}
+    </select>
     <delete id="deleteById" parameterType="java.lang.Long">
     	delete 
     	from equip_parts_info
