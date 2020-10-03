@@ -25,7 +25,6 @@
 #page-tab #menu-list a{float:left;text-decoration:none;padding:0 10px 0 20px;border-right:1px solid #f1f0f0;color:#FFF;font-size:12px;cursor:pointer;transition:background-color .5s;-moz-transition:background-color .5s;-webkit-transition:background-color .5s;-o-transition:background-color .5s}
 #page-tab #menu-list a:hover{text-shadow: 0 0 10px #FFFFFF;font-weight: bold;text-decoration:underline}
 #page-tab #menu-list a.active{color:#000;background-color:#f1f0f0;border-right:0;transition:color .5s;-moz-transition:color .5s;-webkit-transition:color .5s;-o-transition:color .5s;transition:background-color .5s;-moz-transition:background-color .5s;-webkit-transition:background-color .5s;-o-transition:background-color .5s}
-#page-tab #menu-list a.active:hover{}
 #page-tab .menu-close{width:15px;height:15px;display:inline-block;background-image:url(../static/img/close.png);background-size:15px;background-repeat:no-repeat;vertical-align:middle;margin-left:5px;margin-top:-2px}
 #page-tab .menu-close:hover{background-image:url(../static/img/closehover.png)}
 #menu-all{width:175px;border:1px solid #000;position:absolute;right:0;z-index:100;min-height:25px;padding:1px;overflow-y:auto;display:none;max-height:380px;top:31px;background-color:#fff}
@@ -49,6 +48,7 @@
 }
 .table th{
 	text-align: center;
+	vertical-align: middle;
 }
 .table td{
 	text-align: center;

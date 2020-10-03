@@ -66,8 +66,13 @@ layui.use('laydate', function(){
 		<input type="hidden" id="equip-id" name="equipid">
 		<table class="table table-bordered layeropen">
 			<tr>
-				<th>申请时间</th><td><input class="layui-input form-control point needing layedate date-input" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
-				<th>故障时间</th><td><input class="layui-input form-control point needing layedate date-input" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
+				<td colspan="4" align="center" style="font-weight: bold;">
+					设备故障信息
+				</td>
+			</tr>
+			<tr>
+				<th width="80px">申请时间</th><td width="220px"><input class="layui-input form-control point needing layedate date-input" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
+				<th width="80px">故障时间</th><td ><input class="layui-input form-control point needing layedate date-input" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
 			</tr>
 			<tr>
 				<th width="80px;">申请人</th>
@@ -87,13 +92,49 @@ layui.use('laydate', function(){
 				<th>所在地点</th><td><label id="location"></label></td>
 			</tr>
 			<tr>
-				<td colspan="4">
-			</tr>
-			<tr>
 				<th>故障简述</th>
 				<td colspan="3" style="vertical-align: middle;">
-					<textarea class="form-control" id="remarks" name="remarks" rows="4" style="resize:none;"></textarea>
+					<textarea class="form-control" id="remarks" name="remarks" rows="2" style="resize:none;"></textarea>
 				</td>
+			</tr>
+			<tr>
+				<th colspan="4" align="center" style="font-weight: bold;">
+					设备维修信息
+				</th>
+			</tr>
+			<tr>
+				<th>
+					维修单位
+				</th>
+				<td></td>
+				<th>维修时间</th>
+				<td>
+					<div class="input-group input-group-sm col-lg-12">
+				        <input class="layui-input form-control point layedate searchdate" id="search-sbackfiredate" style="width: 118px" name="application_time" id="application_time" placeholder="开始时间" readonly>
+				        <span class="th input-group-addon">-</span>
+				        <input class="layui-input form-control point layedate searchdate" id="search-ebackfiredate" style="width: 118px" name="application_time" id="application_time" placeholder="结束时间" readonly>
+			       </div>
+				</td>
+			</tr>
+			<tr>
+				<th>维修人员</th>
+				<td colspan="3"></td>
+			</tr>
+			<tr>
+				<th>故障描述</th><td colspan="2"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
+				<td rowspan="3">
+					<h6>更换(消耗)零配件、材料列表</h6>
+					<select class="form-control" multiple="multiple" size="10"></select>
+				</td>
+			</tr>
+			<tr>
+				<th>故障分析</th><td colspan="2"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="2"><textarea class="form-control" style="resize:none;" rows="3"></textarea></td>
+			</tr>
+			<tr>
+				<th>奖惩记录</th><td colspan="3"></td>
 			</tr>
 		</table>
 	</form>
