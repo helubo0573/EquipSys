@@ -23,8 +23,7 @@ public class ExcelBean
 	}
 
 	@SuppressWarnings("rawtypes")
-	public ExcelBean(String title, String creator, List list, String[] hearders)
-	{
+	public ExcelBean(String title, String creator, List list, String[] hearders) {
 		this.title = title;
 		this.creator = creator;
 		this.list = list;

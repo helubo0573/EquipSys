@@ -3,6 +3,11 @@ package com.stone.equipsys.core.common.util.excel;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * EXCEL列对象
+ * @author Administrator
+ *
+ */
 public class TableColumn
 {
 

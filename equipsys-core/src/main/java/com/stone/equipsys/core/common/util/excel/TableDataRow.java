@@ -9,7 +9,11 @@ import java.util.List;
 import com.stone.equipsys.core.common.util.DateUtil;
 
 
-
+/**
+ * EXCEL行对象
+ * @author Administrator
+ *
+ */
 public class TableDataRow
 {
 

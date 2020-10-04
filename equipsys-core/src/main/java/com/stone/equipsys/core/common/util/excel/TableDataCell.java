@@ -1,7 +1,11 @@
 package com.stone.equipsys.core.common.util.excel;
 
 import java.text.DecimalFormat;
-
+/**
+ * EXCEL细胞对象
+ * @author Administrator
+ *
+ */
 public class TableDataCell
 {
 	private String value;

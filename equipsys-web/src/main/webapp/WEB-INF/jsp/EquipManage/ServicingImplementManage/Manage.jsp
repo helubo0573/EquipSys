@@ -8,6 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+.table th, .table td {
+text-align: center;
+vertical-align: middle!important;
+}
+</style>
 </head>
 <script type="text/javascript" src="../js/EquipServicingImplement.js?d=202009181"></script>
 <script type="text/javascript">
@@ -94,7 +100,7 @@ layui.use('laydate', function(){
 			<tr>
 				<th>故障简述</th>
 				<td colspan="3" style="vertical-align: middle;">
-					<textarea class="form-control" id="remarks" name="remarks" rows="2" style="resize:none;"></textarea>
+					<textarea class="form-control" id="remarks" name="remarks" rows="1" style="resize:none;"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -121,20 +127,17 @@ layui.use('laydate', function(){
 				<td colspan="3"></td>
 			</tr>
 			<tr>
-				<th>故障描述</th><td colspan="2"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
-				<td rowspan="3">
-					<h6>更换(消耗)零配件、材料列表</h6>
-					<select class="form-control" multiple="multiple" size="10"></select>
-				</td>
+				<th>故障描述</th><td colspan="3"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
 			</tr>
 			<tr>
-				<th>故障分析</th><td colspan="2"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
+				<th>故障分析</th><td colspan="3"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
 			</tr>
 			<tr>
-				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="2"><textarea class="form-control" style="resize:none;" rows="3"></textarea></td>
+				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea class="form-control" style="resize:none;" rows="2"></textarea></td>
 			</tr>
 			<tr>
-				<th>奖惩记录</th><td colspan="3"></td>
+				<th height="200px">更换(消耗)零配件、材料列表</th><td></td>
+				<th>奖惩记录</th><td></td>
 			</tr>
 		</table>
 	</form>

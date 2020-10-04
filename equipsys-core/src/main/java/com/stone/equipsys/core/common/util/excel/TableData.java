@@ -72,7 +72,7 @@ public class TableData
 			return sb.toString();
 		}
 	}
-
+	
 	private TableDataRow buildNewRow(String key, int index)
 	{
 		TableDataRow nrow = new TableDataRow(this);
@@ -94,7 +94,11 @@ public class TableData
 		}
 		return nrow;
 	}
-
+	
+	/**
+	 * 	创建合计行
+	 * @param index
+	 */
 	private void buildSummary(int index)
 	{
 		LinkedList<SummaryData> lst = new LinkedList<SummaryData>();

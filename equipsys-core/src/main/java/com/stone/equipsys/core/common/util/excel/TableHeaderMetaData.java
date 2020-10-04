@@ -3,6 +3,11 @@ package com.stone.equipsys.core.common.util.excel;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Excel表头数据
+ * @author Administrator
+ *
+ */
 public class TableHeaderMetaData
 {
 
