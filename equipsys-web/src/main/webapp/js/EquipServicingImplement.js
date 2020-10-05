@@ -26,7 +26,7 @@ function showImplementInfo(type){
         anim:2,
         shade: 0.3,
         title:type==0?'新增设备维修单':"修改设备维修单",
-        area:[ '680px', '860px' ],
+        area:[ '760px', '860px' ],
         btn:type!=2?['保存','关闭']:"",
         content: $("#servicingImpManage-info"),
         success: function (layero, index){
