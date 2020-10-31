@@ -115,6 +115,7 @@ public class StoreStockGoodsUtil {
 		}
 		for(StockGoodsModelObject model:goodsmodelmap.values()) {
 			if(modelidlist.indexOf(model.id)==-1)
+				System.out.println("debug:"+model.id+"---"+model.pId);
 				goodsinfomap.get(model.pId+"").children.add(model);
 		}
 		for(StockGoodsModelObject goods:goodsinfomap.values()) {

@@ -10,12 +10,12 @@
 <meta charset="UTF-8">
 <style type="text/css">
 .table th, .table td {
-text-align: center;
-vertical-align: middle!important;
+	text-align: center;
+	vertical-align: middle!important;
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202010051"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202010144"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -76,8 +76,10 @@ layui.use('laydate', function(){
 	</div>
 	<form id="servicingImpManage-info" class="form-horizontal box-div" style="display: none;">
 		<input type="hidden" id="id" name="id">
-		<input type="hidden" id="dept-id">
+		<input type="hidden" id="proposer-hd" name="proposer">
+		<input type="hidden" id="dept-id" name="deptid">
 		<input type="hidden" id="equip-id" name="equipid">
+		<input type="hidden" id="Transactor-id" name="Transactorid">
 		<table class="table table-bordered layeropen">
 			<tr>
 				<td colspan="4" align="center" style="font-weight: bold;">
@@ -92,13 +94,13 @@ layui.use('laydate', function(){
 				<th width="80px;">申请人</th>
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
-						<input class="form-control point" id="proposer" style="width: 120px" readonly onclick="setServicingAppproposer()" placeholder="点击选择">
-				        <span id="dept" style="width: 120px" class="th input-group-addon"></span>
+						<input class="form-control point" id="proposer" style="width: 100px" readonly onclick="setProposer()" placeholder="点击选择">
+				        <span id="dept" style="width: 140px" class="th input-group-addon"></span>
 				    </div>
 				</td>
 				<th width="80px;">设备名称</th>
 				<td>
-					<input class="form-control point" data-parent="" id="equip-name" readonly onclick="setServicingEquip()">
+					<input class="form-control point" data-parent="" id="equip-name" readonly onclick="setServicingEquip()" placeholder="点击选择设备">
 				</td>
 			</tr>
 			<tr>				
@@ -120,7 +122,9 @@ layui.use('laydate', function(){
 				<th>
 					维修单位
 				</th>
-				<td></td>
+				<td>
+					<input class="form-control point" data-parent="" id="op-dept" readonly onclick="ServicingDept()" placeholder="点击选择维修单位">
+				</td>
 				<th>维修时间</th>
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
@@ -132,7 +136,7 @@ layui.use('laydate', function(){
 			</tr>
 			<tr>
 				<th>维修人员</th>
-				<td colspan="3"></td>
+				<td colspan="3"><input class="form-control point" id="setTransactor" readonly onclick="setTransactorInfo()" placeholder="点击选择维修组人员"></td>
 			</tr>
 			<tr>
 				<th>故障描述</th><td colspan="3"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
@@ -144,16 +148,56 @@ layui.use('laydate', function(){
 				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea class="form-control" style="resize:none;" rows="3"></textarea></td>
 			</tr>
 			<tr>
-				<th height="200px">更换(消耗)零配件、材料列表</th>
-				<td>
-					<select class="form-control point" multiple="multiple" size="10">
-					</select>
+				<th height="200px" style="text-align: center;">
+					零配件及材料耗用表<br>
+					<button class="btn btn-info" onclick="setConsumptionSpart()">添加</button>
+				</th>
+				<td colspan="3">
+					<div style="height: 198px;">
+						<table class="table table-bordered layeropen">
+							<tr>
+								<th>名称</th>
+								<th width="68px">耗用类型</th>
+								<th width="60px">数量</th>
+								<th width="50px">单位</th>
+								<th width="80px">操作</th>
+							</tr>						
+						</table>
+					</div>
 				</td>
-				<th>奖惩记录</th>
-				<td>
-					<select class="form-control point" multiple="multiple" size="10">
-					</select>
+			</tr>
+		</table>
+	</form>
+	<form id="setConsumptionSpart-form" class="form-horizontal box-div" style="display: none;"><!-- 新增零配件 -->
+		<input type="hidden" id="equipid" name="equipid">
+		<table class="order-table table table-bordered layeropen">
+			<tr>
+				<th width="100px">设备名称</th><td id="equipname" colspan="2" width="150px;"></td>
+				<th width="100px">设备型号</th><td id="equipmodel" width="380px"></td>
+			</tr>
+			<tr>
+				<td colspan="2" width="150px">
+					<div class="input-group input-group-sm" style="width: 180px;">
+			            <input type="text" id="partstree-search" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
+			            <span class="input-group-addon point btn" id="sreach-btn">
+			            	<i class="layui-icon" style="font-size: 12px;">&#xe615;</i>
+			            </span>
+			        </div>
 				</td>
+				<td colspan="3" rowspan="2">
+					<div style="height: 458px;overflow-y:scroll;">
+						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
+							<tr><th width="100px">配件类型</th><th width="145px">名称</th><th width="150px">规格</th><th width="70px">数量</th><th>移除</th></tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="428px">
+				<td colspan="2">
+					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;height: 412px;overflow-y: scroll;" class="ztree">
+					</ul>
+				</td>
+				
 			</tr>
 		</table>
 	</form>
