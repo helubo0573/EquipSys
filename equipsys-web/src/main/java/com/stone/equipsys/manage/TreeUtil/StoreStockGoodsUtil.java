@@ -36,6 +36,7 @@ public class StoreStockGoodsUtil {
 		public String name;
 		public int order;
 		public String icon="";
+		public String unit;
 		public List<StockGoodsModelObject> children = null;
 		public int getOrder() {
 			return this.order;
@@ -95,6 +96,7 @@ public class StoreStockGoodsUtil {
 			mob.id=model.getId();
 			mob.pId=model.getGoodsId();
 			mob.name=model.getModelNumberName();
+			mob.unit=model.getUnit();
 			goodsmodelmap.put(model.getId()+"", mob);
 		}
 		for(StoreGoodsType goodstype:goodstypelist) {

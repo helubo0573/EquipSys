@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202010144"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011095"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -150,14 +150,15 @@ layui.use('laydate', function(){
 			<tr>
 				<th height="200px" style="text-align: center;">
 					零配件及材料耗用表<br>
-					<button class="btn btn-info" onclick="setConsumptionSpart()">添加</button>
+					<input type="button" value="添加" class="btn btn-info" style="width: 68px;margin-right: 0px" onclick="setConsumptionSpart()">
 				</th>
 				<td colspan="3">
-					<div style="height: 198px;">
-						<table class="table table-bordered layeropen">
+					<div style="height: 198px;overflow-y:scroll">
+						<table id="ConsumptionSpart" class="table table-bordered layeropen">
 							<tr>
+								<th width="108px">零配件类型</th>
 								<th>名称</th>
-								<th width="68px">耗用类型</th>
+								<th width="150px">规格</th>
 								<th width="60px">数量</th>
 								<th width="50px">单位</th>
 								<th width="80px">操作</th>
@@ -177,8 +178,8 @@ layui.use('laydate', function(){
 			</tr>
 			<tr>
 				<td colspan="2" width="150px">
-					<div class="input-group input-group-sm" style="width: 180px;">
-			            <input type="text" id="partstree-search" class="form-control" style="width: 150px;" placeholder="输入配件名称搜索">
+					<div class="input-group input-group-sm" style="width: 160px;">
+			            <input type="text" id="partstree-search" class="form-control" style="width: 130px;" placeholder="输入配件名称搜索">
 			            <span class="input-group-addon point btn" id="sreach-btn">
 			            	<i class="layui-icon" style="font-size: 12px;">&#xe615;</i>
 			            </span>
@@ -187,17 +188,16 @@ layui.use('laydate', function(){
 				<td colspan="3" rowspan="2">
 					<div style="height: 458px;overflow-y:scroll;">
 						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
-							<tr><th width="100px">配件类型</th><th width="145px">名称</th><th width="150px">规格</th><th width="70px">数量</th><th>移除</th></tr>
+							<tr><th width="110px">配件类型</th><th width="175px">名称</th><th>规格</th><th width="70px">数量</th><th width="48px">单位</th><th width="48px">操作</th></tr>
 						</table>
 					</div>
 				</td>
 			</tr>
 			<tr height="428px">
 				<td colspan="2">
-					<ul id="equipsparts-tree" style="text-align: left;font-size: 18px;height: 412px;overflow-y: scroll;" class="ztree">
+					<ul id="ConsumptionSpart-tree" style="text-align: left;font-size: 18px;height: 412px;overflow-y: scroll;" class="ztree">
 					</ul>
 				</td>
-				
 			</tr>
 		</table>
 	</form>

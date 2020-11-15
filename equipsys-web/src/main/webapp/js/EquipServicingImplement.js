@@ -66,7 +66,7 @@ function showImplementInfo(type){
 				Type:'POST',
 				dataType:'json',
 				url:"../EquipServicingApplication/save.do",
-				data:$("#servicingImpManage-info").serialize(),
+				data:$("#servicingImpManage-info").serialize()+"&Spart="+JSON.stringify(ConsumptionSpartlist()),
 				success:function(data){
 					layer.msg(data.msg)
 					if(data.code==200){
@@ -83,10 +83,24 @@ function showImplementInfo(type){
         }		
 	})
 }
+
+function ConsumptionSpartlist(){
+	var data=[];
+	$("#setConsumptionSpart-form #partslist-table tr:gt(0)").each(function(){
+		var EquipPartsInfo={};
+		EquipPartsInfo.equipId=modelid;
+		EquipPartsInfo.goodsModelId=$(this).find("input[name=model]").val();
+		EquipPartsInfo.partsName=$(this).children('td').eq(1).html()+"_"+$(this).children('td').eq(2).html();
+		EquipPartsInfo.quantity=$(this).find("input[name=quantity]").val();
+		data.push(EquipPartsInfo)
+	})
+	return data
+}
 /**清空维修单信息 */
 function clearImplementInfo(){
 	
-}/**设置设备维修申请人 */
+}
+/**设置设备维修申请人 */
 function setProposer(){
 	$.ajax({
 		contenType:'application/json',
@@ -291,8 +305,8 @@ function setConsumptionSpart(){
         skin:'', //样式类名
         anim:2,
         shade: 0.3,
-        title:'配件维护',
-        area:[ '780px', '650px' ],
+        title:'零配件及材料耗用维护',
+        area:[ '880px', '650px' ],
         btn:['保存','关闭'],
         content: $("#setConsumptionSpart-form"),
         success: function (layero, index){
@@ -303,27 +317,82 @@ function setConsumptionSpart(){
 				data:"equipid=-1",
 				url:"../storestockgoodsinfo/goodsdetailjson.do",
 				success:function(data){
-					$("#setConsumptionSpart-form #equipname").html($("#equipname-label").html());
-					$("#setConsumptionSpart-form #parantequip").html($("#equipparent-label").html()!=""?$("#equipparent-label").html():"无");
+					$("#setConsumptionSpart-form #equipname").html($("#servicingImpManage-info #equip-name").val());
+					$("#setConsumptionSpart-form #equipmodel").html($("#servicingImpManage-info #modelnumber").html()!=""?$("#servicingImpManage-info #modelnumber").html():"无");
 					var setting={
 				        callback:{
-				        	onClick:clickGoodsModelNumber
+				        	onClick:clickConsumptionSpart
 		        		}
 					};
-					$.fn.zTree.init($("#setConsumptionSpart-form #equipsparts-tree"), setting, JSON.parse(data));
-					fuzzySearch('equipsparts-tree','#setConsumptionSpart-form #sreach-btn',null,true);
+					$.fn.zTree.init($("#setConsumptionSpart-form #ConsumptionSpart-tree"), setting, JSON.parse(data));
+					fuzzySearch('ConsumptionSpart-tree','#setConsumptionSpart-form #sreach-btn',null,true);
 				}
 			})
+			$("#servicingImpManage-info #ConsumptionSpart tr:gt(0)").each(function(){
+			$("#setConsumptionSpart-form #partslist-table").append(this)
+	})
 		},
 		yes:function(index){
-        	insertParts(index);
+        	setConsumptionSpartInfo(index);
         },
         btn2:function(index){
         	layer.close(index);
         },
         end: function(index, layero){
-        	clearPartsInfo();
-        	$("#setparts-form").hide();        	
+        	//clearPartsInfo();
+        	$("#setConsumptionSpart-form").hide();
         }
 	})
+}
+
+function clickConsumptionSpart(event, treeId, treeNode){
+	if(!treeNode.isParent){
+		var flag=true;
+		$("#setConsumptionSpart-form #partslist-table tr").each(function(){
+			if($(this).find(":input:first").val()==treeNode.id){
+				layer.msg("此配件已选择");
+				flag=false;
+				console.log("break")
+			}
+			console.log("true")
+		})
+		if(flag){
+			var goodsnode=treeNode.getParentNode();
+			var goodstypenode=goodsnode.getParentNode();
+			var trhtml=createConsumptionindex(goodsnode,goodstypenode,treeNode);
+			$("#setConsumptionSpart-form #partslist-table").append(trhtml)
+		}
+	}
+}
+
+function createConsumptionindex(goodsnode,goodstypenode,treeNode){
+	var thtml="<tr><input type='hidden' name='model' value='"+treeNode.id+"'>"+
+				"<td>"+goodstypenode.name+"</td>"+
+				"<td>"+goodsnode.name+"</td>"+
+				"<td>"+treeNode.name+"</td>"+
+				"<td><input name='quantity' class='form-control needing' style='height:20px;' value='1'></td>"+
+				"<td>"+treeNode.unit+"</td>"+
+				"<td><i class='layui-icon point' title='删除'  onclick='removeConsumptionindex(this)'>&#xe616</i></td></tr>"
+	return thtml;
+}
+
+function removeConsumptionindex(e){
+	layer.open({
+		type:0,
+		title:"删除",
+		btn:["确定","取消"],
+		content:"确定撤销增加此配件吗?",
+		yes:function(){
+			$(e).parent().parent().remove();
+			layer.close(layer.index)
+		}
+	})
+}
+
+function setConsumptionSpartInfo(index){
+	$("#servicingImpManage-info #ConsumptionSpart tr:gt(0)").remove();
+	$("#setConsumptionSpart-form #partslist-table tr:gt(0)").each(function(){
+		$("#servicingImpManage-info #ConsumptionSpart").append(this)
+	})
+	layer.close(index)
 }

@@ -21,6 +21,7 @@ public class EquipUtile {
 		public int id;
 		public Object pId;
 		public String name;
+		public String equip_code;
 		public String title;
 		public String icon;
 		public Integer level;
@@ -30,6 +31,10 @@ public class EquipUtile {
 		
 		public int getId() {
 			return this.id;
+		}
+		
+		public String getEquipCode() {
+			return this.equip_code;
 		}
 	}
 	public static List<EquipObject> setTreeIcon(List<EquipObject> equiplist){
@@ -61,6 +66,7 @@ public class EquipUtile {
 			object.id=equip.getId();
 			object.pId=equip.getParentId();
 			object.name=equip.getEquipName();
+			object.equip_code=equip.getEquipCode();
 			object.level=equip.getEquipLevel();
 			object.title=equip.getEquipCode();
 			mapping.put(object.id+"", object);
@@ -85,13 +91,13 @@ public class EquipUtile {
 			if(equip.children!=null) {
 				for(EquipObject cequip:equip.children) {
 					if(cequip.children!=null) {
-						cequip.children=cequip.children.stream().sorted(Comparator.comparing(EquipObject::getId)).collect(Collectors.toList());
+						cequip.children=cequip.children.stream().sorted(Comparator.comparing(EquipObject::getEquipCode)).collect(Collectors.toList());
 					}
 				}
-				equip.children=equip.children.stream().sorted(Comparator.comparing(EquipObject::getId)).collect(Collectors.toList());
+				equip.children=equip.children.stream().sorted(Comparator.comparing(EquipObject::getEquipCode)).collect(Collectors.toList());
 			}
 		}
-		equiptree=equiptree.stream().sorted(Comparator.comparing(EquipObject::getId)).collect(Collectors.toList());
+		equiptree=equiptree.stream().sorted(Comparator.comparing(EquipObject::getEquipCode)).collect(Collectors.toList());
 		return equiptree;
 	}
 	
