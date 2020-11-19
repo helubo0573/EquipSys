@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011095"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011192"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -75,11 +75,11 @@ layui.use('laydate', function(){
 		</div>
 	</div>
 	<form id="servicingImpManage-info" class="form-horizontal box-div" style="display: none;">
-		<input type="hidden" id="id" name="id">
-		<input type="hidden" id="proposer-hd" name="proposer">
-		<input type="hidden" id="dept-id" name="deptid">
-		<input type="hidden" id="equip-id" name="equipid">
-		<input type="hidden" id="Transactor-id" name="Transactorid">
+		<input type="hidden" id="id" name="id">	<!-- 维修单id -->
+		<input type="hidden" id="proposer-hd" name="proposer">	<!-- 申请维修人id -->
+		<input type="hidden" id="dept-id" name="deptid">	<!-- 维修部门id -->
+		<input type="hidden" id="equip-id" name="equipid">	<!-- 维修设备id -->
+		<input type="hidden" id="Transactor-id" name="Transactorid">	<!-- 维修组人员 -->
 		<table class="table table-bordered layeropen">
 			<tr>
 				<td colspan="4" align="center" style="font-weight: bold;">
@@ -87,20 +87,26 @@ layui.use('laydate', function(){
 				</td>
 			</tr>
 			<tr>
-				<th width="80px">申请时间</th><td width="255px"><input class="layui-input form-control point needing layedate date-input" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly></td>
-				<th width="80px">故障时间</th><td ><input class="layui-input form-control point needing layedate date-input" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly></td>
+				<th width="80px">申请时间</th>
+				<td width="255px">
+					<input class="layui-input form-control point needing layedate date-input" name="application_time" id="application_time" placeholder="yyyy-MM-dd" readonly data-name='申请时间'>
+				</td>
+				<th width="80px">故障时间</th>
+				<td>
+					<input class="layui-input form-control point needing layedate date-input" name="backfire_time" id="backfire_time" placeholder="yyyy-MM-dd" readonly data-name='故障发生时间'>
+				</td>
 			</tr>
 			<tr>
 				<th width="80px;">申请人</th>
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
-						<input class="form-control point" id="proposer" style="width: 100px" readonly onclick="setProposer()" placeholder="点击选择">
+						<input class="form-control point needing" id="proposer" style="width: 100px" readonly onclick="setProposer()" placeholder="点击选择" data-name='申请人'>
 				        <span id="dept" style="width: 140px" class="th input-group-addon"></span>
 				    </div>
 				</td>
 				<th width="80px;">设备名称</th>
 				<td>
-					<input class="form-control point" data-parent="" id="equip-name" readonly onclick="setServicingEquip()" placeholder="点击选择设备">
+					<input class="form-control point needing" data-parent="" id="equip-name" readonly onclick="setServicingEquip()" placeholder="点击选择设备" data-name='设备'>
 				</td>
 			</tr>
 			<tr>				
@@ -123,29 +129,29 @@ layui.use('laydate', function(){
 					维修单位
 				</th>
 				<td>
-					<input class="form-control point" data-parent="" id="op-dept" readonly onclick="ServicingDept()" placeholder="点击选择维修单位">
+					<input class="form-control point needing" data-parent="" id="op-dept" readonly onclick="ServicingDept()" placeholder="点击选择维修单位" data-name='维修单位'>
 				</td>
 				<th>维修时间</th>
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
-				        <input class="layui-input form-control point layedate searchdatetime" id="search-sbackfiredate" style="width: 140px" name="application_time" id="application_time" placeholder="开始时间" readonly>
+				        <input class="layui-input form-control point layedate searchdatetime needing" id="search-sbackfiredate" style="width: 140px" name="SvrStartTime" id="application_time" placeholder="开始时间" readonly data-name='维修开始时间'>
 				        <span class="th input-group-addon">-</span>
-				        <input class="layui-input form-control point layedate searchdatetime" id="search-ebackfiredate" style="width: 140px" name="application_time" id="application_time" placeholder="结束时间" readonly>
+				        <input class="layui-input form-control point layedate searchdatetime needing" id="search-ebackfiredate" style="width: 140px" name="SvrEndTime" id="application_time" placeholder="结束时间" readonly data-name='维修结束时间'>
 			       </div>
 				</td>
 			</tr>
 			<tr>
 				<th>维修人员</th>
-				<td colspan="3"><input class="form-control point" id="setTransactor" readonly onclick="setTransactorInfo()" placeholder="点击选择维修组人员"></td>
+				<td colspan="3"><input class="form-control point needing" id="setTransactor" readonly onclick="setTransactorInfo()" placeholder="点击选择维修组人员" data-name='维修人员'></td>
 			</tr>
 			<tr>
-				<th>故障描述</th><td colspan="3"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
+				<th>故障描述</th><td colspan="3"><textarea id="FaultSketch" name="FaultSketch" class="form-control needing" style="resize:none;" rows="2" data-name='故障描述'></textarea></td>
 			</tr>
 			<tr>
-				<th>故障分析</th><td colspan="3"><textarea  class="form-control" style="resize:none;" rows="2"></textarea></td>
+				<th>故障分析</th><td colspan="3"><textarea id="FaultAnalyse" name="FaultAnalyse"  class="form-control needing" style="resize:none;" rows="2" data-name='开始时间'故障分析></textarea></td>
 			</tr>
 			<tr>
-				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea class="form-control" style="resize:none;" rows="3"></textarea></td>
+				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea id="FaultResult" name="FaultResult" class="form-control needing" style="resize:none;" rows="3" data-name='维修情况及结果综述'></textarea></td>
 			</tr>
 			<tr>
 				<th height="200px" style="text-align: center;">

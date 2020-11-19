@@ -12,4 +12,7 @@ import com.stone.equipsys.core.domain.EquipServicingImplement;
  */
 public interface EquipServicingImplementService extends BaseService<EquipServicingImplement, Long>{
 
+	Long insertRetrunId(EquipServicingImplement service);
+	
+	Long updateRetrun(EquipServicingImplement service);
 }

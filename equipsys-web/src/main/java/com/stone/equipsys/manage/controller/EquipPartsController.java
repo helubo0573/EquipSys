@@ -70,6 +70,7 @@ public class EquipPartsController {
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
+	
 	@RequestMapping(value="equipparts/saveCustomPart")
 	public void saveCustomPart(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value="partsid",defaultValue = "0")Long id,

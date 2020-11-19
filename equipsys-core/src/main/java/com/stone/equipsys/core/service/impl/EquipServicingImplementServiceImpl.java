@@ -33,5 +33,17 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	public BaseMapper<EquipServicingImplement, Long> getMapper() {
 		return equipServicingImplementMapper;
 	}
+
+	@Override
+	public Long insertRetrunId(EquipServicingImplement service) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long updateRetrun(EquipServicingImplement service) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

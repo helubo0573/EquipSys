@@ -61,21 +61,23 @@ function showImplementInfo(type){
 			}
 		},
 		yes:function(index){
-			$.ajax({
-				contenType:'application/json',
-				Type:'POST',
-				dataType:'json',
-				url:"../EquipServicingApplication/save.do",
-				data:$("#servicingImpManage-info").serialize()+"&Spart="+JSON.stringify(ConsumptionSpartlist()),
-				success:function(data){
-					layer.msg(data.msg)
-					if(data.code==200){
-						getEquipServicingApplicationList(1)
-						clearApplicationInfo();
-						layer.close(index);
+			if(checkImplementInfo()){
+				$.ajax({
+					contenType:'application/json',
+					Type:'POST',
+					dataType:'json',
+					url:"../EquipServicingImplement/save.do",
+					data:$("#servicingImpManage-info").serialize()+"&parts="+JSON.stringify(Consumptionspartlist()),
+					success:function(data){
+						layer.msg(data.msg)
+						if(data.code==200){
+							getEquipServicingApplicationList(1)
+							clearApplicationInfo();
+							layer.close(index);
+						}
 					}
-				}
-			})
+				})
+			}
 		},
 		end: function(index, layero){
         	clearImplementInfo();
@@ -84,17 +86,30 @@ function showImplementInfo(type){
 	})
 }
 
-function ConsumptionSpartlist(){
+function Consumptionspartlist(){
 	var data=[];
-	$("#setConsumptionSpart-form #partslist-table tr:gt(0)").each(function(){
-		var EquipPartsInfo={};
-		EquipPartsInfo.equipId=modelid;
-		EquipPartsInfo.goodsModelId=$(this).find("input[name=model]").val();
-		EquipPartsInfo.partsName=$(this).children('td').eq(1).html()+"_"+$(this).children('td').eq(2).html();
-		EquipPartsInfo.quantity=$(this).find("input[name=quantity]").val();
-		data.push(EquipPartsInfo)
+	$("#servicingImpManage-info #ConsumptionSpart tr:gt(0)").each(function(){
+		var ConsumptionsPartsInfo={};
+		ConsumptionsPartsInfo.partsId=$(this).find("#partid").val();
+		ConsumptionsPartsInfo.partsName=$(this).children('td').eq(2).html();
+		ConsumptionsPartsInfo.useQuantity=$(this).find("input[name=quantity]").val();
+		console.log(ConsumptionsPartsInfo)
+		data.push(ConsumptionsPartsInfo)
 	})
 	return data
+}
+/**维修单信息校验 */
+function checkImplementInfo(){
+	var flag=0;
+	$("#servicingImpManage-info .needing").each(function(){
+		if($(this).val()==""){
+			layer.msg($(this).attr("data-name")+"不能为空");
+			$(this).focus();
+			flag+=1;
+			return false;
+		}
+	})
+	return flag>0?false:true;
 }
 /**清空维修单信息 */
 function clearImplementInfo(){
@@ -113,10 +128,9 @@ function setProposer(){
 				type: 1,
                 skin: 'layui-layer-demo', //样式类名
                 anim: 2,
-                area : [ '400px', '500px' ],
+                area : [ '250px', '500px' ],
                 shadeClose: true, //开启遮罩关闭
                 content: '<ul id="proposertree" class="ztree"></ul>',
-                btn:['确定','取消'],
                 success: function (layero, index) {
                 	var setting = {
             			callback:{
@@ -366,11 +380,11 @@ function clickConsumptionSpart(event, treeId, treeNode){
 }
 
 function createConsumptionindex(goodsnode,goodstypenode,treeNode){
-	var thtml="<tr><input type='hidden' name='model' value='"+treeNode.id+"'>"+
+	var thtml="<tr><input type='hidden' id='partid' value='"+treeNode.id+"'>"+
 				"<td>"+goodstypenode.name+"</td>"+
 				"<td>"+goodsnode.name+"</td>"+
 				"<td>"+treeNode.name+"</td>"+
-				"<td><input name='quantity' class='form-control needing' style='height:20px;' value='1'></td>"+
+				"<td><input class='form-control needing' style='height:20px;' value='1'></td>"+
 				"<td>"+treeNode.unit+"</td>"+
 				"<td><i class='layui-icon point' title='删除'  onclick='removeConsumptionindex(this)'>&#xe616</i></td></tr>"
 	return thtml;

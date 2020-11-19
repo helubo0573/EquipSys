@@ -8,9 +8,9 @@ import java.util.Date;
  * 
  * @author stone
  * @version 1.0.0
- * @date 2020-09-15 11:28:19
+ * @date 2020-11-17 09:03:42
  */
- public class Equipservicingimplementparts implements Serializable {
+ public class EquipServicingImplementParts implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,11 +20,17 @@ import java.util.Date;
     /*** 维修单id*/
     private Long implementId;
 
+    /*** 设备id*/
+    private Long equipId;
+
     /*** 配件id*/
     private Long partsId;
 
     /*** 配件材料名称*/
     private String partsName;
+
+    /*** 耗用数量*/
+    private Integer useQuantity;
 
     /*** 使用类型  0:更换  1:消耗*/
     private Integer useType;
@@ -62,6 +68,22 @@ import java.util.Date;
         this.implementId = implementId;
     }
 
+    /*** 获取设备id
+    *
+    * @return 设备id
+    */
+    public Long getEquipId(){
+        return equipId;
+    }
+
+    /*** 设置设备id
+    * 
+    * @param equipId 要设置的设备id
+    */
+    public void setEquipId(Long equipId){
+        this.equipId = equipId;
+    }
+
     /*** 获取配件id
     *
     * @return 配件id
@@ -92,6 +114,22 @@ import java.util.Date;
     */
     public void setPartsName(String partsName){
         this.partsName = partsName;
+    }
+
+    /*** 获取耗用数量
+    *
+    * @return 耗用数量
+    */
+    public Integer getUseQuantity(){
+        return useQuantity;
+    }
+
+    /*** 设置耗用数量
+    * 
+    * @param useQuantity 要设置的耗用数量
+    */
+    public void setUseQuantity(Integer useQuantity){
+        this.useQuantity = useQuantity;
     }
 
     /*** 获取使用类型  0:更换  1:消耗

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- equip_servicing_implement_parts表:设备维修零件耗用表模块 -->
-<mapper namespace="com.stone.equipsys.core.mapper.EquipservicingimplementpartsMapper">
+<mapper namespace="com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper">
     <!--返回Map-->        
-    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.Equipservicingimplementparts">
+    <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.EquipServicingImplementParts">
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="implement_id" property="implementId" jdbcType="BIGINT" />
+        <result column="equip_id" property="equipId" jdbcType="BIGINT" />
         <result column="parts_id" property="partsId" jdbcType="BIGINT" />
         <result column="parts_name" property="partsName" jdbcType="VARCHAR" />
+        <result column="use_quantity" property="useQuantity" jdbcType="INTEGER" />
         <result column="use_type" property="useType" jdbcType="INTEGER" />
     </resultMap>
     
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,implement_id,parts_id,parts_name,use_type 
+        id,implement_id,equip_id,parts_id,parts_name,use_quantity,use_type 
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
@@ -25,11 +27,17 @@
             <if test="implementId != null and implementId != '' ">
                 and implement_id = #{implementId,jdbcType=BIGINT}
             </if>
+            <if test="equipId != null and equipId != '' ">
+                and equip_id = #{equipId,jdbcType=BIGINT}
+            </if>
             <if test="partsId != null and partsId != '' ">
                 and parts_id = #{partsId,jdbcType=BIGINT}
             </if>
             <if test="partsName != null and partsName != '' ">
                 and parts_name = #{partsName,jdbcType=VARCHAR}
+            </if>
+            <if test="useQuantity != null and useQuantity != '' ">
+                and use_quantity = #{useQuantity,jdbcType=INTEGER}
             </if>
             <if test="useType != null and useType != '' ">
                 and use_type = #{useType,jdbcType=INTEGER}
@@ -38,16 +46,18 @@
     </sql>
     
     
-    <insert id="save" parameterType="com.stone.equipsys.core.domain.Equipservicingimplementparts">
-        insert into equip_servicing_implement_parts(implement_id,parts_id,parts_name,use_type)values(#{implementId,jdbcType=BIGINT},#{partsId,jdbcType=BIGINT},#{partsName,jdbcType=VARCHAR},#{useType,jdbcType=INTEGER})
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipServicingImplementParts">
+        insert into equip_servicing_implement_parts(implement_id,equip_id,parts_id,parts_name,use_quantity,use_type)values(#{implementId,jdbcType=BIGINT},#{equipId,jdbcType=BIGINT},#{partsId,jdbcType=BIGINT},#{partsName,jdbcType=VARCHAR},#{useQuantity,jdbcType=INTEGER},#{useType,jdbcType=INTEGER})
     </insert>
 
     
-    <update id="update" parameterType="com.stone.equipsys.core.domain.Equipservicingimplementparts">
+    <update id="update" parameterType="com.stone.equipsys.core.domain.EquipServicingImplementParts">
         update equip_servicing_implement_parts set 
             implement_id = #{implementId,jdbcType=BIGINT},
+            equip_id = #{equipId,jdbcType=BIGINT},
             parts_id = #{partsId,jdbcType=BIGINT},
             parts_name = #{partsName,jdbcType=VARCHAR},
+            use_quantity = #{useQuantity,jdbcType=INTEGER},
             use_type = #{useType,jdbcType=INTEGER}
         where id = #{id ,jdbcType=INTEGER}
     </update>
@@ -59,11 +69,17 @@
             <if test="implementId != null and implementId != '' ">        
                 implement_id = #{implementId,jdbcType=BIGINT},                
             </if>
+            <if test="equipId != null and equipId != '' ">        
+                equip_id = #{equipId,jdbcType=BIGINT},                
+            </if>
             <if test="partsId != null and partsId != '' ">        
                 parts_id = #{partsId,jdbcType=BIGINT},                
             </if>
             <if test="partsName != null and partsName != '' ">        
                 parts_name = #{partsName,jdbcType=VARCHAR},                
+            </if>
+            <if test="useQuantity != null and useQuantity != '' ">        
+                use_quantity = #{useQuantity,jdbcType=INTEGER},                
             </if>
             <if test="useType != null and useType != '' ">        
                 use_type = #{useType,jdbcType=INTEGER}                
