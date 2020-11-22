@@ -180,4 +180,9 @@
     	from equip_servicing_application
     	where id = #{id,jdbcType=INTEGER}
     </delete>
+    
+    <insert id="insertReturnId"  parameterType="com.stone.equipsys.core.domain.EquipServicingApplication" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+    	insert into equip_servicing_application(equip_id,proposer,application_time,backfire_time,remarks)
+    	values(#{equipId,jdbcType=BIGINT},#{proposer,jdbcType=BIGINT},#{applicationTime,jdbcType=TIMESTAMP},#{backfireTime,jdbcType=TIMESTAMP},#{remarks,jdbcType=VARCHAR})
+    </insert>
 </mapper>

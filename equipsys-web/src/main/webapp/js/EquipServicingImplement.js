@@ -71,8 +71,8 @@ function showImplementInfo(type){
 					success:function(data){
 						layer.msg(data.msg)
 						if(data.code==200){
-							getEquipServicingApplicationList(1)
-							clearApplicationInfo();
+							getEquipServicingImplementList(1)
+							clearImplementInfo();
 							layer.close(index);
 						}
 					}

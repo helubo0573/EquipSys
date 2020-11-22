@@ -22,6 +22,8 @@ public interface EquipServicingApplicationMapper extends BaseMapper<EquipServici
     
 	EquipServicingApplicationModel findExtByPrimary(Long id);
 	
+	Long insertReturnId(EquipServicingApplication application);
+	
 	void deleteById(Long id);
 	
 	int countByEquipId(Long equipid);

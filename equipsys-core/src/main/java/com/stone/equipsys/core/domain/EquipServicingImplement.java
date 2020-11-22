@@ -16,7 +16,13 @@ import java.util.Date;
 
     /*** 主键Id*/
     private Long id;
-
+    
+    /***维修申请人*/
+    private Long proposerId;
+    
+    /*** 设备编号*/
+    private Long equipId;
+    
     /*** 申请单id*/
     private Long applicationId;
 
@@ -51,6 +57,25 @@ import java.util.Date;
     private Integer departmentManagerConfirm;
 
 
+    public EquipServicingImplement() {};
+    
+    public EquipServicingImplement(Long id,Long proposerId,Long equipId,Long applicationId,int servicingDept,Date servicingTimeStart,Date servicingTimeEnd,String failureBewrite,
+    		String failureCause,String servicingCause,int servicingStatus,int servicemanConfirm,int equipOpConfirm,int departmentManagerConfirm) {
+    	if(id!=0)	this.setId(id);
+    	if(proposerId!=0) this.setProposerId(proposerId);
+    	if(equipId!=0)	this.setEquipId(equipId);
+    	if(applicationId!=0)	this.setApplicationId(applicationId);
+    	if(servicingDept!=0)	this.setServicingDept(servicingDept);
+    	if(servicingTimeStart!=null)	this.setServicingTimeStart(servicingTimeStart);
+    	if(servicingTimeEnd!=null)		this.setServicingTimeEnd(servicingTimeEnd);
+    	this.setFailureBewrite(failureBewrite);
+    	this.setFailureCause(failureCause);
+    	this.setServicingCause(servicingCause);
+    	this.setServicingStatus(servicingStatus);
+    	this.setServicemanConfirm(servicemanConfirm);
+    	this.setEquipOpConfirm(equipOpConfirm);
+    	this.setDepartmentManagerConfirm(departmentManagerConfirm);
+    }
     /*** 获取主键Id
     *
     * @return id
@@ -242,5 +267,21 @@ import java.util.Date;
     public void setDepartmentManagerConfirm(Integer departmentManagerConfirm){
         this.departmentManagerConfirm = departmentManagerConfirm;
     }
+
+	public Long getEquipId() {
+		return equipId;
+	}
+
+	public void setEquipId(Long equipId) {
+		this.equipId = equipId;
+	}
+
+	public Long getProposerId() {
+		return proposerId;
+	}
+
+	public void setProposerId(Long proposerId) {
+		this.proposerId = proposerId;
+	}
 
 }

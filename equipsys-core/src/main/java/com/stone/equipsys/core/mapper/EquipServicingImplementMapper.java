@@ -14,6 +14,6 @@ import com.stone.equipsys.core.domain.EquipServicingImplement;
 @RDBatisDao
 public interface EquipServicingImplementMapper extends BaseMapper<EquipServicingImplement, Long> {
 
-    
+    Long insertReturnId(EquipServicingImplement service);
 
 }

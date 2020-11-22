@@ -6,6 +6,8 @@
     <resultMap id="BaseResultMap" type="com.stone.equipsys.core.domain.EquipServicingImplement">
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="application_id" property="applicationId" jdbcType="BIGINT" />
+        <result column="proposer_id" property="proposerId" jdbcType="BIGINT"/>
+        <result column="equip_id" property="equipId" jdbcType="BIGINT" />
         <result column="servicing_dept" property="servicingDept" jdbcType="INTEGER" />
         <result column="servicing_time_start" property="servicingTimeStart" jdbcType="TIMESTAMP" />
         <result column="servicing_time_end" property="servicingTimeEnd" jdbcType="TIMESTAMP" />
@@ -20,8 +22,13 @@
     
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,application_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm 
+        id,application_id,proposer_id,equip_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm 
     </sql>
+    
+    <sql id="Ext_Column_List">
+    	id,application_id,proposer_id,equip_id,servicing_dept,servicing_status
+    </sql>
+    
     
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
@@ -31,6 +38,12 @@
             </if>
             <if test="applicationId != null and applicationId != '' ">
                 and application_id = #{applicationId,jdbcType=BIGINT}
+            </if>
+            <if test="proposerId != null and proposerId != '' ">
+                and proposer_id = #{proposerId,jdbcType=BIGINT}
+            </if>
+            <if test="equipId != null and equipId != '' ">
+                and equip_id = #{equipId,jdbcType=BIGINT}
             </if>
             <if test="servicingDept != null and servicingDept != '' ">
                 and servicing_dept = #{servicingDept,jdbcType=INTEGER}
@@ -65,15 +78,21 @@
         </trim>
     </sql>
     
+    <sql id="ExtSearchBy">
     
-    <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipServicingImplement">
-        insert into equip_servicing_implement(application_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm)values(#{applicationId,jdbcType=BIGINT},#{servicingDept,jdbcType=INTEGER},#{servicingTimeStart,jdbcType=TIMESTAMP},#{servicingTimeEnd,jdbcType=TIMESTAMP},#{failureBewrite,jdbcType=VARCHAR},#{failureCause,jdbcType=VARCHAR},#{servicingCause,jdbcType=VARCHAR},#{servicingStatus,jdbcType=INTEGER},#{servicemanConfirm,jdbcType=INTEGER},#{equipOpConfirm,jdbcType=INTEGER},#{departmentManagerConfirm,jdbcType=INTEGER})
+    </sql>
+    
+    <insert id="save" parameterType="com.stone.equipsys.core.domain.EquipServicingImplement" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into equip_servicing_implement(application_id,proposer_id,equip_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm)
+        values(#{applicationId,jdbcType=BIGINT},#{proposerId,jdbcType=BIGINT},#{equipId,jdbcType=BIGINT},#{servicingDept,jdbcType=INTEGER},#{servicingTimeStart,jdbcType=TIMESTAMP},#{servicingTimeEnd,jdbcType=TIMESTAMP},#{failureBewrite,jdbcType=VARCHAR},#{failureCause,jdbcType=VARCHAR},#{servicingCause,jdbcType=VARCHAR},#{servicingStatus,jdbcType=INTEGER},#{servicemanConfirm,jdbcType=INTEGER},#{equipOpConfirm,jdbcType=INTEGER},#{departmentManagerConfirm,jdbcType=INTEGER})
     </insert>
 
     
     <update id="update" parameterType="com.stone.equipsys.core.domain.EquipServicingImplement">
         update equip_servicing_implement set 
             application_id = #{applicationId,jdbcType=BIGINT},
+            proposer_id = #{proposerId,jdbcType=BIGINT},
+            equip_id=#{equipId,jdbcType=BIGINT},
             servicing_dept = #{servicingDept,jdbcType=INTEGER},
             servicing_time_start = #{servicingTimeStart,jdbcType=TIMESTAMP},
             servicing_time_end = #{servicingTimeEnd,jdbcType=TIMESTAMP},
@@ -93,6 +112,12 @@
           <set>
             <if test="applicationId != null and applicationId != '' ">        
                 application_id = #{applicationId,jdbcType=BIGINT},                
+            </if>
+            <if test="proposerId != null and proposerId != '' ">        
+                proposer_id = #{proposerId,jdbcType=BIGINT},                
+            </if>
+            <if test="equipId != null and equipId != '' ">
+                equip_id = #{equipId,jdbcType=BIGINT},
             </if>
             <if test="servicingDept != null and servicingDept != '' ">        
                 servicing_dept = #{servicingDept,jdbcType=INTEGER},                
@@ -150,4 +175,15 @@
         <include refid="searchBy"/>
     </select>
     
+    <insert id="insertReturnId" parameterType="com.stone.equipsys.core.domain.EquipServicingImplement" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into equip_servicing_implement(application_id,proposer_id,equip_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm)
+        values(#{applicationId,jdbcType=BIGINT},#{proposerId,jdbcType=BIGINT},#{equipId,jdbcType=BIGINT},#{servicingDept,jdbcType=INTEGER},#{servicingTimeStart,jdbcType=TIMESTAMP},#{servicingTimeEnd,jdbcType=TIMESTAMP},#{failureBewrite,jdbcType=VARCHAR},#{failureCause,jdbcType=VARCHAR},#{servicingCause,jdbcType=VARCHAR},#{servicingStatus,jdbcType=INTEGER},#{servicemanConfirm,jdbcType=INTEGER},#{equipOpConfirm,jdbcType=INTEGER},#{departmentManagerConfirm,jdbcType=INTEGER})
+    </insert>
+    
+    <select id="listExtSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Ext_Column_List" />
+        from equip_servicing_implement
+        <include refid="ExtSearchBy"/>
+    </select>
 </mapper>

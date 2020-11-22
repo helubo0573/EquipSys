@@ -59,6 +59,7 @@ public class EquipController {
 		request.setAttribute("deptlist", deptlist);
 		return PathConstant.EquipInfoManage;
 	}
+	
 	@RequestMapping("/saveequip")
 	@RequiresPermissions("equip:info:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,

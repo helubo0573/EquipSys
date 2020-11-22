@@ -1,5 +1,7 @@
 package com.stone.equipsys.core.service;
 
+import java.util.Date;
+
 import com.stone.equipsys.core.common.service.BaseService;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
 
@@ -15,4 +17,7 @@ public interface EquipServicingImplementService extends BaseService<EquipServici
 	Long insertRetrunId(EquipServicingImplement service);
 	
 	Long updateRetrun(EquipServicingImplement service);
+	
+	boolean newServicingImplementService(Long proposer,int deptid,Long equipid,String Transactorid,Date application_time,
+			Date backfire_time,Date SvrStartTime,Date SvrEndTime,String failureBewrite,String failureCause,String servicingCause,String parts);
 }

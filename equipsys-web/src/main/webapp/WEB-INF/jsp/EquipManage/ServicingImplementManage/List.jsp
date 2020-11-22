@@ -20,8 +20,8 @@
 			<th>操作</th>
 		</tr>
 		<c:choose>
-			<c:when test="${not empty applicationList }">
-				<c:forEach items="${applicationList }" var="application">
+			<c:when test="${not empty ServicingImplementList }">
+				<c:forEach items="${ServicingImplementList }" var="ServicingImplement">
 					<tr>
 						<td><fmt:formatDate value="${application.applicationTime }" pattern="yyyy-MM-dd"/></td>
 						<td>${application.equipName }</td>

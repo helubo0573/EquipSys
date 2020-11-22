@@ -145,13 +145,13 @@ layui.use('laydate', function(){
 				<td colspan="3"><input class="form-control point needing" id="setTransactor" readonly onclick="setTransactorInfo()" placeholder="点击选择维修组人员" data-name='维修人员'></td>
 			</tr>
 			<tr>
-				<th>故障描述</th><td colspan="3"><textarea id="FaultSketch" name="FaultSketch" class="form-control needing" style="resize:none;" rows="2" data-name='故障描述'></textarea></td>
+				<th>故障描述</th><td colspan="3"><textarea id="FaultSketch" name="failureBewrite" class="form-control needing" style="resize:none;" rows="2" data-name='故障描述'></textarea></td>
 			</tr>
 			<tr>
-				<th>故障分析</th><td colspan="3"><textarea id="FaultAnalyse" name="FaultAnalyse"  class="form-control needing" style="resize:none;" rows="2" data-name='开始时间'故障分析></textarea></td>
+				<th>故障分析</th><td colspan="3"><textarea id="FaultAnalyse" name="failureCause"  class="form-control needing" style="resize:none;" rows="2" data-name='开始时间'故障分析></textarea></td>
 			</tr>
 			<tr>
-				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea id="FaultResult" name="FaultResult" class="form-control needing" style="resize:none;" rows="3" data-name='维修情况及结果综述'></textarea></td>
+				<th style="vertical-align: middle;">维修情况及结果综述</th><td colspan="3"><textarea id="FaultResult" name="servicingCause" class="form-control needing" style="resize:none;" rows="3" data-name='维修情况及结果综述'></textarea></td>
 			</tr>
 			<tr>
 				<th height="200px" style="text-align: center;">
