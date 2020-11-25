@@ -17,7 +17,7 @@ function getEquipServicingImplementList(page){
 	$("#servicingImpManage-list").load("../EquipServicingImplement/search.do",params);
 }
 /**显示维修单 */
-function showImplementInfo(type){
+function showImplementInfo(type,id){
 	layer.open({
 		type:1,
         skin:'layui-layer-demo', //样式类名
@@ -25,7 +25,7 @@ function showImplementInfo(type){
         shade: 0.3,
         title:type==0?'新增设备维修单':"修改设备维修单",
         area:[ '760px', '860px' ],
-        btn:type!=2?['保存','关闭']:"",
+        btn:type!=2?['保存','关闭']:['关闭'],
         content: $("#servicingImpManage-info"),
         success: function (layero, index){
 			if(type==0){
@@ -43,40 +43,49 @@ function showImplementInfo(type){
         			Type:'POST',
         			dataType:'json',
 					data:"id="+id,
-        			url:"../EquipServicingApplication/getApplication.do",
+        			url:"../EquipServicingImplement/getDetailInfo.do",
         			success:function(data){
-						var appinfo=data.application;
-						$("#servicingImpManage-info #id").val(appinfo.id);
-						$("#servicingImpManage-info #dept").html(appinfo.proposDept);
-						$("#servicingImpManage-info #proposer").html(appinfo.proposerName);
-						$("#servicingImpManage-info #application_time").val(data.applicationTime);
-						$("#servicingImpManage-info #backfire_time").val(data.backfireTime);
-						$("#servicingImpManage-info #equip-name").val(appinfo.equipName);
-						$("#servicingImpManage-info #equip-id").val(appinfo.equipId);
-						$("#servicingImpManage-info #modelnumber").html(appinfo.equipModelNumber);
-						$("#servicingImpManage-info #location").html(appinfo.location);
-						$("#servicingImpManage-info #remarks").val(appinfo.remarks);
+						if(data.cod==200){
+							var info=data.data;
+							$("#servicingImpManage-info #id").val(appinfo.id);
+							$("#servicingImpManage-info #dept").html(appinfo.proposDept);
+							$("#servicingImpManage-info #proposer").html(appinfo.proposerName);
+							$("#servicingImpManage-info #application_time").val(data.applicationTime);
+							$("#servicingImpManage-info #backfire_time").val(data.backfireTime);
+							$("#servicingImpManage-info #equip-name").val(appinfo.equipName);
+							$("#servicingImpManage-info #equip-id").val(appinfo.equipId);
+							$("#servicingImpManage-info #modelnumber").html(appinfo.equipModelNumber);
+							$("#servicingImpManage-info #location").html(appinfo.location);
+							$("#servicingImpManage-info #remarks").val(appinfo.remarks);
+						}else{
+							layer.msg(data.msg)
+							layer.close(layer.index)
+						}
 					}
 				})
 			}
 		},
 		yes:function(index){
-			if(checkImplementInfo()){
-				$.ajax({
-					contenType:'application/json',
-					Type:'POST',
-					dataType:'json',
-					url:"../EquipServicingImplement/save.do",
-					data:$("#servicingImpManage-info").serialize()+"&parts="+JSON.stringify(Consumptionspartlist()),
-					success:function(data){
-						layer.msg(data.msg)
-						if(data.code==200){
-							getEquipServicingImplementList(1)
-							clearImplementInfo();
-							layer.close(index);
+			if(type!=2){
+				if(checkImplementInfo()){
+					$.ajax({
+						contenType:'application/json',
+						Type:'POST',
+						dataType:'json',
+						url:"../EquipServicingImplement/save.do",
+						data:$("#servicingImpManage-info").serialize()+"&parts="+JSON.stringify(Consumptionspartlist()),
+						success:function(data){
+							layer.msg(data.msg)
+							if(data.code==200){
+								getEquipServicingImplementList(1)
+								clearImplementInfo();
+								layer.close(index);
+							}
 						}
-					}
-				})
+					})
+				}
+			}else{
+				layer.close(index)
 			}
 		},
 		end: function(index, layero){
@@ -84,6 +93,30 @@ function showImplementInfo(type){
         	$("#servicingImpManage-info").hide();        	
         }		
 	})
+}
+
+function deleteImplement(id) {
+	layer.open({
+		type:0,
+		title:"删除申请单",
+		btn:["确定","取消"],
+		content:"是否确定删除此维修单?",
+		yes:function(){
+			$.ajax({
+				contenType:'application/json',
+				Type:'POST',
+				dataType:'json',
+				url:"../EquipServicingImplement/delete.do",
+				data:"id="+id,
+				success:function(data){
+					layer.msg(data.msg)
+					if(data.code==200){
+						getEquipServicingImplementList(1)
+					}
+				}
+			})
+		}
+	})	
 }
 
 function Consumptionspartlist(){

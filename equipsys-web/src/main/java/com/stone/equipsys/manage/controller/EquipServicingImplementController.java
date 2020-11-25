@@ -19,6 +19,7 @@ import com.stone.equipsys.core.common.constant.PathConstant;
 import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
+import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
 @Controller
 @RequestMapping("EquipServicingImplement")
@@ -26,11 +27,11 @@ public class EquipServicingImplementController {
 
 	@Resource
 	private EquipServicingImplementService EquipServicingImplementsvc;
-	
+	@Resource
 	private EquipServicingImplementMapper EquipServicingImplementmapper;
 	@RequestMapping("/Manage")
 	public String toPage(HttpServletResponse response, HttpServletRequest request) {
-		List<EquipServicingImplement> list=EquipServicingImplementmapper.listSelective(null);
+		List<EquipServicingImplementModel> list=EquipServicingImplementmapper.listExtSelective(null);
 		request.setAttribute("ServicingImplementList", list);
 		return PathConstant.EquipServicingImplementManage;
 	}
@@ -42,10 +43,31 @@ public class EquipServicingImplementController {
 			@RequestParam(value="eappdate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date eappdate,
 			@RequestParam(value="sbackfiredate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date sbackfiredate,
 			@RequestParam(value = "ebackfiredate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date ebackfiredate) {
-		
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("equipname", equipname);
+		param.put("sappdate", sappdate);
+		param.put("eappdate", eappdate);
+		param.put("sbackfiredate",sbackfiredate);
+		param.put("ebackfiredate", ebackfiredate);
+		List<EquipServicingImplementModel> list=EquipServicingImplementmapper.listExtSelective(param);
+		request.setAttribute("ServicingImplementList", list);
 		return PathConstant.EquipServicingImplementList;
 	}
 	
+	@RequestMapping("/getDetailInfo")
+	public void getDetailInfo(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "id",defaultValue = "0")Long id) {
+		EquipServicingImplement data=EquipServicingImplementmapper.findByPrimary(id);
+		HashMap<String, Object> res=new HashMap<String, Object>();
+		if(data!=null) {
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put("data", data);
+		}else {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
 	@ResponseBody
 	@RequestMapping("/save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
@@ -72,5 +94,10 @@ public class EquipServicingImplementController {
 			res.put(Constant.RESPONSE_CODE_MSG, "保存失败");
 		}
 		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/delete")
+	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) {
+		
 	}
 }

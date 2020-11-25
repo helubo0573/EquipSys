@@ -65,17 +65,22 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	public boolean newServicingImplementService(Long proposer, int deptid, Long equipid, String Transactorid,
 			Date application_time, Date backfire_time, Date SvrStartTime, Date SvrEndTime, String failureBewrite,
 			String failureCause, String servicingCause,String parts) {
-		EquipServicingApplication application=new EquipServicingApplication(0L,equipid,proposer,application_time,backfire_time,failureBewrite);
-		Long appid=ServicingApplicationmapper.insertReturnId(application);
-		EquipServicingImplement ServicingImplement=new EquipServicingImplement(0L,proposer,equipid,appid,deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
-		Long servicieid=insertRetrunId(ServicingImplement);
-		List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
-		for(EquipServicingImplementParts part:partslist) {
-			part.setImplementId(servicieid);
-			part.setEquipId(equipid);
-			EquipServicingImplementPartsmapper.save(part);
+		try {
+			EquipServicingApplication application=new EquipServicingApplication(0L,equipid,proposer,application_time,backfire_time,failureBewrite);
+			ServicingApplicationmapper.insertReturnId(application);
+			EquipServicingImplement ServicingImplement=new EquipServicingImplement(0L,proposer,equipid,application.getId(),deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
+			insertRetrunId(ServicingImplement);
+			List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
+			for(EquipServicingImplementParts part:partslist) {
+				part.setImplementId(ServicingImplement.getId());
+				part.setEquipId(equipid);
+				EquipServicingImplementPartsmapper.save(part);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 	
 }

@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011192"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011243"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
