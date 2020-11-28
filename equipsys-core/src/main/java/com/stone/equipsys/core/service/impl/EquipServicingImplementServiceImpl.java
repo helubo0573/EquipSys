@@ -1,6 +1,7 @@
 package com.stone.equipsys.core.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,11 +12,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.service.impl.BaseServiceImpl;
 import com.stone.equipsys.core.mapper.EquipServicingApplicationMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
+import com.stone.equipsys.core.model.EquipServicingApplicationModel;
+import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.domain.EquipServicingApplication;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
 import com.stone.equipsys.core.domain.EquipServicingImplementParts;
@@ -81,6 +86,14 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public Page<EquipServicingImplementModel> getModelList(HashMap<String, Object> param, int currentPage,
+			int pageSize) {
+		PageHelper.startPage(currentPage, pageSize);
+		List<EquipServicingImplementModel> list=equipServicingImplementMapper.listExtSelective(param);
+		return (Page<EquipServicingImplementModel>) list;
 	}
 	
 }

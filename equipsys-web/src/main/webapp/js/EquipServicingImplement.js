@@ -11,8 +11,8 @@ function getEquipServicingImplementList(page){
 			eappdate:eappdate,
 			sbackfiredate:sbackfiredate,
 			ebackfiredate:ebackfiredate,
-			pageSize:12,
-			current:page
+			pageSize:page,
+			current:13
 		}
 	$("#servicingImpManage-list").load("../EquipServicingImplement/search.do",params);
 }
@@ -28,16 +28,7 @@ function showImplementInfo(type,id){
         btn:type!=2?['保存','关闭']:['关闭'],
         content: $("#servicingImpManage-info"),
         success: function (layero, index){
-			if(type==0){
-				$.ajax({
-        			contenType:'application/json',
-        			Type:'POST',
-        			dataType:'json',
-        			success:function(data){
-
-					}
-				})
-			}else{
+			if(type!=0){
 				$.ajax({
         			contenType:'application/json',
         			Type:'POST',
@@ -45,18 +36,18 @@ function showImplementInfo(type,id){
 					data:"id="+id,
         			url:"../EquipServicingImplement/getDetailInfo.do",
         			success:function(data){
-						if(data.cod==200){
-							var info=data.data;
-							$("#servicingImpManage-info #id").val(appinfo.id);
-							$("#servicingImpManage-info #dept").html(appinfo.proposDept);
-							$("#servicingImpManage-info #proposer").html(appinfo.proposerName);
+						if(data.code==200){
+							var Implement=data.Implement;
+							$("#servicingImpManage-info #id").val(Implement.id);
+							$("#servicingImpManage-info #dept").html(Implement.proposDept);
+							$("#servicingImpManage-info #proposer").html(Implement.proposerName);
 							$("#servicingImpManage-info #application_time").val(data.applicationTime);
 							$("#servicingImpManage-info #backfire_time").val(data.backfireTime);
-							$("#servicingImpManage-info #equip-name").val(appinfo.equipName);
-							$("#servicingImpManage-info #equip-id").val(appinfo.equipId);
-							$("#servicingImpManage-info #modelnumber").html(appinfo.equipModelNumber);
-							$("#servicingImpManage-info #location").html(appinfo.location);
-							$("#servicingImpManage-info #remarks").val(appinfo.remarks);
+							$("#servicingImpManage-info #equip-name").val(Implement.equipName);
+							$("#servicingImpManage-info #equip-id").val(Implement.equipId);
+							$("#servicingImpManage-info #modelnumber").html(Implement.equipModelNumber);
+							$("#servicingImpManage-info #location").html(Implement.location);
+							$("#servicingImpManage-info #remarks").val(Implement.remarks);
 						}else{
 							layer.msg(data.msg)
 							layer.close(layer.index)

@@ -14,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
 import com.stone.equipsys.core.common.constant.Constant;
 import com.stone.equipsys.core.common.constant.PathConstant;
+import com.stone.equipsys.core.common.util.RdPage;
 import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
+import com.stone.equipsys.core.domain.EquipServicingImplementParts;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
+import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
+import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
 @Controller
@@ -29,10 +34,13 @@ public class EquipServicingImplementController {
 	private EquipServicingImplementService EquipServicingImplementsvc;
 	@Resource
 	private EquipServicingImplementMapper EquipServicingImplementmapper;
+	@Resource
+	private EquipServicingImplementPartsMapper EquipServicingImplementPartsMapper;
 	@RequestMapping("/Manage")
 	public String toPage(HttpServletResponse response, HttpServletRequest request) {
-		List<EquipServicingImplementModel> list=EquipServicingImplementmapper.listExtSelective(null);
+		Page<EquipServicingImplementModel> list=EquipServicingImplementsvc.getModelList(null, 1, 13);
 		request.setAttribute("ServicingImplementList", list);
+		request.setAttribute("page", new RdPage(list).getPageStr("getEquipServicingImplementList"));
 		return PathConstant.EquipServicingImplementManage;
 	}
 	
@@ -42,26 +50,33 @@ public class EquipServicingImplementController {
 			@RequestParam(value="sappdate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date sappdate,
 			@RequestParam(value="eappdate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date eappdate,
 			@RequestParam(value="sbackfiredate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date sbackfiredate,
-			@RequestParam(value = "ebackfiredate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date ebackfiredate) {
+			@RequestParam(value = "ebackfiredate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date ebackfiredate,
+			@RequestParam(value = "pageSize")int pageSize,
+			@RequestParam(value = "current")int current) {
 		HashMap<String, Object> param=new HashMap<String, Object>();
 		param.put("equipname", equipname);
 		param.put("sappdate", sappdate);
 		param.put("eappdate", eappdate);
 		param.put("sbackfiredate",sbackfiredate);
 		param.put("ebackfiredate", ebackfiredate);
-		List<EquipServicingImplementModel> list=EquipServicingImplementmapper.listExtSelective(param);
+		Page<EquipServicingImplementModel> list=EquipServicingImplementsvc.getModelList(null, pageSize, current);
 		request.setAttribute("ServicingImplementList", list);
+		request.setAttribute("page", new RdPage(list).getPageStr("getEquipServicingImplementList"));
 		return PathConstant.EquipServicingImplementList;
 	}
 	
 	@RequestMapping("/getDetailInfo")
 	public void getDetailInfo(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")Long id) {
-		EquipServicingImplement data=EquipServicingImplementmapper.findByPrimary(id);
+		EquipServicingImplement Implement=EquipServicingImplementmapper.findByPrimary(id);
+		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
+		PartsParam.put("implementId", id);
+		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
 		HashMap<String, Object> res=new HashMap<String, Object>();
-		if(data!=null) {
+		if(Implement!=null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
-			res.put("data", data);
+			res.put("Implement", Implement);
+			res.put("parts", parts);
 		}else {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
