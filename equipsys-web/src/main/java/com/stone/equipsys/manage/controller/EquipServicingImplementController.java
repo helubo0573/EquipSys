@@ -22,9 +22,11 @@ import com.stone.equipsys.core.common.util.ServletUtils;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
 import com.stone.equipsys.core.domain.EquipServicingImplementParts;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
+import com.stone.equipsys.core.mapper.EquipServicingImplementOpMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
 import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
+import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
 @Controller
 @RequestMapping("EquipServicingImplement")
@@ -35,10 +37,12 @@ public class EquipServicingImplementController {
 	@Resource
 	private EquipServicingImplementMapper EquipServicingImplementmapper;
 	@Resource
+	private EquipServicingImplementOpService EquipServicingImplementOpService; 
+	@Resource
 	private EquipServicingImplementPartsMapper EquipServicingImplementPartsMapper;
 	@RequestMapping("/Manage")
 	public String toPage(HttpServletResponse response, HttpServletRequest request) {
-		Page<EquipServicingImplementModel> list=EquipServicingImplementsvc.getModelList(null, 1, 13);
+		Page<EquipServicingImplementModel> list=EquipServicingImplementsvc.getModelList(null, 1, 12);
 		request.setAttribute("ServicingImplementList", list);
 		request.setAttribute("page", new RdPage(list).getPageStr("getEquipServicingImplementList"));
 		return PathConstant.EquipServicingImplementManage;
@@ -72,11 +76,13 @@ public class EquipServicingImplementController {
 		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
 		PartsParam.put("implementId", id);
 		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
+		HashMap<String, String> opmap=EquipServicingImplementOpService.getOpByImplementId(id);
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		if(Implement!=null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put("Implement", Implement);
 			res.put("parts", parts);
+			res.put("opmap", opmap);
 		}else {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "查询失败");
@@ -113,6 +119,16 @@ public class EquipServicingImplementController {
 	
 	@RequestMapping("/delete")
 	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) {
-		
+		HashMap<String, Object> res=new HashMap<String, Object>();
+		try {
+			EquipServicingImplementsvc.deleteImplement(id);
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "删除失败");
+		}
+		ServletUtils.writeToResponse(response, res);
 	}
 }

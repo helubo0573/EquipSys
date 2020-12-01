@@ -21,4 +21,6 @@ public interface EquipServicingImplementMapper extends BaseMapper<EquipServicing
     Long insertReturnId(EquipServicingImplement service);
 
     List<EquipServicingImplementModel> listExtSelective(HashMap<String, Object> param);
+    
+    void deleteById(Long id);
 }

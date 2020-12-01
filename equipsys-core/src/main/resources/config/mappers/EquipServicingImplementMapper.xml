@@ -29,6 +29,16 @@
         <result column="status" property="status" jdbcType="INTEGER" />
     </resultMap>
     
+    <resultMap id="DetailResultMap" extends="BaseResultMap" type="com.stone.equipsys.core.model.EquipServicingImplementDetailModel">
+        <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
+        <result column="backfire_time" property="backfireTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <select id="getDetailInfoByPrimary" resultMap="DetailResultMap" parameterType="java.lang.Long">
+    	select
+    	from
+    	where
+    </select>
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         id,application_id,proposer_id,equip_id,servicing_dept,servicing_time_start,servicing_time_end,failure_bewrite,failure_cause,servicing_cause,servicing_status,serviceman_confirm,equip_op_confirm,department_manager_confirm 
@@ -38,6 +48,9 @@
     	esi.id as id,esi.application_id as appid,esa.application_time as apptime,esa.backfire_time as backtime,equip.equip_name as equipname,esi.servicing_status as status
     </sql>
     
+    <sql id="Detail_Result_List">
+    	
+    </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
@@ -198,6 +211,7 @@
         <include refid="Base_Column_List" />
         from equip_servicing_implement
         <include refid="searchBy"/>
+        order by id desc
     </select>
     
     <insert id="insertReturnId" parameterType="com.stone.equipsys.core.domain.EquipServicingImplement" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
@@ -210,5 +224,13 @@
         <include refid="Ext_Column_List" />
         from equip_servicing_implement as esi left join equip_servicing_application as esa on esi.application_id=esa.id left join equip_info as equip on esi.equip_id=equip.id
         <include refid="ExtSearchBy"/>
+        order by esi.id desc
     </select>
+    
+    <delete id="deleteById"  parameterType="java.lang.Long">
+    	delete 
+    	from equip_servicing_implement
+		WHERE 
+		id = #{Id}
+    </delete>
 </mapper>

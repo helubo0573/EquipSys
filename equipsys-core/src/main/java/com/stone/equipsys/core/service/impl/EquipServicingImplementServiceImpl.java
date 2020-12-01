@@ -16,15 +16,17 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.service.impl.BaseServiceImpl;
+import com.stone.equipsys.core.common.util.StringUtil;
 import com.stone.equipsys.core.mapper.EquipServicingApplicationMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
-import com.stone.equipsys.core.model.EquipServicingApplicationModel;
+import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.domain.EquipServicingApplication;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
 import com.stone.equipsys.core.domain.EquipServicingImplementParts;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
+import com.stone.equipsys.core.mapper.EquipServicingImplementOpMapper;
 
 
 /**
@@ -49,6 +51,11 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	@Resource
 	private EquipServicingImplementPartsMapper EquipServicingImplementPartsmapper; 
 	
+	@Resource
+	private EquipServicingImplementOpService EquipServicingImplementOpService;
+	
+	@Resource
+	private EquipServicingImplementOpMapper EquipServicingImplementOpMapper;
 	@Override
 	public BaseMapper<EquipServicingImplement, Long> getMapper() {
 		return equipServicingImplementMapper;
@@ -81,6 +88,8 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 				part.setEquipId(equipid);
 				EquipServicingImplementPartsmapper.save(part);
 			}
+			System.out.println("Transactorid:"+Transactorid);
+			EquipServicingImplementOpService.saveOpToList(Transactorid.length()>0?StringUtil.convertStringToIntegerList(Transactorid, ","):null, ServicingImplement.getId());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,6 +103,14 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 		PageHelper.startPage(currentPage, pageSize);
 		List<EquipServicingImplementModel> list=equipServicingImplementMapper.listExtSelective(param);
 		return (Page<EquipServicingImplementModel>) list;
+	}
+
+	@Override
+	@Transactional
+	public void deleteImplement(Long id) {
+		EquipServicingImplementPartsmapper.deleteByImplementId(id);
+		EquipServicingImplementOpMapper.deleteOpByImplementId(id);
+		equipServicingImplementMapper.deleteById(id);
 	}
 	
 }

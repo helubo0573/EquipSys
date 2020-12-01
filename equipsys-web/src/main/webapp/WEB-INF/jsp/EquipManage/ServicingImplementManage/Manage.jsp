@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011244"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=20201011246"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -113,12 +113,6 @@ layui.use('laydate', function(){
 				<th>设备型号</th><td><label id="modelnumber"></label></td>
 				<th>所在地点</th><td><label id="location"></label></td>
 			</tr>
-			<!-- <tr>
-				<th>故障简述</th>
-				<td colspan="3" style="vertical-align: middle;">
-					<textarea class="form-control" id="remarks" name="remarks" rows="1" style="resize:none;"></textarea>
-				</td>
-			</tr> -->
 			<tr>
 				<th colspan="4" align="center" style="font-weight: bold;">
 					设备维修信息

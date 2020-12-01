@@ -110,4 +110,10 @@
         <include refid="searchBy"/>
     </select>
     
+    <delete id="deleteByImplementId"  parameterType="java.lang.Long">
+    	delete 
+    	from equip_servicing_implement_parts
+		WHERE 
+		implement_id = #{implementId}
+    </delete>
 </mapper>

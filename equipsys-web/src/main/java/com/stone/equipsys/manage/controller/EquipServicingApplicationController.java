@@ -38,7 +38,7 @@ public class EquipServicingApplicationController {
 	
 	@RequestMapping("/Manage")
 	public String toPage(HttpServletResponse response, HttpServletRequest request) {
-		Page<EquipServicingApplicationModel> applicationList=ServicingApplicationService.searchApplicationExtList(null, 1, 10);
+		Page<EquipServicingApplicationModel> applicationList=ServicingApplicationService.searchApplicationExtList(null, 1, 12);
 		request.setAttribute("applicationList", applicationList);
 		request.setAttribute("page", new RdPage(applicationList).getPageStr("getEquipServicingApplicationList"));
 		return PathConstant.EquipServicingApplicationManage;

@@ -13,6 +13,8 @@ import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.service.impl.BaseServiceImpl;
 import com.stone.equipsys.core.mapper.EquipServicingImplementOpMapper;
 import com.stone.equipsys.core.model.EquipOpModel;
+import com.stone.equipsys.core.model.EquipServicingImplementOpModel;
+import com.stone.equipsys.core.domain.EquipOp;
 import com.stone.equipsys.core.domain.EquipServicingImplementOp;
 import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 
@@ -40,18 +42,34 @@ public class EquipServicingImplementOpServiceImpl extends BaseServiceImpl<EquipS
 
 	@Override
 	public HashMap<String, String> getOpByImplementId(Long id) {
-		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
-		PartsParam.put("implementId", id);
-		List<EquipServicingImplementOp> oplist=equipServicingImplementOpMapper.listSelective(PartsParam);
+		List<EquipServicingImplementOpModel> oplist=equipServicingImplementOpMapper.getOpByImplementid(id);
 		String opid="";
 		String opname="";
 		HashMap<String,String> opmap=new HashMap<String,String>();
-		for(EquipServicingImplementOp op:oplist) {
-	
+		for(EquipServicingImplementOpModel op:oplist) {
+			opname+=op.getOpname()+",";
+			opid+=op.getEmployeeId()+",";
 		}
 		opmap.put("opid", opid.length()>0?opid.substring(0, opid.length()-1):opid);
 		opmap.put("opname", opname.length()>0?opname.substring(0, opname.length()-1):opname);
 		return opmap;
+	}
+
+	@Override
+	public boolean saveOpToList(List<Integer> oplist, Long id) {
+		try {
+			equipServicingImplementOpMapper.deleteOpByImplementId(id);
+			if(oplist!=null) {
+				for(Integer opid:oplist) {
+					System.out.println("opid:"+opid);
+					equipServicingImplementOpMapper.save(new EquipServicingImplementOp(id,opid));
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }

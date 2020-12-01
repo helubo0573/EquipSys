@@ -14,6 +14,5 @@ import com.stone.equipsys.core.domain.EquipServicingImplementParts;
 @RDBatisDao
 public interface EquipServicingImplementPartsMapper extends BaseMapper<EquipServicingImplementParts, Long> {
 
-    
-
+    void deleteByImplementId(Long implementId);
 }

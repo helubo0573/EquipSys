@@ -12,7 +12,7 @@ function getEquipServicingImplementList(page){
 			sbackfiredate:sbackfiredate,
 			ebackfiredate:ebackfiredate,
 			pageSize:page,
-			current:13
+			current:12
 		}
 	$("#servicingImpManage-list").load("../EquipServicingImplement/search.do",params);
 }
@@ -39,15 +39,24 @@ function showImplementInfo(type,id){
 						if(data.code==200){
 							var Implement=data.Implement;
 							$("#servicingImpManage-info #id").val(Implement.id);
-							$("#servicingImpManage-info #dept").html(Implement.proposDept);
-							$("#servicingImpManage-info #proposer").html(Implement.proposerName);
-							$("#servicingImpManage-info #application_time").val(data.applicationTime);
-							$("#servicingImpManage-info #backfire_time").val(data.backfireTime);
-							$("#servicingImpManage-info #equip-name").val(Implement.equipName);
+							$("#servicingImpManage-info #proposer-hd").html(Implement.proposerId);
+							//$("#servicingImpManage-info #dept-id").html(Implement.dept-id);	//*
 							$("#servicingImpManage-info #equip-id").val(Implement.equipId);
-							$("#servicingImpManage-info #modelnumber").html(Implement.equipModelNumber);
-							$("#servicingImpManage-info #location").html(Implement.location);
-							$("#servicingImpManage-info #remarks").val(Implement.remarks);
+							/*$("#servicingImpManage-info #Transactor-id").html(Implement.proposDept);//*
+							$("#servicingImpManage-info #application_time").html(Implement.proposDept);//*
+							$("#servicingImpManage-info #backfire_time").html(Implement.proposDept);//*
+							$("#servicingImpManage-info #proposer").val(Implement.backfireTime);//*
+							$("#servicingImpManage-info #equip-name").val(Implement.backfireTime);//*
+							$("#servicingImpManage-info #modelnumber").val(Implement.backfireTime);//*
+							$("#servicingImpManage-info #location").val(Implement.backfireTime);//**/
+							$("#servicingImpManage-info #op-dept").val(Implement.servicingDept);
+							$("#servicingImpManage-info #search-sbackfiredate").val(Implement.servicingTimeStart);
+							$("#servicingImpManage-info #search-ebackfiredate").val(Implement.servicingTimeEnd);
+							//$("#servicingImpManage-info #setTransactor").val(Implement.backfireTime);//*
+							$("#servicingImpManage-info #FaultSketch").val(Implement.failureBewrite);
+							$("#servicingImpManage-info #FaultAnalyse").val(Implement.failureCause);
+							$("#servicingImpManage-info #FaultResult").val(Implement.servicingCause);
+							//$("#servicingImpManage-info #ConsumptionSpart").html(Implement.equipModelNumber);//*
 						}else{
 							layer.msg(data.msg)
 							layer.close(layer.index)

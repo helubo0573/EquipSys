@@ -24,9 +24,16 @@ import java.util.Date;
     private Integer employeeId;
 
     /*** 是否为负责人 0:否 1:是*/
-    private Integer leading;
+    private Integer chargePerson;
 
-
+    public EquipServicingImplementOp() {}
+    
+    public EquipServicingImplementOp(Long implementid,int employeeid) {
+    	this.setImplementId(implementid);
+    	this.setEmployeeId(employeeid);
+    	this.setchargePerson(0);
+    }
+    
     /*** 获取主键Id
     *
     * @return id
@@ -79,16 +86,16 @@ import java.util.Date;
     *
     * @return 是否为负责人 0:否 1:是
     */
-    public Integer getLeading(){
-        return leading;
+    public Integer getchargePerson(){
+        return chargePerson;
     }
 
     /*** 设置是否为负责人 0:否 1:是
     * 
     * @param leading 要设置的是否为负责人 0:否 1:是
     */
-    public void setLeading(Integer leading){
-        this.leading = leading;
+    public void setchargePerson(Integer chargePerson){
+        this.chargePerson = chargePerson;
     }
 
 }

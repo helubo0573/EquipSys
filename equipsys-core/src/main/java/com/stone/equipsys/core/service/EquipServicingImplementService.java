@@ -25,4 +25,6 @@ public interface EquipServicingImplementService extends BaseService<EquipServici
 			Date backfire_time,Date SvrStartTime,Date SvrEndTime,String failureBewrite,String failureCause,String servicingCause,String parts);
 	
 	Page<EquipServicingImplementModel> getModelList(HashMap<String, Object> param,int currentPage, int pageSize);
+	
+	void deleteImplement(Long id);
 }
