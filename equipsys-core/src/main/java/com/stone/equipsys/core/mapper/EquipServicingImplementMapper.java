@@ -6,6 +6,7 @@ import java.util.List;
 import com.stone.equipsys.core.common.mapper.BaseMapper;
 import com.stone.equipsys.core.common.mapper.RDBatisDao;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
+import com.stone.equipsys.core.model.EquipServicingImplementDetailModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
 
 /**
@@ -23,4 +24,6 @@ public interface EquipServicingImplementMapper extends BaseMapper<EquipServicing
     List<EquipServicingImplementModel> listExtSelective(HashMap<String, Object> param);
     
     void deleteById(Long id);
+    
+    EquipServicingImplementDetailModel getDetailInfoByPrimary(Long id);
 }

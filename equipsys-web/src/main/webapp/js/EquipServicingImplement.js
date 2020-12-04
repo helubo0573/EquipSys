@@ -24,7 +24,7 @@ function showImplementInfo(type,id){
         anim:2,
         shade: 0.3,
         title:type==0?'新增设备维修单':"修改设备维修单",
-        area:[ '760px', '860px' ],
+        area:[ '760px', '880px' ],
         btn:type!=2?['保存','关闭']:['关闭'],
         content: $("#servicingImpManage-info"),
         success: function (layero, index){
@@ -40,23 +40,25 @@ function showImplementInfo(type,id){
 							var Implement=data.Implement;
 							$("#servicingImpManage-info #id").val(Implement.id);
 							$("#servicingImpManage-info #proposer-hd").html(Implement.proposerId);
-							//$("#servicingImpManage-info #dept-id").html(Implement.dept-id);	//*
+							$("#servicingImpManage-info #dept-id").html(Implement.servicingDept);
+							$("#servicingImpManage-info #dept").html(Implement.pdeptName);
 							$("#servicingImpManage-info #equip-id").val(Implement.equipId);
-							/*$("#servicingImpManage-info #Transactor-id").html(Implement.proposDept);//*
-							$("#servicingImpManage-info #application_time").html(Implement.proposDept);//*
-							$("#servicingImpManage-info #backfire_time").html(Implement.proposDept);//*
-							$("#servicingImpManage-info #proposer").val(Implement.backfireTime);//*
-							$("#servicingImpManage-info #equip-name").val(Implement.backfireTime);//*
-							$("#servicingImpManage-info #modelnumber").val(Implement.backfireTime);//*
-							$("#servicingImpManage-info #location").val(Implement.backfireTime);//**/
-							$("#servicingImpManage-info #op-dept").val(Implement.servicingDept);
+							$("#servicingImpManage-info #Transactor-id").val(data.opmap.opid);
+							$("#servicingImpManage-info #setTransactor").val(data.opmap.opname);
+							$("#servicingImpManage-info #application_time").val(Implement.applicationTime.substring(0,10));
+							$("#servicingImpManage-info #backfire_time").val(Implement.backfireTime.substring(0,10));
+							$("#servicingImpManage-info #equip-name").val(Implement.equipName);
+							$("#servicingImpManage-info #modelnumber").html(Implement.equipCode);
+							$("#servicingImpManage-info #location").html(Implement.location);
+							$("#servicingImpManage-info #op-dept").val(Implement.deptName);
 							$("#servicingImpManage-info #search-sbackfiredate").val(Implement.servicingTimeStart);
 							$("#servicingImpManage-info #search-ebackfiredate").val(Implement.servicingTimeEnd);
-							//$("#servicingImpManage-info #setTransactor").val(Implement.backfireTime);//*
 							$("#servicingImpManage-info #FaultSketch").val(Implement.failureBewrite);
 							$("#servicingImpManage-info #FaultAnalyse").val(Implement.failureCause);
 							$("#servicingImpManage-info #FaultResult").val(Implement.servicingCause);
-							//$("#servicingImpManage-info #ConsumptionSpart").html(Implement.equipModelNumber);//*
+							$("#servicingImpManage-info #proposer").val(Implement.employeeName);
+							//$("#servicingImpManage-info #setTransactor").val(Implement.backfireTime);
+							//$("#servicingImpManage-info #ConsumptionSpart").html(Implement.equipModelNumber);*/
 						}else{
 							layer.msg(data.msg)
 							layer.close(layer.index)

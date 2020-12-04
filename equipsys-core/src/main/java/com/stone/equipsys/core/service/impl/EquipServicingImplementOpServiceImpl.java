@@ -48,7 +48,7 @@ public class EquipServicingImplementOpServiceImpl extends BaseServiceImpl<EquipS
 		HashMap<String,String> opmap=new HashMap<String,String>();
 		for(EquipServicingImplementOpModel op:oplist) {
 			opname+=op.getOpname()+",";
-			opid+=op.getEmployeeId()+",";
+			opid+=op.getOpId()+",";
 		}
 		opmap.put("opid", opid.length()>0?opid.substring(0, opid.length()-1):opid);
 		opmap.put("opname", opname.length()>0?opname.substring(0, opname.length()-1):opname);

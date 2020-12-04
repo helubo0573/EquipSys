@@ -29,15 +29,31 @@
         <result column="status" property="status" jdbcType="INTEGER" />
     </resultMap>
     
-    <resultMap id="DetailResultMap" extends="BaseResultMap" type="com.stone.equipsys.core.model.EquipServicingImplementDetailModel">
+    <resultMap  extends="BaseResultMap" id="DetailResultMap" type="com.stone.equipsys.core.model.EquipServicingImplementDetailModel" >
         <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
         <result column="backfire_time" property="backfireTime" jdbcType="TIMESTAMP" />
+        <result column="equip_name" property="equipName" jdbcType="VARCHAR"/>
+        <result column="equip_code" property="equipCode" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="employee_name" property="employeeName" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR"/>
+        <result column="pdept_name" property="pdeptName" jdbcType="VARCHAR"/>
     </resultMap>
     
     <select id="getDetailInfoByPrimary" resultMap="DetailResultMap" parameterType="java.lang.Long">
     	select
-    	from
-    	where
+    		imp.id as id,imp.application_id as application,imp.proposer_id as proposer,imp.equip_id as equip_id,imp.servicing_dept as servicing_dept,imp.servicing_time_start as servicing_time_start,
+    		imp.servicing_time_end as servicing_time_end,imp.failure_bewrite as failure_bewrite,imp.failure_cause as failure_cause,imp.servicing_cause as servicing_cause,imp.servicing_status as servicing_status,
+    		imp.serviceman_confirm as serviceman_confirm,imp.equip_op_confirm as equip_op_confirm,imp.department_manager_confirm as department_manager,app.application_time as application_time,
+    		app.backfire_time as backfire_time,equip.equip_name as equip_name,equip.equip_code as equip_code,equip.location as location,emp.emp_name as employee_name,d.dept_name as dept_name,pd.dept_name as pdept_name
+    	from 
+    		equip_servicing_implement as imp 
+    		left join equip_servicing_application as app on imp.application_id=app.id 
+    		left join equip_info as equip on imp.equip_id=equip.id 
+    		left join employee_info as emp on imp.proposer_id=emp.id
+    		left join org_dept as d on imp.servicing_dept=d.id 
+    		left join org_dept as pd on emp.emp_dept=pd.id
+        where imp.id = #{id,jdbcType=INTEGER}
     </select>
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
@@ -46,10 +62,6 @@
     
     <sql id="Ext_Column_List">
     	esi.id as id,esi.application_id as appid,esa.application_time as apptime,esa.backfire_time as backtime,equip.equip_name as equipname,esi.servicing_status as status
-    </sql>
-    
-    <sql id="Detail_Result_List">
-    	
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->

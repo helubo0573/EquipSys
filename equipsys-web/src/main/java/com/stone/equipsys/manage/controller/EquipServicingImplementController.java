@@ -25,6 +25,7 @@ import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementOpMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
 import com.stone.equipsys.core.model.EquipServicingApplicationModel;
+import com.stone.equipsys.core.model.EquipServicingImplementDetailModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
@@ -72,7 +73,7 @@ public class EquipServicingImplementController {
 	@RequestMapping("/getDetailInfo")
 	public void getDetailInfo(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")Long id) {
-		EquipServicingImplement Implement=EquipServicingImplementmapper.findByPrimary(id);
+		EquipServicingImplementDetailModel Implement=EquipServicingImplementmapper.getDetailInfoByPrimary(id);
 		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
 		PartsParam.put("implementId", id);
 		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
