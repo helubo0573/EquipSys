@@ -62,17 +62,6 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	}
 
 	@Override
-	public Long insertRetrunId(EquipServicingImplement service) {
-		return equipServicingImplementMapper.insertReturnId(service);
-	}
-
-	@Override
-	public Long updateRetrun(EquipServicingImplement service) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	@Transactional
 	public boolean newServicingImplementService(Long proposer, int deptid, Long equipid, String Transactorid,
 			Date application_time, Date backfire_time, Date SvrStartTime, Date SvrEndTime, String failureBewrite,
@@ -81,7 +70,7 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 			EquipServicingApplication application=new EquipServicingApplication(0L,equipid,proposer,application_time,backfire_time,failureBewrite);
 			ServicingApplicationmapper.insertReturnId(application);
 			EquipServicingImplement ServicingImplement=new EquipServicingImplement(0L,proposer,equipid,application.getId(),deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
-			insertRetrunId(ServicingImplement);
+			equipServicingImplementMapper.save(ServicingImplement);
 			List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
 			for(EquipServicingImplementParts part:partslist) {
 				part.setImplementId(ServicingImplement.getId());
@@ -98,6 +87,30 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	}
 
 	@Override
+	public boolean updateServicingImplementService(Long id,Long appid,Long proposer, int deptid, Long equipid,
+			String Transactorid, Date application_time, Date backfire_time, Date SvrStartTime, Date SvrEndTime,
+			String failureBewrite, String failureCause, String servicingCause, String parts) {
+		try {
+			EquipServicingApplication application=new EquipServicingApplication(appid,equipid,proposer,application_time,backfire_time,failureBewrite);
+			ServicingApplicationmapper.update(application);
+			EquipServicingImplement ServicingImplement=new EquipServicingImplement(id,proposer,equipid,application.getId(),deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
+			equipServicingImplementMapper.update(ServicingImplement);
+			List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
+			for(EquipServicingImplementParts part:partslist) {
+				part.setImplementId(ServicingImplement.getId());
+				part.setEquipId(equipid);
+				EquipServicingImplementPartsmapper.save(part);
+			}
+			System.out.println("Transactorid:"+Transactorid);
+			EquipServicingImplementOpService.saveOpToList(Transactorid.length()>0?StringUtil.convertStringToIntegerList(Transactorid, ","):null, ServicingImplement.getId());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
 	public Page<EquipServicingImplementModel> getModelList(HashMap<String, Object> param, int currentPage,
 			int pageSize) {
 		PageHelper.startPage(currentPage, pageSize);
@@ -112,5 +125,5 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 		EquipServicingImplementOpMapper.deleteOpByImplementId(id);
 		equipServicingImplementMapper.deleteById(id);
 	}
-	
+
 }

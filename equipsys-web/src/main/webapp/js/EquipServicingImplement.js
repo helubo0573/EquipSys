@@ -39,9 +39,10 @@ function showImplementInfo(type,id){
 						if(data.code==200){
 							var Implement=data.Implement;
 							$("#servicingImpManage-info #id").val(Implement.id);
-							$("#servicingImpManage-info #proposer-hd").html(Implement.proposerId);
-							$("#servicingImpManage-info #dept-id").html(Implement.servicingDept);
+							$("#servicingImpManage-info #proposer-hd").val(Implement.proposerId);
+							$("#servicingImpManage-info #dept-id").val(Implement.servicingDept);
 							$("#servicingImpManage-info #dept").html(Implement.pdeptName);
+							$("#servicingImpManage-info #app-id").val(Implement.applicationId);
 							$("#servicingImpManage-info #equip-id").val(Implement.equipId);
 							$("#servicingImpManage-info #Transactor-id").val(data.opmap.opid);
 							$("#servicingImpManage-info #setTransactor").val(data.opmap.opname);
@@ -419,7 +420,7 @@ function createConsumptionindex(goodsnode,goodstypenode,treeNode){
 				"<td>"+goodstypenode.name+"</td>"+
 				"<td>"+goodsnode.name+"</td>"+
 				"<td>"+treeNode.name+"</td>"+
-				"<td><input class='form-control needing' style='height:20px;' value='1'></td>"+
+				"<td><input class='form-control needing' name='quantity' style='height:20px;' value='1'></td>"+
 				"<td>"+treeNode.unit+"</td>"+
 				"<td><i class='layui-icon point' title='删除'  onclick='removeConsumptionindex(this)'>&#xe616</i></td></tr>"
 	return thtml;

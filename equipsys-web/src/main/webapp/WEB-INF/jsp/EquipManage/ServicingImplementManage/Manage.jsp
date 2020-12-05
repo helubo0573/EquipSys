@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202012042"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202012045"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -76,6 +76,7 @@ layui.use('laydate', function(){
 	</div>
 	<form id="servicingImpManage-info" class="form-horizontal box-div" style="display: none;">
 		<input type="hidden" id="id" name="id">	<!-- 维修单id -->
+		<input type="hidden" id="app-id" name="appid">	<!-- 申请单id -->
 		<input type="hidden" id="proposer-hd" name="proposer">	<!-- 申请维修人id -->
 		<input type="hidden" id="dept-id" name="deptid">	<!-- 维修部门id -->
 		<input type="hidden" id="equip-id" name="equipid">	<!-- 维修设备id -->

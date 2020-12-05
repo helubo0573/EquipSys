@@ -75,9 +75,9 @@ public class EquipServicingImplementController {
 			@RequestParam(value = "id",defaultValue = "0")Long id) {
 		EquipServicingImplementDetailModel Implement=EquipServicingImplementmapper.getDetailInfoByPrimary(id);
 		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
+		HashMap<String, String> opmap=EquipServicingImplementOpService.getOpByImplementId(id);
 		PartsParam.put("implementId", id);
 		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
-		HashMap<String, String> opmap=EquipServicingImplementOpService.getOpByImplementId(id);
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		if(Implement!=null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
@@ -94,6 +94,7 @@ public class EquipServicingImplementController {
 	@RequestMapping("/save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")Long id,
+			@RequestParam(value = "appid",defaultValue = "0")Long appid,
 			@RequestParam(value = "proposer")Long proposer,
 			@RequestParam(value = "deptid")int deptid,
 			@RequestParam(value="equipid")Long equipid,
@@ -106,7 +107,12 @@ public class EquipServicingImplementController {
 			@RequestParam(value = "failureCause")String failureCause,
 			@RequestParam(value = "servicingCause")String servicingCause,
 			@RequestParam(value = "parts")String parts) {
-		boolean flag=EquipServicingImplementsvc.newServicingImplementService(proposer, deptid, equipid, Transactorid, application_time, backfire_time, SvrStartTime, SvrEndTime, failureBewrite, failureCause, servicingCause, parts);
+		boolean flag=false;
+		if(id==0) {
+			flag=EquipServicingImplementsvc.newServicingImplementService(proposer, deptid, equipid, Transactorid, application_time, backfire_time, SvrStartTime, SvrEndTime, failureBewrite, failureCause, servicingCause, parts);
+		}else {
+			flag=EquipServicingImplementsvc.updateServicingImplementService(id,appid, proposer, deptid, equipid, Transactorid, application_time, backfire_time, SvrStartTime, SvrEndTime, failureBewrite, failureCause, servicingCause, parts);
+		}
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		if(flag) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);

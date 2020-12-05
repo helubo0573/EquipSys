@@ -13,11 +13,17 @@
         <result column="use_type" property="useType" jdbcType="INTEGER" />
     </resultMap>
     
+    <resultMap type="com.stone.equipsys.core.model.EquipServicingImplementPartsModel" id="ExtResultMap">
+    	<result column="type_name" property="typeName"  jdbcType="VARCHAR"/>
+    </resultMap>
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         id,implement_id,equip_id,parts_id,parts_name,use_quantity,use_type 
     </sql>
     
+    <sql id="Ext_Column_List">
+        parts.id as id,parts.implement_id as implement,parts.equip_id as equip_id,parts.parts_id as parts_id,parts.parts_name as parts_name,parts.use_quantity as use_quantity,eparts. 
+    </sql>
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
         <trim prefix="where" prefixOverrides="and|or">
@@ -110,6 +116,11 @@
         <include refid="searchBy"/>
     </select>
     
+    <select id="ExtlistSelective" resultMap="ExtResultMap" parameterType="java.lang.Long">
+    	select
+    	<include refid="Ext_Column_List" />
+    	from equip_servicing_implement_parts as parts left join equip_parts_info as eparts on parts.parts_id=eparts.id
+    </select>
     <delete id="deleteByImplementId"  parameterType="java.lang.Long">
     	delete 
     	from equip_servicing_implement_parts

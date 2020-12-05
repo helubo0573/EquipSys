@@ -42,7 +42,7 @@
     
     <select id="getDetailInfoByPrimary" resultMap="DetailResultMap" parameterType="java.lang.Long">
     	select
-    		imp.id as id,imp.application_id as application,imp.proposer_id as proposer,imp.equip_id as equip_id,imp.servicing_dept as servicing_dept,imp.servicing_time_start as servicing_time_start,
+    		imp.id as id,imp.application_id as application_id,imp.proposer_id as proposer_id,imp.equip_id as equip_id,imp.servicing_dept as servicing_dept,imp.servicing_time_start as servicing_time_start,
     		imp.servicing_time_end as servicing_time_end,imp.failure_bewrite as failure_bewrite,imp.failure_cause as failure_cause,imp.servicing_cause as servicing_cause,imp.servicing_status as servicing_status,
     		imp.serviceman_confirm as serviceman_confirm,imp.equip_op_confirm as equip_op_confirm,imp.department_manager_confirm as department_manager,app.application_time as application_time,
     		app.backfire_time as backfire_time,equip.equip_name as equip_name,equip.equip_code as equip_code,equip.location as location,emp.emp_name as employee_name,d.dept_name as dept_name,pd.dept_name as pdept_name
