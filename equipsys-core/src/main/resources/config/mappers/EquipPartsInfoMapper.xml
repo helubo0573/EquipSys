@@ -64,7 +64,7 @@
                 and parts.goods_model_id = #{goodsModelId,jdbcType=BIGINT}
             </if>
             <if test="goodstypeId != null and goodstypeId != '' ">
-                and parts.goodstype_id = #{goodstypeId,jdbcType=BIGINT}
+                and goods.goods_type = #{goodstypeId,jdbcType=BIGINT}
             </if>
             <if test="partsName != null and partsName != '' ">
                 and parts.parts_name  like CONCAT("%",#{partsName,jdbcType=VARCHAR},"%")
@@ -134,7 +134,10 @@
     <select id="listSelectiveExt" resultMap="ExtResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Ext_Column_List" />
-        from equip_parts_info as parts left join store_goods_model_number_info as model on parts.goods_model_id=model.id left join store_goods_info as goods on model.goods_id=goods.id left join store_goods_type as type on goods.goods_type=type.id
+        from 
+        	equip_parts_info as parts left join store_goods_model_number_info as model on parts.goods_model_id=model.id 
+        	left join store_goods_info as goods on model.goods_id=goods.id 
+        	left join store_goods_type as type on goods.goods_type=type.id
         <include refid="ext_searchBy"/>
         order by id desc
     </select>

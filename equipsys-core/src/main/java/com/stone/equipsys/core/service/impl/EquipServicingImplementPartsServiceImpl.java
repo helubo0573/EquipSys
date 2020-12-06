@@ -38,14 +38,15 @@ public class EquipServicingImplementPartsServiceImpl extends BaseServiceImpl<Equ
 
 	@Override
 	public void insertPartList(List<EquipServicingImplementParts> list) {
-		// TODO Auto-generated method stub
-		
+		deleteServicingImplementParts(list.get(0).getImplementId());
+		for(EquipServicingImplementParts part:list) {
+			equipServicingImplementPartsMapper.save(part);
+		}
 	}
 
 	@Override
 	public void deleteServicingImplementParts(Long implementid) {
-		// TODO Auto-generated method stub
-		
+		equipServicingImplementPartsMapper.deleteByImplementId(implementid);
 	}
 	
 }

@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202012045"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=2020120603"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -102,7 +102,7 @@ layui.use('laydate', function(){
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
 						<input class="form-control point needing" id="proposer" style="width: 100px" readonly onclick="setProposer()" placeholder="点击选择" data-name='申请人'>
-				        <span id="dept" style="width: 140px" class="th input-group-addon"></span>
+				        <span id="dept" style="width: 140px" class="th input-group-addon datainfo"></span>
 				    </div>
 				</td>
 				<th width="80px;">设备名称</th>
@@ -111,8 +111,8 @@ layui.use('laydate', function(){
 				</td>
 			</tr>
 			<tr>				
-				<th>设备型号</th><td><label id="modelnumber"></label></td>
-				<th>所在地点</th><td><label id="location"></label></td>
+				<th>设备型号</th><td><label class="datainfo" id="modelnumber"></label></td>
+				<th>所在地点</th><td><label class="datainfo" id="location"></label></td>
 			</tr>
 			<tr>
 				<th colspan="4" align="center" style="font-weight: bold;">
@@ -151,7 +151,7 @@ layui.use('laydate', function(){
 			<tr>
 				<th height="200px" style="text-align: center;">
 					零配件及材料耗用表<br>
-					<input type="button" value="添加" class="btn btn-info" style="width: 68px;margin-right: 0px" onclick="setConsumptionSpart()">
+					<a type="button"class="btn btn-info" style="width: 68px;margin-right: 0px" onclick="setConsumptionSpart()">添加</a>
 				</th>
 				<td colspan="3">
 					<div style="height: 198px;overflow-y:scroll">

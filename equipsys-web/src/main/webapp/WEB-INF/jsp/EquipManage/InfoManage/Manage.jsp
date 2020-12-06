@@ -13,7 +13,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipInfo.js?d=202009241"></script>
+<script type="text/javascript" src="../js/EquipInfo.js?d=202012066"></script>
 <body>
 	<div class="body-fdiv">
 		<div class="title-div">

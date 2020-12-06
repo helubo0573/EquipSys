@@ -38,6 +38,7 @@ function showImplementInfo(type,id){
         			success:function(data){
 						if(data.code==200){
 							var Implement=data.Implement;
+							var parts=data.parts;
 							$("#servicingImpManage-info #id").val(Implement.id);
 							$("#servicingImpManage-info #proposer-hd").val(Implement.proposerId);
 							$("#servicingImpManage-info #dept-id").val(Implement.servicingDept);
@@ -58,8 +59,11 @@ function showImplementInfo(type,id){
 							$("#servicingImpManage-info #FaultAnalyse").val(Implement.failureCause);
 							$("#servicingImpManage-info #FaultResult").val(Implement.servicingCause);
 							$("#servicingImpManage-info #proposer").val(Implement.employeeName);
-							//$("#servicingImpManage-info #setTransactor").val(Implement.backfireTime);
-							//$("#servicingImpManage-info #ConsumptionSpart").html(Implement.equipModelNumber);*/
+							if(parts.length>0){
+								$.each(parts,function(){
+									$("#servicingImpManage-info #ConsumptionSpart").append(createConsumptionindex(this.goodsname,this.typeName,this.partsId,this.modelNumber,this.unit,this.useQuantity));
+								})
+							}
 						}else{
 							layer.msg(data.msg)
 							layer.close(layer.index)
@@ -149,7 +153,13 @@ function checkImplementInfo(){
 }
 /**清空维修单信息 */
 function clearImplementInfo(){
-	
+	$("#servicingImpManage-info input[type!=layedate],textarea,select").val("");
+	$("#servicingImpManage-info .datainfo").html("");
+	$("#servicingImpManage-info #application_time").val(new Date());
+	$("#servicingImpManage-info #backfire_time").val(new Date());
+	$("#servicingImpManage-info #search-sbackfiredate").val("");
+	$("#servicingImpManage-info #search-ebackfiredate").val("");
+	$("#servicingImpManage-info #ConsumptionSpart tr:gt(0)").remove();
 }
 /**设置设备维修申请人 */
 function setProposer(){
@@ -186,7 +196,6 @@ function setProposerInfo(event, treeId, treeNode){
 		$("#servicingImpManage-info #proposer-hd").val(treeNode.id)
 		$("#servicingImpManage-info #proposer").val(treeNode.name)
 		var pnode=treeNode.getParentNode().getParentNode()
-		console.log(pnode.name)
 		$("#servicingImpManage-info #dept").html("部门:"+pnode.name)
 		layer.close(layer.index)
 	}
@@ -409,19 +418,25 @@ function clickConsumptionSpart(event, treeId, treeNode){
 		if(flag){
 			var goodsnode=treeNode.getParentNode();
 			var goodstypenode=goodsnode.getParentNode();
-			var trhtml=createConsumptionindex(goodsnode,goodstypenode,treeNode);
+			var trhtml=createConsumptionindex(goodsnode.name,goodstypenode.name,treeNode.id,treeNode.name,treeNode.unit,"1");
 			$("#setConsumptionSpart-form #partslist-table").append(trhtml)
 		}
 	}
 }
-
-function createConsumptionindex(goodsnode,goodstypenode,treeNode){
-	var thtml="<tr><input type='hidden' id='partid' value='"+treeNode.id+"'>"+
-				"<td>"+goodstypenode.name+"</td>"+
-				"<td>"+goodsnode.name+"</td>"+
-				"<td>"+treeNode.name+"</td>"+
-				"<td><input class='form-control needing' name='quantity' style='height:20px;' value='1'></td>"+
-				"<td>"+treeNode.unit+"</td>"+
+/**
+	@param goodsname	产品名称
+	@param typename		产品类型名称
+	@param partid		配件id
+	@param partname		配件名称-产品型号
+	@param partunit		配件单位
+ */
+function createConsumptionindex(goodsname,typename,partid,partname,partunit,quantity){
+	var thtml="<tr><input type='hidden' id='partid' value='"+partid+"'>"+
+				"<td>"+typename+"</td>"+
+				"<td>"+goodsname+"</td>"+
+				"<td>"+partname+"</td>"+
+				"<td><input class='form-control needing' name='quantity' style='height:20px;' value='"+quantity+"'></td>"+
+				"<td>"+partunit+"</td>"+
 				"<td><i class='layui-icon point' title='删除'  onclick='removeConsumptionindex(this)'>&#xe616</i></td></tr>"
 	return thtml;
 }

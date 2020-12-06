@@ -27,6 +27,7 @@ import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
 import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 import com.stone.equipsys.core.model.EquipServicingImplementDetailModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
+import com.stone.equipsys.core.model.EquipServicingImplementPartsModel;
 import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
 @Controller
@@ -77,7 +78,7 @@ public class EquipServicingImplementController {
 		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
 		HashMap<String, String> opmap=EquipServicingImplementOpService.getOpByImplementId(id);
 		PartsParam.put("implementId", id);
-		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
+		List<EquipServicingImplementPartsModel> parts=EquipServicingImplementPartsMapper.ExtlistSelective(id);
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		if(Implement!=null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
