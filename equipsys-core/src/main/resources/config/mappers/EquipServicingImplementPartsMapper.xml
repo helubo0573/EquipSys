@@ -9,7 +9,7 @@
         <result column="equip_id" property="equipId" jdbcType="BIGINT" />
         <result column="parts_id" property="partsId" jdbcType="BIGINT" />
         <result column="parts_name" property="partsName" jdbcType="VARCHAR" />
-        <result column="use_quantity" property="useQuantity" jdbcType="INTEGER" />
+        <result column="use_quantity" property="useQuantity" jdbcType="DECIMAL" />
         <result column="use_type" property="useType" jdbcType="INTEGER" />
     </resultMap>
     

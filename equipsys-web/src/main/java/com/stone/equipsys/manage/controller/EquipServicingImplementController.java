@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,6 +94,7 @@ public class EquipServicingImplementController {
 	}
 	@ResponseBody
 	@RequestMapping("/save")
+	@RequiresPermissions("equip:implement:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")Long id,
 			@RequestParam(value = "appid",defaultValue = "0")Long appid,
@@ -126,6 +128,7 @@ public class EquipServicingImplementController {
 	}
 	
 	@RequestMapping("/delete")
+	@RequiresPermissions("equip:implement:delete")
 	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) {
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		try {

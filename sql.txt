@@ -119,3 +119,8 @@ update equip_info set logical_state=0;
 
 alter table store_goods_model_number_info add column logical_state boolean NULL DEFAULT 0  comment'Âß¼­×´Ì¬';
 update store_goods_model_number_info set logical_state=0;
+
+
+2021-01-17
+
+alter table equip_servicing_implement_parts alter column use_quantity float(11,2) NULL DEFAULT 0.00 COMMENT 'ºÄÓÃÊýÁ¿';

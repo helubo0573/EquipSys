@@ -365,7 +365,7 @@ function setConsumptionSpart(){
         anim:2,
         shade: 0.3,
         title:'零配件及材料耗用维护',
-        area:[ '880px', '650px' ],
+        area:[ '900px', '650px' ],
         btn:['保存','关闭'],
         content: $("#setConsumptionSpart-form"),
         success: function (layero, index){

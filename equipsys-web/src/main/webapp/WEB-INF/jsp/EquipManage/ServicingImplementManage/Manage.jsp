@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=2020120603"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202101171"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -68,7 +68,9 @@ layui.use('laydate', function(){
 		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingImplementList(1)">查询</button>
 		</div>
 		<div id="eqimp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
+			<shiro:hasPermission name="equip:implement:save">
 				<button class="btn btn-success" onclick="showImplementInfo('0')">新增设备维修单</button>
+			</shiro:hasPermission>
 		</div>
 		<div id="servicingImpManage-list" class="box-div form-inline" style="height: 600px;">
 			<%@include file="List.jsp" %>
@@ -160,9 +162,9 @@ layui.use('laydate', function(){
 								<th width="108px">零配件类型</th>
 								<th>名称</th>
 								<th width="150px">规格</th>
-								<th width="60px">数量</th>
+								<th width="90px">数量</th>
 								<th width="50px">单位</th>
-								<th width="80px">操作</th>
+								<th width="50px">操作</th>
 							</tr>						
 						</table>
 					</div>
@@ -189,7 +191,7 @@ layui.use('laydate', function(){
 				<td colspan="3" rowspan="2">
 					<div style="height: 458px;overflow-y:scroll;">
 						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
-							<tr><th width="110px">配件类型</th><th width="175px">名称</th><th>规格</th><th width="70px">数量</th><th width="48px">单位</th><th width="48px">操作</th></tr>
+							<tr><th width="110px">配件类型</th><th width="175px">名称</th><th>规格</th><th width="90px">数量</th><th width="48px">单位</th><th width="48px">操作</th></tr>
 						</table>
 					</div>
 				</td>

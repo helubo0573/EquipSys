@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +31,12 @@
 						</td>
 						<td>
 							<c:if test="${ServicingImplement.status==0 }">
-								<i class="layui-icon point" title="修改申请单" onclick="showImplementInfo('1',${ServicingImplement.id})">&#xe642;</i>&nbsp;
-								<i class="layui-icon point" title="删除申请单" onclick="deleteImplement('${ServicingImplement.id}')">&#xe640;</i>&nbsp;
+								<shiro:hasPermission name="equip:implement:save">
+									<i class="layui-icon point" title="修改申请单" onclick="showImplementInfo('1',${ServicingImplement.id})">&#xe642;</i>&nbsp;
+								</shiro:hasPermission>
+								<shiro:hasPermission name="equip:implement:delete">
+									<i class="layui-icon point" title="删除申请单" onclick="deleteImplement('${ServicingImplement.id}')">&#xe640;</i>&nbsp;
+								</shiro:hasPermission>
 							</c:if>
 							<i class="layui-icon point" title="查看详情" onclick="showImplementInfo('2',${ServicingImplement.id})">&#xe63c;</i>
 						</td>

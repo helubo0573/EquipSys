@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>焱鑫有色金属有限公司设备管理系统</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/P-Main.css?d=202003083">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/P-Main.css?d=202101061">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
 </head>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
