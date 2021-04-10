@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
 import com.stone.equipsys.core.model.EquipServicingApplicationModel;
 import com.stone.equipsys.core.model.EquipServicingImplementDetailModel;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
+import com.stone.equipsys.core.model.EquipServicingImplementPartsModel;
 import com.stone.equipsys.core.service.EquipServicingImplementOpService;
 import com.stone.equipsys.core.service.EquipServicingImplementService;
 @Controller
@@ -77,7 +79,7 @@ public class EquipServicingImplementController {
 		HashMap<String, Object> PartsParam=new HashMap<String, Object>();
 		HashMap<String, String> opmap=EquipServicingImplementOpService.getOpByImplementId(id);
 		PartsParam.put("implementId", id);
-		List<EquipServicingImplementParts> parts=EquipServicingImplementPartsMapper.listSelective(PartsParam);
+		List<EquipServicingImplementPartsModel> parts=EquipServicingImplementPartsMapper.ExtlistSelective(id);
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		if(Implement!=null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
@@ -92,6 +94,7 @@ public class EquipServicingImplementController {
 	}
 	@ResponseBody
 	@RequestMapping("/save")
+	@RequiresPermissions("equip:implement:save")
 	public void save(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id",defaultValue = "0")Long id,
 			@RequestParam(value = "appid",defaultValue = "0")Long appid,
@@ -125,6 +128,7 @@ public class EquipServicingImplementController {
 	}
 	
 	@RequestMapping("/delete")
+	@RequiresPermissions("equip:implement:delete")
 	public void delete(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "id")Long id) {
 		HashMap<String, Object> res=new HashMap<String, Object>();
 		try {

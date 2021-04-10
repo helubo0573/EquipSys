@@ -210,7 +210,7 @@ function saveEquipInfo(index){
 			success:function(data){
 				layer.msg(data.msg)
 				if(data.code==200){
-					getEquipTree("#equipinfo-tree");
+					//getEquipTree("#equipinfo-tree");		前期数据维护量较大，暂时屏蔽保存后刷新设备树的功能
 					clearEquipInfo();
 					clearSubEquipInfo();
 					changeBtnState(true)
@@ -422,7 +422,7 @@ function changeBtnState(type){
 
 /**配件管理 */
 function getEquipPartsList(pagenum){
-	var goodstype=$("#search-div #search-modelid").val()
+	var goodstype=$("#search-div #search-modelid").val();
 	var partsname=$("#search-div #search-partsname").val()
 	var quantity=$("#search-div #search-quantity").val()
 	var equipid=$("#equip-info #equipid-hd").val();
@@ -786,4 +786,47 @@ function partsseachgoods(){
 
 function searchParts(){
 	getEquipPartsList(1);
+}
+
+function EquipSearchPartType(){
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		url:"../goodstype/searchfortree.do",
+		success:function(data){
+			layer.open({
+				type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                anim: 2,
+                area : [ '250px', '500px' ],
+                shadeClose: true, //开启遮罩关闭
+				btn:['清空','关闭'],
+                content: '<ul id="equip-SearchPartType" class="ztree"></ul>',
+                success: function (layero, index) {
+                	var setting = {
+            			callback:{
+    			        	onClick:setEquipSearchPartType
+    			        }
+                	};
+                	$.fn.zTree.init($("#equip-SearchPartType"), setting, JSON.parse(data));
+                },
+				yes:function(index){
+					$("#partssearch-div #searchgoodstypename").val("")
+					$("#partssearch-div #search-modelid").val("")
+					layer.close(index);
+				},
+				btn2:function(index){
+					layer.close(index);
+				}
+			})
+			
+		}
+	})
+}
+
+function setEquipSearchPartType(event, treeId, treeNode){
+	$("#partssearch-div #searchgoodstypename").val(treeNode.name)
+	$("#partssearch-div #search-modelid").val(treeNode.id)
+	layer.close(layer.index);
 }

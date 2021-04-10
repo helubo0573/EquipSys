@@ -8,7 +8,7 @@ body{
 }
 @media screen and (max-width: 1439px) {
 	.body-div{
-		width:1200px;
+		width:100%;
 	}
  	.workbench-div{
 		width: 957px;
@@ -16,7 +16,7 @@ body{
 }
 @media screen and (min-width: 1440px) {
 	.body-div{
-		width:1440px;
+		width:100%;
 	}
 	.workbench-div{
 		width: 1197px;

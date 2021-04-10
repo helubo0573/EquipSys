@@ -23,14 +23,14 @@
 		</shiro:hasPermission>
 	</div>
 	<div id="search-div" style="padding: 3px;">
-		<input type="hidden" id="search-modelid">
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 10px;text-align: center;">
 			配件信息
 		</div>
 		<div>
 			<div id="partssearch-div" class="input-group col-lg-9">
+				<input type="hidden" id="search-modelid">
 				<span class="input-group-addon">配件类型</span>
-	            <input type="text" class="form-control point" style="width: 150px;" placeholder="点击选择" readonly onclick="">
+	            <input type="text" class="form-control point" style="width: 150px;" placeholder="点击选择" readonly onclick="EquipSearchPartType()" id="searchgoodstypename">
 	            <span class="input-group-addon">配件名称</span>
 	            <input type="text" class="form-control" style="width: 150px;"placeholder="输入配件名称" id="search-partsname">
 	            <span class="input-group-addon">需求数量</span>

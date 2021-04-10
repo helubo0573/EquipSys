@@ -9,12 +9,15 @@
         <result column="equip_id" property="equipId" jdbcType="BIGINT" />
         <result column="parts_id" property="partsId" jdbcType="BIGINT" />
         <result column="parts_name" property="partsName" jdbcType="VARCHAR" />
-        <result column="use_quantity" property="useQuantity" jdbcType="INTEGER" />
+        <result column="use_quantity" property="useQuantity" jdbcType="DECIMAL" />
         <result column="use_type" property="useType" jdbcType="INTEGER" />
     </resultMap>
     
     <resultMap type="com.stone.equipsys.core.model.EquipServicingImplementPartsModel" id="ExtResultMap">
+    	<result column="model_number" property="modelNumber" jdbcType="VARCHAR"/>
+    	<result column="goods_name" property="goodsname" jdbcType="VARCHAR"/>
     	<result column="type_name" property="typeName"  jdbcType="VARCHAR"/>
+    	<result column="unit" property="unit" jdbcType="VARCHAR"/>
     </resultMap>
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
@@ -22,7 +25,16 @@
     </sql>
     
     <sql id="Ext_Column_List">
-        parts.id as id,parts.implement_id as implement,parts.equip_id as equip_id,parts.parts_id as parts_id,parts.parts_name as parts_name,parts.use_quantity as use_quantity,eparts. 
+        parts.id as id,
+		parts.implement_id as implement_id,
+		parts.parts_id as parts_id,
+		parts.parts_name as parts_name,
+		parts.use_quantity as use_quantity,
+		parts.equip_id as equip_id,
+		model.model_number_name as model_number,
+		goods.goods_name as goods_name,
+		goodstype.type_name as type_name,
+		model.unit as unit
     </sql>
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
@@ -119,7 +131,12 @@
     <select id="ExtlistSelective" resultMap="ExtResultMap" parameterType="java.lang.Long">
     	select
     	<include refid="Ext_Column_List" />
-    	from equip_servicing_implement_parts as parts left join equip_parts_info as eparts on parts.parts_id=eparts.id
+    	from
+    	equip_servicing_implement_parts AS parts
+		Left Join store_goods_model_number_info AS model ON model.id = parts.parts_id
+		Left Join store_goods_info AS goods ON goods.id = model.goods_id
+		Left Join store_goods_type AS goodstype ON goodstype.id = goods.goods_type
+		where parts.implement_id=#{implementId}
     </select>
     <delete id="deleteByImplementId"  parameterType="java.lang.Long">
     	delete 

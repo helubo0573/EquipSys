@@ -21,6 +21,7 @@ import com.stone.equipsys.core.mapper.EquipServicingApplicationMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementMapper;
 import com.stone.equipsys.core.mapper.EquipServicingImplementPartsMapper;
 import com.stone.equipsys.core.service.EquipServicingImplementOpService;
+import com.stone.equipsys.core.service.EquipServicingImplementPartsService;
 import com.stone.equipsys.core.model.EquipServicingImplementModel;
 import com.stone.equipsys.core.domain.EquipServicingApplication;
 import com.stone.equipsys.core.domain.EquipServicingImplement;
@@ -49,7 +50,7 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	private EquipServicingApplicationMapper ServicingApplicationmapper;
 	
 	@Resource
-	private EquipServicingImplementPartsMapper EquipServicingImplementPartsmapper; 
+	private EquipServicingImplementPartsService EquipServicingImplementPartsService; 
 	
 	@Resource
 	private EquipServicingImplementOpService EquipServicingImplementOpService;
@@ -72,12 +73,13 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 			EquipServicingImplement ServicingImplement=new EquipServicingImplement(0L,proposer,equipid,application.getId(),deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
 			equipServicingImplementMapper.save(ServicingImplement);
 			List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
-			for(EquipServicingImplementParts part:partslist) {
-				part.setImplementId(ServicingImplement.getId());
-				part.setEquipId(equipid);
-				EquipServicingImplementPartsmapper.save(part);
+			if(partslist.size()>0) {
+				for(EquipServicingImplementParts part:partslist) {
+					part.setImplementId(ServicingImplement.getId());
+					part.setEquipId(equipid);
+				}
+				EquipServicingImplementPartsService.insertPartList(partslist);
 			}
-			System.out.println("Transactorid:"+Transactorid);
 			EquipServicingImplementOpService.saveOpToList(Transactorid.length()>0?StringUtil.convertStringToIntegerList(Transactorid, ","):null, ServicingImplement.getId());
 			return true;
 		} catch (Exception e) {
@@ -96,12 +98,15 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 			EquipServicingImplement ServicingImplement=new EquipServicingImplement(id,proposer,equipid,application.getId(),deptid,SvrStartTime,SvrEndTime,failureBewrite,failureCause,servicingCause,0,0,0,0);
 			equipServicingImplementMapper.update(ServicingImplement);
 			List<EquipServicingImplementParts> partslist=JSONArray.parseArray(parts,EquipServicingImplementParts.class);
-			for(EquipServicingImplementParts part:partslist) {
-				part.setImplementId(ServicingImplement.getId());
-				part.setEquipId(equipid);
-				EquipServicingImplementPartsmapper.save(part);
+			if(partslist.size()>0) {
+				for(EquipServicingImplementParts part:partslist) {
+					part.setImplementId(ServicingImplement.getId());
+					part.setEquipId(equipid);
+				}
+				EquipServicingImplementPartsService.insertPartList(partslist);
+			}else {
+				EquipServicingImplementPartsService.deleteServicingImplementParts(id);
 			}
-			System.out.println("Transactorid:"+Transactorid);
 			EquipServicingImplementOpService.saveOpToList(Transactorid.length()>0?StringUtil.convertStringToIntegerList(Transactorid, ","):null, ServicingImplement.getId());
 			return true;
 		} catch (Exception e) {
@@ -121,7 +126,7 @@ public class EquipServicingImplementServiceImpl extends BaseServiceImpl<EquipSer
 	@Override
 	@Transactional
 	public void deleteImplement(Long id) {
-		EquipServicingImplementPartsmapper.deleteByImplementId(id);
+		EquipServicingImplementPartsService.deleteServicingImplementParts(id);
 		EquipServicingImplementOpMapper.deleteOpByImplementId(id);
 		equipServicingImplementMapper.deleteById(id);
 	}

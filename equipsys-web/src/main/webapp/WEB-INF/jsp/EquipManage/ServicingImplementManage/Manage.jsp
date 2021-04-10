@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202012045"></script>
+<script type="text/javascript" src="../js/EquipServicingImplement.js?d=202101171"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
@@ -68,7 +68,9 @@ layui.use('laydate', function(){
 		    <button class="search-btn btn btn-info right" style="height: 100%;" onclick="getEquipServicingImplementList(1)">查询</button>
 		</div>
 		<div id="eqimp-btndiv btn-div btn-Rdiv" style="margin:10px 0px;text-align: right;">
+			<shiro:hasPermission name="equip:implement:save">
 				<button class="btn btn-success" onclick="showImplementInfo('0')">新增设备维修单</button>
+			</shiro:hasPermission>
 		</div>
 		<div id="servicingImpManage-list" class="box-div form-inline" style="height: 600px;">
 			<%@include file="List.jsp" %>
@@ -102,7 +104,7 @@ layui.use('laydate', function(){
 				<td>
 					<div class="input-group input-group-sm col-lg-12">
 						<input class="form-control point needing" id="proposer" style="width: 100px" readonly onclick="setProposer()" placeholder="点击选择" data-name='申请人'>
-				        <span id="dept" style="width: 140px" class="th input-group-addon"></span>
+				        <span id="dept" style="width: 140px" class="th input-group-addon datainfo"></span>
 				    </div>
 				</td>
 				<th width="80px;">设备名称</th>
@@ -111,8 +113,8 @@ layui.use('laydate', function(){
 				</td>
 			</tr>
 			<tr>				
-				<th>设备型号</th><td><label id="modelnumber"></label></td>
-				<th>所在地点</th><td><label id="location"></label></td>
+				<th>设备型号</th><td><label class="datainfo" id="modelnumber"></label></td>
+				<th>所在地点</th><td><label class="datainfo" id="location"></label></td>
 			</tr>
 			<tr>
 				<th colspan="4" align="center" style="font-weight: bold;">
@@ -151,7 +153,7 @@ layui.use('laydate', function(){
 			<tr>
 				<th height="200px" style="text-align: center;">
 					零配件及材料耗用表<br>
-					<input type="button" value="添加" class="btn btn-info" style="width: 68px;margin-right: 0px" onclick="setConsumptionSpart()">
+					<a type="button"class="btn btn-info" style="width: 68px;margin-right: 0px" onclick="setConsumptionSpart()">添加</a>
 				</th>
 				<td colspan="3">
 					<div style="height: 198px;overflow-y:scroll">
@@ -160,9 +162,9 @@ layui.use('laydate', function(){
 								<th width="108px">零配件类型</th>
 								<th>名称</th>
 								<th width="150px">规格</th>
-								<th width="60px">数量</th>
+								<th width="90px">数量</th>
 								<th width="50px">单位</th>
-								<th width="80px">操作</th>
+								<th width="50px">操作</th>
 							</tr>						
 						</table>
 					</div>
@@ -189,7 +191,7 @@ layui.use('laydate', function(){
 				<td colspan="3" rowspan="2">
 					<div style="height: 458px;overflow-y:scroll;">
 						<table  id="partslist-table" class="order-table table table-bordered layeropen" style="margin: 0px">
-							<tr><th width="110px">配件类型</th><th width="175px">名称</th><th>规格</th><th width="70px">数量</th><th width="48px">单位</th><th width="48px">操作</th></tr>
+							<tr><th width="110px">配件类型</th><th width="175px">名称</th><th>规格</th><th width="90px">数量</th><th width="48px">单位</th><th width="48px">操作</th></tr>
 						</table>
 					</div>
 				</td>

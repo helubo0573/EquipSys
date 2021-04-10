@@ -30,7 +30,7 @@ import java.util.Date;
     private String partsName;
 
     /*** 耗用数量*/
-    private Integer useQuantity;
+    private float useQuantity;
 
     /*** 使用类型  0:更换  1:消耗*/
     private Integer useType;
@@ -120,7 +120,7 @@ import java.util.Date;
     *
     * @return 耗用数量
     */
-    public Integer getUseQuantity(){
+    public float getUseQuantity(){
         return useQuantity;
     }
 
@@ -128,7 +128,7 @@ import java.util.Date;
     * 
     * @param useQuantity 要设置的耗用数量
     */
-    public void setUseQuantity(Integer useQuantity){
+    public void setUseQuantity(float useQuantity){
         this.useQuantity = useQuantity;
     }
 
