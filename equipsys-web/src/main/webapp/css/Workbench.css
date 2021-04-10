@@ -1,7 +1,8 @@
 @charset "UTF-8";
 .body-sdiv{	width: 60%;text-align: center;padding:30px;}
 .body-bdiv{ width: 80%;text-align: center;padding:30px;}
-.body-sdiv,.body-bdiv{	background: rgb(248,248,248,0.4)}
+.body-fdiv{	width: 95%;text-align: center;padding:30px;}
+.body-sdiv,.body-bdiv,.body-fdiv{background: rgb(248,248,248,0.2)}
 .title-div{	font-weight:bold;font-size:18px;text-align: center;border-bottom: 2px solid;width: 50%;margin-left: 25%;margin-bottom: 20px;}
 .layui-nav,.point{cursor: pointer;}
 .btn-div{	margin-top: 20px;	text-align: center;}
