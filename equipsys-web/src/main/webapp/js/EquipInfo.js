@@ -732,21 +732,16 @@ function saveCustomPartInfo(index){
 }
 
 function custompart(){
-/*	if($("#custompart-form #goodstypename").val()==""){
+	if($("#custompart-form #goodstypename").val()==""){
 		layer.msg("请选择配件的物料类型");
 		return false;
-	}*/
+	}
 	
 	if($("#custompart-form #partname").val()==""){
 		layer.msg("请填写配件名称")
 		return false;
 	}
-	
-	if($("#custompart-form #partname").val()==""){
-		layer.msg("请填写配件名称");
-		return false;
-	}
-	
+		
 	if($("#custompart-form #quantity").val()==""){
 		layer.msg("请填写设备的配件需求数量")
 		return false;

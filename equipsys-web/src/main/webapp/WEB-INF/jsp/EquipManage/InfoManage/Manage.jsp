@@ -150,17 +150,17 @@
 		<input type="hidden" id="model-id" name="modelid">
 		<table class="order-table table table-bordered layeropen">
 			<tr>
-				<th width="120px">设备名称</th>
-				<td width="200px" id="equip-name"></td>
+				<th width="80px">设备名称</th>
+				<td width="240px" id="equip-name"></td>
 			</tr>
 			<tr>
-				<th width="120px">配件类型</th>
-				<td><input class="form-control point" id="goodstypename" readonly placeholder="点击选择配件类型"  onclick="PartshowGoodsType()"></td>
+				<th>配件类型</th>
+				<td><input class="form-control point needing" id="goodstypename" readonly placeholder="点击选择配件类型"  onclick="PartshowGoodsType()"></td>
 			</tr>
-			<tr>
+			<!-- <tr>	改变需求以后可能不需要关联库存物料，直接将自定义配件作为新的物料
 				<th>关联库存物料</th>
 				<td><input class="form-control point" id="linkStockGoods" readonly placeholder="点击选择关联物料"  onclick="PartsetStockGoods()"></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>配件名称</th>
 				<td><input class="form-control needing" id="partname" name="partname"></td>

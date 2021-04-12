@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 </head>
 <body class="bg-theme">	<!-- 在body中设置css属性实现动态背景 -->
-	
+	<div class="wrapper"><!-- 封装界面 -->
+		
+	</div>
 </body>
 </html>
