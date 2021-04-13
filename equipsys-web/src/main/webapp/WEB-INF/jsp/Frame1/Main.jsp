@@ -55,7 +55,7 @@ $(document).ready(function(){
 						var innerHTML="<li><a class='has-arrow' href='javascript:;'><div class='parent-icon'><i class='bx bx-spa'></i></div><div class='menu-title'>"+m.menuName+"</div></a><ul data-fid='"+m.id+"'></ul></li>"
 						$(".metismenu").append(innerHTML)
 					}else{
-						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"'>"+m.menuName+"</a></li>";
+						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"'><i class='bx bx-right-arrow-alt'></i>"+m.menuName+"</a></li>";
 						$("ul[data-fid='"+m.parentId+"']").append(innerHTML)
 					}
 				})
