@@ -3,7 +3,7 @@ package com.stone.equipsys.core.common.constant;
 public class PathConstant {
 
 	/**登录后进入工作页面**/
-	public static final String FrameMainPage="forward:/WEB-INF/jsp/Frame/Main.jsp";
+	public static final String FrameMainPage="forward:/WEB-INF/jsp/Frame1/Main.jsp";
 	/**工作台**/
 	public static final String FrameWorkbenchPage="forward:/WEB-INF/jsp/Frame/Workbench.jsp";								//首页
 	
