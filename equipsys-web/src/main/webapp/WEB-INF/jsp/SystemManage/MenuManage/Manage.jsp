@@ -6,11 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 <title></title>
 </head>
 <script type="text/javascript" src="../js/SystemMenu.js?d=202007111"></script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js?d=202007111"></script>
 <body>
 	<div class="body-sdiv">
 		<div class="title-div">

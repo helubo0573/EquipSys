@@ -7,14 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
 <script type="text/javascript" src="../js/EmployeeInfo.js?d=202008231"></script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript">
 layui.use('laydate', function(){
   	var laydate = layui.laydate;
-	$(".layedate").each(function(){
+	$(".date-input").each(function(){
 	  	laydate.render({
 	  	elem: this,
 	  	format: 'yyyy-MM-dd',
@@ -24,7 +22,7 @@ layui.use('laydate', function(){
 })
 </script>
 <body>
-	<div  class="body-bdiv">
+	<div class="body-bdiv">
 		<div class="title-div">
 			员工管理
 		</div>
@@ -81,7 +79,7 @@ layui.use('laydate', function(){
 						</td>
 						<th><label class="control-label">入职时间</label></th>
 						<td>
-							<input class="layui-input form-control point layedate" name="empinfo-indate" id="empinfo-indate" placeholder="yyyy-MM-dd" readonly>
+							<input class="layui-input form-control point layedate date-input" name="empinfo-indate" id="empinfo-indate" placeholder="yyyy-MM-dd" readonly>
 						</td>
 					</tr>
 					<tr>

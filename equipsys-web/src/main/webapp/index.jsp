@@ -10,7 +10,7 @@
 	<title>焱鑫有色金属有限公司设备管理系统</title>
 </head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/layui/css/layui.css?d=202005301">
-<body onkeydown="keyLogin()">
+<body onkeydown="keyLogin()"> 
 	<div class="login-box frame-box">
 		<div align="center" style="margin-bottom: 30px;">
 			<h1>登&nbsp;&nbsp;&nbsp;&nbsp;录</h1>
