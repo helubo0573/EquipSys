@@ -52,10 +52,10 @@ $(document).ready(function(){
 				$.each(data,function(i,m){
 					if(m.parentId=="0"){
 						//var innerHTML="<dl class='menu_dl' data-fid='"+m.id+"'><dt class='"+m.iconCode+"'>"+m.menuName+"<img src='${pageContext.request.contextPath}/static/img/menu_click.png'></dt></dl>";
-						var innerHTML="<li><a class='has-arrow' href='javascript:;'><div class='parent-icon'><i class='bx bx-spa'></i></div><div class='menu-title'>"+m.menuName+"</div></a><ul data-fid='"+m.id+"'></ul></li>"
+						var innerHTML="<li><a class='has-arrow' href='javascript:;'><div class='parent-icon'><i class='bx bx-magnet'></i></div><div class='menu-title'>"+m.menuName+"</div></a><ul data-fid='"+m.id+"'></ul></li>"
 						$(".metismenu").append(innerHTML)
 					}else{
-						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"'><i class='bx bx-right-arrow-alt'></i>"+m.menuName+"</a></li>";
+						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"'><i class='bx bx-magnet'></i>"+m.menuName+"</a></li>";
 						$("ul[data-fid='"+m.parentId+"']").append(innerHTML)
 					}
 				})

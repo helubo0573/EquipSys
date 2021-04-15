@@ -49,6 +49,7 @@ $(document).ready(function(){
 									    })
 									    element.tabChange('tab-content', id);
 										$("#templdiv").html("")
+										
 									 })
 								}
 							}
