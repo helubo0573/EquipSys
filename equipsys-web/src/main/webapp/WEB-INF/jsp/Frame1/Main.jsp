@@ -8,7 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/System.css?d=202104132" rel="stylesheet"> <!-- 主体样式 -->
 <link href="../plugins/simplebar/css/simplebar.css" rel="stylesheet" />	<!--滚动轴插件-->
 <link href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />	<!--滚动轴插件-->
 <link href="../plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />	<!--左侧菜单插件-->
@@ -16,6 +15,7 @@
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
+<link href="../css/System.css?d=202104133" rel="stylesheet"> <!-- 主体样式 -->
 </head>
 <body class="bg-theme bg-theme1">	<!-- 在body中设置css属性实现动态背景 -->
 	<div class="wrapper"><!-- 封装界面 -->
@@ -41,11 +41,17 @@
 					<div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
 						<div class="card-body">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
-								<li class="nav-item" role="presentation"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								</li>
-								<li class="nav-item" role="presentation"> <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile
+										<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+									</a>
 								</li>
-								<li class="nav-item" role="presentation"> <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
 								</li>
 							</ul>
 							<div class="tab-content p-3" id="myTabContent">
@@ -76,58 +82,25 @@ $(document).ready(function(){
 						var innerHTML="<li><a class='has-arrow' href='javascript:;'><div class='parent-icon'><i class='bx bx-magnet'></i></div><div class='menu-title'>"+m.menuName+"</div></a><ul data-fid='"+m.id+"'></ul></li>"
 						$(".metismenu").append(innerHTML)
 					}else{
-						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"'><i class='bx bx-magnet'></i>"+m.menuName+"</a></li>";
+						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"' onclick='openUrl(this)'><i class='bx bx-magnet'></i>"+m.menuName+"</a></li>";
 						$("ul[data-fid='"+m.parentId+"']").append(innerHTML)
 					}
 				})
 				$("#menu").metisMenu();
-				/* layui.use('element', function(){
-					var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-					element.on('nav(menu)', function(elem){//监听导航点击
-						var fid=$(elem).attr("data-fid");
-						if(fid>0){
-							var id=$(elem).attr("data-id");
-							if(checkpage(element,id)){
-								if(checktablen()){
-									var title=elem.text();
-									var url=$(elem).attr("data-url");
-									$("#templdiv").load(url,'',function(response){
-										element.tabAdd('tab-content', {
-									    	title:title,//用于演示
-									        content:response,
-									        id: id //实际使用一般是规定好的id，这里以时间戳模拟下
-									    })
-									    element.tabChange('tab-content', id);
-										$("#templdiv").html("")
-									 })
-								}
-							}
-						}
-					})
-				}) */
-				
 			}
 		})
 	});
 });
-/* function checkpage(element,id){
-	if($("li[lay-id='"+id+"']").length>0){
-		element.tabChange('tab-content',id);
-		return false;
-	}else{
-		return true;
-	}
-	return 
+function openUrl(e){
+	var NavStr="<li class='nav-item' role='presentation'>"+
+					"<a class='nav-link' id='home-tab' data-toggle='tab' href='#"+$(e).attr("data-url")+"' role='tab' aria-controls='home' aria-selected='true'>Home"+
+					"<span class='closebtn' onclick='this.parentElement.style.display=\"none\"'>&times;</span></a>"+
+					
+				"</li>";
+	var DivStr="<div class='tab-pane fade' id='profile' role='tabpanel' aria-labelledby='profile-tab'>"+$(e).attr("data-url")+"</div>";
+	$("#myTab").append(NavStr);
+	$("#myTabContent").append(DivStr)	
 }
-function checktablen(){
-	var n=$("#tab-ul li").length
-	if(n<=7){
-		return true;
-	}else{
-		layer.msg("打开的页面太多,请关闭一些再尝试打开新页面")
-		return false;
-	}
-} */
 </script>
 <script src="../plugins/metismenu/js/metisMenu.min.js"></script>
 </html>
