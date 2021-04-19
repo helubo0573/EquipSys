@@ -99,8 +99,11 @@ function openUrl(e){
 				"</li>";
 	var DivStr="<div class='tab-pane fade' id='profile' role='tabpanel' aria-labelledby='profile-tab'>"+$(e).attr("data-url")+"</div>";
 	$("#myTab").append(NavStr);
-	$("#myTabContent").append(DivStr)	
+	$("#myTabContent").append(DivStr)
 }
+$("#myTab").on("click",".nav-link",function(){	//监听选项卡点击切换
+	alert("click")
+})
 </script>
-<script src="../plugins/metismenu/js/metisMenu.min.js"></script>
+<script src="../plugins/metismenu/js/metisMenu.min.js"/>
 </html>
