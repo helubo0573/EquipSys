@@ -42,22 +42,14 @@
 						<div class="card-body">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 								<li class="nav-item" role="presentation">
-									<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+									<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="home" aria-controls="home" aria-selected="true">首页</a>
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								</li>
-								<li class="nav-item" role="presentation">
-									<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile
-										<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-									</a>
-								</li>
-								<li class="nav-item" role="presentation">
-									<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
 								</li>
 							</ul>
 							<div class="tab-content p-3" id="myTabContent">
-								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</div>
-								<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
-								<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</div>
+								<div class="tab-pane fade show active" id="home" role="home" aria-labelledby="home-tab">
+									首页
+								</div>
 							</div>
 						</div>
 					</div>
@@ -67,6 +59,7 @@
 	</div>
 </body>
 <script src="${pageContext.request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
+<script src="../plugins/metismenu/js/metisMenu.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(function(){
@@ -78,11 +71,10 @@ $(document).ready(function(){
 			success:function(data){
 				$.each(data,function(i,m){
 					if(m.parentId=="0"){
-						//var innerHTML="<dl class='menu_dl' data-fid='"+m.id+"'><dt class='"+m.iconCode+"'>"+m.menuName+"<img src='${pageContext.request.contextPath}/static/img/menu_click.png'></dt></dl>";
 						var innerHTML="<li><a class='has-arrow' href='javascript:;'><div class='parent-icon'><i class='bx bx-magnet'></i></div><div class='menu-title'>"+m.menuName+"</div></a><ul data-fid='"+m.id+"'></ul></li>"
 						$(".metismenu").append(innerHTML)
 					}else{
-						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"' onclick='openUrl(this)'><i class='bx bx-magnet'></i>"+m.menuName+"</a></li>";
+						var innerHTML="<li><a class='menu_a' data-fid='"+m.parentId+"' data-url='.."+m.url+"' data-id='"+m.id+"' data-name='"+m.menuName+"' onclick='openUrl(this)'><i class='bx bx-magnet'></i>"+m.menuName+"</a></li>";
 						$("ul[data-fid='"+m.parentId+"']").append(innerHTML)
 					}
 				})
@@ -92,18 +84,62 @@ $(document).ready(function(){
 	});
 });
 function openUrl(e){
-	var NavStr="<li class='nav-item' role='presentation'>"+
-					"<a class='nav-link' id='home-tab' data-toggle='tab' href='#"+$(e).attr("data-url")+"' role='tab' aria-controls='home' aria-selected='true'>Home"+
-					"<span class='closebtn' onclick='this.parentElement.style.display=\"none\"'>&times;</span></a>"+
-					
-				"</li>";
-	var DivStr="<div class='tab-pane fade' id='profile' role='tabpanel' aria-labelledby='profile-tab'>"+$(e).attr("data-url")+"</div>";
-	$("#myTab").append(NavStr);
-	$("#myTabContent").append(DivStr)
+	if(checkpage(e)){
+		if(checktablen()){
+			var NavStr="<li class='nav-item' role='presentation'>"+
+							"<a class='nav-link active' id='home-tab' data-toggle='tab' href='#"+$(e).attr("data-url")+"' role='"+$(e).attr("data-id")+"' aria-controls='home' aria-selected='true'>"+$(e).attr("data-name")+
+							"<span class='closebtn' onclick='closeTab(this)'>&times;</span></a>"+
+						"</li>";
+			var DivStr="<div class='tab-pane fade show active' id='profile' role='"+$(e).attr("data-id")+"' aria-labelledby='profile-tab'></div>";
+			$(".nav-item .nav-link").removeClass("active");
+			$(".tab-content .tab-pane").removeClass("show active");
+			$("#myTab").append(NavStr);
+			$("#myTabContent").append(DivStr)
+			$("#myTabContent .active").load($(e).attr("data-url"))
+		}else{
+			var role=$(e).attr("data-id");
+			$(".nav-item .nav-link").removeClass("active");
+			$(".tab-content .tab-pane").removeClass("show active");
+			$(".nav-item a[role="+role+"]").addClass("active");
+			$(".tab-content .tab-pane[role="+role+"]").addClass("show active")
+		}
+	}
 }
 $("#myTab").on("click",".nav-link",function(){	//监听选项卡点击切换
-	alert("click")
+	if(!$(this).hasClass('active')){
+		$(".nav-item .nav-link").removeClass("active");
+		$(".tab-content .tab-pane").removeClass("show active");
+		$(this).addClass("active");
+		$(".tab-content .tab-pane[role="+$(this).attr("role")+"]").addClass("show active")
+	}
 })
+function closeTab(e){
+	var tab=$(e).parent().parent();
+	var prevtab=$(tab).prev().find("a");
+	if($(e).parent().hasClass('active')){
+		$(prevtab).addClass("active");
+		$(".tab-content .tab-pane[role="+$(prevtab).attr("role")+"]").addClass("show active");		
+	}
+	$(tab).remove();
+	$(".tab-content .tab-pane[role="+$(e).parent().attr("role")+"]").remove();
+}
+function checkpage(e){
+	var role=$(e).attr("data-id");
+	if($(".tab-content .tab-pane[role="+role+"]").length>0){
+		return false;
+	}else{
+		return true;
+	}
+	return 
+}
+function checktablen(){
+	var n=$("#myTab").children().length
+	if(n<=8){
+		return true;
+	}else{
+		alert("打开的页面太多,请关闭一些再尝试打开新页面")
+		return false;
+	}
+}
 </script>
-<script src="../plugins/metismenu/js/metisMenu.min.js"/>
 </html>
