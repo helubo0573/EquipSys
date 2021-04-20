@@ -16,6 +16,7 @@
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
 <link href="../css/System.css?d=202104133" rel="stylesheet"> <!-- 主体样式 -->
+<link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 </head>
 <body class="bg-theme bg-theme1">	<!-- 在body中设置css属性实现动态背景 -->
 	<div class="wrapper"><!-- 封装界面 -->
@@ -39,16 +40,18 @@
 			<div class="page-content-wrapper">
 				<div class="page-content">
 					<div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-						<div class="card-body">
-							<ul class="nav nav-tabs" id="myTab" role="tablist">
-								<li class="nav-item" role="presentation">
-									<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="home" aria-controls="home" aria-selected="true">首页</a>
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								</li>
-							</ul>
-							<div class="tab-content p-3" id="myTabContent">
-								<div class="tab-pane fade show active" id="home" role="home" aria-labelledby="home-tab">
-									首页
+						<div class="card radius-15" style="width: 100%">
+							<div class="card-body">
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item" role="presentation">
+										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="home" aria-controls="home" aria-selected="true">首页</a>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									</li>
+								</ul>
+								<div class="tab-content p-3" id="myTabContent">
+									<div class="tab-pane fade show active" id="home" role="home" aria-labelledby="home-tab">
+										首页
+									</div>
 								</div>
 							</div>
 						</div>
@@ -142,4 +145,7 @@ function checktablen(){
 	}
 }
 </script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
 </html>
