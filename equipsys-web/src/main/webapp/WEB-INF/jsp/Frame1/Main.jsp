@@ -96,13 +96,13 @@ function openUrl(e){
 			$("#myTab").append(NavStr);
 			$("#myTabContent").append(DivStr)
 			$("#myTabContent .active").load($(e).attr("data-url"))
-		}else{
-			var role=$(e).attr("data-id");
-			$(".nav-item .nav-link").removeClass("active");
-			$(".tab-content .tab-pane").removeClass("show active");
-			$(".nav-item a[role="+role+"]").addClass("active");
-			$(".tab-content .tab-pane[role="+role+"]").addClass("show active")
 		}
+	}else{
+		var role=$(e).attr("data-id");
+		$(".nav-item .nav-link").removeClass("active");
+		$(".tab-content .tab-pane").removeClass("show active");
+		$(".nav-item a[role="+role+"]").addClass("active");
+		$(".tab-content .tab-pane[role="+role+"]").addClass("show active")
 	}
 }
 $("#myTab").on("click",".nav-link",function(){	//监听选项卡点击切换
