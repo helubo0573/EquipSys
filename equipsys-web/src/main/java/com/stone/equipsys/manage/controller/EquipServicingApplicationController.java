@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +55,6 @@ public class EquipServicingApplicationController {
 			@RequestParam(value="pageSize")int pageSize,
 			@RequestParam(value="current")int current) throws ParseException {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println("test-"+sappdate);
 		HashMap<String, Object> param=new HashMap<String, Object>();
 		if(equipname!="")	param.put("equipName", equipname);
 		if(!"".equals(sappdate))	param.put("sappDate", sdf.parse(sappdate));
@@ -65,6 +65,25 @@ public class EquipServicingApplicationController {
 		request.setAttribute("applicationList", applicationList);
 		request.setAttribute("page", new RdPage(applicationList).getPageStr("getEquipServicingApplicationList"));
 		return PathConstant.EquipServicingApplicationList;
+	}
+	@RequestMapping("/searchforjson")
+	public void search(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value="equipname",defaultValue = "")String equipname,
+			@RequestParam(value="sappdate",defaultValue = "")String sappdate,
+			@RequestParam(value="eappdate",defaultValue = "")String eappdate,
+			@RequestParam(value="sbackfiredate",defaultValue = "")String sbackfiredate,
+			@RequestParam(value="ebackfiredate",defaultValue = "")String ebackfiredate) throws ParseException, UnsupportedEncodingException, IOException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		if(equipname!="")	param.put("equipName", equipname);
+		if(!"".equals(sappdate))	param.put("sappDate", sdf.parse(sappdate));
+		if(!"".equals(eappdate))	param.put("eappDate", sdf.parse(eappdate));
+		if(!"".equals(sbackfiredate))	param.put("sbackfireDate", sdf.parse(sbackfiredate));
+		if(!"".equals(ebackfiredate))	param.put("ebackfireDate", sdf.parse(ebackfiredate));
+		List<EquipServicingApplicationModel> list=ServicingApplicationMapper.listExtSelective(param);
+		HashMap<String, Object> res=new HashMap<String, Object>();
+		res.put("data", list);
+		ServletUtils.writeToResponse(response, res);
 	}
 	@RequestMapping("/save")
 	public void save(HttpServletResponse response, HttpServletRequest request,

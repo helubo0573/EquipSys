@@ -10,27 +10,130 @@
 <meta charset="UTF-8">
 </head>
 <script type="text/javascript" src="../js/EquipServicingApplication.js?d=202009143"></script>
+<script type="text/javascript" src="../plugins/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-layui.use('laydate', function(){
-  	var laydate = layui.laydate;
-/* 	$(".layedate").each(function(){
-	  	laydate.render({
-	  	elem: this,
-	  	format: 'yyyy-MM-dd',
-	  	value:new Date()
-		});		
-	}) */
-	$(".searchdate").each(function(){
-	  	laydate.render({
-	  	elem: this,
-	  	format: 'yyyy-MM-dd',
-	  	value:""
-		});		
-	})
-})
+$(document).ready(function () {
+	//Default data table
+	var oTable = $('#servicingAppManage-table').dataTable( {
+     	//"bProcessing" : false, //DataTables载入数据时，是否显示‘进度’提示
+        //"bServerSide" : true, //是否启动服务器端数据导入
+        "aLengthMenu" : [9, 20, 50], //更改显示记录数选项
+       	"iDisplayLength" : 9, //默认显示的记录数
+        "bPaginate" : true, //是否显示（应用）分页器
+        "bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数
+        //"bSort" : true, //是否启动各个字段的排序功能
+        "sDom": "t<'row-fluid'<'span6'i><'span6'p>>",//定义表格的显示方式
+        "pagingType": "full_numbers",
+        //"aaSorting" : [[0, "desc"]], //默认的排序方式，第0列，降序排列 
+        "bFilter" : true, //是否启动过滤、搜索功能
+            "aoColumns" : [{
+                "mData" : "applicationTime",	//列标识，和服务器返回数据中的属性名称对应
+                "sTitle" : "申请时间",//列标题
+                "sDefaultContent" : "", //此列默认值为""，以防数据中没有此值，DataTables加载数据的时候报错
+                "render":function(data, type, row){
+                	return new Date(data).Format("yyyy-MM-dd");
+                }
+            }, {
+                "mData" : "equipName",
+                "sTitle" : "设备名称",
+                "sWidth":"10%",//定义列宽度，以百分比表示
+                "sDefaultContent" : ""
+            }, {
+                "mData" : "backfireTime",
+                "sTitle" : "故障时间",
+                "sDefaultContent" : "",
+                "render":function(data, type, row){
+                	return new Date(data).Format("yyyy-MM-dd");
+                }
+            }, {
+                "mData" : "proposDept",
+                "sTitle" : "部门",
+                "sDefaultContent" : "",
+                "bSortable":false	//此列不需要排序
+            },  {
+                "mData" : "status",
+                "sTitle" : "状态",
+                "sDefaultContent" : "",
+            },{//倒数第一列
+                "targets":-1,
+                "sTitle" : "操作",
+                "bSortable": false,
+                render: function(data, type, row) {
+                    var html ="<i class='lni lni-write' titel='修改申请单'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-trash' titel='撤销申请单'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-checkmark-circle'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-windows'></i>"
+                    return html;
+                }
+            }],
+            "oLanguage": { //国际化配置
+                "sProcessing" : "正在获取数据，请稍后...",  
+                "sLengthMenu" : "显示 _MENU_ 条",  
+                "sZeroRecords" : "没有您要搜索的内容",  
+                "sInfo" : "从 _START_ 到  _END_ 条记录 总显示记录数为 _TOTAL_ 条",  
+                "sInfoEmpty" : "记录数为0",  
+                "sInfoFiltered" : "(共显示 _MAX_ 条数据)",  
+                "sInfoPostFix" : "",  
+                "oPaginate": {  
+                    "sFirst" : "第一页",  
+                    "sPrevious" : "上一页",  
+                    "sNext" : "下一页",  
+                    "sLast" : "最后一页"  
+                }
+            },/** 修改状态值 */
+            "fnRowCallback" : function(nRow, aData, iDisplayIndex) {
+                if (aData.response_type == 'video')
+                    $('td:eq(1)', nRow).html('视频回复');
+                return nRow;
+            },/** 向服务器传递的参数*/
+           /*  "fnServerParams": function ( aoData ) {
+                aoData.push( 
+                		{ "name": "keyword", "value": $("#search-keyword").val() }, 
+                		{ "name": "responseType", "value": $("#search-responseType").val() }
+                		);
+              } ,*/
+             //请求url
+            "sAjaxSource" : "../EquipServicingApplication/searchforjson.do",
+                //服务器端，数据回调处理
+            "fnServerData" : function(sSource, aDataSet, fnCallback) {
+            	$.ajax({
+                    "dataType" : 'json',
+                    "type" : "post",
+                    "url" : sSource,
+                    "data" : aDataSet,
+                    "success" : function(resp){
+                    	fnCallback(resp);
+                    }
+                });
+            }
+    });
+});
 </script>
 <body>
-	<div class="body-bdiv">
+	<div class="card-title">
+		<h4 class="mb-0">设备维修申请管理</h4>
+	</div>
+	<div class="table-responsive">
+		<div class="form-row col-lg-12">
+			<div class="form-group col-md-3">
+				<div class="input-group input-group-sm">
+					<div class="input-group-prepend"><span class="input-group-text">设备名称</span>
+					</div>
+					<input type="text" class="form-control border-left-0" placeholder="Last Name">
+				</div>
+			</div>
+			<div class="form-group col-md-3">
+				<div class="input-group input-group-sm">
+					<div class="input-group-prepend"><span class="input-group-text">申请时间</span>
+					</div>
+					<input type="text" class="form-control border-left-0" placeholder="Last Name">
+				</div>
+			</div>
+			
+		</div>
+		<table id="servicingAppManage-table" class="table table-stripe table-hover table-striped table-bordered" style="width:100%"><thead></thead><tbody></tbody></table>
+	</div>
+	<%-- <div class="body-bdiv">
 		<div class="title-div">
 			设备维修申请管理
 		</div>
@@ -92,6 +195,6 @@ layui.use('laydate', function(){
 				</td>
 			</tr>
 		</table>
-	</form>
+	</form> --%>
 </body>
 </html>

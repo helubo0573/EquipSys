@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="../css/icons.css" />
 <link href="../css/System.css?d=202104133" rel="stylesheet"> <!-- 主体样式 -->
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
+<link rel="stylesheet" type="text/css" href="../plugins/datatable/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css">
 </head>
 <body class="bg-theme bg-theme1">	<!-- 在body中设置css属性实现动态背景 -->
 	<div class="wrapper"><!-- 封装界面 -->
@@ -148,4 +150,6 @@ function checktablen(){
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
+<script type="text/javascript" src="../plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/Tools.js"></script>
 </html>
