@@ -17,7 +17,7 @@
 </head>
 <script type="text/javascript" src="../js/EquipServicingImplement.js?d=202101171"></script>
 <script type="text/javascript">
-layui.use('laydate', function(){
+/* layui.use('laydate', function(){
   	var laydate = layui.laydate;
  	$(".date-input").each(function(){
 	  	laydate.render({
@@ -41,7 +41,7 @@ layui.use('laydate', function(){
 	  	value:""
 		});	
 	})
-})
+}) */
 </script>
 <body>
 	<div class="body-bdiv">

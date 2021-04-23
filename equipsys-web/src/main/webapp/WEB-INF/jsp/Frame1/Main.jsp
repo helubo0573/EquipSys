@@ -12,13 +12,13 @@
 <link href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />	<!--滚动轴插件-->
 <link href="../plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />	<!--左侧菜单插件-->
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css?d=202104231" />
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
 <link href="../css/System.css?d=202104133" rel="stylesheet"> <!-- 主体样式 -->
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
-<link rel="stylesheet" type="text/css" href="../plugins/datatable/css/buttons.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css?d=202104231">
+<link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/buttons.bootstrap4.min.css">
 </head>
 <body class="bg-theme bg-theme1">	<!-- 在body中设置css属性实现动态背景 -->
 	<div class="wrapper"><!-- 封装界面 -->
@@ -65,6 +65,12 @@
 </body>
 <script src="${pageContext.request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
 <script src="../plugins/metismenu/js/metisMenu.min.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
+<script type="text/javascript" src="../plugins/datatable/js/jquery.dataTables.min.js"></script>
+<!-- <script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="../js/Tools.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(function(){
@@ -95,12 +101,12 @@ function openUrl(e){
 							"<a class='nav-link active' id='home-tab' data-toggle='tab' href='#"+$(e).attr("data-url")+"' role='"+$(e).attr("data-id")+"' aria-controls='home' aria-selected='true'>"+$(e).attr("data-name")+
 							"<span class='closebtn' onclick='closeTab(this)'>&times;</span></a>"+
 						"</li>";
-			var DivStr="<div class='tab-pane fade show active' id='profile' role='"+$(e).attr("data-id")+"' aria-labelledby='profile-tab'></div>";
+			var DivStr="<div class='tab-pane fade newContont show active' id='profile' role='"+$(e).attr("data-id")+"' aria-labelledby='profile-tab'></div>";
 			$(".nav-item .nav-link").removeClass("active");
-			$(".tab-content .tab-pane").removeClass("show active");
+			$(".tab-content .tab-pane").removeClass("show active newContont");
 			$("#myTab").append(NavStr);
 			$("#myTabContent").append(DivStr)
-			$("#myTabContent .active").load($(e).attr("data-url"))
+			$("#myTabContent .newContont").load($(e).attr("data-url"))
 		}
 	}else{
 		var role=$(e).attr("data-id");
@@ -147,9 +153,4 @@ function checktablen(){
 	}
 }
 </script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.excheck.js"></script>
-<script type="text/javascript" src="../plugins/zTree/js/jquery.ztree.exhide.js"></script>
-<script type="text/javascript" src="../plugins/datatable/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../js/Tools.js"></script>
 </html>

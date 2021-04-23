@@ -3,6 +3,7 @@
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ * 	20210423:ÐÞ¸ÄÁË .form-group:margin:1rem-> 0.2rem;
  */
 :root {
   --blue: #673ab7;
@@ -2157,7 +2158,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin: 0.2rem;
 }
 
 .form-text {

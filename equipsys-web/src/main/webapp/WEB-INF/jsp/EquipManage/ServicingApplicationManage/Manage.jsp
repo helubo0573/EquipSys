@@ -13,19 +13,22 @@
 <script type="text/javascript" src="../plugins/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	//Default data table
+	getEquipServicingApplicationList();
+});
+function test(){
+	$("#servicingAppManage-table").dataTable().fnDestroy();
+	getEquipServicingApplicationList();
+}
+function getEquipServicingApplicationList(){
 	var oTable = $('#servicingAppManage-table').dataTable( {
-     	//"bProcessing" : false, //DataTables载入数据时，是否显示‘进度’提示
-        //"bServerSide" : true, //是否启动服务器端数据导入
-        "aLengthMenu" : [9, 20, 50], //更改显示记录数选项
-       	"iDisplayLength" : 9, //默认显示的记录数
+		"bLengthChange": false, //更改显示记录数选项
+       	"iDisplayLength" : 10, //默认显示的记录数
         "bPaginate" : true, //是否显示（应用）分页器
         "bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数
-        //"bSort" : true, //是否启动各个字段的排序功能
-        "sDom": "t<'row-fluid'<'span6'i><'span6'p>>",//定义表格的显示方式
-        "pagingType": "full_numbers",
-        //"aaSorting" : [[0, "desc"]], //默认的排序方式，第0列，降序排列 
-        "bFilter" : true, //是否启动过滤、搜索功能
+        "bSort" : true, //是否启动各个字段的排序功能
+       /*  "sDom": "t<'row-fluid'<'span6'i><'span6'p>>",//定义表格的显示方式 */
+        "sPaginationType": "full_numbers",
+        "bFilter" : false, //是否启动过滤、搜索功能
             "aoColumns" : [{
                 "mData" : "applicationTime",	//列标识，和服务器返回数据中的属性名称对应
                 "sTitle" : "申请时间",//列标题
@@ -67,18 +70,8 @@ $(document).ready(function () {
                 }
             }],
             "oLanguage": { //国际化配置
-                "sProcessing" : "正在获取数据，请稍后...",  
-                "sLengthMenu" : "显示 _MENU_ 条",  
-                "sZeroRecords" : "没有您要搜索的内容",  
-                "sInfo" : "从 _START_ 到  _END_ 条记录 总显示记录数为 _TOTAL_ 条",  
-                "sInfoEmpty" : "记录数为0",  
-                "sInfoFiltered" : "(共显示 _MAX_ 条数据)",  
-                "sInfoPostFix" : "",  
-                "oPaginate": {  
-                    "sFirst" : "第一页",  
-                    "sPrevious" : "上一页",  
-                    "sNext" : "下一页",  
-                    "sLast" : "最后一页"  
+                "sProcessing" : "正在获取数据，请稍后...","sLengthMenu" : "显示 _MENU_ 条","sZeroRecords" : "没有您要搜索的内容","sInfo" : "从 _START_ 到  _END_ 条记录 总显示记录数为 _TOTAL_ 条","sInfoEmpty" : "记录数为0","sInfoFiltered" : "(共显示 _MAX_ 条数据)",  
+                "sInfoPostFix" : "","oPaginate": {"sFirst" : "第一页","sPrevious" : "上一页","sNext" : "下一页","sLast" : "最后一页"  
                 }
             },/** 修改状态值 */
             "fnRowCallback" : function(nRow, aData, iDisplayIndex) {
@@ -86,12 +79,12 @@ $(document).ready(function () {
                     $('td:eq(1)', nRow).html('视频回复');
                 return nRow;
             },/** 向服务器传递的参数*/
-           /*  "fnServerParams": function ( aoData ) {
+            "fnServerParams": function ( aoData ) {
                 aoData.push( 
-                		{ "name": "keyword", "value": $("#search-keyword").val() }, 
-                		{ "name": "responseType", "value": $("#search-responseType").val() }
+                		{ "name": "equipname", "value": $("#search-equipname").val() }
+                		//{ "name": "responseType", "value": $("#search-responseType").val() }
                 		);
-              } ,*/
+              } ,
              //请求url
             "sAjaxSource" : "../EquipServicingApplication/searchforjson.do",
                 //服务器端，数据回调处理
@@ -107,7 +100,7 @@ $(document).ready(function () {
                 });
             }
     });
-});
+}
 </script>
 <body>
 	<div class="card-title">
@@ -115,23 +108,30 @@ $(document).ready(function () {
 	</div>
 	<div class="table-responsive">
 		<div class="form-row col-lg-12">
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 				<div class="input-group input-group-sm">
 					<div class="input-group-prepend"><span class="input-group-text">设备名称</span>
 					</div>
-					<input type="text" class="form-control border-left-0" placeholder="Last Name">
+					<input type="text" class="form-control border-left-0" id="search-equipname" placeholder="Last Name">
 				</div>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 				<div class="input-group input-group-sm">
 					<div class="input-group-prepend"><span class="input-group-text">申请时间</span>
 					</div>
 					<input type="text" class="form-control border-left-0" placeholder="Last Name">
 				</div>
 			</div>
-			
+			<div class="form-group col-md-3">
+				<button type="button" class="btn btn-info px-5 radius-25 btn-sm" id="EquipServicingApplication" onclick="test()">搜索</button>
+			</div>
 		</div>
-		<table id="servicingAppManage-table" class="table table-stripe table-hover table-striped table-bordered" style="width:100%"><thead></thead><tbody></tbody></table>
+		<div id="eqsrvapp-btndiv btn-div btn-Rdiv" class="form-row col-lg-12">
+			<div class="form-group col-md-3">
+				<button class="btn btn-success" onclick="showApplicationInfo('0')">新增设备维修单</button>
+			</div>
+		</div>
+		<table id="servicingAppManage-table" class="table compact table-stripe table-hover table-striped table-bordered" style="width:100%"><thead></thead><tbody></tbody></table>
 	</div>
 	<%-- <div class="body-bdiv">
 		<div class="title-div">
