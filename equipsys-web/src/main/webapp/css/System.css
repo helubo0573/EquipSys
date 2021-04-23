@@ -58,6 +58,13 @@ body {
 
 }
 
+.right{
+	float: right;
+}
+
+.pointer{
+	cursor: pointer;
+}
 a:hover {
 
 	text-decoration: none;

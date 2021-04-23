@@ -21,12 +21,12 @@ function test(){
 }
 function getEquipServicingApplicationList(){
 	var oTable = $('#servicingAppManage-table').dataTable( {
-		"bLengthChange": false, //更改显示记录数选项
+		"bLengthChange": true, //更改显示记录数选项
        	"iDisplayLength" : 10, //默认显示的记录数
         "bPaginate" : true, //是否显示（应用）分页器
         "bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数
         "bSort" : true, //是否启动各个字段的排序功能
-       /*  "sDom": "t<'row-fluid'<'span6'i><'span6'p>>",//定义表格的显示方式 */
+        "sDom": "rt<'row'<'col-lg-2'l><'col-lg-4'i><'col-lg-6'p>>",//定义表格的显示方式  '<"top"iflp<"clear">>rt<"bottom"ilp<"clear">>'   t<'row'<'span6'i><'span6 right'p>>/
         "sPaginationType": "full_numbers",
         "bFilter" : false, //是否启动过滤、搜索功能
             "aoColumns" : [{
@@ -62,10 +62,10 @@ function getEquipServicingApplicationList(){
                 "sTitle" : "操作",
                 "bSortable": false,
                 render: function(data, type, row) {
-                    var html ="<i class='lni lni-write' titel='修改申请单'></i>&nbsp;&nbsp;&nbsp;"+
-                    	"<i class='lni lni-trash' titel='撤销申请单'></i>&nbsp;&nbsp;&nbsp;"+
-                    	"<i class='lni lni-checkmark-circle'></i>&nbsp;&nbsp;&nbsp;"+
-                    	"<i class='lni lni-windows'></i>"
+                    var html ="<i class='lni lni-write pointer' titel='修改申请单'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-trash pointer' titel='撤销申请单'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-checkmark-circle pointer'></i>&nbsp;&nbsp;&nbsp;"+
+                    	"<i class='lni lni-windows pointer'></i>"
                     return html;
                 }
             }],
@@ -106,7 +106,7 @@ function getEquipServicingApplicationList(){
 	<div class="card-title">
 		<h4 class="mb-0">设备维修申请管理</h4>
 	</div>
-	<div class="table-responsive">
+	<div class="table-responsive" style="width: 80%">
 		<div class="form-row col-lg-12">
 			<div class="form-group col-md-2">
 				<div class="input-group input-group-sm">

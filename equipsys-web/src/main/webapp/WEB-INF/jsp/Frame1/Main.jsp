@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta title="焱鑫有色" >
+<title>焱鑫有色设备管理系统</title>
 <link href="../plugins/simplebar/css/simplebar.css" rel="stylesheet" />	<!--滚动轴插件-->
 <link href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />	<!--滚动轴插件-->
 <link href="../plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />	<!--左侧菜单插件-->
@@ -15,7 +17,7 @@
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css?d=202104231" />
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
-<link href="../css/System.css?d=202104133" rel="stylesheet"> <!-- 主体样式 -->
+<link href="../css/System.css?d=202104231" rel="stylesheet"> <!-- 主体样式 -->
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 <link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css?d=202104231">
 <link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/buttons.bootstrap4.min.css">
