@@ -56,7 +56,9 @@ function getEquipServicingApplicationList(){
             },  {
                 "mData" : "status",
                 "sTitle" : "状态",
-                "sDefaultContent" : "",
+                "reder":function(data,type,row){
+                	return data==0?""
+                },
             },{//倒数第一列
                 "targets":-1,
                 "sTitle" : "操作",

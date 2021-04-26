@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css?d=202104231" />
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
-<link href="../css/System.css?d=202104231" rel="stylesheet"> <!-- 主体样式 -->
+<link href="../css/System.css?d=202104233" rel="stylesheet"> <!-- 主体样式 -->
 <link rel="stylesheet" type="text/css" href="../plugins/zTree/css/zTreeStyle/zTreeStyle.css?d=202006021">
 <link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css?d=202104231">
 <link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/buttons.bootstrap4.min.css">
